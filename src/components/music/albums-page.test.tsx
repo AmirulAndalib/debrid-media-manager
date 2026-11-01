@@ -21,6 +21,7 @@ vi.mock('@/hooks/auth', () => ({
 }));
 
 import AlbumsPage from '@/pages/albums/[[...slug]]';
+import { PLAYER_STATE_VERSION } from './player/persistence';
 
 const track = (fileId: number, filename: string) => ({
 	title: filename.slice(5, -5),
@@ -86,6 +87,7 @@ const savedQueue = () =>
 	localStorage.setItem(
 		'music:player',
 		JSON.stringify({
+			version: PLAYER_STATE_VERSION,
 			queue: {
 				contextId: 'album:h1',
 				context: [{ track: fullAlbum.tracks[0], album: summary }],
@@ -228,6 +230,7 @@ describe('music page', () => {
 	it("resumes the account's queue on a device that has none", async () => {
 		me.state = {
 			state: {
+				version: PLAYER_STATE_VERSION,
 				queue: {
 					contextId: 'album:h1',
 					context: [{ track: fullAlbum.tracks[1], album: summary }],

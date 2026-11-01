@@ -1,6 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { QueuedTrack } from '../types';
-import { accountPersistence, localStoragePersistence, PersistedPlayerState } from './persistence';
+import {
+	accountPersistence,
+	localStoragePersistence,
+	PersistedPlayerState,
+	PLAYER_STATE_VERSION,
+} from './persistence';
 import { emptyQueue, nowPlayingOf } from './queue';
 
 const album = {
@@ -106,6 +111,46 @@ describe('localStoragePersistence', () => {
 		expect(localStoragePersistence.load()!.queue.context).toEqual([]);
 	});
 
+	// Saved before 55844f59, when the API titled a track from its filename.
+	const unversioned = {
+		queue: {
+			...emptyQueue,
+			contextId: 'album:h',
+			context: [
+				{
+					...item('a'),
+					track: {
+						...item('a').track,
+						filename: '01_05 - Papa Gene’s Blues (Stereo Mix).flac',
+						title: '05 - Papa Gene’s Blues (Stereo Mix)',
+					},
+				},
+			],
+			contextIndex: 0,
+		},
+		repeatMode: 'all',
+		isShuffled: true,
+		volume: 0.3,
+	};
+
+	it('drops a queue saved without the current version, keeping the settings', () => {
+		localStorage.setItem('music:player', JSON.stringify(unversioned));
+		const state = localStoragePersistence.load()!;
+		expect(state.queue).toEqual(emptyQueue);
+		expect(state).toMatchObject({ repeatMode: 'all', isShuffled: true, volume: 0.3 });
+
+		localStorage.setItem('music:player', JSON.stringify({ ...unversioned, version: 1 }));
+		expect(localStoragePersistence.load()!.queue).toEqual(emptyQueue);
+	});
+
+	it('writes the current version and loads its own queue back', () => {
+		localStoragePersistence.save(unversioned as PersistedPlayerState);
+		expect(JSON.parse(localStorage.getItem('music:player')!).version).toBe(
+			PLAYER_STATE_VERSION
+		);
+		expect(localStoragePersistence.load()!.queue.context).toHaveLength(1);
+	});
+
 	it('returns nothing for a corrupt saved state', () => {
 		localStorage.setItem('music:player', '{not json');
 		expect(localStoragePersistence.load()).toBeNull();
@@ -148,6 +193,7 @@ describe('localStoragePersistence', () => {
 
 describe('accountPersistence', () => {
 	const playing = (id: string): PersistedPlayerState => ({
+		version: PLAYER_STATE_VERSION,
 		queue: {
 			...emptyQueue,
 			contextId: `album:${id}`,
@@ -186,6 +232,14 @@ describe('accountPersistence', () => {
 		expect(persistence.load()!.queue.contextId).toBe('album:server');
 	});
 
+	it("drops the account's queue saved without the current version", async () => {
+		const persistence = accountPersistence(
+			remote({ ...playing('server'), version: undefined })
+		);
+		await persistence.hydrate();
+		expect(persistence.load()).toMatchObject({ queue: emptyQueue, volume: 0.5 });
+	});
+
 	it('falls back to this device when the server fails or sends junk', async () => {
 		const failing = accountPersistence({
 			get: vi.fn(async () => Promise.reject(new Error('signed out'))),
@@ -212,7 +266,10 @@ describe('accountPersistence', () => {
 		await vi.advanceTimersByTimeAsync(1);
 		expect(server.put).toHaveBeenCalledOnce();
 		const sent = server.put.mock.calls[0][0];
-		expect(sent.queue.contextId).toBe('album:b');
+		expect(sent).toMatchObject({
+			version: PLAYER_STATE_VERSION,
+			queue: { contextId: 'album:b' },
+		});
 		expect(JSON.stringify(sent)).not.toContain('https://cdn/');
 
 		// The same state again is not sent again.

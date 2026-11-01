@@ -1,7 +1,13 @@
 import { QueuedTrack } from '../types';
 import { emptyQueue, QueueState, RepeatMode } from './queue';
 
+// Saved queues older than this lose their tracks on load: before 2 a track's
+// title could be its filename, which the player must never show.
+export const PLAYER_STATE_VERSION = 2;
+
 export interface PersistedPlayerState {
+	/** Set on every save; a state without the current one keeps its settings, not its queue. */
+	version?: number;
 	queue: QueueState;
 	repeatMode: RepeatMode;
 	isShuffled: boolean;
@@ -33,19 +39,23 @@ const strip = ({ streamUrl, ...item }: QueuedTrack): QueuedTrack => ({
 	album: { ...item.album, tracks: [] },
 });
 
-function stripQueue(queue: QueueState): QueueState {
-	return {
-		...queue,
-		context: queue.context.map(strip),
-		priority: queue.priority.map(strip),
-		priorityItem: queue.priorityItem && strip(queue.priorityItem),
-	};
-}
+/** What both copies store: the current version, the queue without stream URLs or track lists. */
+const stored = (state: PersistedPlayerState): PersistedPlayerState => ({
+	...state,
+	version: PLAYER_STATE_VERSION,
+	queue: {
+		...state.queue,
+		context: state.queue.context.map(strip),
+		priority: state.queue.priority.map(strip),
+		priorityItem: state.queue.priorityItem && strip(state.queue.priorityItem),
+	},
+});
 
 function parseState(saved: unknown): PersistedPlayerState | null {
 	const state = saved as PersistedPlayerState | null;
 	if (!Array.isArray(state?.queue?.context) || !Array.isArray(state.queue.priority)) return null;
-	return { ...state, queue: { ...emptyQueue, ...state.queue } };
+	const queue = state.version === PLAYER_STATE_VERSION ? state.queue : {};
+	return { ...state, queue: { ...emptyQueue, ...queue } };
 }
 
 const readJson = (key: string): unknown => {
@@ -88,7 +98,7 @@ export const localStoragePersistence: PlayerPersistence = {
 		}
 	},
 	save(state) {
-		const json = JSON.stringify({ ...state, queue: stripQueue(state.queue) });
+		const json = JSON.stringify(stored(state));
 		try {
 			window.localStorage.setItem(STORAGE_KEY, json);
 		} catch {
@@ -151,7 +161,7 @@ export function accountPersistence(
 		},
 		save(state) {
 			local.save(state);
-			const stripped = { ...state, queue: stripQueue(state.queue) };
+			const stripped = stored(state);
 			const json = JSON.stringify(stripped);
 			clearTimeout(timer);
 			timer = setTimeout(() => {
