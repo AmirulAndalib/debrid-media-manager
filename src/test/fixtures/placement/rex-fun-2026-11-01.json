@@ -1,0 +1,258 @@
+{
+	"answers": {
+		"find": {
+			"tt0117579": {
+				"movie_results": [
+					{
+						"id": 369091
+					}
+				],
+				"tv_results": [],
+				"tv_episode_results": []
+			}
+		},
+		"episodeShow": {
+			"tt0117579": null
+		},
+		"identify": {
+			"Second.Chance.1995.dvdrip-xpost": null
+		},
+		"identifier": {
+			"Second.Chance.1995.dvdrip-xpost": {
+				"confident": false,
+				"kind": "movie",
+				"matches": [
+					{
+						"imdbId": "tt0117579",
+						"score": 0.7907,
+						"title": "Second Chance",
+						"year": 1996
+					},
+					{
+						"imdbId": "tt0046288",
+						"score": -0.9092,
+						"title": "Second Chance",
+						"year": 1953
+					},
+					{
+						"imdbId": "tt0306057",
+						"score": -2.171,
+						"title": "Second Chance",
+						"year": 1950
+					},
+					{
+						"imdbId": "tt0039807",
+						"score": -2.1749,
+						"title": "Second Chance",
+						"year": 1947
+					},
+					{
+						"imdbId": "tt1667100",
+						"score": -2.1783,
+						"title": "Second Chance",
+						"year": 2010
+					}
+				],
+				"parsedTitle": "Second Chance",
+				"parsedYear": 1995,
+				"probability": 0.6144
+			},
+			"Second.Chance.01": {
+				"confident": false,
+				"kind": "movie",
+				"matches": [
+					{
+						"imdbId": "tt0046288",
+						"score": 0.8524,
+						"title": "Second Chance",
+						"year": 1953
+					},
+					{
+						"imdbId": "tt0039807",
+						"score": -0.1904,
+						"title": "Second Chance",
+						"year": 1947
+					},
+					{
+						"imdbId": "tt0075215",
+						"score": -0.9443,
+						"title": "Second Chance",
+						"year": 1976
+					},
+					{
+						"imdbId": "tt0117579",
+						"score": -1.5795,
+						"title": "Second Chance",
+						"year": 1996
+					},
+					{
+						"imdbId": "tt1667100",
+						"score": -1.7362,
+						"title": "Second Chance",
+						"year": 2010
+					}
+				],
+				"parsedTitle": "Second Chance 01",
+				"parsedYear": null,
+				"probability": 0.12
+			}
+		},
+		"imdbSeries": {
+			"tt0117579": {
+				"titleType": "video",
+				"title": "Second Chance",
+				"episodes": []
+			}
+		}
+	},
+	"cases": [
+		{
+			"request": {
+				"name": "Second.Chance.1995.dvdrip-xpost",
+				"hash": null,
+				"imdbId": "tt0117579",
+				"files": [
+					{
+						"path": "Second.Chance.01.mkv",
+						"folder": ""
+					},
+					{
+						"path": "Second.Chance.02.mkv",
+						"folder": ""
+					},
+					{
+						"path": "Second.Chance.03.mkv",
+						"folder": ""
+					},
+					{
+						"path": "Second.Chance.04.mkv",
+						"folder": ""
+					},
+					{
+						"path": "Second.Chance.05.mkv",
+						"folder": ""
+					},
+					{
+						"path": "Second.Chance.06.mkv",
+						"folder": ""
+					},
+					{
+						"path": "Second.Chance.07.mkv",
+						"folder": ""
+					},
+					{
+						"path": "Second.Chance.08.mkv",
+						"folder": ""
+					},
+					{
+						"path": "Second.Chance.10.mkv",
+						"folder": ""
+					},
+					{
+						"path": "Second.Chance.11.mkv",
+						"folder": ""
+					},
+					{
+						"path": "Second.Chance.12.mkv",
+						"folder": ""
+					}
+				]
+			},
+			"expect": {
+				"kind": null,
+				"imdbId": "tt0117579",
+				"tmdbId": null,
+				"files": [
+					{
+						"path": "Second.Chance.01.mkv",
+						"season": null,
+						"episode": null,
+						"episodeEnd": null,
+						"how": null,
+						"tmdbEpisodeId": null
+					},
+					{
+						"path": "Second.Chance.02.mkv",
+						"season": null,
+						"episode": null,
+						"episodeEnd": null,
+						"how": null,
+						"tmdbEpisodeId": null
+					},
+					{
+						"path": "Second.Chance.03.mkv",
+						"season": null,
+						"episode": null,
+						"episodeEnd": null,
+						"how": null,
+						"tmdbEpisodeId": null
+					},
+					{
+						"path": "Second.Chance.04.mkv",
+						"season": null,
+						"episode": null,
+						"episodeEnd": null,
+						"how": null,
+						"tmdbEpisodeId": null
+					},
+					{
+						"path": "Second.Chance.05.mkv",
+						"season": null,
+						"episode": null,
+						"episodeEnd": null,
+						"how": null,
+						"tmdbEpisodeId": null
+					},
+					{
+						"path": "Second.Chance.06.mkv",
+						"season": null,
+						"episode": null,
+						"episodeEnd": null,
+						"how": null,
+						"tmdbEpisodeId": null
+					},
+					{
+						"path": "Second.Chance.07.mkv",
+						"season": null,
+						"episode": null,
+						"episodeEnd": null,
+						"how": null,
+						"tmdbEpisodeId": null
+					},
+					{
+						"path": "Second.Chance.08.mkv",
+						"season": null,
+						"episode": null,
+						"episodeEnd": null,
+						"how": null,
+						"tmdbEpisodeId": null
+					},
+					{
+						"path": "Second.Chance.10.mkv",
+						"season": null,
+						"episode": null,
+						"episodeEnd": null,
+						"how": null,
+						"tmdbEpisodeId": null
+					},
+					{
+						"path": "Second.Chance.11.mkv",
+						"season": null,
+						"episode": null,
+						"episodeEnd": null,
+						"how": null,
+						"tmdbEpisodeId": null
+					},
+					{
+						"path": "Second.Chance.12.mkv",
+						"season": null,
+						"episode": null,
+						"episodeEnd": null,
+						"how": null,
+						"tmdbEpisodeId": null
+					}
+				]
+			}
+		}
+	]
+}

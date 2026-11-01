@@ -48,7 +48,7 @@ import { getTmdbAuth } from '@/utils/tmdbAuth';
  * releases they discarded). A caller that starts reading a field decides for itself whether to
  * ask again (zurg's placementReader). Deploys that place nothing differently keep it.
  */
-export const PLACEMENT_RULES = '2026-10-29.1';
+export const PLACEMENT_RULES = '2026-11-01.1';
 
 export interface PlaceRequest {
 	name: string;
@@ -733,9 +733,12 @@ async function resolve(
 	if (!found) return undefined;
 	const tv = found.tv_results?.[0]?.id ?? found.tv_episode_results?.[0]?.show_id;
 	const movie = found.movie_results?.[0]?.id;
-	const seasons = release.files.some(
-		(f) => fileNumbers(release.name, f.folder, f.path, false)?.season != null
-	);
+	// files numbered as a run of episodes are no film either: zurg sent tt0117579, the 1996 film
+	// Second Chance, for `Second.Chance.1995.dvdrip-xpost`'s `Second.Chance.01`-`12`, and rex-fun
+	// showed eleven copies of it (2026-11-01); `Part 2`, `Disc 2` and `cd2` number no episode
+	const numbers = release.files.map((f) => fileNumbers(release.name, f.folder, f.path, false));
+	const episodes = new Set(numbers.map((n) => n?.episode).filter((n) => n != null));
+	const seasons = numbers.some((n) => n?.season != null) || episodes.size > 1;
 	let kind: 'movie' | 'tv' | null = show ? 'tv' : null;
 	if (typeof tv === 'number' && typeof movie === 'number') {
 		kind ??= identified ?? (seasons ? 'tv' : 'movie');

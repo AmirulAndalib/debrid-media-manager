@@ -17,6 +17,7 @@ import fun1022 from '@/test/fixtures/placement/rex-fun-2026-10-22.json';
 import fun1023 from '@/test/fixtures/placement/rex-fun-2026-10-23.json';
 import fun1024 from '@/test/fixtures/placement/rex-fun-2026-10-24.json';
 import fun1025 from '@/test/fixtures/placement/rex-fun-2026-10-25.json';
+import fun1101 from '@/test/fixtures/placement/rex-fun-2026-11-01.json';
 import siblingShows from '@/test/fixtures/placement/sibling-shows.json';
 import titleChecks from '@/test/fixtures/placement/title-checks.json';
 import liveFind from '@/test/fixtures/placement/tmdb-find-tt14986406.json';
@@ -1086,5 +1087,24 @@ describe('single episodes rex-fun showed as shows of their own on 2026-10-25', (
 				tmdbId: null,
 			});
 		}
+	});
+});
+
+describe('a film id sent for a release of numbered episodes', () => {
+	// zurg-usenet sent tt0117579, the 1996 film Second Chance, for an eleven-episode release, and
+	// rex-fun showed the film eleven times (2026-11-01; see the fixtures README)
+	const [secondChance] = fun1101.cases;
+
+	it('places none of the episodes as that film', async () => {
+		const { releases, complete } = await place(
+			[secondChance.request as PlaceRequest],
+			Infinity,
+			recordedSources(fun1101.answers),
+			async (list) =>
+				list.map(({ name }) => (fun1101.answers.identify as any)?.[name] ?? null)
+		);
+		expect(complete).toBe(true);
+		expect(releases[0].kind).toBeNull();
+		expect(releases[0]).toEqual(secondChance.expect);
 	});
 });
