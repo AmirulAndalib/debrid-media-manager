@@ -49,9 +49,9 @@ function Probe() {
 	user = useMusicUser();
 	return null;
 }
-const mount = async () => {
+const mount = async (account = 'rd-1') => {
 	render(
-		<MusicUserProvider accessToken="rd-token">
+		<MusicUserProvider accessToken="rd-token" account={account}>
 			<Probe />
 		</MusicUserProvider>
 	);
@@ -94,7 +94,12 @@ describe('MusicUserProvider', () => {
 	it('reuses a stored session and mints a new one when it has expired', async () => {
 		localStorage.setItem(
 			'music:session',
-			JSON.stringify({ token: 'stored', userId: 'user-1', exp: Date.now() + 3600e3 })
+			JSON.stringify({
+				token: 'stored',
+				userId: 'user-1',
+				exp: Date.now() + 3600e3,
+				account: 'rd-1',
+			})
 		);
 		await mount();
 		expect(tokens).toBe(0);
@@ -102,11 +107,36 @@ describe('MusicUserProvider', () => {
 
 		localStorage.setItem(
 			'music:session',
-			JSON.stringify({ token: 'old', userId: 'user-1', exp: Date.now() - 1 })
+			JSON.stringify({ token: 'old', userId: 'user-1', exp: Date.now() - 1, account: 'rd-1' })
 		);
 		cleanup();
 		await mount();
 		expect(tokens).toBe(1);
+	});
+
+	// Switching Real-Debrid accounts without logging out showed the previous one's library.
+	it.each([
+		['another account', { account: 'rd-2' }],
+		['no account, as saved before sessions were bound', {}],
+	])('mints a new session over a saved one of %s', async (_, owner) => {
+		localStorage.setItem(
+			'music:session',
+			JSON.stringify({
+				token: 'stored',
+				userId: 'user-0',
+				exp: Date.now() + 3600e3,
+				...owner,
+			})
+		);
+		await mount('rd-1');
+		expect(tokens).toBe(1);
+		expect(fetchMock.mock.calls.slice(1).map(([, init]) => tokenOf(init!))).not.toContain(
+			'stored'
+		);
+		expect(JSON.parse(localStorage.getItem('music:session')!)).toMatchObject({
+			token: 't1',
+			account: 'rd-1',
+		});
 	});
 
 	it('mints a new token on a 401 and retries the request once', async () => {

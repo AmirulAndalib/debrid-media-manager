@@ -17,6 +17,7 @@ vi.mock('next/head', () => ({
 }));
 vi.mock('@/hooks/auth', () => ({
 	useRealDebridAccessToken: () => ['rd-token', false, false],
+	useRealDebrid: () => ({ user: { id: 1 } }),
 }));
 
 import AlbumsPage from '@/pages/albums/[[...slug]]';

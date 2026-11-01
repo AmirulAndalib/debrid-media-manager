@@ -22,7 +22,7 @@ import TopBar, { SearchBox } from '@/components/music/TopBar';
 import { QueuedTrack } from '@/components/music/types';
 import { MusicUserProvider, useMusicUser } from '@/components/music/user/MusicUserProvider';
 import { albumItems, trackRef, trackTitle } from '@/components/music/utils';
-import { useRealDebridAccessToken } from '@/hooks/auth';
+import { useRealDebrid, useRealDebridAccessToken } from '@/hooks/auth';
 import useLocalStorage from '@/hooks/localStorage';
 import { MusicAlbum, MusicLibraryResponse, MusicTrack } from '@/pages/api/music/library';
 import type { MusicPlayerStateResponse } from '@/pages/api/music/me/state';
@@ -109,15 +109,18 @@ const fullScreenSpinner = (
 export default function AlbumsPage() {
 	const router = useRouter();
 	const [accessToken, isLoading] = useRealDebridAccessToken();
+	const rdUser = useRealDebrid().user;
 
 	if (!accessToken) {
 		// Redirect if not authenticated
 		if (!isLoading) router.push('/realdebrid/login?redirect=/music');
 		return isLoading ? fullScreenSpinner : null;
 	}
+	// The music session belongs to one account: wait to know which.
+	if (!rdUser && isLoading) return fullScreenSpinner;
 
 	return (
-		<MusicUserProvider accessToken={accessToken}>
+		<MusicUserProvider accessToken={accessToken} account={rdUser ? String(rdUser.id) : null}>
 			<MusicPlayerRoot accessToken={accessToken} />
 			<Toaster position={toasterPosition()} />
 		</MusicUserProvider>

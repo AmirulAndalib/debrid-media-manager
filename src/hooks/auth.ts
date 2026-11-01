@@ -97,7 +97,7 @@ const clearRefreshTimer = () => {
 };
 
 // Simplified hook that handles RealDebrid auth
-const useRealDebrid = () => {
+export const useRealDebrid = () => {
 	const [user, setUser] = useState<RealDebridUser | null>(globalRealDebridState.user);
 	const [error, setError] = useState<Error | null>(globalRealDebridState.error);
 	const [loading, setLoading] = useState(globalRealDebridState.loading);

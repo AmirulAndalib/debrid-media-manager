@@ -58,10 +58,19 @@ export function useMusicUser(): MusicUser {
 	return user;
 }
 
-function readSession(): MusicSessionResponse | null {
+/** A session and the Real-Debrid account it was minted for. */
+type StoredSession = MusicSessionResponse & { account: string | null };
+
+/** The saved session when it belongs to `account`; another account's library must not show. */
+function readSession(account: string | null): StoredSession | null {
 	try {
 		const saved = JSON.parse(localStorage.getItem(SESSION_KEY) ?? 'null');
-		return typeof saved?.token === 'string' && typeof saved.exp === 'number' ? saved : null;
+		return typeof saved?.token === 'string' &&
+			typeof saved.exp === 'number' &&
+			account !== null &&
+			saved.account === account
+			? saved
+			: null;
 	} catch {
 		return null;
 	}
@@ -71,18 +80,24 @@ const trackId = (ref: MusicTrackRef) => `${ref.hash}-${ref.fileId}`;
 
 export function MusicUserProvider({
 	accessToken,
+	account,
 	children,
 }: {
 	/** The Real-Debrid access token the session is minted from. */
 	accessToken: string | null;
+	/** That token's Real-Debrid user id; a session saved for another account is minted anew. */
+	account: string | null;
 	children: ReactNode;
 }) {
 	const tokenRef = useRef(accessToken);
 	tokenRef.current = accessToken;
-	const session = useRef<MusicSessionResponse | null>(null);
-	const minting = useRef<Promise<MusicSessionResponse> | null>(null);
+	const accountRef = useRef(account);
+	accountRef.current = account;
+	const session = useRef<StoredSession | null>(null);
+	const minting = useRef<Promise<StoredSession> | null>(null);
 	const gaveUp = useRef(false);
-	const started = useRef(false);
+	// The account the library was loaded for.
+	const started = useRef<string | null | undefined>(undefined);
 	const [ready, setReady] = useState(false);
 	const [userId, setUserId] = useState<string | null>(null);
 	const [library, setLibrary] = useState(emptyLibrary);
@@ -97,7 +112,10 @@ export function MusicUserProvider({
 					body: JSON.stringify({ accessToken: tokenRef.current }),
 				});
 				if (!res.ok) throw new Error(`Music session refused: ${res.status}`);
-				const minted: MusicSessionResponse = await res.json();
+				const minted: StoredSession = {
+					...(await res.json()),
+					account: accountRef.current,
+				};
 				session.current = minted;
 				try {
 					localStorage.setItem(SESSION_KEY, JSON.stringify(minted));
@@ -127,7 +145,9 @@ export function MusicUserProvider({
 			});
 
 		if (gaveUp.current || !tokenRef.current) throw new Error('No music session');
-		const saved = session.current ?? readSession();
+		const saved =
+			(session.current?.account === accountRef.current ? session.current : null) ??
+			readSession(accountRef.current);
 		const current =
 			saved && saved.exp > Date.now() + EXPIRY_MARGIN_MS
 				? (session.current = saved)
@@ -153,8 +173,8 @@ export function MusicUserProvider({
 	}, [musicFetch]);
 
 	useEffect(() => {
-		if (!accessToken || started.current) return;
-		started.current = true;
+		if (!accessToken || started.current === account) return;
+		started.current = account;
 		void (async () => {
 			try {
 				const [, likes] = await Promise.all([
@@ -171,7 +191,7 @@ export function MusicUserProvider({
 				setReady(true);
 			}
 		})();
-	}, [accessToken, musicFetch, refreshLibrary]);
+	}, [accessToken, account, musicFetch, refreshLibrary]);
 
 	// The request's answer when it succeeded, else null.
 	const send = async (path: string, method: string, body?: unknown) => {
