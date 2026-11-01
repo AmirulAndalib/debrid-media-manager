@@ -1,0 +1,858 @@
+{
+	"artist-credit": [
+		{
+			"name": "Green Day",
+			"artist": {
+				"genres": [
+					{
+						"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+						"count": 17,
+						"disambiguation": "",
+						"name": "alternative rock"
+					},
+					{
+						"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+						"disambiguation": "",
+						"count": 2,
+						"name": "pop"
+					},
+					{
+						"id": "60e21d01-ce21-4127-86b7-aada79558dab",
+						"count": 33,
+						"disambiguation": "",
+						"name": "pop punk"
+					},
+					{
+						"name": "pop rock",
+						"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+						"count": 1,
+						"disambiguation": ""
+					},
+					{
+						"name": "power pop",
+						"count": 3,
+						"disambiguation": "",
+						"id": "618704fc-daac-44a2-92c9-89e3b1a2fc8c"
+					},
+					{
+						"name": "punk",
+						"count": 7,
+						"disambiguation": "",
+						"id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3"
+					},
+					{
+						"name": "punk rock",
+						"id": "bd7e1d40-43b1-4ba5-97b3-05b891466962",
+						"disambiguation": "",
+						"count": 36
+					},
+					{
+						"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+						"disambiguation": "",
+						"count": 14,
+						"name": "rock"
+					}
+				],
+				"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+				"disambiguation": "",
+				"type": "Group",
+				"country": "US",
+				"id": "084308bd-1654-436f-ba03-df6697104e19",
+				"sort-name": "Green Day",
+				"name": "Green Day"
+			},
+			"joinphrase": ""
+		}
+	],
+	"disambiguation": "",
+	"first-release-date": "2012-12-04",
+	"genres": [
+		{
+			"name": "alternative rock",
+			"disambiguation": "",
+			"count": 2,
+			"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18"
+		},
+		{
+			"name": "pop punk",
+			"id": "60e21d01-ce21-4127-86b7-aada79558dab",
+			"count": 3,
+			"disambiguation": ""
+		},
+		{
+			"disambiguation": "",
+			"count": 1,
+			"id": "618704fc-daac-44a2-92c9-89e3b1a2fc8c",
+			"name": "power pop"
+		},
+		{
+			"count": 2,
+			"disambiguation": "",
+			"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+			"name": "rock"
+		}
+	],
+	"id": "4853b957-05f2-457b-ba47-18b2565abc69",
+	"primary-type": "Album",
+	"primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+	"releases": [
+		{
+			"date": "2012-12-04",
+			"id": "08205eae-c9e3-4174-8d69-2a67d742a19c",
+			"title": "¡Tré!",
+			"country": "XW",
+			"media": [
+				{
+					"format-id": "907a28d9-b3b2-3ef6-89a8-7b18d91d4794",
+					"title": "",
+					"id": "16b8e3bc-a197-39e1-b62c-d6a32ac11f60",
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 12
+				}
+			],
+			"barcode": "093624948636",
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"genres": [],
+			"quality": "normal",
+			"status": "Official",
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"disambiguation": "",
+						"type": "Group",
+						"country": "US",
+						"id": "084308bd-1654-436f-ba03-df6697104e19",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"disambiguation": "",
+								"count": 17
+							},
+							{
+								"name": "pop",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 2,
+								"disambiguation": ""
+							},
+							{
+								"count": 33,
+								"disambiguation": "",
+								"id": "60e21d01-ce21-4127-86b7-aada79558dab",
+								"name": "pop punk"
+							},
+							{
+								"name": "pop rock",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": "",
+								"count": 1
+							},
+							{
+								"count": 3,
+								"disambiguation": "",
+								"id": "618704fc-daac-44a2-92c9-89e3b1a2fc8c",
+								"name": "power pop"
+							},
+							{
+								"id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3",
+								"count": 7,
+								"disambiguation": "",
+								"name": "punk"
+							},
+							{
+								"name": "punk rock",
+								"disambiguation": "",
+								"count": 36,
+								"id": "bd7e1d40-43b1-4ba5-97b3-05b891466962"
+							},
+							{
+								"name": "rock",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 14
+							}
+						],
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"sort-name": "Green Day",
+						"name": "Green Day"
+					},
+					"name": "Green Day"
+				}
+			],
+			"packaging": "None",
+			"disambiguation": "",
+			"release-events": [
+				{
+					"area": {
+						"iso-3166-1-codes": ["XW"],
+						"name": "[Worldwide]",
+						"sort-name": "[Worldwide]",
+						"type": null,
+						"disambiguation": "",
+						"id": "525d4e18-3d00-31b9-a58b-a146a916de8f",
+						"type-id": null
+					},
+					"date": "2012-12-04"
+				},
+				{ "area": null, "date": "2012-12-07" }
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": "119eba76-b343-3e02-a292-f0f00644bb9b"
+		},
+		{
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"genres": [
+				{
+					"count": 1,
+					"disambiguation": "",
+					"id": "bd7e1d40-43b1-4ba5-97b3-05b891466962",
+					"name": "punk rock"
+				}
+			],
+			"quality": "normal",
+			"title": "¡Tré!",
+			"country": "XE",
+			"date": "2012-12-07",
+			"id": "47b3741a-e097-4562-b3c8-1992241f538c",
+			"media": [
+				{
+					"track-count": 12,
+					"position": 1,
+					"format": "CD",
+					"id": "25693294-6526-3237-902a-40f7e92b3735",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"title": ""
+				}
+			],
+			"barcode": "093624948643",
+			"artist-credit": [
+				{
+					"name": "Green Day",
+					"joinphrase": "",
+					"artist": {
+						"type": "Group",
+						"disambiguation": "",
+						"id": "084308bd-1654-436f-ba03-df6697104e19",
+						"country": "US",
+						"genres": [
+							{
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"count": 17,
+								"disambiguation": "",
+								"name": "alternative rock"
+							},
+							{
+								"name": "pop",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 2,
+								"disambiguation": ""
+							},
+							{
+								"id": "60e21d01-ce21-4127-86b7-aada79558dab",
+								"count": 33,
+								"disambiguation": "",
+								"name": "pop punk"
+							},
+							{
+								"name": "pop rock",
+								"count": 1,
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+							},
+							{
+								"name": "power pop",
+								"id": "618704fc-daac-44a2-92c9-89e3b1a2fc8c",
+								"disambiguation": "",
+								"count": 3
+							},
+							{
+								"id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3",
+								"disambiguation": "",
+								"count": 7,
+								"name": "punk"
+							},
+							{
+								"disambiguation": "",
+								"count": 36,
+								"id": "bd7e1d40-43b1-4ba5-97b3-05b891466962",
+								"name": "punk rock"
+							},
+							{
+								"count": 14,
+								"disambiguation": "",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"name": "rock"
+							}
+						],
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"name": "Green Day",
+						"sort-name": "Green Day"
+					}
+				}
+			],
+			"status": "Official",
+			"release-events": [
+				{
+					"date": "2012-12-07",
+					"area": {
+						"type-id": null,
+						"id": "89a675c2-3e37-3518-b83c-418bad59a85a",
+						"disambiguation": "",
+						"type": null,
+						"sort-name": "Europe",
+						"name": "Europe",
+						"iso-3166-1-codes": ["XE"]
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging": "Jewel Case",
+			"disambiguation": "",
+			"packaging-id": "ec27701a-4a22-37f4-bfac-6616e0f9750a"
+		},
+		{
+			"packaging": "Jewel Case",
+			"disambiguation": "",
+			"release-events": [
+				{
+					"area": {
+						"iso-3166-1-codes": ["US"],
+						"name": "United States",
+						"sort-name": "United States",
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"disambiguation": "",
+						"type": null,
+						"type-id": null
+					},
+					"date": "2012-12-11"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": "ec27701a-4a22-37f4-bfac-6616e0f9750a",
+			"country": "US",
+			"title": "¡Tré!",
+			"id": "ae08cdae-9a82-4dfc-b249-d5462970fa6a",
+			"date": "2012-12-11",
+			"media": [
+				{
+					"format": "CD",
+					"position": 1,
+					"track-count": 12,
+					"title": "",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"id": "74b19af3-e1dd-3e20-9d74-213de21ee42d"
+				}
+			],
+			"barcode": "093624948643",
+			"genres": [
+				{
+					"name": "alternative rock",
+					"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+					"disambiguation": "",
+					"count": 1
+				},
+				{
+					"name": "pop punk",
+					"disambiguation": "",
+					"count": 2,
+					"id": "60e21d01-ce21-4127-86b7-aada79558dab"
+				},
+				{
+					"count": 1,
+					"disambiguation": "",
+					"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+					"name": "rock"
+				}
+			],
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"quality": "normal",
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"genres": [
+							{
+								"disambiguation": "",
+								"count": 17,
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"name": "alternative rock"
+							},
+							{
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"count": 2,
+								"name": "pop"
+							},
+							{
+								"id": "60e21d01-ce21-4127-86b7-aada79558dab",
+								"count": 33,
+								"disambiguation": "",
+								"name": "pop punk"
+							},
+							{
+								"count": 1,
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"name": "pop rock"
+							},
+							{
+								"name": "power pop",
+								"id": "618704fc-daac-44a2-92c9-89e3b1a2fc8c",
+								"disambiguation": "",
+								"count": 3
+							},
+							{
+								"id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3",
+								"disambiguation": "",
+								"count": 7,
+								"name": "punk"
+							},
+							{
+								"id": "bd7e1d40-43b1-4ba5-97b3-05b891466962",
+								"disambiguation": "",
+								"count": 36,
+								"name": "punk rock"
+							},
+							{
+								"disambiguation": "",
+								"count": 14,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"name": "rock"
+							}
+						],
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"type": "Group",
+						"disambiguation": "",
+						"id": "084308bd-1654-436f-ba03-df6697104e19",
+						"country": "US",
+						"name": "Green Day",
+						"sort-name": "Green Day"
+					},
+					"name": "Green Day"
+				}
+			],
+			"status": "Official"
+		},
+		{
+			"release-events": [
+				{
+					"date": "2012-12-11",
+					"area": {
+						"type-id": null,
+						"disambiguation": "",
+						"type": null,
+						"id": "525d4e18-3d00-31b9-a58b-a146a916de8f",
+						"name": "[Worldwide]",
+						"sort-name": "[Worldwide]",
+						"iso-3166-1-codes": ["XW"]
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging": "None",
+			"disambiguation": "96kHz/24bit",
+			"packaging-id": "119eba76-b343-3e02-a292-f0f00644bb9b",
+			"quality": "normal",
+			"genres": [],
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"title": "¡Tré!",
+			"country": "XW",
+			"id": "2eaa70de-8f77-4452-af48-b5796efdd4e1",
+			"date": "2012-12-11",
+			"media": [
+				{
+					"id": "df67fad8-55df-30bc-bb17-d436d41db074",
+					"format-id": "907a28d9-b3b2-3ef6-89a8-7b18d91d4794",
+					"title": "",
+					"track-count": 12,
+					"format": "Digital Media",
+					"position": 1
+				}
+			],
+			"barcode": "093624947899",
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"disambiguation": "",
+								"count": 17
+							},
+							{
+								"name": "pop",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"count": 2
+							},
+							{
+								"id": "60e21d01-ce21-4127-86b7-aada79558dab",
+								"disambiguation": "",
+								"count": 33,
+								"name": "pop punk"
+							},
+							{
+								"name": "pop rock",
+								"disambiguation": "",
+								"count": 1,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+							},
+							{
+								"name": "power pop",
+								"id": "618704fc-daac-44a2-92c9-89e3b1a2fc8c",
+								"disambiguation": "",
+								"count": 3
+							},
+							{
+								"name": "punk",
+								"count": 7,
+								"disambiguation": "",
+								"id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3"
+							},
+							{
+								"name": "punk rock",
+								"id": "bd7e1d40-43b1-4ba5-97b3-05b891466962",
+								"disambiguation": "",
+								"count": 36
+							},
+							{
+								"name": "rock",
+								"disambiguation": "",
+								"count": 14,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+							}
+						],
+						"country": "US",
+						"id": "084308bd-1654-436f-ba03-df6697104e19",
+						"disambiguation": "",
+						"type": "Group",
+						"sort-name": "Green Day",
+						"name": "Green Day"
+					},
+					"name": "Green Day"
+				}
+			],
+			"status": "Official"
+		},
+		{
+			"release-events": [
+				{
+					"area": {
+						"type": null,
+						"disambiguation": "",
+						"id": "2db42837-c832-3c27-b4a3-08198f75693c",
+						"type-id": null,
+						"iso-3166-1-codes": ["JP"],
+						"name": "Japan",
+						"sort-name": "Japan"
+					},
+					"date": "2012-12-12"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging": null,
+			"disambiguation": "",
+			"packaging-id": null,
+			"quality": "normal",
+			"genres": [],
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"date": "2012-12-12",
+			"id": "5f0eb95b-46e2-4e67-865c-a7a35f8cbde0",
+			"country": "JP",
+			"title": "¡Tré!",
+			"media": [
+				{
+					"track-count": 13,
+					"format": "CD",
+					"position": 1,
+					"id": "1d6c0c5e-89f8-37a4-b42b-84dd5c80c3b9",
+					"title": "",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31"
+				}
+			],
+			"barcode": "4943674131303",
+			"artist-credit": [
+				{
+					"name": "Green Day",
+					"joinphrase": "",
+					"artist": {
+						"sort-name": "Green Day",
+						"name": "Green Day",
+						"type": "Group",
+						"disambiguation": "",
+						"country": "US",
+						"id": "084308bd-1654-436f-ba03-df6697104e19",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"disambiguation": "",
+								"count": 17
+							},
+							{
+								"name": "pop",
+								"disambiguation": "",
+								"count": 2,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+							},
+							{
+								"disambiguation": "",
+								"count": 33,
+								"id": "60e21d01-ce21-4127-86b7-aada79558dab",
+								"name": "pop punk"
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 1,
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"id": "618704fc-daac-44a2-92c9-89e3b1a2fc8c",
+								"disambiguation": "",
+								"count": 3,
+								"name": "power pop"
+							},
+							{
+								"count": 7,
+								"disambiguation": "",
+								"id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3",
+								"name": "punk"
+							},
+							{
+								"name": "punk rock",
+								"disambiguation": "",
+								"count": 36,
+								"id": "bd7e1d40-43b1-4ba5-97b3-05b891466962"
+							},
+							{
+								"name": "rock",
+								"disambiguation": "",
+								"count": 14,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+							}
+						],
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+					}
+				}
+			],
+			"status": "Official"
+		},
+		{
+			"release-events": [
+				{
+					"area": {
+						"type-id": null,
+						"id": "89a675c2-3e37-3518-b83c-418bad59a85a",
+						"disambiguation": "",
+						"type": null,
+						"name": "Europe",
+						"sort-name": "Europe",
+						"iso-3166-1-codes": ["XE"]
+					},
+					"date": "2013-02-11"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging": null,
+			"disambiguation": "",
+			"packaging-id": null,
+			"genres": [],
+			"quality": "normal",
+			"text-representation": { "language": null, "script": null },
+			"country": "XE",
+			"title": "¡TRÉ!",
+			"id": "4bebbd97-ab8f-45d6-848c-27cf9607e249",
+			"date": "2013-02-11",
+			"barcode": "093624948346",
+			"media": [
+				{
+					"track-count": 12,
+					"format": "12\" Vinyl",
+					"position": 1,
+					"id": "bc9fbd2b-26d0-3ee8-9c20-ea682e9c2b1c",
+					"title": "",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64"
+				}
+			],
+			"status": "Official",
+			"artist-credit": [
+				{
+					"name": "Green Day",
+					"joinphrase": "",
+					"artist": {
+						"sort-name": "Green Day",
+						"name": "Green Day",
+						"id": "084308bd-1654-436f-ba03-df6697104e19",
+						"country": "US",
+						"type": "Group",
+						"disambiguation": "",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"count": 17,
+								"disambiguation": "",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18"
+							},
+							{
+								"name": "pop",
+								"count": 2,
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+							},
+							{
+								"id": "60e21d01-ce21-4127-86b7-aada79558dab",
+								"disambiguation": "",
+								"count": 33,
+								"name": "pop punk"
+							},
+							{
+								"name": "pop rock",
+								"count": 1,
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+							},
+							{
+								"name": "power pop",
+								"count": 3,
+								"disambiguation": "",
+								"id": "618704fc-daac-44a2-92c9-89e3b1a2fc8c"
+							},
+							{
+								"name": "punk",
+								"id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3",
+								"count": 7,
+								"disambiguation": ""
+							},
+							{
+								"name": "punk rock",
+								"disambiguation": "",
+								"count": 36,
+								"id": "bd7e1d40-43b1-4ba5-97b3-05b891466962"
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 14,
+								"name": "rock"
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"country": "US",
+			"title": "¡Tré!",
+			"id": "a2966915-d631-4512-bd96-11018401db5e",
+			"date": "",
+			"media": [
+				{
+					"format": "CD",
+					"position": 1,
+					"track-count": 12,
+					"title": "",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"id": "68ac7c1a-9053-48aa-a14b-9374709f3ff0"
+				}
+			],
+			"barcode": "093624948278",
+			"quality": "normal",
+			"genres": [],
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"artist-credit": [
+				{
+					"name": "Green Day",
+					"joinphrase": "",
+					"artist": {
+						"country": "US",
+						"id": "084308bd-1654-436f-ba03-df6697104e19",
+						"type": "Group",
+						"disambiguation": "",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"disambiguation": "",
+								"count": 17,
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18"
+							},
+							{
+								"name": "pop",
+								"count": 2,
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+							},
+							{
+								"id": "60e21d01-ce21-4127-86b7-aada79558dab",
+								"count": 33,
+								"disambiguation": "",
+								"name": "pop punk"
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": "",
+								"count": 1,
+								"name": "pop rock"
+							},
+							{
+								"name": "power pop",
+								"id": "618704fc-daac-44a2-92c9-89e3b1a2fc8c",
+								"disambiguation": "",
+								"count": 3
+							},
+							{
+								"count": 7,
+								"disambiguation": "",
+								"id": "8cc9b280-230b-4a3a-b1e2-8acab0744dd3",
+								"name": "punk"
+							},
+							{
+								"name": "punk rock",
+								"disambiguation": "",
+								"count": 36,
+								"id": "bd7e1d40-43b1-4ba5-97b3-05b891466962"
+							},
+							{
+								"name": "rock",
+								"disambiguation": "",
+								"count": 14,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+							}
+						],
+						"sort-name": "Green Day",
+						"name": "Green Day"
+					}
+				}
+			],
+			"status": "Official",
+			"packaging": null,
+			"disambiguation": "Clean Edition",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "",
+					"area": {
+						"iso-3166-1-codes": ["US"],
+						"name": "United States",
+						"sort-name": "United States",
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"type": null,
+						"disambiguation": "",
+						"type-id": null
+					}
+				}
+			],
+			"packaging-id": null
+		}
+	],
+	"secondary-type-ids": [],
+	"secondary-types": [],
+	"title": "¡Tré!"
+}

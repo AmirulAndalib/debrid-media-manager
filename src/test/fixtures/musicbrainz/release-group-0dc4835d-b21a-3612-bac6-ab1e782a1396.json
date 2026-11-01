@@ -1,0 +1,2956 @@
+{
+	"artist-credit": [
+		{
+			"artist": {
+				"genres": [
+					{
+						"disambiguation": "",
+						"count": 10,
+						"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+						"name": "alternative rock"
+					},
+					{
+						"name": "art pop",
+						"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+						"disambiguation": "",
+						"count": 7
+					},
+					{
+						"name": "art rock",
+						"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+						"disambiguation": "",
+						"count": 22
+					},
+					{
+						"disambiguation": "",
+						"count": 3,
+						"id": "93244085-20e5-4f16-9067-1d19143b3810",
+						"name": "classic rock"
+					},
+					{
+						"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+						"disambiguation": "",
+						"count": 22,
+						"name": "glam rock"
+					},
+					{
+						"name": "new wave",
+						"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+						"disambiguation": "",
+						"count": 5
+					},
+					{
+						"name": "pop",
+						"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+						"count": 10,
+						"disambiguation": ""
+					},
+					{
+						"name": "pop rock",
+						"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+						"disambiguation": "",
+						"count": 5
+					},
+					{
+						"name": "rock",
+						"count": 8,
+						"disambiguation": "",
+						"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+					}
+				],
+				"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+				"type": "Person",
+				"disambiguation": "English singer‐songwriter",
+				"country": "GB",
+				"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+				"name": "David Bowie",
+				"sort-name": "Bowie, David"
+			},
+			"joinphrase": "",
+			"name": "David Bowie"
+		}
+	],
+	"disambiguation": "",
+	"first-release-date": "1974-05-24",
+	"genres": [
+		{
+			"disambiguation": "",
+			"count": 2,
+			"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+			"name": "art rock"
+		},
+		{
+			"disambiguation": "",
+			"count": 1,
+			"id": "93244085-20e5-4f16-9067-1d19143b3810",
+			"name": "classic rock"
+		},
+		{
+			"name": "glam",
+			"id": "bc08993e-b188-43e8-b358-b84f2db6bfe6",
+			"count": 1,
+			"disambiguation": ""
+		},
+		{
+			"disambiguation": "",
+			"count": 3,
+			"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+			"name": "glam rock"
+		},
+		{
+			"name": "pop",
+			"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+			"count": 1,
+			"disambiguation": ""
+		},
+		{
+			"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+			"count": 4,
+			"disambiguation": "",
+			"name": "pop rock"
+		},
+		{
+			"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+			"disambiguation": "",
+			"count": 5,
+			"name": "rock"
+		},
+		{
+			"disambiguation": "",
+			"count": 1,
+			"id": "baaf713d-1e4e-459e-a058-60d89ce1f9df",
+			"name": "rock opera"
+		}
+	],
+	"id": "0dc4835d-b21a-3612-bac6-ab1e782a1396",
+	"primary-type": "Album",
+	"primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+	"releases": [
+		{
+			"quality": "normal",
+			"genres": [],
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"date": "1974-05-24",
+			"id": "06a786fe-75dc-42ee-9c91-47d2739f77fc",
+			"country": "GB",
+			"title": "Diamond Dogs",
+			"media": [
+				{
+					"track-count": 11,
+					"position": 1,
+					"format": "12\" Vinyl",
+					"id": "be52461a-81ea-3502-be6e-b6790a06c13a",
+					"title": "",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64"
+				}
+			],
+			"barcode": "",
+			"artist-credit": [
+				{
+					"artist": {
+						"sort-name": "Bowie, David",
+						"name": "David Bowie",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"country": "GB",
+						"type": "Person",
+						"disambiguation": "English singer‐songwriter",
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"disambiguation": "",
+								"count": 10,
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18"
+							},
+							{
+								"name": "art pop",
+								"count": 7,
+								"disambiguation": "",
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14"
+							},
+							{
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"count": 22,
+								"disambiguation": "",
+								"name": "art rock"
+							},
+							{
+								"name": "classic rock",
+								"count": 3,
+								"disambiguation": "",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810"
+							},
+							{
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"count": 22,
+								"disambiguation": "",
+								"name": "glam rock"
+							},
+							{
+								"name": "new wave",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"count": 5,
+								"disambiguation": ""
+							},
+							{
+								"name": "pop",
+								"disambiguation": "",
+								"count": 10,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+							},
+							{
+								"count": 5,
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"name": "pop rock"
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 8,
+								"name": "rock"
+							}
+						]
+					},
+					"joinphrase": "",
+					"name": "David Bowie"
+				}
+			],
+			"status": "Official",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "1974-05-24",
+					"area": {
+						"disambiguation": "",
+						"type": null,
+						"id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+						"type-id": null,
+						"iso-3166-1-codes": ["GB"],
+						"sort-name": "United Kingdom",
+						"name": "United Kingdom"
+					}
+				}
+			],
+			"packaging": "Gatefold Cover",
+			"disambiguation": "",
+			"packaging-id": "e724a489-a7e8-30a1-a17c-30dfd6831202"
+		},
+		{
+			"disambiguation": "",
+			"packaging": "Gatefold Cover",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "1974-05",
+					"area": {
+						"iso-3166-1-codes": ["US"],
+						"sort-name": "United States",
+						"name": "United States",
+						"disambiguation": "",
+						"type": null,
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"type-id": null
+					}
+				}
+			],
+			"packaging-id": "e724a489-a7e8-30a1-a17c-30dfd6831202",
+			"media": [
+				{
+					"format": "12\" Vinyl",
+					"position": 1,
+					"track-count": 11,
+					"title": "",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"id": "0497c206-96ab-3f79-908c-21f9e1c920fe"
+				}
+			],
+			"barcode": "",
+			"country": "US",
+			"title": "Diamond Dogs",
+			"date": "1974-05",
+			"id": "99a48afd-1292-4076-a9b6-12818729eae8",
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"genres": [],
+			"quality": "normal",
+			"status": "Official",
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"genres": [
+							{
+								"disambiguation": "",
+								"count": 10,
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"name": "alternative rock"
+							},
+							{
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"count": 7,
+								"disambiguation": "",
+								"name": "art pop"
+							},
+							{
+								"count": 22,
+								"disambiguation": "",
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"name": "art rock"
+							},
+							{
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"count": 3,
+								"disambiguation": "",
+								"name": "classic rock"
+							},
+							{
+								"name": "glam rock",
+								"disambiguation": "",
+								"count": 22,
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75"
+							},
+							{
+								"name": "new wave",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"count": 5,
+								"disambiguation": ""
+							},
+							{
+								"count": 10,
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"disambiguation": "",
+								"count": 5,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 8,
+								"name": "rock"
+							}
+						],
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"type": "Person",
+						"disambiguation": "English singer‐songwriter",
+						"sort-name": "Bowie, David",
+						"name": "David Bowie"
+					},
+					"name": "Bowie"
+				}
+			]
+		},
+		{
+			"status": "Official",
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"joinphrase": "",
+					"artist": {
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person",
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"count": 10,
+								"disambiguation": ""
+							},
+							{
+								"count": 7,
+								"disambiguation": "",
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"name": "art pop"
+							},
+							{
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"disambiguation": "",
+								"count": 22,
+								"name": "art rock"
+							},
+							{
+								"name": "classic rock",
+								"count": 3,
+								"disambiguation": "",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810"
+							},
+							{
+								"name": "glam rock",
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"disambiguation": "",
+								"count": 22
+							},
+							{
+								"name": "new wave",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"count": 5,
+								"disambiguation": ""
+							},
+							{
+								"name": "pop",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"count": 10
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 5,
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"name": "rock",
+								"count": 8,
+								"disambiguation": "",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"sort-name": "Bowie, David",
+						"name": "David Bowie"
+					}
+				}
+			],
+			"country": "US",
+			"title": "Diamond Dogs",
+			"id": "405fa0c3-b52f-42e8-b129-ee80407460e9",
+			"date": "1980",
+			"barcode": "",
+			"media": [
+				{
+					"track-count": 11,
+					"format": "Cassette",
+					"position": 1,
+					"id": "375b221d-31c5-341a-a238-e8e4351ee5d9",
+					"format-id": "f5e6e254-8f39-331c-936b-9c69d686dc47",
+					"title": ""
+				}
+			],
+			"genres": [],
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"quality": "normal",
+			"packaging-id": "c70b737a-0114-39a9-88f7-82843e54f906",
+			"packaging": "Cassette Case",
+			"disambiguation": "",
+			"release-events": [
+				{
+					"area": {
+						"iso-3166-1-codes": ["US"],
+						"sort-name": "United States",
+						"name": "United States",
+						"type": null,
+						"disambiguation": "",
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"type-id": null
+					},
+					"date": "1980"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe"
+		},
+		{
+			"packaging-id": "f7101ce3-0384-39ce-9fde-fbbd0044d35f",
+			"disambiguation": "",
+			"packaging": "Cardboard/Paper Sleeve",
+			"release-events": [
+				{
+					"date": "1980",
+					"area": {
+						"iso-3166-1-codes": ["US"],
+						"name": "United States",
+						"sort-name": "United States",
+						"type": null,
+						"disambiguation": "",
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"type-id": null
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"joinphrase": "",
+					"artist": {
+						"sort-name": "Bowie, David",
+						"name": "David Bowie",
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"genres": [
+							{
+								"disambiguation": "",
+								"count": 10,
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"name": "alternative rock"
+							},
+							{
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"count": 7,
+								"disambiguation": "",
+								"name": "art pop"
+							},
+							{
+								"name": "art rock",
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"count": 22,
+								"disambiguation": ""
+							},
+							{
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"count": 3,
+								"disambiguation": "",
+								"name": "classic rock"
+							},
+							{
+								"count": 22,
+								"disambiguation": "",
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"name": "glam rock"
+							},
+							{
+								"name": "new wave",
+								"count": 5,
+								"disambiguation": "",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb"
+							},
+							{
+								"count": 10,
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"disambiguation": "",
+								"count": 5,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 8,
+								"name": "rock"
+							}
+						],
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person"
+					}
+				}
+			],
+			"status": "Official",
+			"media": [
+				{
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"title": "",
+					"id": "25f772f2-1a67-3571-83b9-befc6d76a101",
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 11
+				}
+			],
+			"barcode": "",
+			"title": "Diamond Dogs",
+			"country": "US",
+			"id": "ebceb9a9-fa32-3f42-8b4d-56fcfc4e270b",
+			"date": "1980",
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"genres": [],
+			"quality": "normal"
+		},
+		{
+			"genres": [],
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"quality": "normal",
+			"media": [
+				{
+					"id": "0e4a1ee0-642b-3695-840e-8f261b0f5fd9",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"title": "",
+					"track-count": 11,
+					"position": 1,
+					"format": "12\" Vinyl"
+				}
+			],
+			"barcode": "",
+			"id": "97b2989a-d04b-3bbe-b873-22f0bf143b5b",
+			"date": "1981",
+			"country": "IT",
+			"title": "Diamond Dogs",
+			"artist-credit": [
+				{
+					"artist": {
+						"name": "David Bowie",
+						"sort-name": "Bowie, David",
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"type": "Person",
+						"disambiguation": "English singer‐songwriter",
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"genres": [
+							{
+								"count": 10,
+								"disambiguation": "",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"name": "alternative rock"
+							},
+							{
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"count": 7,
+								"disambiguation": "",
+								"name": "art pop"
+							},
+							{
+								"name": "art rock",
+								"disambiguation": "",
+								"count": 22,
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b"
+							},
+							{
+								"disambiguation": "",
+								"count": 3,
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"name": "classic rock"
+							},
+							{
+								"name": "glam rock",
+								"disambiguation": "",
+								"count": 22,
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75"
+							},
+							{
+								"count": 5,
+								"disambiguation": "",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"name": "new wave"
+							},
+							{
+								"count": 10,
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"name": "pop"
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 5,
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"count": 8,
+								"disambiguation": "",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"name": "rock"
+							}
+						]
+					},
+					"joinphrase": "",
+					"name": "David Bowie"
+				}
+			],
+			"status": "Official",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "1981",
+					"area": {
+						"sort-name": "Italy",
+						"name": "Italy",
+						"iso-3166-1-codes": ["IT"],
+						"type-id": null,
+						"id": "c6500277-9a3d-349b-bf30-41afdbf42add",
+						"type": null,
+						"disambiguation": ""
+					}
+				}
+			],
+			"disambiguation": "",
+			"packaging": "Cardboard/Paper Sleeve",
+			"packaging-id": "f7101ce3-0384-39ce-9fde-fbbd0044d35f"
+		},
+		{
+			"packaging": null,
+			"disambiguation": "",
+			"status-id": null,
+			"release-events": [
+				{
+					"date": "1984",
+					"area": {
+						"type-id": null,
+						"id": "2db42837-c832-3c27-b4a3-08198f75693c",
+						"type": null,
+						"disambiguation": "",
+						"sort-name": "Japan",
+						"name": "Japan",
+						"iso-3166-1-codes": ["JP"]
+					}
+				}
+			],
+			"packaging-id": null,
+			"title": "Diamond Dogs",
+			"country": "JP",
+			"date": "1984",
+			"id": "140cdf79-3a8b-4912-ae14-5514ddf64ef3",
+			"media": [
+				{
+					"id": "2afb031d-2789-3f87-ba7a-d1bbff521bb2",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"title": "",
+					"track-count": 11,
+					"format": "CD",
+					"position": 1
+				}
+			],
+			"barcode": null,
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"genres": [],
+			"quality": "normal",
+			"status": null,
+			"artist-credit": [
+				{
+					"name": "Bowie",
+					"artist": {
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"genres": [
+							{
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"count": 10,
+								"disambiguation": "",
+								"name": "alternative rock"
+							},
+							{
+								"name": "art pop",
+								"disambiguation": "",
+								"count": 7,
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14"
+							},
+							{
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"disambiguation": "",
+								"count": 22,
+								"name": "art rock"
+							},
+							{
+								"name": "classic rock",
+								"disambiguation": "",
+								"count": 3,
+								"id": "93244085-20e5-4f16-9067-1d19143b3810"
+							},
+							{
+								"disambiguation": "",
+								"count": 22,
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"name": "glam rock"
+							},
+							{
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"disambiguation": "",
+								"count": 5,
+								"name": "new wave"
+							},
+							{
+								"disambiguation": "",
+								"count": 10,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"disambiguation": "",
+								"count": 5,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+							},
+							{
+								"name": "rock",
+								"disambiguation": "",
+								"count": 8,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+							}
+						],
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"type": "Person",
+						"disambiguation": "English singer‐songwriter",
+						"name": "David Bowie",
+						"sort-name": "Bowie, David"
+					},
+					"joinphrase": ""
+				}
+			]
+		},
+		{
+			"barcode": "078635057621",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 11,
+					"title": "",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"id": "373b557e-8455-3aef-adef-36d5052b56cd"
+				}
+			],
+			"date": "1984",
+			"id": "4f00baf4-c11c-41dc-bdca-4267180077f7",
+			"title": "Diamond Dogs",
+			"country": "US",
+			"quality": "normal",
+			"genres": [],
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"status": "Official",
+			"artist-credit": [
+				{
+					"artist": {
+						"name": "David Bowie",
+						"sort-name": "Bowie, David",
+						"genres": [
+							{
+								"disambiguation": "",
+								"count": 10,
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"name": "alternative rock"
+							},
+							{
+								"count": 7,
+								"disambiguation": "",
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"name": "art pop"
+							},
+							{
+								"name": "art rock",
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"disambiguation": "",
+								"count": 22
+							},
+							{
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"count": 3,
+								"disambiguation": "",
+								"name": "classic rock"
+							},
+							{
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"count": 22,
+								"disambiguation": "",
+								"name": "glam rock"
+							},
+							{
+								"name": "new wave",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"disambiguation": "",
+								"count": 5
+							},
+							{
+								"name": "pop",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"count": 10
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 5,
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"name": "rock",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 8
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"country": "GB"
+					},
+					"joinphrase": "",
+					"name": "David Bowie"
+				}
+			],
+			"disambiguation": "",
+			"packaging": "Jewel Case",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"area": {
+						"disambiguation": "",
+						"type": null,
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"type-id": null,
+						"iso-3166-1-codes": ["US"],
+						"sort-name": "United States",
+						"name": "United States"
+					},
+					"date": "1984"
+				}
+			],
+			"packaging-id": "ec27701a-4a22-37f4-bfac-6616e0f9750a"
+		},
+		{
+			"packaging-id": "ec27701a-4a22-37f4-bfac-6616e0f9750a",
+			"packaging": "Jewel Case",
+			"disambiguation": "",
+			"release-events": [
+				{
+					"area": {
+						"type-id": null,
+						"type": null,
+						"disambiguation": "",
+						"id": "89a675c2-3e37-3518-b83c-418bad59a85a",
+						"sort-name": "Europe",
+						"name": "Europe",
+						"iso-3166-1-codes": ["XE"]
+					},
+					"date": "1985"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"sort-name": "Bowie, David",
+						"name": "David Bowie",
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"count": 10,
+								"disambiguation": "",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18"
+							},
+							{
+								"name": "art pop",
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"disambiguation": "",
+								"count": 7
+							},
+							{
+								"name": "art rock",
+								"disambiguation": "",
+								"count": 22,
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b"
+							},
+							{
+								"name": "classic rock",
+								"count": 3,
+								"disambiguation": "",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810"
+							},
+							{
+								"name": "glam rock",
+								"disambiguation": "",
+								"count": 22,
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75"
+							},
+							{
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"count": 5,
+								"disambiguation": "",
+								"name": "new wave"
+							},
+							{
+								"disambiguation": "",
+								"count": 10,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": "",
+								"count": 5
+							},
+							{
+								"name": "rock",
+								"disambiguation": "",
+								"count": 8,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+							}
+						],
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"type": "Person",
+						"disambiguation": "English singer‐songwriter"
+					},
+					"name": "David Bowie"
+				}
+			],
+			"status": "Official",
+			"country": "XE",
+			"title": "Diamond Dogs",
+			"id": "aa6483c0-698d-48c5-83e4-7d0cd06abbac",
+			"date": "1985",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 8,
+					"title": "",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"id": "17b85cbe-9202-34fd-8df1-58f8a8e46bb0"
+				}
+			],
+			"barcode": "0035628388926",
+			"genres": [],
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"quality": "normal"
+		},
+		{
+			"packaging-id": null,
+			"disambiguation": "",
+			"packaging": null,
+			"release-events": [
+				{
+					"date": "1990-10-31",
+					"area": {
+						"sort-name": "Japan",
+						"name": "Japan",
+						"iso-3166-1-codes": ["JP"],
+						"type-id": null,
+						"type": null,
+						"disambiguation": "",
+						"id": "2db42837-c832-3c27-b4a3-08198f75693c"
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"status": "Official",
+			"artist-credit": [
+				{
+					"artist": {
+						"name": "David Bowie",
+						"sort-name": "Bowie, David",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"count": 10,
+								"disambiguation": ""
+							},
+							{
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"count": 7,
+								"disambiguation": "",
+								"name": "art pop"
+							},
+							{
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"count": 22,
+								"disambiguation": "",
+								"name": "art rock"
+							},
+							{
+								"name": "classic rock",
+								"disambiguation": "",
+								"count": 3,
+								"id": "93244085-20e5-4f16-9067-1d19143b3810"
+							},
+							{
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"count": 22,
+								"disambiguation": "",
+								"name": "glam rock"
+							},
+							{
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"disambiguation": "",
+								"count": 5,
+								"name": "new wave"
+							},
+							{
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"count": 10,
+								"name": "pop"
+							},
+							{
+								"count": 5,
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"name": "pop rock"
+							},
+							{
+								"disambiguation": "",
+								"count": 8,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"name": "rock"
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"country": "GB"
+					},
+					"joinphrase": "",
+					"name": "Bowie"
+				}
+			],
+			"barcode": "4988006648845",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 13,
+					"title": "",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"id": "d575c6bd-07ab-3c23-a3cc-4c403953e2b2"
+				}
+			],
+			"title": "Diamond Dogs",
+			"country": "JP",
+			"date": "1990-10-31",
+			"id": "02b4495f-5919-4613-a7f0-803cdf7e8f8c",
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"genres": [],
+			"quality": "normal"
+		},
+		{
+			"packaging-id": "ec27701a-4a22-37f4-bfac-6616e0f9750a",
+			"release-events": [
+				{
+					"area": {
+						"name": "Europe",
+						"sort-name": "Europe",
+						"iso-3166-1-codes": ["XE"],
+						"type-id": null,
+						"id": "89a675c2-3e37-3518-b83c-418bad59a85a",
+						"disambiguation": "",
+						"type": null
+					},
+					"date": "1990"
+				},
+				{
+					"area": {
+						"id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+						"disambiguation": "",
+						"type": null,
+						"type-id": null,
+						"iso-3166-1-codes": ["GB"],
+						"sort-name": "United Kingdom",
+						"name": "United Kingdom"
+					},
+					"date": "1990"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging": "Jewel Case",
+			"disambiguation": "no price code",
+			"status": "Official",
+			"artist-credit": [
+				{
+					"artist": {
+						"name": "David Bowie",
+						"sort-name": "Bowie, David",
+						"genres": [
+							{
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"count": 10,
+								"disambiguation": "",
+								"name": "alternative rock"
+							},
+							{
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"disambiguation": "",
+								"count": 7,
+								"name": "art pop"
+							},
+							{
+								"name": "art rock",
+								"disambiguation": "",
+								"count": 22,
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b"
+							},
+							{
+								"name": "classic rock",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"count": 3,
+								"disambiguation": ""
+							},
+							{
+								"name": "glam rock",
+								"count": 22,
+								"disambiguation": "",
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75"
+							},
+							{
+								"name": "new wave",
+								"disambiguation": "",
+								"count": 5,
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb"
+							},
+							{
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"count": 10,
+								"name": "pop"
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 5,
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"name": "rock",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 8
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"type": "Person",
+						"disambiguation": "English singer‐songwriter",
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50"
+					},
+					"joinphrase": "",
+					"name": "David Bowie"
+				}
+			],
+			"genres": [],
+			"quality": "normal",
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"title": "Diamond Dogs",
+			"country": "XE",
+			"date": "1990",
+			"id": "54a293fc-d5bd-4925-94b3-62fd833d6c7b",
+			"media": [
+				{
+					"title": "",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"id": "074d40af-8f75-354e-87b2-75135a8275b9",
+					"format": "CD",
+					"position": 1,
+					"track-count": 13
+				}
+			],
+			"barcode": "0077779521128"
+		},
+		{
+			"genres": [
+				{
+					"disambiguation": "",
+					"count": 1,
+					"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+					"name": "glam rock"
+				},
+				{
+					"name": "rock",
+					"count": 1,
+					"disambiguation": "",
+					"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+				}
+			],
+			"quality": "normal",
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"media": [
+				{
+					"track-count": 13,
+					"format": "CD",
+					"position": 1,
+					"id": "1b8722fe-512c-35af-a67f-d535e57a3179",
+					"title": "",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31"
+				}
+			],
+			"barcode": null,
+			"date": "1990",
+			"id": "ac6a3bdd-4d2e-38e8-ba6e-33cecf128b18",
+			"title": "Diamond Dogs",
+			"country": "US",
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"joinphrase": "",
+					"artist": {
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"count": 10,
+								"disambiguation": ""
+							},
+							{
+								"name": "art pop",
+								"disambiguation": "",
+								"count": 7,
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14"
+							},
+							{
+								"name": "art rock",
+								"disambiguation": "",
+								"count": 22,
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b"
+							},
+							{
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"count": 3,
+								"disambiguation": "",
+								"name": "classic rock"
+							},
+							{
+								"name": "glam rock",
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"disambiguation": "",
+								"count": 22
+							},
+							{
+								"name": "new wave",
+								"count": 5,
+								"disambiguation": "",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb"
+							},
+							{
+								"name": "pop",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"count": 10
+							},
+							{
+								"name": "pop rock",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": "",
+								"count": 5
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 8,
+								"disambiguation": "",
+								"name": "rock"
+							}
+						],
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"type": "Person",
+						"disambiguation": "English singer‐songwriter",
+						"name": "David Bowie",
+						"sort-name": "Bowie, David"
+					}
+				}
+			],
+			"status": "Official",
+			"release-events": [
+				{
+					"date": "1990",
+					"area": {
+						"sort-name": "United States",
+						"name": "United States",
+						"iso-3166-1-codes": ["US"],
+						"type-id": null,
+						"disambiguation": "",
+						"type": null,
+						"id": "489ce91b-6658-3307-9877-795b68554c98"
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"disambiguation": "Ryko remaster",
+			"packaging": null,
+			"packaging-id": null
+		},
+		{
+			"packaging-id": "ec27701a-4a22-37f4-bfac-6616e0f9750a",
+			"disambiguation": "rights society: bel BIEM",
+			"packaging": "Jewel Case",
+			"release-events": [
+				{
+					"date": "1999-09-03",
+					"area": {
+						"type-id": null,
+						"id": "85752fda-13c4-31a3-bee5-0e5cb1f51dad",
+						"disambiguation": "",
+						"type": null,
+						"sort-name": "Germany",
+						"name": "Germany",
+						"iso-3166-1-codes": ["DE"]
+					}
+				},
+				{
+					"date": "1999-09-06",
+					"area": {
+						"type-id": null,
+						"id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+						"type": null,
+						"disambiguation": "",
+						"name": "United Kingdom",
+						"sort-name": "United Kingdom",
+						"iso-3166-1-codes": ["GB"]
+					}
+				},
+				{
+					"area": {
+						"sort-name": "Europe",
+						"name": "Europe",
+						"iso-3166-1-codes": ["XE"],
+						"type-id": null,
+						"type": null,
+						"disambiguation": "",
+						"id": "89a675c2-3e37-3518-b83c-418bad59a85a"
+					},
+					"date": "1999-09"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"name": "David Bowie",
+						"sort-name": "Bowie, David",
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person",
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"count": 10,
+								"disambiguation": ""
+							},
+							{
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"disambiguation": "",
+								"count": 7,
+								"name": "art pop"
+							},
+							{
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"count": 22,
+								"disambiguation": "",
+								"name": "art rock"
+							},
+							{
+								"name": "classic rock",
+								"disambiguation": "",
+								"count": 3,
+								"id": "93244085-20e5-4f16-9067-1d19143b3810"
+							},
+							{
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"count": 22,
+								"disambiguation": "",
+								"name": "glam rock"
+							},
+							{
+								"name": "new wave",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"disambiguation": "",
+								"count": 5
+							},
+							{
+								"disambiguation": "",
+								"count": 10,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"count": 5,
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 8,
+								"disambiguation": "",
+								"name": "rock"
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df"
+					},
+					"name": "David Bowie"
+				}
+			],
+			"status": "Official",
+			"media": [
+				{
+					"track-count": 11,
+					"format": "Enhanced CD",
+					"position": 1,
+					"id": "fe6420d3-99ba-344a-833c-992208b9f110",
+					"format-id": "8a08dc62-1aa2-34de-a904-fa467c53052c",
+					"title": ""
+				}
+			],
+			"barcode": "724352190409",
+			"country": "DE",
+			"title": "Diamond Dogs",
+			"id": "b451ecc1-9453-494e-8c23-907975a26b8c",
+			"date": "1999-09-03",
+			"quality": "normal",
+			"genres": [],
+			"text-representation": { "script": "Latn", "language": "eng" }
+		},
+		{
+			"packaging-id": null,
+			"disambiguation": "",
+			"packaging": null,
+			"release-events": [
+				{
+					"area": {
+						"name": "United Kingdom",
+						"sort-name": "United Kingdom",
+						"iso-3166-1-codes": ["GB"],
+						"type-id": null,
+						"id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+						"disambiguation": "",
+						"type": null
+					},
+					"date": "1999-09-06"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"status": "Official",
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"joinphrase": "",
+					"artist": {
+						"genres": [
+							{
+								"count": 10,
+								"disambiguation": "",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"name": "alternative rock"
+							},
+							{
+								"disambiguation": "",
+								"count": 7,
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"name": "art pop"
+							},
+							{
+								"name": "art rock",
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"disambiguation": "",
+								"count": 22
+							},
+							{
+								"count": 3,
+								"disambiguation": "",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"name": "classic rock"
+							},
+							{
+								"name": "glam rock",
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"disambiguation": "",
+								"count": 22
+							},
+							{
+								"name": "new wave",
+								"disambiguation": "",
+								"count": 5,
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb"
+							},
+							{
+								"count": 10,
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 5,
+								"disambiguation": ""
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 8,
+								"name": "rock"
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"country": "GB",
+						"name": "David Bowie",
+						"sort-name": "Bowie, David"
+					}
+				}
+			],
+			"barcode": "0724352190409",
+			"media": [
+				{
+					"format": "CD",
+					"position": 1,
+					"track-count": 11,
+					"title": "",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"id": "c72a1ef6-93af-348a-95f4-8c99d6ced254"
+				}
+			],
+			"id": "e6af9bab-1335-3ce9-b76c-f4187f54e5be",
+			"date": "1999-09-06",
+			"title": "Diamond Dogs",
+			"country": "GB",
+			"genres": [],
+			"quality": "normal",
+			"text-representation": { "language": "eng", "script": "Latn" }
+		},
+		{
+			"release-events": [
+				{
+					"area": {
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"type": null,
+						"disambiguation": "",
+						"type-id": null,
+						"iso-3166-1-codes": ["US"],
+						"name": "United States",
+						"sort-name": "United States"
+					},
+					"date": "1999-09-28"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"disambiguation": "",
+			"packaging": "Jewel Case",
+			"packaging-id": "ec27701a-4a22-37f4-bfac-6616e0f9750a",
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"genres": [],
+			"quality": "normal",
+			"media": [
+				{
+					"id": "bad6dfee-0d37-3711-a2d9-997b29fc6702",
+					"title": "",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"track-count": 11,
+					"position": 1,
+					"format": "CD"
+				}
+			],
+			"barcode": "724352190409",
+			"title": "Diamond Dogs",
+			"country": "US",
+			"date": "1999-09-28",
+			"id": "5d51a4c3-0c78-4571-be5e-9f97afd40a76",
+			"status": "Official",
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"genres": [
+							{
+								"count": 10,
+								"disambiguation": "",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"name": "alternative rock"
+							},
+							{
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"count": 7,
+								"disambiguation": "",
+								"name": "art pop"
+							},
+							{
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"count": 22,
+								"disambiguation": "",
+								"name": "art rock"
+							},
+							{
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"count": 3,
+								"disambiguation": "",
+								"name": "classic rock"
+							},
+							{
+								"count": 22,
+								"disambiguation": "",
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"name": "glam rock"
+							},
+							{
+								"count": 5,
+								"disambiguation": "",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"name": "new wave"
+							},
+							{
+								"name": "pop",
+								"count": 10,
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+							},
+							{
+								"name": "pop rock",
+								"count": 5,
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+							},
+							{
+								"count": 8,
+								"disambiguation": "",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"name": "rock"
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person",
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"name": "David Bowie",
+						"sort-name": "Bowie, David"
+					},
+					"name": "David Bowie"
+				}
+			]
+		},
+		{
+			"release-events": [
+				{
+					"area": {
+						"name": "Japan",
+						"sort-name": "Japan",
+						"iso-3166-1-codes": ["JP"],
+						"type-id": null,
+						"type": null,
+						"disambiguation": "",
+						"id": "2db42837-c832-3c27-b4a3-08198f75693c"
+					},
+					"date": "1999-09-29"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging": null,
+			"disambiguation": "",
+			"packaging-id": null,
+			"quality": "normal",
+			"genres": [],
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"date": "1999-09-29",
+			"id": "eeeb19e9-6bf5-345b-a7f4-cc0f9e909978",
+			"country": "JP",
+			"title": "Diamond Dogs",
+			"barcode": "4988006775121",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 11,
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"title": "",
+					"id": "6529c50e-b8a0-3b05-b666-37a807bfa10b"
+				}
+			],
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"artist": {
+						"genres": [
+							{
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"disambiguation": "",
+								"count": 10,
+								"name": "alternative rock"
+							},
+							{
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"disambiguation": "",
+								"count": 7,
+								"name": "art pop"
+							},
+							{
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"count": 22,
+								"disambiguation": "",
+								"name": "art rock"
+							},
+							{
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"count": 3,
+								"disambiguation": "",
+								"name": "classic rock"
+							},
+							{
+								"disambiguation": "",
+								"count": 22,
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"name": "glam rock"
+							},
+							{
+								"name": "new wave",
+								"count": 5,
+								"disambiguation": "",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb"
+							},
+							{
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"count": 10,
+								"name": "pop"
+							},
+							{
+								"count": 5,
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"name": "pop rock"
+							},
+							{
+								"name": "rock",
+								"disambiguation": "",
+								"count": 8,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"type": "Person",
+						"disambiguation": "English singer‐songwriter",
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"sort-name": "Bowie, David",
+						"name": "David Bowie"
+					},
+					"joinphrase": ""
+				}
+			],
+			"status": "Official"
+		},
+		{
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"genres": [],
+			"quality": "normal",
+			"barcode": "724357785723",
+			"media": [
+				{
+					"id": "15186c59-0bd2-3a6b-ae4e-e15491728f0e",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"title": "",
+					"track-count": 11,
+					"position": 1,
+					"format": "CD"
+				},
+				{
+					"track-count": 8,
+					"position": 2,
+					"format": "CD",
+					"id": "58e59584-dc00-308e-aa31-13a908f411c7",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"title": ""
+				}
+			],
+			"id": "6efb7235-2262-3bb3-8ad0-211f60528e42",
+			"date": "2004-06-07",
+			"country": "GB",
+			"title": "Diamond Dogs",
+			"status": "Official",
+			"artist-credit": [
+				{
+					"artist": {
+						"type": "Person",
+						"disambiguation": "English singer‐songwriter",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"country": "GB",
+						"genres": [
+							{
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"count": 10,
+								"disambiguation": "",
+								"name": "alternative rock"
+							},
+							{
+								"count": 7,
+								"disambiguation": "",
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"name": "art pop"
+							},
+							{
+								"disambiguation": "",
+								"count": 22,
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"name": "art rock"
+							},
+							{
+								"disambiguation": "",
+								"count": 3,
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"name": "classic rock"
+							},
+							{
+								"disambiguation": "",
+								"count": 22,
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"name": "glam rock"
+							},
+							{
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"disambiguation": "",
+								"count": 5,
+								"name": "new wave"
+							},
+							{
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 10,
+								"disambiguation": "",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"count": 5,
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 8,
+								"name": "rock"
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"sort-name": "Bowie, David",
+						"name": "David Bowie"
+					},
+					"joinphrase": "",
+					"name": "David Bowie"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "2004-06-07",
+					"area": {
+						"id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+						"type": null,
+						"disambiguation": "",
+						"type-id": null,
+						"iso-3166-1-codes": ["GB"],
+						"name": "United Kingdom",
+						"sort-name": "United Kingdom"
+					}
+				}
+			],
+			"disambiguation": "30th anniversary 2CD edition",
+			"packaging": "Gatefold Cover",
+			"packaging-id": "e724a489-a7e8-30a1-a17c-30dfd6831202"
+		},
+		{
+			"packaging-id": null,
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "2004-07-14",
+					"area": {
+						"type": null,
+						"disambiguation": "",
+						"id": "2db42837-c832-3c27-b4a3-08198f75693c",
+						"type-id": null,
+						"iso-3166-1-codes": ["JP"],
+						"sort-name": "Japan",
+						"name": "Japan"
+					}
+				}
+			],
+			"packaging": null,
+			"disambiguation": "",
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"artist": {
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person",
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"genres": [
+							{
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"disambiguation": "",
+								"count": 10,
+								"name": "alternative rock"
+							},
+							{
+								"disambiguation": "",
+								"count": 7,
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"name": "art pop"
+							},
+							{
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"count": 22,
+								"disambiguation": "",
+								"name": "art rock"
+							},
+							{
+								"name": "classic rock",
+								"count": 3,
+								"disambiguation": "",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810"
+							},
+							{
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"disambiguation": "",
+								"count": 22,
+								"name": "glam rock"
+							},
+							{
+								"name": "new wave",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"disambiguation": "",
+								"count": 5
+							},
+							{
+								"name": "pop",
+								"count": 10,
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 5,
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"name": "rock",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 8,
+								"disambiguation": ""
+							}
+						],
+						"name": "David Bowie",
+						"sort-name": "Bowie, David"
+					},
+					"joinphrase": ""
+				}
+			],
+			"status": "Official",
+			"quality": "normal",
+			"genres": [],
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"country": "JP",
+			"title": "Diamond Dogs",
+			"id": "61460681-d7f7-3190-8d74-06a67edcabca",
+			"date": "2004-07-14",
+			"barcode": "4988006822061",
+			"media": [
+				{
+					"id": "3bdd9701-01ba-3adf-94ea-43916aab6934",
+					"title": "",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"track-count": 11,
+					"position": 1,
+					"format": "CD"
+				},
+				{
+					"track-count": 8,
+					"format": "CD",
+					"position": 2,
+					"id": "dc4b013a-74bb-3263-a876-6e90f470970b",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"title": ""
+				}
+			]
+		},
+		{
+			"packaging": "Cardboard/Paper Sleeve",
+			"disambiguation": "30th anniversary 2CD edition",
+			"release-events": [
+				{
+					"area": {
+						"iso-3166-1-codes": ["XE"],
+						"sort-name": "Europe",
+						"name": "Europe",
+						"id": "89a675c2-3e37-3518-b83c-418bad59a85a",
+						"disambiguation": "",
+						"type": null,
+						"type-id": null
+					},
+					"date": "2004"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": "f7101ce3-0384-39ce-9fde-fbbd0044d35f",
+			"id": "0600b408-8033-4baf-955f-da4253fb7418",
+			"date": "2004",
+			"title": "Diamond Dogs",
+			"country": "XE",
+			"barcode": "724357786027",
+			"media": [
+				{
+					"format-id": "1a648190-5c75-3b74-b8c5-8150c97af0f5",
+					"title": "",
+					"id": "35f5cf19-b1d1-302b-b1fe-90fe285aa1b9",
+					"position": 1,
+					"format": "Copy Control CD",
+					"track-count": 11
+				},
+				{
+					"title": "",
+					"format-id": "1a648190-5c75-3b74-b8c5-8150c97af0f5",
+					"id": "d81c0522-787b-39ba-aae8-061133095a3f",
+					"format": "Copy Control CD",
+					"position": 2,
+					"track-count": 8
+				}
+			],
+			"genres": [],
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"quality": "normal",
+			"status": "Official",
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"artist": {
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"genres": [
+							{
+								"count": 10,
+								"disambiguation": "",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"name": "alternative rock"
+							},
+							{
+								"name": "art pop",
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"count": 7,
+								"disambiguation": ""
+							},
+							{
+								"name": "art rock",
+								"disambiguation": "",
+								"count": 22,
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b"
+							},
+							{
+								"count": 3,
+								"disambiguation": "",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"name": "classic rock"
+							},
+							{
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"disambiguation": "",
+								"count": 22,
+								"name": "glam rock"
+							},
+							{
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"count": 5,
+								"disambiguation": "",
+								"name": "new wave"
+							},
+							{
+								"name": "pop",
+								"disambiguation": "",
+								"count": 10,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": "",
+								"count": 5,
+								"name": "pop rock"
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 8,
+								"name": "rock"
+							}
+						],
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person",
+						"name": "David Bowie",
+						"sort-name": "Bowie, David"
+					},
+					"joinphrase": ""
+				}
+			]
+		},
+		{
+			"disambiguation": "",
+			"packaging": null,
+			"release-events": [
+				{
+					"date": "2007-02-07",
+					"area": {
+						"type-id": null,
+						"type": null,
+						"disambiguation": "",
+						"id": "2db42837-c832-3c27-b4a3-08198f75693c",
+						"name": "Japan",
+						"sort-name": "Japan",
+						"iso-3166-1-codes": ["JP"]
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": null,
+			"media": [
+				{
+					"title": "",
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"id": "4ba6a05b-55c9-3e9a-9c8c-4f48b07cfc89",
+					"position": 1,
+					"format": "CD",
+					"track-count": 11
+				}
+			],
+			"barcode": "4988006850569",
+			"id": "f74fbfa1-2c8e-38ce-babe-9cae166d3ced",
+			"date": "2007-02-07",
+			"country": "JP",
+			"title": "Diamond Dogs",
+			"genres": [],
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"quality": "normal",
+			"status": "Official",
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person",
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"count": 10,
+								"disambiguation": "",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18"
+							},
+							{
+								"name": "art pop",
+								"disambiguation": "",
+								"count": 7,
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14"
+							},
+							{
+								"name": "art rock",
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"disambiguation": "",
+								"count": 22
+							},
+							{
+								"count": 3,
+								"disambiguation": "",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"name": "classic rock"
+							},
+							{
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"disambiguation": "",
+								"count": 22,
+								"name": "glam rock"
+							},
+							{
+								"name": "new wave",
+								"count": 5,
+								"disambiguation": "",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb"
+							},
+							{
+								"name": "pop",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"count": 10
+							},
+							{
+								"disambiguation": "",
+								"count": 5,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"name": "pop rock"
+							},
+							{
+								"count": 8,
+								"disambiguation": "",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"name": "rock"
+							}
+						],
+						"sort-name": "Bowie, David",
+						"name": "David Bowie"
+					},
+					"name": "David Bowie"
+				}
+			]
+		},
+		{
+			"quality": "normal",
+			"genres": [],
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"media": [
+				{
+					"format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+					"title": "",
+					"id": "e3f35b31-d4e4-3c14-b08e-3dfb148ef27c",
+					"position": 1,
+					"format": "CD",
+					"track-count": 11
+				}
+			],
+			"barcode": "4988006863439",
+			"country": "JP",
+			"title": "Diamond Dogs",
+			"id": "b9ab6a4d-ed88-3956-9cc1-2e238cc63f2d",
+			"date": "2008-06-11",
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"artist": {
+						"sort-name": "Bowie, David",
+						"name": "David Bowie",
+						"type": "Person",
+						"disambiguation": "English singer‐songwriter",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"country": "GB",
+						"genres": [
+							{
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"disambiguation": "",
+								"count": 10,
+								"name": "alternative rock"
+							},
+							{
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"disambiguation": "",
+								"count": 7,
+								"name": "art pop"
+							},
+							{
+								"name": "art rock",
+								"count": 22,
+								"disambiguation": "",
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b"
+							},
+							{
+								"name": "classic rock",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"disambiguation": "",
+								"count": 3
+							},
+							{
+								"disambiguation": "",
+								"count": 22,
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"name": "glam rock"
+							},
+							{
+								"count": 5,
+								"disambiguation": "",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"name": "new wave"
+							},
+							{
+								"name": "pop",
+								"count": 10,
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": "",
+								"count": 5,
+								"name": "pop rock"
+							},
+							{
+								"count": 8,
+								"disambiguation": "",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"name": "rock"
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df"
+					},
+					"joinphrase": ""
+				}
+			],
+			"status": "Official",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "2008-06-11",
+					"area": {
+						"iso-3166-1-codes": ["JP"],
+						"name": "Japan",
+						"sort-name": "Japan",
+						"id": "2db42837-c832-3c27-b4a3-08198f75693c",
+						"type": null,
+						"disambiguation": "",
+						"type-id": null
+					}
+				}
+			],
+			"disambiguation": "",
+			"packaging": null,
+			"packaging-id": null
+		},
+		{
+			"packaging-id": "f7101ce3-0384-39ce-9fde-fbbd0044d35f",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "2009-11-25",
+					"area": {
+						"name": "Japan",
+						"sort-name": "Japan",
+						"iso-3166-1-codes": ["JP"],
+						"type-id": null,
+						"disambiguation": "",
+						"type": null,
+						"id": "2db42837-c832-3c27-b4a3-08198f75693c"
+					}
+				}
+			],
+			"disambiguation": "",
+			"packaging": "Cardboard/Paper Sleeve",
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"artist": {
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"country": "GB",
+						"genres": [
+							{
+								"count": 10,
+								"disambiguation": "",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"name": "alternative rock"
+							},
+							{
+								"count": 7,
+								"disambiguation": "",
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"name": "art pop"
+							},
+							{
+								"disambiguation": "",
+								"count": 22,
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"name": "art rock"
+							},
+							{
+								"name": "classic rock",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"count": 3,
+								"disambiguation": ""
+							},
+							{
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"count": 22,
+								"disambiguation": "",
+								"name": "glam rock"
+							},
+							{
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"disambiguation": "",
+								"count": 5,
+								"name": "new wave"
+							},
+							{
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 10,
+								"disambiguation": "",
+								"name": "pop"
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 5,
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"name": "rock",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 8,
+								"disambiguation": ""
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"sort-name": "Bowie, David",
+						"name": "David Bowie"
+					},
+					"joinphrase": ""
+				}
+			],
+			"status": "Official",
+			"quality": "normal",
+			"genres": [],
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"barcode": "4988006876323",
+			"media": [
+				{
+					"format": "SHM-CD",
+					"position": 1,
+					"track-count": 11,
+					"title": "",
+					"format-id": "4856b1c6-674d-3f68-a1dd-8ae517e8b566",
+					"id": "99edc48b-c9ca-3474-a30d-dac0cca37570"
+				}
+			],
+			"country": "JP",
+			"title": "Diamond Dogs",
+			"date": "2009-11-25",
+			"id": "96581a72-1ab2-3179-be3b-c41fec23baf9"
+		},
+		{
+			"disambiguation": "",
+			"packaging": "Jewel Case",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"area": {
+						"type-id": null,
+						"disambiguation": "",
+						"type": null,
+						"id": "89a675c2-3e37-3518-b83c-418bad59a85a",
+						"name": "Europe",
+						"sort-name": "Europe",
+						"iso-3166-1-codes": ["XE"]
+					},
+					"date": "2014"
+				}
+			],
+			"packaging-id": "ec27701a-4a22-37f4-bfac-6616e0f9750a",
+			"media": [
+				{
+					"title": "",
+					"format-id": "8a08dc62-1aa2-34de-a904-fa467c53052c",
+					"id": "45c4ea7f-2887-3500-b8ff-39e9853f3ba5",
+					"format": "Enhanced CD",
+					"position": 1,
+					"track-count": 11
+				}
+			],
+			"barcode": "724352190409",
+			"date": "2014",
+			"id": "dcf35f75-1b79-4bdf-9ed8-ebfbcc930a42",
+			"title": "Diamond Dogs",
+			"country": "XE",
+			"genres": [],
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"quality": "normal",
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"joinphrase": "",
+					"artist": {
+						"sort-name": "Bowie, David",
+						"name": "David Bowie",
+						"genres": [
+							{
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"count": 10,
+								"disambiguation": "",
+								"name": "alternative rock"
+							},
+							{
+								"name": "art pop",
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"disambiguation": "",
+								"count": 7
+							},
+							{
+								"disambiguation": "",
+								"count": 22,
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"name": "art rock"
+							},
+							{
+								"name": "classic rock",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"disambiguation": "",
+								"count": 3
+							},
+							{
+								"name": "glam rock",
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"disambiguation": "",
+								"count": 22
+							},
+							{
+								"name": "new wave",
+								"disambiguation": "",
+								"count": 5,
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb"
+							},
+							{
+								"name": "pop",
+								"count": 10,
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+							},
+							{
+								"count": 5,
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"name": "pop rock"
+							},
+							{
+								"name": "rock",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 8,
+								"disambiguation": ""
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"type": "Person",
+						"disambiguation": "English singer‐songwriter",
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50"
+					}
+				}
+			],
+			"status": "Official"
+		},
+		{
+			"packaging-id": "ec27701a-4a22-37f4-bfac-6616e0f9750a",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "2014",
+					"area": {
+						"type": null,
+						"disambiguation": "",
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"type-id": null,
+						"iso-3166-1-codes": ["US"],
+						"name": "United States",
+						"sort-name": "United States"
+					}
+				}
+			],
+			"disambiguation": "",
+			"packaging": "Jewel Case",
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"artist": {
+						"sort-name": "Bowie, David",
+						"name": "David Bowie",
+						"genres": [
+							{
+								"count": 10,
+								"disambiguation": "",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"name": "alternative rock"
+							},
+							{
+								"name": "art pop",
+								"count": 7,
+								"disambiguation": "",
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14"
+							},
+							{
+								"name": "art rock",
+								"count": 22,
+								"disambiguation": "",
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b"
+							},
+							{
+								"name": "classic rock",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"count": 3,
+								"disambiguation": ""
+							},
+							{
+								"count": 22,
+								"disambiguation": "",
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"name": "glam rock"
+							},
+							{
+								"count": 5,
+								"disambiguation": "",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"name": "new wave"
+							},
+							{
+								"disambiguation": "",
+								"count": 10,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": "",
+								"count": 5
+							},
+							{
+								"name": "rock",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 8
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"country": "GB"
+					},
+					"joinphrase": ""
+				}
+			],
+			"status": "Official",
+			"quality": "normal",
+			"genres": [],
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"media": [
+				{
+					"id": "a0d4a736-18e6-3c36-be7f-9e011ee92713",
+					"format-id": "8a08dc62-1aa2-34de-a904-fa467c53052c",
+					"title": "",
+					"track-count": 11,
+					"position": 1,
+					"format": "Enhanced CD"
+				}
+			],
+			"barcode": "724352190409",
+			"date": "2014",
+			"id": "4d7c5c94-8c5e-475d-bc0b-7665ca0c21c4",
+			"country": "US",
+			"title": "Diamond Dogs"
+		},
+		{
+			"status": "Official",
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"artist": {
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"disambiguation": "English singer‐songwriter",
+						"type": "Person",
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18",
+								"count": 10,
+								"disambiguation": ""
+							},
+							{
+								"disambiguation": "",
+								"count": 7,
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14",
+								"name": "art pop"
+							},
+							{
+								"name": "art rock",
+								"count": 22,
+								"disambiguation": "",
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b"
+							},
+							{
+								"name": "classic rock",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810",
+								"count": 3,
+								"disambiguation": ""
+							},
+							{
+								"name": "glam rock",
+								"disambiguation": "",
+								"count": 22,
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75"
+							},
+							{
+								"disambiguation": "",
+								"count": 5,
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb",
+								"name": "new wave"
+							},
+							{
+								"name": "pop",
+								"count": 10,
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+							},
+							{
+								"disambiguation": "",
+								"count": 5,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"name": "pop rock"
+							},
+							{
+								"name": "rock",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 8
+							}
+						],
+						"sort-name": "Bowie, David",
+						"name": "David Bowie"
+					},
+					"joinphrase": ""
+				}
+			],
+			"barcode": "190295990398",
+			"media": [
+				{
+					"title": "",
+					"format-id": "907a28d9-b3b2-3ef6-89a8-7b18d91d4794",
+					"id": "a49adb56-c242-3a87-8ff3-5910dcb2d62f",
+					"format": "Digital Media",
+					"position": 1,
+					"track-count": 11
+				}
+			],
+			"title": "Diamond Dogs",
+			"country": "XW",
+			"date": "2016-05-20",
+			"id": "49d4f99b-3ee2-4c3e-a378-2a9ee9e6215c",
+			"genres": [],
+			"text-representation": { "language": "eng", "script": "Latn" },
+			"quality": "normal",
+			"packaging-id": "119eba76-b343-3e02-a292-f0f00644bb9b",
+			"disambiguation": "2016 remaster",
+			"packaging": "None",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"area": {
+						"disambiguation": "",
+						"type": null,
+						"id": "525d4e18-3d00-31b9-a58b-a146a916de8f",
+						"type-id": null,
+						"iso-3166-1-codes": ["XW"],
+						"name": "[Worldwide]",
+						"sort-name": "[Worldwide]"
+					},
+					"date": "2016-05-20"
+				}
+			]
+		},
+		{
+			"status": "Official",
+			"artist-credit": [
+				{
+					"name": "David Bowie",
+					"artist": {
+						"name": "David Bowie",
+						"sort-name": "Bowie, David",
+						"type": "Person",
+						"disambiguation": "English singer‐songwriter",
+						"country": "GB",
+						"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+						"genres": [
+							{
+								"name": "alternative rock",
+								"disambiguation": "",
+								"count": 10,
+								"id": "ceeaa283-5d7b-4202-8d1d-e25d116b2a18"
+							},
+							{
+								"name": "art pop",
+								"disambiguation": "",
+								"count": 7,
+								"id": "930ef127-3653-4677-9b95-ecc90c7c1a14"
+							},
+							{
+								"id": "b7ef058e-6d83-4ca4-8123-9724bff4648b",
+								"disambiguation": "",
+								"count": 22,
+								"name": "art rock"
+							},
+							{
+								"name": "classic rock",
+								"count": 3,
+								"disambiguation": "",
+								"id": "93244085-20e5-4f16-9067-1d19143b3810"
+							},
+							{
+								"name": "glam rock",
+								"id": "54d89e62-5bfb-42bc-a321-9230e6fdcd75",
+								"count": 22,
+								"disambiguation": ""
+							},
+							{
+								"name": "new wave",
+								"count": 5,
+								"disambiguation": "",
+								"id": "56407f9d-3398-4bf3-bbbd-ea372fa5adeb"
+							},
+							{
+								"name": "pop",
+								"count": 10,
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+							},
+							{
+								"name": "pop rock",
+								"disambiguation": "",
+								"count": 5,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+							},
+							{
+								"name": "rock",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"count": 8
+							}
+						],
+						"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df"
+					},
+					"joinphrase": ""
+				}
+			],
+			"barcode": "0190295990367",
+			"media": [
+				{
+					"title": "",
+					"format-id": "907a28d9-b3b2-3ef6-89a8-7b18d91d4794",
+					"id": "659f07bf-3ca6-408d-8d44-e3a0e78ad419",
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 11
+				}
+			],
+			"date": "2016",
+			"id": "f4e5d2cc-d27b-4347-bc4b-8599ab081261",
+			"title": "Diamond Dogs",
+			"country": "XW",
+			"genres": [],
+			"text-representation": { "script": "Latn", "language": "eng" },
+			"quality": "normal",
+			"packaging-id": "119eba76-b343-3e02-a292-f0f00644bb9b",
+			"disambiguation": "",
+			"packaging": "None",
+			"release-events": [
+				{
+					"date": "2016",
+					"area": {
+						"name": "[Worldwide]",
+						"sort-name": "[Worldwide]",
+						"iso-3166-1-codes": ["XW"],
+						"type-id": null,
+						"disambiguation": "",
+						"type": null,
+						"id": "525d4e18-3d00-31b9-a58b-a146a916de8f"
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe"
+		}
+	],
+	"secondary-type-ids": [],
+	"secondary-types": [],
+	"title": "Diamond Dogs"
+}

@@ -1,0 +1,559 @@
+{
+	"artist-credit": [
+		{
+			"joinphrase": "",
+			"name": "Bowie",
+			"artist": {
+				"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+				"sort-name": "Bowie, David",
+				"type": "Person",
+				"disambiguation": "English singer‐songwriter",
+				"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+				"name": "David Bowie",
+				"country": "GB"
+			}
+		}
+	],
+	"asin": null,
+	"barcode": "",
+	"country": "US",
+	"cover-art-archive": {
+		"front": true,
+		"back": true,
+		"count": 5,
+		"artwork": true,
+		"darkened": false
+	},
+	"date": "1974-05",
+	"disambiguation": "",
+	"id": "99a48afd-1292-4076-a9b6-12818729eae8",
+	"media": [
+		{
+			"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+			"track-offset": 0,
+			"position": 1,
+			"format": "12\" Vinyl",
+			"track-count": 11,
+			"id": "0497c206-96ab-3f79-908c-21f9e1c920fe",
+			"tracks": [
+				{
+					"recording": {
+						"artist-credit": [
+							{
+								"name": "David Bowie",
+								"joinphrase": "",
+								"artist": {
+									"disambiguation": "English singer‐songwriter",
+									"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+									"country": "GB",
+									"name": "David Bowie",
+									"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+									"type": "Person",
+									"sort-name": "Bowie, David"
+								}
+							}
+						],
+						"disambiguation": "“This ain’t Rock ’n’ Roll, this is Genocide” outro",
+						"first-release-date": "1974-05-24",
+						"title": "Future Legend",
+						"video": false,
+						"id": "d590dc65-9124-43aa-a46e-72a72a9f942e",
+						"length": 68000
+					},
+					"artist-credit": [
+						{
+							"joinphrase": "",
+							"name": "Bowie",
+							"artist": {
+								"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+								"type": "Person",
+								"sort-name": "Bowie, David",
+								"disambiguation": "English singer‐songwriter",
+								"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+								"country": "GB",
+								"name": "David Bowie"
+							}
+						}
+					],
+					"title": "Future Legend",
+					"length": 68000,
+					"id": "6dcc7686-d926-3c48-ba8f-07677351d84c",
+					"number": "A1",
+					"position": 1
+				},
+				{
+					"artist-credit": [
+						{
+							"name": "Bowie",
+							"joinphrase": "",
+							"artist": {
+								"type": "Person",
+								"sort-name": "Bowie, David",
+								"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+								"country": "GB",
+								"name": "David Bowie",
+								"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+								"disambiguation": "English singer‐songwriter"
+							}
+						}
+					],
+					"recording": {
+						"video": false,
+						"title": "Diamond Dogs",
+						"id": "51086d20-5d3d-473d-9805-6ca404a614eb",
+						"length": 358133,
+						"first-release-date": "1974-05-24",
+						"disambiguation": "",
+						"artist-credit": [
+							{
+								"artist": {
+									"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+									"type": "Person",
+									"sort-name": "Bowie, David",
+									"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+									"disambiguation": "English singer‐songwriter",
+									"country": "GB",
+									"name": "David Bowie"
+								},
+								"name": "David Bowie",
+								"joinphrase": ""
+							}
+						]
+					},
+					"position": 2,
+					"title": "Diamond Dogs",
+					"number": "A2",
+					"id": "867e2538-1b79-3947-bc19-4efc00cc9162",
+					"length": 358133
+				},
+				{
+					"artist-credit": [
+						{
+							"name": "Bowie",
+							"joinphrase": "",
+							"artist": {
+								"sort-name": "Bowie, David",
+								"type": "Person",
+								"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+								"name": "David Bowie",
+								"country": "GB",
+								"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+								"disambiguation": "English singer‐songwriter"
+							}
+						}
+					],
+					"recording": {
+						"first-release-date": "1974-05-24",
+						"length": 218666,
+						"id": "0ff4c7c5-a384-4530-b07a-f53c0525fa0f",
+						"title": "Sweet Thing",
+						"video": false,
+						"artist-credit": [
+							{
+								"artist": {
+									"country": "GB",
+									"name": "David Bowie",
+									"disambiguation": "English singer‐songwriter",
+									"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+									"type": "Person",
+									"sort-name": "Bowie, David",
+									"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50"
+								},
+								"joinphrase": "",
+								"name": "David Bowie"
+							}
+						],
+						"disambiguation": ""
+					},
+					"position": 3,
+					"number": "A3",
+					"id": "7c7a4ac2-7adb-314b-b632-8fadb2b058aa",
+					"length": 218666,
+					"title": "Sweet Thing"
+				},
+				{
+					"position": 4,
+					"id": "153041bf-8755-3be2-8407-7d1bebe3ffd3",
+					"number": "A4",
+					"length": 160093,
+					"title": "Candidate",
+					"artist-credit": [
+						{
+							"name": "Bowie",
+							"joinphrase": "",
+							"artist": {
+								"type": "Person",
+								"sort-name": "Bowie, David",
+								"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+								"country": "GB",
+								"name": "David Bowie",
+								"disambiguation": "English singer‐songwriter",
+								"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df"
+							}
+						}
+					],
+					"recording": {
+						"disambiguation": "",
+						"artist-credit": [
+							{
+								"joinphrase": "",
+								"name": "David Bowie",
+								"artist": {
+									"disambiguation": "English singer‐songwriter",
+									"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+									"name": "David Bowie",
+									"country": "GB",
+									"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+									"sort-name": "Bowie, David",
+									"type": "Person"
+								}
+							}
+						],
+						"length": 160093,
+						"id": "25da028f-b0a9-4a57-96ad-db69806e52bb",
+						"title": "Candidate",
+						"video": false,
+						"first-release-date": "1974-05-24"
+					}
+				},
+				{
+					"artist-credit": [
+						{
+							"joinphrase": "",
+							"name": "Bowie",
+							"artist": {
+								"sort-name": "Bowie, David",
+								"type": "Person",
+								"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+								"name": "David Bowie",
+								"country": "GB",
+								"disambiguation": "English singer‐songwriter",
+								"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df"
+							}
+						}
+					],
+					"recording": {
+						"video": false,
+						"title": "Sweet Thing (reprise)",
+						"id": "e93d06be-e8d4-42e5-993a-65051aa1f7c6",
+						"length": 152173,
+						"first-release-date": "1974-05-24",
+						"disambiguation": "",
+						"artist-credit": [
+							{
+								"artist": {
+									"disambiguation": "English singer‐songwriter",
+									"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+									"country": "GB",
+									"name": "David Bowie",
+									"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+									"type": "Person",
+									"sort-name": "Bowie, David"
+								},
+								"joinphrase": "",
+								"name": "David Bowie"
+							}
+						]
+					},
+					"id": "f0318fc0-f52d-3e5b-bb16-44d9171e3f09",
+					"number": "A5",
+					"length": 152173,
+					"title": "Sweet Thing (reprise)",
+					"position": 5
+				},
+				{
+					"title": "Rebel Rebel",
+					"length": 273893,
+					"number": "A6",
+					"id": "543a1753-9ed3-37b2-baac-74d2d72ae991",
+					"position": 6,
+					"recording": {
+						"artist-credit": [
+							{
+								"artist": {
+									"country": "GB",
+									"name": "David Bowie",
+									"disambiguation": "English singer‐songwriter",
+									"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+									"type": "Person",
+									"sort-name": "Bowie, David",
+									"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50"
+								},
+								"name": "David Bowie",
+								"joinphrase": ""
+							}
+						],
+						"disambiguation": "",
+						"first-release-date": "1974-05-24",
+						"id": "11bd860a-4447-4140-813d-64834ae02ca8",
+						"length": 270826,
+						"video": false,
+						"title": "Rebel Rebel"
+					},
+					"artist-credit": [
+						{
+							"joinphrase": "",
+							"name": "Bowie",
+							"artist": {
+								"sort-name": "Bowie, David",
+								"type": "Person",
+								"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+								"name": "David Bowie",
+								"country": "GB",
+								"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+								"disambiguation": "English singer‐songwriter"
+							}
+						}
+					]
+				},
+				{
+					"position": 7,
+					"title": "Rock ’n’ Roll With Me",
+					"length": 241840,
+					"id": "a389eeaa-7f76-36a0-9782-a3b8419b7312",
+					"number": "B1",
+					"recording": {
+						"id": "189f297b-98fc-4805-a5df-b9e161243ab3",
+						"length": 241840,
+						"title": "Rock ’n’ Roll With Me",
+						"video": false,
+						"first-release-date": "1974-05-24",
+						"disambiguation": "",
+						"artist-credit": [
+							{
+								"artist": {
+									"country": "GB",
+									"name": "David Bowie",
+									"disambiguation": "English singer‐songwriter",
+									"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+									"type": "Person",
+									"sort-name": "Bowie, David",
+									"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50"
+								},
+								"joinphrase": "",
+								"name": "David Bowie"
+							}
+						]
+					},
+					"artist-credit": [
+						{
+							"name": "Bowie",
+							"joinphrase": "",
+							"artist": {
+								"sort-name": "Bowie, David",
+								"type": "Person",
+								"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+								"name": "David Bowie",
+								"country": "GB",
+								"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+								"disambiguation": "English singer‐songwriter"
+							}
+						}
+					]
+				},
+				{
+					"artist-credit": [
+						{
+							"joinphrase": "",
+							"name": "Bowie",
+							"artist": {
+								"type": "Person",
+								"sort-name": "Bowie, David",
+								"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+								"country": "GB",
+								"name": "David Bowie",
+								"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+								"disambiguation": "English singer‐songwriter"
+							}
+						}
+					],
+					"recording": {
+						"length": 299226,
+						"id": "074bd83d-4cf6-465e-9e6e-2acc426a45c1",
+						"video": false,
+						"title": "We Are the Dead",
+						"first-release-date": "1974-05-24",
+						"disambiguation": "",
+						"artist-credit": [
+							{
+								"name": "David Bowie",
+								"joinphrase": "",
+								"artist": {
+									"name": "David Bowie",
+									"country": "GB",
+									"disambiguation": "English singer‐songwriter",
+									"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+									"sort-name": "Bowie, David",
+									"type": "Person",
+									"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50"
+								}
+							}
+						]
+					},
+					"position": 8,
+					"id": "0694b35c-0a81-3d32-ba75-7b94092a0e66",
+					"number": "B2",
+					"length": 299226,
+					"title": "We Are the Dead"
+				},
+				{
+					"length": 207373,
+					"number": "B3",
+					"id": "226fa06b-1e3a-33b8-84b8-15b113f8cf63",
+					"title": "1984",
+					"position": 9,
+					"recording": {
+						"disambiguation": "",
+						"artist-credit": [
+							{
+								"artist": {
+									"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+									"disambiguation": "English singer‐songwriter",
+									"country": "GB",
+									"name": "David Bowie",
+									"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+									"type": "Person",
+									"sort-name": "Bowie, David"
+								},
+								"joinphrase": "",
+								"name": "David Bowie"
+							}
+						],
+						"video": false,
+						"title": "1984",
+						"length": 207373,
+						"id": "6b3e5418-c624-421c-a180-1ebb95a1936f",
+						"first-release-date": "1974-05-24"
+					},
+					"artist-credit": [
+						{
+							"name": "Bowie",
+							"joinphrase": "",
+							"artist": {
+								"name": "David Bowie",
+								"country": "GB",
+								"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+								"disambiguation": "English singer‐songwriter",
+								"sort-name": "Bowie, David",
+								"type": "Person",
+								"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50"
+							}
+						}
+					]
+				},
+				{
+					"artist-credit": [
+						{
+							"artist": {
+								"type": "Person",
+								"sort-name": "Bowie, David",
+								"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+								"country": "GB",
+								"name": "David Bowie",
+								"disambiguation": "English singer‐songwriter",
+								"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df"
+							},
+							"name": "Bowie",
+							"joinphrase": ""
+						}
+					],
+					"recording": {
+						"first-release-date": "1974-05-24",
+						"length": 200466,
+						"id": "f772fac4-abba-46c3-a680-ddbd91b5ac70",
+						"title": "Big Brother",
+						"video": false,
+						"artist-credit": [
+							{
+								"artist": {
+									"disambiguation": "English singer‐songwriter",
+									"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+									"country": "GB",
+									"name": "David Bowie",
+									"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+									"type": "Person",
+									"sort-name": "Bowie, David"
+								},
+								"joinphrase": "",
+								"name": "David Bowie"
+							}
+						],
+						"disambiguation": ""
+					},
+					"title": "Big Brother",
+					"id": "5f4ba25e-4fad-3f9d-bad4-516a0ad02de1",
+					"number": "B4",
+					"length": 200466,
+					"position": 10
+				},
+				{
+					"length": 123933,
+					"number": "B5",
+					"id": "54d33eb8-e477-3443-8eab-f3b341555d00",
+					"title": "Chant of the Ever Circling Skeletal Family",
+					"position": 11,
+					"recording": {
+						"length": 123933,
+						"id": "57842def-1fbb-481e-9325-2ae46ba50d71",
+						"video": false,
+						"title": "Chant of the Ever Circling Skeletal Family",
+						"first-release-date": "1974-05-24",
+						"disambiguation": "",
+						"artist-credit": [
+							{
+								"artist": {
+									"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+									"type": "Person",
+									"sort-name": "Bowie, David",
+									"disambiguation": "English singer‐songwriter",
+									"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+									"country": "GB",
+									"name": "David Bowie"
+								},
+								"name": "David Bowie",
+								"joinphrase": ""
+							}
+						]
+					},
+					"artist-credit": [
+						{
+							"joinphrase": "",
+							"name": "Bowie",
+							"artist": {
+								"type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+								"disambiguation": "English singer‐songwriter",
+								"name": "David Bowie",
+								"country": "GB",
+								"id": "5441c29d-3602-4898-b1a1-b77fa23b8e50",
+								"sort-name": "Bowie, David",
+								"type": "Person"
+							}
+						}
+					]
+				}
+			],
+			"title": ""
+		}
+	],
+	"packaging": "Gatefold Cover",
+	"packaging-id": "e724a489-a7e8-30a1-a17c-30dfd6831202",
+	"quality": "normal",
+	"release-events": [
+		{
+			"area": {
+				"name": "United States",
+				"type-id": null,
+				"iso-3166-1-codes": ["US"],
+				"disambiguation": "",
+				"sort-name": "United States",
+				"type": null,
+				"id": "489ce91b-6658-3307-9877-795b68554c98"
+			},
+			"date": "1974-05"
+		}
+	],
+	"status": "Official",
+	"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+	"text-representation": { "language": "eng", "script": "Latn" },
+	"title": "Diamond Dogs"
+}

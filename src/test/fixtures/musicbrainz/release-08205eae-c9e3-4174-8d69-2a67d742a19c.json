@@ -1,0 +1,605 @@
+{
+	"artist-credit": [
+		{
+			"name": "Green Day",
+			"artist": {
+				"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+				"disambiguation": "",
+				"id": "084308bd-1654-436f-ba03-df6697104e19",
+				"country": "US",
+				"name": "Green Day",
+				"type": "Group",
+				"sort-name": "Green Day"
+			},
+			"joinphrase": ""
+		}
+	],
+	"asin": "B00AH2PVXC",
+	"barcode": "093624948636",
+	"country": "XW",
+	"cover-art-archive": {
+		"front": true,
+		"darkened": false,
+		"artwork": true,
+		"count": 1,
+		"back": false
+	},
+	"date": "2012-12-04",
+	"disambiguation": "",
+	"id": "08205eae-c9e3-4174-8d69-2a67d742a19c",
+	"media": [
+		{
+			"tracks": [
+				{
+					"number": "1",
+					"id": "cf2ce1ed-bd6c-4a58-89ff-2c704ba6a342",
+					"length": 294746,
+					"position": 1,
+					"title": "Brutal Love",
+					"recording": {
+						"first-release-date": "2012-12-04",
+						"id": "3953235a-289b-4cdf-b184-42ce3af56c68",
+						"video": false,
+						"artist-credit": [
+							{
+								"name": "Green Day",
+								"artist": {
+									"type": "Group",
+									"sort-name": "Green Day",
+									"country": "US",
+									"id": "084308bd-1654-436f-ba03-df6697104e19",
+									"name": "Green Day",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"disambiguation": ""
+								},
+								"joinphrase": ""
+							}
+						],
+						"title": "Brutal Love",
+						"length": 294746,
+						"disambiguation": ""
+					},
+					"artist-credit": [
+						{
+							"name": "Green Day",
+							"artist": {
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": "",
+								"id": "084308bd-1654-436f-ba03-df6697104e19",
+								"country": "US",
+								"name": "Green Day",
+								"type": "Group",
+								"sort-name": "Green Day"
+							},
+							"joinphrase": ""
+						}
+					]
+				},
+				{
+					"artist-credit": [
+						{
+							"joinphrase": "",
+							"artist": {
+								"type": "Group",
+								"sort-name": "Green Day",
+								"country": "US",
+								"id": "084308bd-1654-436f-ba03-df6697104e19",
+								"name": "Green Day",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": ""
+							},
+							"name": "Green Day"
+						}
+					],
+					"position": 2,
+					"title": "Missing You",
+					"recording": {
+						"first-release-date": "2012-12-04",
+						"id": "1e83c23b-0b3f-4d96-9d27-c88ec2d50b25",
+						"video": false,
+						"artist-credit": [
+							{
+								"name": "Green Day",
+								"artist": {
+									"sort-name": "Green Day",
+									"type": "Group",
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"name": "Green Day",
+									"country": "US",
+									"id": "084308bd-1654-436f-ba03-df6697104e19"
+								},
+								"joinphrase": ""
+							}
+						],
+						"title": "Missing You",
+						"length": 223693,
+						"disambiguation": ""
+					},
+					"number": "2",
+					"id": "cc3f45a3-00dc-47e1-8c02-36be345a21f6",
+					"length": 223693
+				},
+				{
+					"length": 156653,
+					"number": "3",
+					"id": "d2ede26a-d794-417a-9921-966fbf5d5740",
+					"recording": {
+						"first-release-date": "2012-12-04",
+						"id": "1eda52c4-3a0d-46b6-9311-e6b983276d51",
+						"title": "8th Avenue Serenade",
+						"artist-credit": [
+							{
+								"joinphrase": "",
+								"artist": {
+									"type": "Group",
+									"sort-name": "Green Day",
+									"country": "US",
+									"id": "084308bd-1654-436f-ba03-df6697104e19",
+									"name": "Green Day",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"disambiguation": ""
+								},
+								"name": "Green Day"
+							}
+						],
+						"video": false,
+						"disambiguation": "",
+						"length": 156653
+					},
+					"position": 3,
+					"title": "8th Avenue Serenade",
+					"artist-credit": [
+						{
+							"joinphrase": "",
+							"artist": {
+								"country": "US",
+								"id": "084308bd-1654-436f-ba03-df6697104e19",
+								"name": "Green Day",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": "",
+								"type": "Group",
+								"sort-name": "Green Day"
+							},
+							"name": "Green Day"
+						}
+					]
+				},
+				{
+					"artist-credit": [
+						{
+							"joinphrase": "",
+							"artist": {
+								"type": "Group",
+								"sort-name": "Green Day",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": "",
+								"id": "084308bd-1654-436f-ba03-df6697104e19",
+								"country": "US",
+								"name": "Green Day"
+							},
+							"name": "Green Day"
+						}
+					],
+					"recording": {
+						"video": false,
+						"artist-credit": [
+							{
+								"name": "Green Day",
+								"artist": {
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"name": "Green Day",
+									"id": "084308bd-1654-436f-ba03-df6697104e19",
+									"country": "US",
+									"sort-name": "Green Day",
+									"type": "Group"
+								},
+								"joinphrase": ""
+							}
+						],
+						"title": "Drama Queen",
+						"length": 187533,
+						"disambiguation": "",
+						"first-release-date": "2012-11-13",
+						"id": "fa163696-78e0-4c68-9ea3-e72cf31db7db"
+					},
+					"position": 4,
+					"title": "Drama Queen",
+					"length": 187533,
+					"number": "4",
+					"id": "ba05433c-2e17-4005-b589-aff79f9bcfa8"
+				},
+				{
+					"length": 221720,
+					"number": "5",
+					"id": "b350b25b-dc8c-46e3-91f2-29c68ce4a74e",
+					"recording": {
+						"title": "X-Kid",
+						"artist-credit": [
+							{
+								"joinphrase": "",
+								"name": "Green Day",
+								"artist": {
+									"type": "Group",
+									"sort-name": "Green Day",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"disambiguation": "",
+									"country": "US",
+									"id": "084308bd-1654-436f-ba03-df6697104e19",
+									"name": "Green Day"
+								}
+							}
+						],
+						"video": false,
+						"disambiguation": "",
+						"length": 221720,
+						"first-release-date": "2012-12-04",
+						"id": "a89cbb60-9541-4530-aa5d-b77812760191"
+					},
+					"title": "X‐Kid",
+					"position": 5,
+					"artist-credit": [
+						{
+							"joinphrase": "",
+							"artist": {
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": "",
+								"id": "084308bd-1654-436f-ba03-df6697104e19",
+								"country": "US",
+								"name": "Green Day",
+								"type": "Group",
+								"sort-name": "Green Day"
+							},
+							"name": "Green Day"
+						}
+					]
+				},
+				{
+					"length": 211946,
+					"number": "6",
+					"id": "f2563e3d-930d-40b8-9d86-e5bd73c1de6c",
+					"recording": {
+						"first-release-date": "2012-12-04",
+						"id": "ea7d58b9-56c1-4a82-a337-7549ac473044",
+						"artist-credit": [
+							{
+								"joinphrase": "",
+								"artist": {
+									"type": "Group",
+									"sort-name": "Green Day",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"disambiguation": "",
+									"id": "084308bd-1654-436f-ba03-df6697104e19",
+									"country": "US",
+									"name": "Green Day"
+								},
+								"name": "Green Day"
+							}
+						],
+						"video": false,
+						"title": "Sex, Drugs & Violence",
+						"length": 211946,
+						"disambiguation": ""
+					},
+					"title": "Sex, Drugs & Violence",
+					"position": 6,
+					"artist-credit": [
+						{
+							"joinphrase": "",
+							"artist": {
+								"name": "Green Day",
+								"id": "084308bd-1654-436f-ba03-df6697104e19",
+								"country": "US",
+								"disambiguation": "",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"sort-name": "Green Day",
+								"type": "Group"
+							},
+							"name": "Green Day"
+						}
+					]
+				},
+				{
+					"position": 7,
+					"title": "A Little Boy Named Train",
+					"recording": {
+						"id": "dc675c2c-2241-4032-869b-c83004da58ea",
+						"first-release-date": "2012-12-04",
+						"length": 217266,
+						"disambiguation": "",
+						"video": false,
+						"artist-credit": [
+							{
+								"joinphrase": "",
+								"artist": {
+									"name": "Green Day",
+									"id": "084308bd-1654-436f-ba03-df6697104e19",
+									"country": "US",
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"sort-name": "Green Day",
+									"type": "Group"
+								},
+								"name": "Green Day"
+							}
+						],
+						"title": "A Little Boy Named Train"
+					},
+					"artist-credit": [
+						{
+							"joinphrase": "",
+							"name": "Green Day",
+							"artist": {
+								"country": "US",
+								"id": "084308bd-1654-436f-ba03-df6697104e19",
+								"name": "Green Day",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": "",
+								"type": "Group",
+								"sort-name": "Green Day"
+							}
+						}
+					],
+					"number": "7",
+					"id": "e1f208ce-a5f7-467a-9ff7-7f856b71efb0",
+					"length": 217266
+				},
+				{
+					"number": "8",
+					"id": "522246f0-4a9a-4de8-8388-89b49d02599d",
+					"length": 148066,
+					"title": "Amanda",
+					"position": 8,
+					"recording": {
+						"title": "Amanda",
+						"video": false,
+						"artist-credit": [
+							{
+								"artist": {
+									"name": "Green Day",
+									"id": "084308bd-1654-436f-ba03-df6697104e19",
+									"country": "US",
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"sort-name": "Green Day",
+									"type": "Group"
+								},
+								"name": "Green Day",
+								"joinphrase": ""
+							}
+						],
+						"disambiguation": "",
+						"length": 148066,
+						"first-release-date": "2012-12-04",
+						"id": "648a7bb4-3663-4475-91c8-9f0daebda7bb"
+					},
+					"artist-credit": [
+						{
+							"name": "Green Day",
+							"artist": {
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": "",
+								"id": "084308bd-1654-436f-ba03-df6697104e19",
+								"country": "US",
+								"name": "Green Day",
+								"type": "Group",
+								"sort-name": "Green Day"
+							},
+							"joinphrase": ""
+						}
+					]
+				},
+				{
+					"artist-credit": [
+						{
+							"artist": {
+								"disambiguation": "",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"name": "Green Day",
+								"country": "US",
+								"id": "084308bd-1654-436f-ba03-df6697104e19",
+								"sort-name": "Green Day",
+								"type": "Group"
+							},
+							"name": "Green Day",
+							"joinphrase": ""
+						}
+					],
+					"position": 9,
+					"title": "Walk Away",
+					"recording": {
+						"id": "bf1d8130-4367-4b78-b6f6-fe625eb44f24",
+						"first-release-date": "2012-12-04",
+						"disambiguation": "",
+						"length": 225893,
+						"title": "Walk Away",
+						"video": false,
+						"artist-credit": [
+							{
+								"name": "Green Day",
+								"artist": {
+									"id": "084308bd-1654-436f-ba03-df6697104e19",
+									"country": "US",
+									"name": "Green Day",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"disambiguation": "",
+									"type": "Group",
+									"sort-name": "Green Day"
+								},
+								"joinphrase": ""
+							}
+						]
+					},
+					"id": "fe63f9fb-a1cd-4dd8-8376-a8ee98bc95dd",
+					"number": "9",
+					"length": 225893
+				},
+				{
+					"title": "Dirty Rotten Bastards",
+					"position": 10,
+					"recording": {
+						"first-release-date": "2012-12-04",
+						"id": "2ad51fc7-60b2-4310-9685-0006df569a00",
+						"title": "Dirty Rotten Bastards",
+						"video": false,
+						"artist-credit": [
+							{
+								"name": "Green Day",
+								"artist": {
+									"sort-name": "Green Day",
+									"type": "Group",
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"name": "Green Day",
+									"id": "084308bd-1654-436f-ba03-df6697104e19",
+									"country": "US"
+								},
+								"joinphrase": ""
+							}
+						],
+						"disambiguation": "",
+						"length": 386360
+					},
+					"artist-credit": [
+						{
+							"artist": {
+								"sort-name": "Green Day",
+								"type": "Group",
+								"name": "Green Day",
+								"id": "084308bd-1654-436f-ba03-df6697104e19",
+								"country": "US",
+								"disambiguation": "",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+							},
+							"name": "Green Day",
+							"joinphrase": ""
+						}
+					],
+					"id": "7deb9ec6-a571-483b-b9fb-6de07ca45fdf",
+					"number": "10",
+					"length": 386360
+				},
+				{
+					"position": 11,
+					"title": "99 Revolutions",
+					"recording": {
+						"title": "99 Revolutions",
+						"artist-credit": [
+							{
+								"joinphrase": "",
+								"artist": {
+									"sort-name": "Green Day",
+									"type": "Group",
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"name": "Green Day",
+									"country": "US",
+									"id": "084308bd-1654-436f-ba03-df6697104e19"
+								},
+								"name": "Green Day"
+							}
+						],
+						"video": false,
+						"disambiguation": "",
+						"length": 229893,
+						"first-release-date": "2012-12-04",
+						"id": "de36288e-b1b6-43f8-87f2-0a9cc5ac1d00"
+					},
+					"artist-credit": [
+						{
+							"name": "Green Day",
+							"artist": {
+								"sort-name": "Green Day",
+								"type": "Group",
+								"name": "Green Day",
+								"id": "084308bd-1654-436f-ba03-df6697104e19",
+								"country": "US",
+								"disambiguation": "",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+							},
+							"joinphrase": ""
+						}
+					],
+					"id": "7f158a50-3a47-422c-b496-69faf9ad1b14",
+					"number": "11",
+					"length": 229893
+				},
+				{
+					"recording": {
+						"title": "The Forgotten",
+						"artist-credit": [
+							{
+								"artist": {
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"name": "Green Day",
+									"id": "084308bd-1654-436f-ba03-df6697104e19",
+									"country": "US",
+									"sort-name": "Green Day",
+									"type": "Group"
+								},
+								"name": "Green Day",
+								"joinphrase": ""
+							}
+						],
+						"video": false,
+						"disambiguation": "",
+						"length": 298733,
+						"first-release-date": "2012-11-13",
+						"id": "fbfe9532-765d-449c-8215-a2ab6e2019f8"
+					},
+					"position": 12,
+					"title": "The Forgotten",
+					"artist-credit": [
+						{
+							"joinphrase": "",
+							"artist": {
+								"type": "Group",
+								"sort-name": "Green Day",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": "",
+								"id": "084308bd-1654-436f-ba03-df6697104e19",
+								"country": "US",
+								"name": "Green Day"
+							},
+							"name": "Green Day"
+						}
+					],
+					"length": 298733,
+					"id": "ea89f30c-79ee-4e97-959c-bd3b82455fbf",
+					"number": "12"
+				}
+			],
+			"title": "",
+			"format": "Digital Media",
+			"track-offset": 0,
+			"track-count": 12,
+			"id": "16b8e3bc-a197-39e1-b62c-d6a32ac11f60",
+			"format-id": "907a28d9-b3b2-3ef6-89a8-7b18d91d4794",
+			"position": 1
+		}
+	],
+	"packaging": "None",
+	"packaging-id": "119eba76-b343-3e02-a292-f0f00644bb9b",
+	"quality": "normal",
+	"release-events": [
+		{
+			"date": "2012-12-04",
+			"area": {
+				"type": null,
+				"iso-3166-1-codes": ["XW"],
+				"sort-name": "[Worldwide]",
+				"type-id": null,
+				"disambiguation": "",
+				"id": "525d4e18-3d00-31b9-a58b-a146a916de8f",
+				"name": "[Worldwide]"
+			}
+		},
+		{ "date": "2012-12-07", "area": null }
+	],
+	"status": "Official",
+	"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+	"text-representation": { "script": "Latn", "language": "eng" },
+	"title": "¡Tré!"
+}
