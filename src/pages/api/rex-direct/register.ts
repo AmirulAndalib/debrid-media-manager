@@ -135,13 +135,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const cert = await db.rexDirectServerCert(machineIdentifier);
 	const now = Date.now();
-	// A certificate from before LAN names lacks the wildcard: reorder it, and keep
-	// answering it meanwhile so the public name works.
+	// A certificate from before LAN names lacks the wildcard: reorder it and answer 202
+	// meanwhile. rex keeps serving the answer it kept and asks again in a minute, where
+	// a 200 without the LAN name would have it wait for its next 6-hourly call.
 	const coversLan = !!lanIp && !!cert && rexDirectCertCoversLan(cert.certificate, hostname);
-	if (!cert || cert.expiresAt.getTime() - now < RENEW_BEFORE_MS || (lanIp && !coversLan)) {
+	const usable = !!cert && cert.expiresAt.getTime() > now && (!lanIp || coversLan);
+	if (!cert || cert.expiresAt.getTime() - now < RENEW_BEFORE_MS || !usable) {
 		await orderCertificate(machineIdentifier, hostname);
 	}
-	if (!cert || cert.expiresAt.getTime() <= now) {
+	if (!usable) {
 		res.setHeader('Retry-After', String(RETRY_AFTER_S));
 		return res.status(202).json({
 			hostname,

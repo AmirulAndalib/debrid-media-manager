@@ -247,11 +247,14 @@ describe('rex-direct register, LAN name', () => {
 		expect(db.rexDirectRecordLanIp).not.toHaveBeenCalled();
 	});
 
-	it('keeps answering a certificate from before LAN names, reordering it once with the wildcard', async () => {
+	it('answers 202 for a certificate from before LAN names, reordering it once with the wildcard', async () => {
 		stored(SINGLE_NAME_CERT);
 		const res = await call({ 'x-plex-token': 'tok' }, LAN);
-		expect(res.code).toBe(200);
-		expect(res.body.certificate).toBe(SINGLE_NAME_CERT);
+		// rex keeps serving what it kept and asks again in a minute; a 200 without the
+		// LAN name would have it wait for its next 6-hourly call.
+		expect(res.code).toBe(202);
+		expect(res.body.retryAfter).toBe(60);
+		expect(res.body).not.toHaveProperty('certificate');
 		expect(res.body).not.toHaveProperty('lanHostname');
 		expect(res.body).not.toHaveProperty('lanIp');
 		expect(upsertRexDirectRecord).toHaveBeenCalledWith(
