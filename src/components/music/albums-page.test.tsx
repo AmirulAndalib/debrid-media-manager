@@ -392,6 +392,24 @@ describe('music page', () => {
 		expect(fetchMock).not.toHaveBeenCalledWith(expect.stringContaining('sortBy=name'));
 	});
 
+	it('opens a playlist made with the + in Your Library', async () => {
+		me.playlists = {
+			id: 'p9',
+			name: 'My Playlist #1',
+			description: null,
+			trackCount: 0,
+			coverUrl: null,
+			updatedAt: '',
+		};
+		render(<AlbumsPage />);
+		fireEvent.click(await screen.findByRole('button', { name: 'Create playlist' }));
+		await waitFor(() =>
+			expect(routerMock.push).toHaveBeenCalledWith('/music/playlist/p9', undefined, {
+				shallow: true,
+			})
+		);
+	});
+
 	it('shows Your Library as a page of its own', async () => {
 		routerMock.query = { slug: ['library'] };
 		render(<AlbumsPage />);
