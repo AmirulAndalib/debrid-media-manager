@@ -1,8 +1,11 @@
 import { filenameParse } from '@ctrl/video-filename-parser';
+import ptt from 'parse-torrent-title';
 
 // What a release's name says about it, for API callers that would otherwise parse it
 // themselves. Read from the name alone, never from the files. Languages are left out:
-// the parser answers English for a name that names none.
+// the parser answers English for a name that names none. Seasons, episodes and group
+// come from parse-torrent-title, which reads "Complete Season 1 2 3 4 5" as five seasons
+// and takes no year for a group; a film gets no numbers.
 export type ReleaseFields = {
 	resolution: string | null;
 	source: string | null;
@@ -20,12 +23,11 @@ export type ReleaseFields = {
 
 export function releaseFields(name: string, isTv: boolean): ReleaseFields {
 	const p = filenameParse(name, isTv) as ReturnType<typeof filenameParse> & {
-		seasons?: number[];
-		episodeNumbers?: number[];
 		complete?: boolean;
 		fullSeason?: boolean;
 		modifier?: string;
 	};
+	const t = ptt.parse(name);
 	const resolution = p.resolution ? p.resolution.toLowerCase() : null;
 	return {
 		resolution: resolution && resolution !== 'unknown' ? resolution : null,
@@ -35,10 +37,10 @@ export function releaseFields(name: string, isTv: boolean): ReleaseFields {
 		hdr: p.edition?.dolbyVision ? 'DV' : p.edition?.hdr ? 'HDR' : null,
 		audioCodec: p.audioCodec ?? null,
 		audioChannels: p.audioChannels ?? null,
-		group: p.group || null,
+		group: t.group || null,
 		proper: (p.revision?.version ?? 1) > 1,
-		seasons: p.seasons ?? [],
-		episodes: p.episodeNumbers ?? [],
+		seasons: isTv ? (t.seasons ?? []) : [],
+		episodes: isTv ? (t.episodes ?? []) : [],
 		complete: Boolean(p.complete || p.fullSeason),
 	};
 }

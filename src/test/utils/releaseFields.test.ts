@@ -38,6 +38,27 @@ describe('releaseFields', () => {
 		).toMatchObject({ seasons: [1, 2, 3, 4, 5], episodes: [], complete: true, remux: false });
 	});
 
+	// Names search-torrents answered live on 2026-11-01 for tt0903747 and tt0133093.
+	it('reads every season a pack names in words', () => {
+		expect(
+			releaseFields('Breaking Bad Complete Season 1 2 3 4 5 Extras BluRay 1080p', true)
+				.seasons
+		).toEqual([1, 2, 3, 4, 5]);
+		expect(
+			releaseFields('Breaking Bad - Complete Season 1,2,3,4,5 + Extras - BluRay 1080p', true)
+				.seasons
+		).toEqual([1, 2, 3, 4, 5]);
+	});
+
+	it('takes no year for a group, nor numbers for a film', () => {
+		expect(
+			releaseFields(
+				'Matrix 1-3. filmů / The Matrix 1-3. movie (1999-2003)(CZ/EN)[2160p][HDR]',
+				false
+			)
+		).toMatchObject({ group: null, seasons: [], episodes: [] });
+	});
+
 	it('flags PROPER and REPACK', () => {
 		expect(releaseFields('Movie.2020.PROPER.1080p.WEB.H264-GRP', false).proper).toBe(true);
 		expect(releaseFields('Show.S03.REPACK.720p.HDTV.x264-GRP', true).proper).toBe(true);
