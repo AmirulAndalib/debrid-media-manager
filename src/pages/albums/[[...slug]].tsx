@@ -18,7 +18,7 @@ import { MusicPlayerProvider, useMusicPlayer } from '@/components/music/player/M
 import { accountPersistence } from '@/components/music/player/persistence';
 import PlaylistView from '@/components/music/PlaylistView';
 import { musicHref, MusicRoute, parseMusicRoute } from '@/components/music/routes';
-import TopBar from '@/components/music/TopBar';
+import TopBar, { SearchBox } from '@/components/music/TopBar';
 import { QueuedTrack } from '@/components/music/types';
 import { MusicUserProvider, useMusicUser } from '@/components/music/user/MusicUserProvider';
 import { albumItems, trackRef, trackTitle } from '@/components/music/utils';
@@ -28,7 +28,7 @@ import { MusicAlbum, MusicLibraryResponse, MusicTrack } from '@/pages/api/music/
 import type { MusicPlayerStateResponse } from '@/pages/api/music/me/state';
 import { UnrestrictTrackResponse } from '@/pages/api/music/unrestrict';
 import { toasterPosition } from '@/utils/toastOptions';
-import { Loader2 } from 'lucide-react';
+import { House, Library, Loader2, Search } from 'lucide-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
@@ -718,7 +718,7 @@ function MusicLibrary({
 			</Head>
 
 			<div className="flex h-dvh flex-col bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white">
-				<div className="relative flex min-h-0 flex-1 gap-2 p-2">
+				<div className={`relative flex min-h-0 flex-1 ${phone ? '' : 'gap-2 p-2'}`}>
 					{!phone && (
 						<aside
 							className={`shrink-0 transition-[width] duration-200 ${
@@ -739,14 +739,30 @@ function MusicLibrary({
 						</aside>
 					)}
 
-					<div className="flex min-w-0 flex-1 flex-col overflow-hidden rounded-lg bg-black/25">
-						<TopBar
-							searchText={searchText}
-							onSearch={search}
-							registerSearchInput={registerSearchInput}
-							catalogTotals={catalogTotals}
-							onShowShortcuts={() => setShowShortcuts(true)}
-						/>
+					<div
+						className={`flex min-w-0 flex-1 flex-col overflow-hidden ${
+							phone ? '' : 'rounded-lg bg-black/25'
+						}`}
+					>
+						{!phone ? (
+							<TopBar
+								searchText={searchText}
+								onSearch={search}
+								registerSearchInput={registerSearchInput}
+								catalogTotals={catalogTotals}
+								onShowShortcuts={() => setShowShortcuts(true)}
+							/>
+						) : (
+							route.name === 'search' && (
+								<div className="flex px-3 pt-3">
+									<SearchBox
+										value={searchText}
+										onSearch={search}
+										inputRef={registerSearchInput}
+									/>
+								</div>
+							)
+						)}
 						<main
 							ref={mainRef}
 							onScroll={(e) =>
@@ -790,6 +806,7 @@ function MusicLibrary({
 						onToggleMute={player.toggleMute}
 						onToggleQueue={toggleNowPlaying}
 						isQueueOpen={nowPlayingOpen}
+						onOpenNowPlaying={phone ? () => setOverlayOpen(true) : undefined}
 						isLiked={user.isLiked(currentTrack.track.id)}
 						onToggleLike={() => {
 							const ref = trackRef(currentTrack.track, currentTrack.album);
@@ -798,13 +815,68 @@ function MusicLibrary({
 						}}
 					/>
 				)}
+
+				{phone && (
+					<nav
+						aria-label="Music"
+						className="grid shrink-0 grid-cols-3 bg-black pb-[env(safe-area-inset-bottom)]"
+					>
+						{(
+							[
+								['Home', House, { name: 'home' }, route.name === 'home'],
+								[
+									'Search',
+									Search,
+									{ name: 'search', q: searchText },
+									route.name === 'search',
+								],
+								[
+									'Your Library',
+									Library,
+									{ name: 'library' },
+									['library', 'liked', 'playlist'].includes(route.name),
+								],
+							] as const
+						).map(([label, Icon, to, active]) => (
+							<button
+								key={label}
+								type="button"
+								onClick={() => navigate(to)}
+								aria-current={active ? 'page' : undefined}
+								className={`flex flex-col items-center gap-1 py-2 text-[11px] font-medium ${
+									active ? 'text-white' : 'text-gray-400'
+								}`}
+							>
+								<Icon className="h-6 w-6" />
+								{label}
+							</button>
+						))}
+					</nav>
+				)}
 			</div>
 
+			{phone && currentTrack && nowPlayingOpen && (
+				<div
+					role="dialog"
+					aria-modal="true"
+					aria-label="Now Playing"
+					className="fixed inset-0 z-[70] flex flex-col bg-gradient-to-b from-gray-800 via-gray-900 to-black pt-[env(safe-area-inset-top)] text-white"
+				>
+					<NowPlayingPanel
+						sheet
+						navigate={navigate}
+						onClose={() => setOverlayOpen(false)}
+						onTrackMenu={openTrackMenu}
+						onDownload={downloadTrack}
+					/>
+				</div>
+			)}
 			{showShortcuts && <KeyboardShortcutsModal onClose={() => setShowShortcuts(false)} />}
 			{menu && (
 				<ContextMenu
 					key={`${menu.x}:${menu.y}`}
 					menu={menu}
+					sheet={phone}
 					onClose={() => setMenu(null)}
 				/>
 			)}

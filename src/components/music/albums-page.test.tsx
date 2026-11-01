@@ -486,4 +486,60 @@ describe('music page', () => {
 		expect(saved.queue.contextId).toBe('album:h1');
 		expect(saved.queue.context).toHaveLength(2);
 	});
+
+	describe('on a phone', () => {
+		beforeEach(() => viewport(390));
+
+		it('has a tab bar and no side panes', async () => {
+			render(<AlbumsPage />);
+			const tabs = await screen.findByRole('navigation', { name: 'Music' });
+			expect(within(tabs).getByRole('button', { name: 'Home' })).toHaveAttribute(
+				'aria-current',
+				'page'
+			);
+			expect(screen.queryByRole('region', { name: 'Your Library' })).toBeNull();
+			expect(screen.queryByRole('button', { name: 'Go back' })).toBeNull();
+			fireEvent.click(within(tabs).getByRole('button', { name: 'Search' }));
+			expect(routerMock.push).toHaveBeenCalledWith('/music/search', undefined, {
+				shallow: true,
+			});
+			fireEvent.click(within(tabs).getByRole('button', { name: 'Your Library' }));
+			expect(routerMock.push).toHaveBeenCalledWith('/music/library', undefined, {
+				shallow: true,
+			});
+		});
+
+		it('puts the search box at the top of the search page', async () => {
+			routerMock.query = { slug: ['search'], q: 'first' };
+			render(<AlbumsPage />);
+			expect(await screen.findByLabelText('Search artists or albums')).toHaveValue('first');
+			expect(await screen.findByText('11 albums match')).toBeInTheDocument();
+		});
+
+		it('shows Your Library full width on its tab', async () => {
+			routerMock.query = { slug: ['library'] };
+			render(<AlbumsPage />);
+			expect(await screen.findAllByRole('region', { name: 'Your Library' })).toHaveLength(1);
+		});
+
+		it('opens Now Playing full screen from the mini player, with the queue on a tab', async () => {
+			savedQueue();
+			render(<AlbumsPage />);
+			fireEvent.click(await screen.findByRole('button', { name: 'Open Now Playing' }));
+			const sheet = await screen.findByRole('dialog', { name: 'Now Playing' });
+			fireEvent.click(within(sheet).getByRole('tab', { name: 'Queue' }));
+			expect(within(sheet).getByText(/Nothing plays after this/)).toBeInTheDocument();
+			fireEvent.click(within(sheet).getByRole('button', { name: 'Close Now Playing' }));
+			expect(screen.queryByRole('dialog', { name: 'Now Playing' })).toBeNull();
+		});
+
+		it('opens menus as a bottom sheet', async () => {
+			routerMock.query = { slug: ['browse'] };
+			render(<AlbumsPage />);
+			fireEvent.click(
+				await screen.findByRole('button', { name: 'More options for First Album' })
+			);
+			expect(screen.getByRole('menu')).toHaveClass('rounded-t-2xl');
+		});
+	});
 });

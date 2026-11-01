@@ -8,6 +8,42 @@ interface TopBarProps {
 	onShowShortcuts: () => void;
 }
 
+/** The catalog search: the top bar's, and on phones the search page's own. */
+export function SearchBox({
+	value,
+	onSearch,
+	inputRef,
+}: {
+	value: string;
+	onSearch: (q: string) => void;
+	inputRef: (input: HTMLInputElement | null) => void;
+}) {
+	return (
+		<div className="relative min-w-0 flex-1 md:max-w-md">
+			<input
+				ref={inputRef}
+				type="text"
+				placeholder="Search artists or albums..."
+				value={value}
+				onChange={(e) => onSearch(e.target.value)}
+				aria-label="Search artists or albums"
+				className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-2 pr-9 text-sm placeholder-gray-400 outline-hidden backdrop-blur-sm transition-all duration-200 focus:border-green-500/50 focus:bg-white/10 focus:ring-1 focus:ring-green-500/30"
+			/>
+			{value && (
+				<button
+					type="button"
+					onClick={() => onSearch('')}
+					className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-0.5 text-gray-400 transition-colors hover:text-white"
+					aria-label="Clear search"
+					title="Clear search"
+				>
+					<X className="h-4 w-4" />
+				</button>
+			)}
+		</div>
+	);
+}
+
 const roundButton =
 	'flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-black/40 text-gray-300 transition-colors hover:bg-black/60 hover:text-white';
 
@@ -39,28 +75,7 @@ export default function TopBar({
 				<ChevronRight className="h-5 w-5" />
 			</button>
 
-			<div className="relative ml-2 min-w-0 flex-1 md:max-w-md">
-				<input
-					ref={registerSearchInput}
-					type="text"
-					placeholder="Search artists or albums..."
-					value={searchText}
-					onChange={(e) => onSearch(e.target.value)}
-					aria-label="Search artists or albums"
-					className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-2 pr-9 text-sm placeholder-gray-400 outline-hidden backdrop-blur-sm transition-all duration-200 focus:border-green-500/50 focus:bg-white/10 focus:ring-1 focus:ring-green-500/30"
-				/>
-				{searchText && (
-					<button
-						type="button"
-						onClick={() => onSearch('')}
-						className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-0.5 text-gray-400 transition-colors hover:text-white"
-						aria-label="Clear search"
-						title="Clear search"
-					>
-						<X className="h-4 w-4" />
-					</button>
-				)}
-			</div>
+			<SearchBox value={searchText} onSearch={onSearch} inputRef={registerSearchInput} />
 
 			<div className="ml-auto flex min-w-0 items-center gap-3 pl-2">
 				{catalogTotals && (
