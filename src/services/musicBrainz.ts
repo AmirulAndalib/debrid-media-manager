@@ -15,6 +15,17 @@ export const isMbid = (value: unknown): value is string =>
 export const caaCoverUrl = (mbid: string) =>
 	`https://coverartarchive.org/release-group/${mbid}/front-500`;
 
+const CAA_COVER = /^https:\/\/coverartarchive\.org\/release-group\/([0-9a-f-]{36})\//;
+
+/**
+ * The cover URL the API hands out. An archive cover takes three hops, about
+ * 1.7 s, so it is served through DMM's cached copy instead; others as stored.
+ */
+export const servedCoverUrl = (url: string | null): string | null => {
+	const mbid = url?.match(CAA_COVER)?.[1];
+	return mbid ? `/api/music/cover/${mbid}.jpg` : url;
+};
+
 /**
  * The Cover Art Archive redirects to the image when there is one and answers
  * 404 when not. Unreachable counts as none: callers fall back and ask again later.

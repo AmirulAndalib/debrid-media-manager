@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { QueuedTrack } from '../types';
 import { MusicPlayer, MusicPlayerProvider, useMusicPlayer } from './MusicPlayerProvider';
@@ -101,6 +101,47 @@ describe('MusicPlayerProvider', () => {
 		const { audio } = setup();
 		expect(audio).toHaveAttribute('playsinline');
 		expect(audio).toHaveAttribute('preload', 'auto');
+	});
+
+	it("hands the OS media controls DMM's relative cover as an absolute URL", async () => {
+		const session = {
+			metadata: null as unknown,
+			playbackState: 'none',
+			setActionHandler: vi.fn(),
+			setPositionState: vi.fn(),
+		};
+		Object.defineProperty(navigator, 'mediaSession', { value: session, configurable: true });
+		vi.stubGlobal(
+			'MediaMetadata',
+			class {
+				constructor(init: object) {
+					Object.assign(this, init);
+				}
+			}
+		);
+		const cover = '/api/music/cover/4853b957-05f2-457b-ba47-18b2565abc69.jpg';
+		try {
+			setup();
+			const covered = items('a').map((item) => ({
+				...item,
+				album: { ...item.album, coverUrl: cover },
+			}));
+			await act(async () => player.playContext(covered, 0, 'album:h'));
+
+			expect(session.metadata).toMatchObject({
+				artwork: [
+					{
+						src: `${window.location.origin}${cover}`,
+						sizes: '600x600',
+						type: 'image/jpeg',
+					},
+				],
+			});
+		} finally {
+			cleanup();
+			delete (navigator as { mediaSession?: unknown }).mediaSession;
+			vi.unstubAllGlobals();
+		}
 	});
 
 	it('prefetches only the next item, once, and skips to it without waiting', async () => {

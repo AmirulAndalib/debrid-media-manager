@@ -1,4 +1,5 @@
 import { ImdbSearchService } from '@/services/database/imdbSearch';
+import { servedCoverUrl } from '@/services/musicBrainz';
 import { getBlocklist } from '@/services/takedown/blocklist';
 import {
 	getDirectory,
@@ -186,7 +187,7 @@ export async function queryAlbums({
 		artist: row.artist ?? 'Unknown Artist',
 		album: row.album ?? row.filename,
 		year: row.year === null ? null : Number(row.year),
-		coverUrl: row.coverUrl,
+		coverUrl: servedCoverUrl(row.coverUrl),
 		tracks: [],
 		totalBytes: Number(row.bytes),
 		trackCount: Number(row.fileCount),
@@ -254,7 +255,7 @@ export async function searchArtists(search: Prisma.Sql, limit: number): Promise<
 		mbid: row.mbid,
 		name: row.name,
 		albumCount: Number(row.albumCount),
-		coverUrl: row.coverUrl,
+		coverUrl: servedCoverUrl(row.coverUrl),
 	}));
 }
 

@@ -246,6 +246,25 @@ describe('resolveAlbumSummaries', () => {
 		expect(summaries.get(M3)).toMatchObject({ hash: null, trackCount: 0, album: 'Third' });
 		expect(mocked.availableMusic.findMany).toHaveBeenCalledTimes(1);
 	});
+
+	it("hands out an archive cover as DMM's cached copy and the rest as stored", async () => {
+		const itunes = 'https://is1-ssl.mzstatic.com/image/thumb/Music/x/600x600bb.jpg';
+		mocked.availableMusic.findMany.mockResolvedValue([]);
+		mocked.musicMetadata.findMany.mockResolvedValue([
+			{
+				...meta(M1, 'Archive'),
+				coverUrl: `https://coverartarchive.org/release-group/${M1}/front-500`,
+			},
+			{ ...meta(M2, 'iTunes'), coverUrl: itunes },
+			{ ...meta(M3, 'None'), coverUrl: null },
+		] as any);
+
+		const summaries = await resolveAlbumSummaries([M1, M2, M3]);
+
+		expect(summaries.get(M1)?.coverUrl).toBe(`/api/music/cover/${M1}.jpg`);
+		expect(summaries.get(M2)?.coverUrl).toBe(itunes);
+		expect(summaries.get(M3)?.coverUrl).toBeNull();
+	});
 });
 
 describe('playlistSummaries', () => {
@@ -260,7 +279,7 @@ describe('playlistSummaries', () => {
 			{ playlistId: 'p1', mbid: M1 },
 		] as any);
 		mocked.musicMetadata.findMany.mockResolvedValue([
-			{ mbid: M1, coverUrl: 'https://covers.example/1.jpg' },
+			{ mbid: M1, coverUrl: `https://coverartarchive.org/release-group/${M1}/front-500` },
 		] as any);
 
 		const summaries = await playlistSummaries([
@@ -278,7 +297,7 @@ describe('playlistSummaries', () => {
 				name: 'One',
 				description: null,
 				trackCount: 3,
-				coverUrl: 'https://covers.example/1.jpg',
+				coverUrl: `/api/music/cover/${M1}.jpg`,
 				updatedAt: updatedAt.toISOString(),
 			},
 			{

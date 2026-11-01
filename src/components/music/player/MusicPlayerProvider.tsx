@@ -280,7 +280,12 @@ export function MusicPlayerProvider({
 			...(nowItem.album.coverUrl
 				? {
 						artwork: [
-							{ src: nowItem.album.coverUrl, sizes: '600x600', type: 'image/jpeg' },
+							{
+								// Covers served by DMM are relative; the OS media controls need the origin.
+								src: new URL(nowItem.album.coverUrl, window.location.origin).href,
+								sizes: '600x600',
+								type: 'image/jpeg',
+							},
 						],
 					}
 				: {}),

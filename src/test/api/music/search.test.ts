@@ -88,6 +88,23 @@ describe('/api/music/search', () => {
 		expect((await search({ q: '  ' }))._getStatusCode()).toBe(400);
 	});
 
+	it("hands out an artist's archive cover as DMM's cached copy", async () => {
+		serve({
+			artists: [
+				{
+					mbid: GREEN_DAY,
+					name: 'Green Day',
+					albumCount: BigInt(3),
+					coverUrl: `https://coverartarchive.org/release-group/${TRE_MBID}/front-500`,
+				},
+			],
+		});
+
+		const data = (await search({ q: 'green day' }))._getData() as any;
+
+		expect(data.artists[0].coverUrl).toBe(`/api/music/cover/${TRE_MBID}.jpg`);
+	});
+
 	it('finds artists, albums and tracks with the fulltext indexes', async () => {
 		serve({
 			albums: [treRow],

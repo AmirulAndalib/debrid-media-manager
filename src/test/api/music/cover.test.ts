@@ -200,6 +200,8 @@ describe('/api/music/cover', () => {
 		// inauguration seal on 2026-11-01; the archive has its art.
 		const MBID = '5c14fd50-a2f1-3672-9537-b0dad91bea2f';
 		const CAA = `https://coverartarchive.org/release-group/${MBID}/front-500`;
+		// Stored as the archive's URL, handed out as DMM's cached copy of it.
+		const SERVED = `/api/music/cover/${MBID}.jpg`;
 		const body = { mbid: MBID, artist: 'Radiohead', album: 'Hail to the Thief' };
 		const fetchMock = () => global.fetch as ReturnType<typeof vi.fn>;
 		const post = async () => {
@@ -214,7 +216,7 @@ describe('/api/music/cover', () => {
 
 			const res = await post();
 
-			expect(res._getData()).toEqual({ coverUrl: CAA, source: 'caa' });
+			expect(res._getData()).toEqual({ coverUrl: SERVED, source: 'caa' });
 			expect(fetchMock()).toHaveBeenCalledTimes(1);
 			expect(fetchMock().mock.calls[0][0]).toBe(CAA);
 			expect(fetchMock().mock.calls[0][1]).toMatchObject({
@@ -235,7 +237,7 @@ describe('/api/music/cover', () => {
 			} as any);
 			fetchMock().mockResolvedValue(new Response(null, { status: 307 }));
 
-			expect((await post())._getData()).toEqual({ coverUrl: CAA, source: 'caa' });
+			expect((await post())._getData()).toEqual({ coverUrl: SERVED, source: 'caa' });
 		});
 
 		it('keeps a stored iTunes cover while the archive has none', async () => {
@@ -277,7 +279,7 @@ describe('/api/music/cover', () => {
 				coverSource: 'caa',
 			} as any);
 
-			expect((await post())._getData()).toEqual({ coverUrl: CAA, source: 'cached' });
+			expect((await post())._getData()).toEqual({ coverUrl: SERVED, source: 'cached' });
 			expect(fetchMock()).not.toHaveBeenCalled();
 		});
 	});

@@ -1,4 +1,4 @@
-import { caaCoverUrl, hasCaaCover } from '@/services/musicBrainz';
+import { caaCoverUrl, hasCaaCover, servedCoverUrl } from '@/services/musicBrainz';
 import { prisma } from '@/utils/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -104,7 +104,9 @@ export default async function handler(
 		});
 
 		if (existing?.coverUrl && existing.coverSource === 'caa') {
-			return res.status(200).json({ coverUrl: existing.coverUrl, source: 'cached' });
+			return res
+				.status(200)
+				.json({ coverUrl: servedCoverUrl(existing.coverUrl), source: 'cached' });
 		}
 
 		// The Cover Art Archive files art under this very release group, so it
@@ -116,11 +118,13 @@ export default async function handler(
 				where: { mbid },
 				data: { coverUrl, coverSource: 'caa' },
 			});
-			return res.status(200).json({ coverUrl, source: 'caa' });
+			return res.status(200).json({ coverUrl: servedCoverUrl(coverUrl), source: 'caa' });
 		}
 
 		if (existing?.coverUrl) {
-			return res.status(200).json({ coverUrl: existing.coverUrl, source: 'cached' });
+			return res
+				.status(200)
+				.json({ coverUrl: servedCoverUrl(existing.coverUrl), source: 'cached' });
 		}
 
 		const coverUrl = await searchItunesCover(artist, album);

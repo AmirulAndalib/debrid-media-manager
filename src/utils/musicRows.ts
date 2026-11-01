@@ -1,4 +1,5 @@
 import type { MusicTrack } from '@/pages/api/music/library';
+import { servedCoverUrl } from '@/services/musicBrainz';
 import { albumTracks } from '@/services/musicCatalog';
 import { getBlocklist, isHashBlockedIn } from '@/services/takedown/blocklist';
 import type { MusicTrackRef } from '@/utils/musicUser';
@@ -69,7 +70,7 @@ function summarize(
 		artist: meta?.artist ?? 'Unknown Artist',
 		album: meta?.album ?? release?.filename ?? '',
 		year: meta?.year ?? null,
-		coverUrl: meta?.coverUrl ?? null,
+		coverUrl: servedCoverUrl(meta?.coverUrl ?? null),
 		trackCount: release?._count.files ?? 0,
 	};
 }
@@ -189,7 +190,7 @@ export async function playlistSummaries(
 					select: { mbid: true, coverUrl: true },
 				});
 	const countById = new Map(groups.map((g) => [g.playlistId, g._count._all]));
-	const coverByMbid = new Map(covers.map((c) => [c.mbid, c.coverUrl]));
+	const coverByMbid = new Map(covers.map((c) => [c.mbid, servedCoverUrl(c.coverUrl)]));
 	const coverById = new Map(firsts.map((f) => [f.playlistId, coverByMbid.get(f.mbid) ?? null]));
 	return playlists.map((p) => ({
 		id: p.id,

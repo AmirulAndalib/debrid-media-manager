@@ -33,7 +33,10 @@ export function useCoverTint(url: string | null): string | null {
 	useEffect(() => {
 		if (!url || tints.has(url)) return;
 		const image = new Image();
-		image.crossOrigin = 'anonymous';
+		// A cross-origin cover needs CORS to be read; DMM's own must match the <img> request to share it.
+		if (new URL(url, window.location.href).origin !== window.location.origin) {
+			image.crossOrigin = 'anonymous';
+		}
 		image.onload = () => {
 			tints.set(url, averageColor(image));
 			setSampled(url);

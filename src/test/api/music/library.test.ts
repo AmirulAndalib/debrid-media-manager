@@ -246,6 +246,24 @@ describe('/api/music/library', () => {
 			expect(mockedPrisma.availableMusicFile.findMany).not.toHaveBeenCalled();
 		});
 
+		it("hands out archive covers as DMM's cached copy and iTunes covers as stored", async () => {
+			const itunes = 'https://is1-ssl.mzstatic.com/image/thumb/Music/x/600x600bb.jpg';
+			serve([
+				row({
+					mbid: TRE_MBID,
+					coverUrl: `https://coverartarchive.org/release-group/${TRE_MBID}/front-500`,
+				}),
+				row({ hash: 'hash2', mbid: 'mbid-2', coverUrl: itunes }),
+			]);
+
+			const data = (await get({ summary: '1' }))._getData() as any;
+
+			expect(data.albums.map((album: any) => album.coverUrl)).toEqual([
+				`/api/music/cover/${TRE_MBID}.jpg`,
+				itunes,
+			]);
+		});
+
 		it('says there is no next page on the last one', async () => {
 			serve([row()], { totalAlbums: 3, totalTracks: 30 });
 
