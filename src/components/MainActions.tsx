@@ -145,17 +145,29 @@ export function MainActions({
 			{/* Second row: Cast. One provider keeps its full button; two or more
 			    share one row of provider chips, which used to take up to two
 			    rows of six "Cast for XX" buttons. */}
-			{castButtons.length === 1 &&
-				castButtons.map((button) => (
+			{castButtons.length === 1 && (
+				<div className="grid w-full grid-cols-2 gap-3">
+					{castButtons.map((button) => (
+						<Link
+							key={button.href}
+							href={button.href}
+							className={`haptic flex items-center justify-center gap-2 rounded border-2 ${button.borderColor} ${button.bgColor} px-1 py-3 whitespace-nowrap ${button.textColor} transition-colors ${button.hoverColor} sm:p-3`}
+						>
+							<Sparkles
+								className={`mr-1 hidden h-4 w-4 sm:inline-block ${button.iconColor}`}
+							/>
+							{button.label}
+						</Link>
+					))}
 					<Link
-						key={button.href}
-						href={button.href}
-						className={`haptic flex items-center justify-center gap-2 rounded border-2 ${button.borderColor} ${button.bgColor} p-3 ${button.textColor} transition-colors ${button.hoverColor}`}
+						href="/kodi"
+						className="haptic flex items-center justify-center gap-2 rounded border-2 border-blue-500 bg-blue-900/30 px-1 py-3 whitespace-nowrap text-blue-100 transition-colors hover:bg-blue-800/50 sm:p-3"
 					>
-						<Sparkles className={`mr-1 inline-block h-4 w-4 ${button.iconColor}`} />
-						{button.label}
+						<Tv className="mr-1 hidden h-4 w-4 text-blue-400 sm:inline-block" />
+						Watch in Kodi
 					</Link>
-				))}
+				</div>
+			)}
 			{castButtons.length > 1 && (
 				<div className="flex w-full items-center gap-2">
 					<span className="flex items-center gap-1 pr-1 text-sm text-gray-300">
@@ -176,12 +188,12 @@ export function MainActions({
 				</div>
 			)}
 
-			{castButtons.length > 0 && (
+			{castButtons.length > 1 && (
 				<Link
 					href="/kodi"
-					className="haptic flex items-center justify-center gap-2 rounded border-2 border-gray-500 bg-gray-800/30 p-2 text-sm text-gray-100 transition-colors hover:bg-gray-700/50"
+					className="haptic flex items-center justify-center gap-2 rounded border-2 border-blue-500 bg-blue-900/30 p-2 text-sm text-blue-100 transition-colors hover:bg-blue-800/50"
 				>
-					<Tv className="h-4 w-4 text-gray-400" />
+					<Tv className="h-4 w-4 text-blue-400" />
 					Watch in Kodi
 				</Link>
 			)}

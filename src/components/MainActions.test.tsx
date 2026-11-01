@@ -497,4 +497,24 @@ describe('MainActions', () => {
 
 		expect(screen.queryByRole('link', { name: /transfers/i })).toBeNull();
 	});
+
+	it("puts one provider's Cast button and Watch in Kodi on the same row", () => {
+		render(
+			<MainActions
+				rdUser={baseRdUser}
+				tbUser={null}
+				adUser={false}
+				pmUser={false}
+				ocUser={false}
+				dlUser={false}
+				isLoading={false}
+			/>
+		);
+
+		const cast = screen.getByRole('link', { name: /cast for rd/i });
+		const kodi = screen.getByRole('link', { name: /watch in kodi/i });
+		expect(cast.parentElement).toBe(kodi.parentElement);
+		expect(kodi.parentElement?.className).toContain('grid-cols-2');
+		expect(kodi.className).not.toContain('gray');
+	});
 });
