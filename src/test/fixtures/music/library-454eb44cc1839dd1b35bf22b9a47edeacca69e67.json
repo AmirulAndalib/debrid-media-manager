@@ -1,0 +1,93 @@
+{
+	"_source": "GET https://debridmediamanager.com/api/music/library?hash=454eb44cc1839dd1b35bf22b9a47edeacca69e67, read 2026-11-01: Adele, 25, enriched with an 11-track release; its 14 audio files (\"12. Adele - Can't Let Go.flac\"…) in the order served, as AvailableMusicFile rows (RD links left out). It served files 12 to 14 untitled. trackNumber is null: the API serves the matched position, not the stored number, and every file names its own.",
+	"album": "25",
+	"artist": "Adele",
+	"files": [
+		{
+			"bytes": 29516964,
+			"file_id": 1,
+			"path": "/01. Adele - Hello.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 24784090,
+			"file_id": 2,
+			"path": "/02. Adele - Send My Love (To Your New Lover).flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 39578472,
+			"file_id": 3,
+			"path": "/03. Adele - I Miss You.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 28589533,
+			"file_id": 4,
+			"path": "/04. Adele - When We Were Young.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 23312912,
+			"file_id": 5,
+			"path": "/05. Adele - Remedy.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 28524981,
+			"file_id": 6,
+			"path": "/06. Adele - Water Under the Bridge.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 25166653,
+			"file_id": 7,
+			"path": "/07. Adele - River Lea.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 29849293,
+			"file_id": 8,
+			"path": "/08. Adele - Love in the Dark.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 21241318,
+			"file_id": 9,
+			"path": "/09. Adele - Million Years Ago.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 25961977,
+			"file_id": 10,
+			"path": "/10. Adele - All I Ask.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 28163482,
+			"file_id": 11,
+			"path": "/11. Adele - Sweetest Devotion.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 18173265,
+			"file_id": 12,
+			"path": "/12. Adele - Can't Let Go.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 26380724,
+			"file_id": 13,
+			"path": "/13. Adele - Lay Me Down.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 26203904,
+			"file_id": 14,
+			"path": "/14. Adele - Why Do You Love Me.flac",
+			"trackNumber": null
+		}
+	],
+	"hash": "454eb44cc1839dd1b35bf22b9a47edeacca69e67",
+	"mbid": "5537624c-3d2f-4f5c-8099-df916082c85c"
+}

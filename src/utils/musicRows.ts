@@ -116,7 +116,8 @@ export async function resolveMusicRows(refs: MusicTrackRef[]): Promise<MusicTrac
 				key,
 				albumTracks(
 					files.filter((file) => file.hash.toLowerCase() === key),
-					tracklists.filter((track) => track.mbid === mbid)
+					tracklists.filter((track) => track.mbid === mbid),
+					metaByMbid.get(mbid)?.artist
 				)
 			);
 		}

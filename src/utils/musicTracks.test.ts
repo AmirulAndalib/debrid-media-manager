@@ -189,6 +189,30 @@ describe('track helpers', () => {
 		);
 	});
 
+	it('reads a name without the album artist, before or after its number', () => {
+		// Names from the catalog (census 2026-11-01).
+		expect(formatTrackTitle("12. Adele - Can't Let Go.flac", 'Adele')).toBe("Can't Let Go");
+		expect(
+			formatTrackTitle(
+				"17 - Sick Puppies - There's No Going Back (Acoustic).mp3",
+				'Sick Puppies'
+			)
+		).toBe("There's No Going Back (Acoustic)");
+		expect(formatTrackTitle('001. Enigma - The Voice Of Enigma.flac', 'Enigma')).toBe(
+			'The Voice Of Enigma'
+		);
+		expect(formatTrackTitle('01 Blackened (Remastered).flac')).toBe('Blackened (Remastered)');
+		// The other shapes, case and accents aside.
+		expect(formatTrackTitle('ADELE - 12 - Lay Me Down.flac', 'Adele')).toBe('Lay Me Down');
+		expect(formatTrackTitle('01 - Beyonce \u2013 Halo.flac', 'Beyoncé')).toBe('Halo');
+		expect(formatTrackTitle('01-the_beatles-help.mp3', 'The Beatles')).toBe('help');
+		// A title's own number, or the artist's name as a title, stays.
+		expect(formatTrackTitle('05 - 21 Guns.flac', 'Green Day')).toBe('21 Guns');
+		expect(formatTrackTitle('Green Day - 21 Guns.flac', 'Green Day')).toBe('21 Guns');
+		expect(formatTrackTitle('03 - Adele.flac', 'Adele')).toBe('Adele');
+		expect(formatTrackTitle('01 - Lovesong.flac', 'Love')).toBe('Lovesong');
+	});
+
 	it('counts anything but a known sidecar as audio', () => {
 		expect(isAudioPath('/Disc 1/01 Blackened.flac')).toBe(true);
 		expect(isAudioPath('/Scans/front.JPG')).toBe(false);

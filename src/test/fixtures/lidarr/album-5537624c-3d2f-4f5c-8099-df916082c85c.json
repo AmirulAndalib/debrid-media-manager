@@ -1,0 +1,2214 @@
+{
+	"Releases": [
+		{
+			"Id": "528143ee-3ba6-4faa-b5b8-fc4ff3ae2b68",
+			"Media": [
+				{
+					"Format": "CD",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2020-01-01",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 296000,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223080,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348626,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290906,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245426,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240426,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225426,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285946,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 253000,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "89015f5d-d3dc-4ad3-904b-492870bbf4e4",
+			"Media": [
+				{
+					"Format": "CD",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 14,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295493,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223080,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (To Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348626,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290906,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245426,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240426,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225426,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285946,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251693,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 198360,
+					"MediumNumber": 1,
+					"RecordingId": "66bfe087-1e25-451d-84a7-c75981359d0c",
+					"TrackName": "Can’t Let Go",
+					"TrackPosition": 12
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 270400,
+					"MediumNumber": 1,
+					"RecordingId": "0a64c5bb-d1ad-41e5-b380-00adb48db786",
+					"TrackName": "Lay Me Down",
+					"TrackPosition": 13
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 238893,
+					"MediumNumber": 1,
+					"RecordingId": "af03643d-8610-4e7a-9a75-a9537c23aadd",
+					"TrackName": "Why Do You Love Me",
+					"TrackPosition": 14
+				}
+			]
+		},
+		{
+			"Id": "5b78767e-e2b4-4e17-b517-87adfb37210a",
+			"Media": [
+				{
+					"Format": "12\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295493,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223080,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348626,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290906,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245426,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240426,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225426,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285946,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251693,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "2b4c1e9c-1904-4155-9df6-d1681ddef130",
+			"Media": [
+				{
+					"Format": "CD",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295493,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223080,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348626,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290906,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245426,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240426,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225426,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285946,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251693,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "97189482-89ee-4d31-90c7-ba07b412d7f9",
+			"Media": [
+				{
+					"Format": "CD",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295493,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223080,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348626,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290906,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245426,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240426,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225426,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285946,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251693,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "3ce75ee5-4fb0-4209-9bde-8770d17f5fc4",
+			"Media": [
+				{
+					"Format": "CD",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295493,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223080,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348626,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290906,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245426,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240426,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225426,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285946,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251693,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "0c0fa6cd-004e-435c-bf57-7b3ccac115d0",
+			"Media": [
+				{
+					"Format": "CD",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 296000,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223000,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 349000,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 291000,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245000,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240000,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225000,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 286000,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227000,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 272000,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 252000,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "0fd7b9f9-5921-42c1-bb90-1a3f76b7b628",
+			"Media": [
+				{
+					"Format": "Digital Media",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295502,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223079,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348625,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290900,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245427,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240439,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225427,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285935,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251702,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "8319bd69-f946-44aa-a63a-474ed706e93d",
+			"Media": [
+				{
+					"Format": "Digital Media",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295493,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223080,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348626,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290906,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245426,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240426,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225426,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285946,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251693,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "ae9128af-16ef-430b-9822-5f6a24cdc5ab",
+			"Media": [
+				{
+					"Format": "Digital Media",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295502,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223079,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348625,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290900,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245427,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240439,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225427,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285935,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251702,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "c9a9881f-9e00-4607-b679-d2739fa2d937",
+			"Media": [
+				{
+					"Format": "Digital Media",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295502,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223078,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348625,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290900,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245426,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240439,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225426,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285935,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227065,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251701,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "d63626b9-a38b-45fc-9157-1d61ac2b2ad5",
+			"Media": [
+				{
+					"Format": "12\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295000,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223000,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348000,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290000,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245000,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240000,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225000,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285946,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227000,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271000,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251000,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "67de1291-cde8-4a4c-b06c-621e53e68e97",
+			"Media": [
+				{
+					"Format": "CD",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-01-01",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295493,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223080,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348626,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290906,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245426,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240426,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225426,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285946,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251693,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "11506187-0013-4276-8c87-4a2e561af7d8",
+			"Media": [
+				{
+					"Format": "Digital Media",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295502,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223079,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348625,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290900,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245427,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240439,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225427,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285935,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251702,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "b2dbd919-229f-41df-a6bf-eaa042c1a550",
+			"Media": [
+				{
+					"Format": "CD",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 14,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295493,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223080,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348626,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290906,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245426,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240426,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225426,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285946,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251693,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 198360,
+					"MediumNumber": 1,
+					"RecordingId": "66bfe087-1e25-451d-84a7-c75981359d0c",
+					"TrackName": "Can’t Let Go",
+					"TrackPosition": 12
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 270400,
+					"MediumNumber": 1,
+					"RecordingId": "0a64c5bb-d1ad-41e5-b380-00adb48db786",
+					"TrackName": "Lay Me Down",
+					"TrackPosition": 13
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 238893,
+					"MediumNumber": 1,
+					"RecordingId": "af03643d-8610-4e7a-9a75-a9537c23aadd",
+					"TrackName": "Why Do You Love Me",
+					"TrackPosition": 14
+				}
+			]
+		},
+		{
+			"Id": "cc9a210e-8dff-4c2a-84b9-39df1eb1dc7f",
+			"Media": [
+				{
+					"Format": "Digital Media",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295502,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223079,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348625,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290900,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245427,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240439,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225427,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285935,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251702,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "a4f190d5-c752-4ebd-8d2f-925abfb52c40",
+			"Media": [
+				{
+					"Format": "CD",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2015-11-20",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295493,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223080,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348626,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290906,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245426,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240426,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225426,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285946,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251693,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "0a536975-66b0-447d-8877-42cbc079e10c",
+			"Media": [
+				{
+					"Format": "CD",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": null,
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295493,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223080,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (to Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348626,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290906,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245426,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240426,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225426,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285946,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251693,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "5f8339a9-2487-42b8-bd66-ced48cabdc26",
+			"Media": [
+				{
+					"Format": "Digital Media",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "2025-06-24",
+			"Status": "Official",
+			"Title": "25",
+			"TrackCount": 11,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295502,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223079,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (To Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348625,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290900,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245427,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240439,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225427,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285935,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227066,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271800,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251702,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				}
+			]
+		},
+		{
+			"Id": "d6bb6492-fb07-4521-b8e8-56ced479839e",
+			"Media": [
+				{
+					"Format": "Digital Media",
+					"Position": 1
+				},
+				{
+					"Format": "Digital Media",
+					"Position": 2
+				}
+			],
+			"ReleaseDate": "2015-01-01",
+			"Status": "Bootleg",
+			"Title": "25",
+			"TrackCount": 20,
+			"Tracks": [
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 295000,
+					"MediumNumber": 1,
+					"RecordingId": "0a8e8d55-4b83-4f8a-9732-fbb5ded9f344",
+					"TrackName": "Hello",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 223000,
+					"MediumNumber": 1,
+					"RecordingId": "1e74cd4c-cfa7-4bdb-99da-41869f5f1171",
+					"TrackName": "Send My Love (To Your New Lover)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 348000,
+					"MediumNumber": 1,
+					"RecordingId": "20594682-fa10-43e8-80fa-b116c68f1b7f",
+					"TrackName": "I Miss You",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 290000,
+					"MediumNumber": 1,
+					"RecordingId": "c5ad2611-071b-4003-bb22-eee8b4f48fe9",
+					"TrackName": "When We Were Young",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 245000,
+					"MediumNumber": 1,
+					"RecordingId": "cdc9f701-60b4-4e37-a94f-87d0e396f2bc",
+					"TrackName": "Remedy",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 240000,
+					"MediumNumber": 1,
+					"RecordingId": "ade2f0f3-39bf-46ad-a44d-7fc4a8069db7",
+					"TrackName": "Water Under the Bridge",
+					"TrackPosition": 6
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 225000,
+					"MediumNumber": 1,
+					"RecordingId": "b7c37d3d-feea-4a73-8346-9e2392a292e6",
+					"TrackName": "River Lea",
+					"TrackPosition": 7
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 285000,
+					"MediumNumber": 1,
+					"RecordingId": "dedf519d-8eca-4756-9f93-c390308e0c1b",
+					"TrackName": "Love in the Dark",
+					"TrackPosition": 8
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 227000,
+					"MediumNumber": 1,
+					"RecordingId": "870c62b6-ba2c-4873-b962-6289128e4a90",
+					"TrackName": "Million Years Ago",
+					"TrackPosition": 9
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 271000,
+					"MediumNumber": 1,
+					"RecordingId": "bfe7a94e-4161-4802-8916-efe57e611842",
+					"TrackName": "All I Ask",
+					"TrackPosition": 10
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 251000,
+					"MediumNumber": 1,
+					"RecordingId": "b2c8aed1-777d-409b-941e-7d4c594697a2",
+					"TrackName": "Sweetest Devotion",
+					"TrackPosition": 11
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 198000,
+					"MediumNumber": 1,
+					"RecordingId": "66bfe087-1e25-451d-84a7-c75981359d0c",
+					"TrackName": "Can’t Let Go",
+					"TrackPosition": 12
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 270000,
+					"MediumNumber": 1,
+					"RecordingId": "0a64c5bb-d1ad-41e5-b380-00adb48db786",
+					"TrackName": "Lay Me Down",
+					"TrackPosition": 13
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 238000,
+					"MediumNumber": 1,
+					"RecordingId": "af03643d-8610-4e7a-9a75-a9537c23aadd",
+					"TrackName": "Why Do You Love Me",
+					"TrackPosition": 14
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 288000,
+					"MediumNumber": 2,
+					"RecordingId": "f8360768-41d7-4a87-86d7-12ed49e4188f",
+					"TrackName": "When We Were Young (live at the Church Studios)",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 307000,
+					"MediumNumber": 2,
+					"RecordingId": "5dc6daa3-0a36-407d-b663-75527e91efa5",
+					"TrackName": "Hello (live at Nrj Awards)",
+					"TrackPosition": 2
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 191000,
+					"MediumNumber": 2,
+					"RecordingId": "f390cc3a-582a-47dc-98e8-7d3c24f80726",
+					"TrackName": "Send My Love (live From Joe's Pub)",
+					"TrackPosition": 3
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 230000,
+					"MediumNumber": 2,
+					"RecordingId": "c3da4fd8-e0d7-4bde-b650-dc01cfd052ca",
+					"TrackName": "Water Under the Bridge (live From the Tonight Show)",
+					"TrackPosition": 4
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 220000,
+					"MediumNumber": 2,
+					"RecordingId": "061f02de-23f2-49fc-813d-5cb082f435e5",
+					"TrackName": "Million Years Ago (live in New York City)",
+					"TrackPosition": 5
+				},
+				{
+					"ArtistId": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+					"DurationMs": 276000,
+					"MediumNumber": 2,
+					"RecordingId": "9f7f4a30-b787-42af-950a-91ef41ffca22",
+					"TrackName": "All I Ask (live in New York City)",
+					"TrackPosition": 6
+				}
+			]
+		}
+	],
+	"_source": "GET https://api.lidarr.audio/api/v0.4/album/5537624c-3d2f-4f5c-8099-df916082c85c, read 2026-11-01: Adele, 25 (2015), all 20 releases, among them the 14-track US and Japanese CDs. Trimmed to the fields DMM reads (album: id, title, type, secondarytypes, releasedate, artistid, genres, images CoverType/Url, artists id/artistname/sortname/artistaliases; release: Id, Title, Status, ReleaseDate, Media Format/Position, TrackCount, Tracks; track: TrackName, TrackPosition, MediumNumber, DurationMs, RecordingId, ArtistId); nothing else changed.",
+	"artistid": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+	"artists": [
+		{
+			"artistaliases": ["Adele", "アデル", "阿黛尔"],
+			"artistname": "Adele",
+			"id": "cc2c9c3c-b7bc-4b8b-84d8-4fbd8779e493",
+			"sortname": "Adele"
+		}
+	],
+	"genres": ["Pop", "Pop Soul", "Neo Soul", "Blue-Eyed Soul", "Soul", "Folk"],
+	"id": "5537624c-3d2f-4f5c-8099-df916082c85c",
+	"images": [
+		{
+			"CoverType": "Cover",
+			"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/0fd7b9f9-5921-42c1-bb90-1a3f76b7b628/12266354356-1200.jpg"
+		},
+		{
+			"CoverType": "Disc",
+			"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/67de1291-cde8-4a4c-b06c-621e53e68e97/28729869306-1200.jpg"
+		}
+	],
+	"releasedate": "2015-11-20",
+	"secondarytypes": [],
+	"title": "25",
+	"type": "Album"
+}

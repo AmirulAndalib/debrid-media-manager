@@ -7,7 +7,9 @@ import {
 } from '@/services/musicBrainz';
 import lz2Album from '@/test/fixtures/lidarr/album-33b4653d-006e-3cc1-8afb-386b15a6cd6e.json';
 import monkeesAlbum from '@/test/fixtures/lidarr/album-48e8b712-4f5d-34e0-9492-22f936854662.json';
+import adeleAlbum from '@/test/fixtures/lidarr/album-5537624c-3d2f-4f5c-8099-df916082c85c.json';
 import chopin from '@/test/fixtures/music/library-0380fe617494cfc4a0b969639ad8a277ab366478.json';
+import adele from '@/test/fixtures/music/library-454eb44cc1839dd1b35bf22b9a47edeacca69e67.json';
 import lz2 from '@/test/fixtures/music/library-700d948d78ff200d34d643d4474365ea0b698fd7.json';
 import monkees from '@/test/fixtures/music/library-dc925f67cd67936b4a8fbeb17d6decb648fd3479.json';
 import { discTrackCounts, getFilename } from '@/utils/musicTracks';
@@ -19,6 +21,7 @@ vi.mock('@/utils/prisma', () => ({ prisma: {} }));
 type Library = {
 	hash: string;
 	mbid: string;
+	artist?: string;
 	files: { file_id: number; path: string; bytes: number; trackNumber: number | null }[];
 };
 
@@ -44,12 +47,32 @@ function served(library: Library, album?: LidarrAlbum, releaseId?: string) {
 	);
 	const rows = [...tracks, ...titlePool(library.mbid, group, releases, tracks)];
 	return {
-		tracks: albumTracks(files, rows as Parameters<typeof albumTracks>[1]),
+		tracks: albumTracks(files, rows as Parameters<typeof albumTracks>[1], library.artist),
 		mbTrackCount: metadata.mbTrackCount,
 	};
 }
 
 const enriched = { enrichedAt: new Date('2026-11-01'), mbReleaseId: 'a-release' };
+
+describe('albumTracks', () => {
+	it('titles files named "<artist> - <title>" from the titles of other releases', () => {
+		// Adele, 25: "12. Adele - Can't Let Go.flac"… stored with an 11-track
+		// release; the 14-track CDs put 12 to 14 in the pool (census 2026-11-01).
+		const album = served(
+			adele,
+			adeleAlbum as unknown as LidarrAlbum,
+			'2b4c1e9c-1904-4155-9df6-d1681ddef130'
+		);
+		expect(album.mbTrackCount).toBe(11);
+		expect(album.tracks.map((track) => track.title).slice(10)).toEqual([
+			'Sweetest Devotion',
+			'Can’t Let Go',
+			'Lay Me Down',
+			'Why Do You Love Me',
+		]);
+		expect(titleCensusReason(album, enriched)).toBe('titled');
+	});
+});
 
 describe('titleCensusReason', () => {
 	it("counts a deluxe edition titled from its own release's layout as titled", () => {

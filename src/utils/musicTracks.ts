@@ -95,30 +95,58 @@ export function removeExtension(filename: string): string {
 	return filename.replace(/\.[^/.]+$/, '');
 }
 
-/** For matching a file to its MusicBrainz track only: a title shown is MusicBrainz's or none. */
-export function formatTrackTitle(filename: string): string {
-	const title = removeExtension(filename).trim();
-	const formattedTitle = title
+// "01 - ", "01. ", "01_01 - ", "[01] ", "01) ", "Track 01 ".
+const withoutNumber = (title: string) =>
+	title
 		.replace(/^\s*\[(\d{1,3})\]\s*/, '')
 		.replace(/^\s*(\d{1,2}[-_])?\d{1,3}\s*[-_.]\s*/, '')
 		.replace(/^\s*\d{1,3}\)\s*/, '')
 		.replace(/^\s*track\s*\d{1,3}\s*[-_.]?\s*/i, '')
 		.trim();
-	return formattedTitle || title;
+
+/** Letters and digits only, lower case, accents aside. */
+const fold = (text: string) => normalizeTitle(text.normalize('NFD'));
+
+/** `title` after a leading "<artist> - ", alike in letters and digits; else `title`. */
+function withoutArtist(title: string, artist: string): string {
+	const wanted = fold(artist);
+	let seen = '';
+	for (let i = 0; wanted && seen.length < wanted.length && i < title.length; i++) {
+		seen += fold(title[i]);
+		if (seen === wanted) {
+			return (
+				title.slice(i + 1).match(/^\p{M}*[\s_]*[-\u2013\u2014][\s_]*(.+)/su)?.[1] ?? title
+			);
+		}
+	}
+	return title;
+}
+
+/**
+ * For matching a file to its MusicBrainz track only: a title shown is
+ * MusicBrainz's or none. The name without its track number and a leading
+ * "<album artist> - ", in either order ("12. Adele - Song", "Adele - 12 - Song").
+ */
+export function formatTrackTitle(filename: string, artist?: string | null): string {
+	const title = removeExtension(filename).trim();
+	let formatted = withoutNumber(title);
+	// "01 Song" only when nothing else numbers it: "05 - 21 Guns" keeps its 21.
+	if (formatted === title) formatted = title.replace(/^\d{1,3}\s+/, '');
+	const rest = artist ? withoutArtist(formatted, artist) : formatted;
+	return (rest === formatted ? formatted : withoutNumber(rest)) || title;
 }
 
 export type TrackMetadata = { disc: number; position: number; title: string };
 
 const TITLE_SIMILARITY = 0.8;
-// Disc 0 holds the titles of the group's other releases, so a file the chosen
-// release leaves untitled takes one of them only when the names agree outright.
-const POOL_SIMILARITY = 1;
 export const normalizeTitle = (title: string) =>
 	title.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '');
-const similarity = (filename: string, title: string) => {
-	const a = normalizeTitle(formatTrackTitle(filename));
+/** A file's name as it is compared with titles (see `formatTrackTitle`). */
+const nameKey = (filename: string, artist?: string | null) =>
+	normalizeTitle(formatTrackTitle(filename, artist));
+const similarity = (name: string, title: string) => {
 	const b = normalizeTitle(title);
-	return 1 - distance(a, b) / Math.max(a.length, b.length, 1);
+	return 1 - distance(name, b) / Math.max(name.length, b.length, 1);
 };
 
 /**
@@ -129,13 +157,15 @@ const similarity = (filename: string, title: string) => {
 export function similarTitle<T extends TrackMetadata>(
 	filename: string,
 	tracks: T[],
-	threshold = TITLE_SIMILARITY
+	threshold = TITLE_SIMILARITY,
+	artist?: string | null
 ): T | null {
+	const name = nameKey(filename, artist);
 	let best: T | null = null;
 	let bestScore = threshold;
 	let tied = false;
 	for (const track of tracks) {
-		const score = similarity(filename, track.title);
+		const score = similarity(name, track.title);
 		if (score > bestScore || (score === bestScore && !best)) {
 			best = track;
 			bestScore = score;
@@ -158,23 +188,33 @@ export function similarTitle<T extends TrackMetadata>(
  * disc or the release has one, and no two files share both: a box set repeats
  * them album after album, and most of a disc's names do not fit other tracks
  * better: a release laid out otherwise), unless another track's title fits
- * the file's name better; then by title. A file still untitled may take a disc-0 title (see
- * POOL_SIMILARITY), which is never a place on a disc.
+ * the file's name better; then by title. A file still untitled may take a
+ * disc-0 title, which is never a place on a disc. Names are read without a
+ * leading "`artist` - " (the album's).
  */
 export function matchTrackMetadata<T extends TrackMetadata>(
 	files: { disc?: number | null; trackNumber: number | null; filename: string }[],
-	tracks: T[]
+	tracks: T[],
+	artist?: string | null
 ): (T | null)[] {
-	const pool = tracks.filter((track) => track.disc === 0);
+	// Disc 0 holds the titles of the group's other releases (and of the artist's
+	// other groups, for a pack), so a file takes one only when the names agree outright.
+	const pool = new Map<string, T>();
+	for (const track of tracks.filter((track) => track.disc === 0)) {
+		const key = normalizeTitle(track.title);
+		if (!pool.has(key)) pool.set(key, track);
+	}
 	return matchRelease(
 		files,
-		tracks.filter((track) => track.disc > 0)
-	).map((match, i) => match ?? similarTitle(files[i].filename, pool, POOL_SIMILARITY));
+		tracks.filter((track) => track.disc > 0),
+		artist
+	).map((match, i) => match ?? pool.get(nameKey(files[i].filename, artist)) ?? null);
 }
 
 function matchRelease<T extends TrackMetadata>(
 	files: { disc?: number | null; trackNumber: number | null; filename: string }[],
-	tracks: T[]
+	tracks: T[],
+	artist?: string | null
 ): (T | null)[] {
 	const ordered = [...tracks].sort((a, b) => a.disc - b.disc || a.position - b.position);
 	if (ordered.length === files.length) return ordered;
@@ -189,7 +229,9 @@ function matchRelease<T extends TrackMetadata>(
 	const numbered = keys.map((key) =>
 		byNumber ? ordered.find((track) => `${track.disc}-${track.position}` === key) : undefined
 	);
-	const titled = files.map((file) => similarTitle(file.filename, ordered));
+	const titled = files.map((file) =>
+		similarTitle(file.filename, ordered, TITLE_SIMILARITY, artist)
+	);
 	// A disc laid out otherwise than the release's: most of its files' names fit
 	// other tracks than their numbers give, so its numbers are not trusted.
 	const contradicted = new Map<number | null | undefined, number>();
@@ -201,9 +243,8 @@ function matchRelease<T extends TrackMetadata>(
 	return files.map((file, i) => {
 		const number = (contradicted.get(file.disc) ?? 0) > 0 ? undefined : numbered[i];
 		const title = titled[i];
-		return title &&
-			(!number ||
-				similarity(file.filename, title.title) > similarity(file.filename, number.title))
+		const name = nameKey(file.filename, artist);
+		return title && (!number || similarity(name, title.title) > similarity(name, number.title))
 			? title
 			: (number ?? null);
 	});

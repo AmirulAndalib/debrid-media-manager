@@ -285,11 +285,13 @@ export async function withPackFlags(albums: MusicAlbum[]): Promise<MusicAlbum[]>
 /**
  * An album's audio tracks in album order (folder, disc, then track number, then
  * name), numbered, titled and timed from MusicBrainz where a file matches
- * `tracklist`. Unmatched tracks have no title: a file's name is never one.
+ * `tracklist` (by its name read without a leading "`artist` - "). Unmatched
+ * tracks have no title: a file's name is never one.
  */
 export function albumTracks(
 	files: AvailableMusicFile[],
-	tracklist: MusicTrackMetadata[]
+	tracklist: MusicTrackMetadata[],
+	artist?: string | null
 ): MusicTrack[] {
 	const audio = files
 		.filter((file) => isAudioPath(file.path))
@@ -319,7 +321,7 @@ export function albumTracks(
 			disc,
 		};
 	});
-	const matches = matchTrackMetadata(tracks, tracklist);
+	const matches = matchTrackMetadata(tracks, tracklist, artist);
 	tracks.forEach((track, i) => {
 		const match = matches[i];
 		track.title = match?.title ?? null;
@@ -350,7 +352,8 @@ export async function withTracks(albums: MusicAlbum[]): Promise<MusicAlbum[]> {
 		.map((album) => {
 			const tracks = albumTracks(
 				files.filter((file) => file.hash === album.hash),
-				tracklists.filter((track) => track.mbid === album.mbid)
+				tracklists.filter((track) => track.mbid === album.mbid),
+				album.artist
 			);
 			return {
 				...album,
