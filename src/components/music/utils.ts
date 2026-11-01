@@ -1,3 +1,4 @@
+import { formatTrackTitle, removeExtension } from '@/utils/musicTracks';
 import { PlayableTrack } from './types';
 
 export function formatDuration(seconds: number): string {
@@ -14,7 +15,7 @@ export function formatSize(bytes: number): string {
 }
 
 // Shared with the music API, which titles a track the same way when MusicBrainz has none.
-export { formatTrackTitle, removeExtension } from '@/utils/musicTracks';
+export { formatTrackTitle, removeExtension };
 
 export const trackTitle = (track: PlayableTrack) => track.title || formatTrackTitle(track.filename);
 
