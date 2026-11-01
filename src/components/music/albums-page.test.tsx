@@ -73,6 +73,33 @@ const fetchMock = vi.fn(async (url: string, init?: RequestInit) => {
 	return json({ albums: [summary], totalAlbums: 120, totalTracks: 1500, hasMore: false });
 });
 
+const savedQueue = () =>
+	localStorage.setItem(
+		'music:player',
+		JSON.stringify({
+			queue: {
+				contextId: 'album:h1',
+				context: [{ track: fullAlbum.tracks[0], album: summary }],
+				contextIndex: 0,
+				originalOrder: [],
+				priority: [],
+				priorityItem: null,
+			},
+			repeatMode: 'off',
+			isShuffled: false,
+			volume: 1,
+		})
+	);
+
+/** The page lays itself out from `(min-width: …)` queries, as a window this wide answers them. */
+const viewport = (width: number) =>
+	vi.stubGlobal('matchMedia', (query: string) => ({
+		matches: width >= Number(/min-width:\s*(\d+)px/.exec(query)?.[1] ?? Infinity),
+		media: query,
+		addEventListener: vi.fn(),
+		removeEventListener: vi.fn(),
+	}));
+
 describe('music page', () => {
 	const spies: { mockRestore: () => void }[] = [];
 	beforeEach(() => {
@@ -82,6 +109,7 @@ describe('music page', () => {
 		routerMock.push.mockClear();
 		routerMock.replace.mockClear();
 		vi.stubGlobal('fetch', fetchMock);
+		viewport(1440);
 		spies.push(
 			vi.spyOn(HTMLMediaElement.prototype, 'play').mockImplementation(function (
 				this: HTMLMediaElement
@@ -98,31 +126,61 @@ describe('music page', () => {
 		fetchMock.mockClear();
 	});
 
-	it('pads the sidebar list while a track is loaded so the player bar covers none of it', async () => {
-		localStorage.setItem(
-			'music:player',
-			JSON.stringify({
-				queue: {
-					contextId: 'album:h1',
-					context: [{ track: fullAlbum.tracks[0], album: summary }],
-					contextIndex: 0,
-					originalOrder: [],
-					priority: [],
-					priorityItem: null,
-				},
-				repeatMode: 'off',
-				isShuffled: false,
-				volume: 1,
-			})
-		);
+	it('docks the player bar for a saved queue and drops it when the queue is cleared', async () => {
+		savedQueue();
 		render(<AlbumsPage />);
-		const sidebarList = (await screen.findByText('Recently added')).parentElement!;
-		expect(sidebarList).toHaveClass('pb-32');
-
-		fireEvent.keyDown(window, { key: 'q' });
+		expect(
+			(await screen.findAllByRole('button', { name: 'Next track' })).length
+		).toBeGreaterThan(0);
+		// The Queue button rather than Q: its handler is bound at render, the window's after.
+		fireEvent.click(screen.getAllByRole('button', { name: 'Queue' })[0]);
 		fireEvent.click(await screen.findByTitle('Clear queue'));
 		expect(screen.queryByRole('button', { name: 'Next track' })).toBeNull();
-		expect(sidebarList).not.toHaveClass('pb-32');
+	});
+
+	it('likes the playing track from the heart in the player bar', async () => {
+		savedQueue();
+		render(<AlbumsPage />);
+		const [heart] = await screen.findAllByRole('button', { name: 'Save to Liked Songs' });
+		fireEvent.click(heart);
+		await waitFor(() =>
+			expect(fetchMock).toHaveBeenCalledWith(
+				'/api/music/me/likes',
+				expect.objectContaining({
+					method: 'PUT',
+					body: JSON.stringify({ hash: 'h1', fileId: 1, mbid: 'mb1' }),
+				})
+			)
+		);
+		expect(screen.getAllByRole('button', { name: 'Remove from Liked Songs' }).length).toBe(2);
+	});
+
+	it('shows the library pane with Home, Search and Browse on a desktop, and collapses it', async () => {
+		me.library = {
+			albums: [{ mbid: 'mb1', savedAt: '2026-10-01T00:00:00Z', album: summary }],
+			artists: [],
+			playlists: [],
+		};
+		render(<AlbumsPage />);
+		const pane = await screen.findByRole('region', { name: 'Your Library' });
+		expect(screen.getByRole('button', { name: 'Home' })).toHaveAttribute(
+			'aria-current',
+			'page'
+		);
+		expect(screen.getByRole('button', { name: 'Browse' })).toBeInTheDocument();
+		await waitFor(() => expect(pane).toHaveTextContent('First AlbumAlbum · Test Artist'));
+		fireEvent.click(screen.getByRole('button', { name: 'Collapse Your Library' }));
+		expect(screen.queryByLabelText('Search in Your Library')).toBeNull();
+		expect(pane.querySelector('[aria-label="First Album"]')).not.toBeNull();
+	});
+
+	it('keeps the library pane to icons on a tablet', async () => {
+		viewport(768);
+		render(<AlbumsPage />);
+		await screen.findByRole('region', { name: 'Your Library' });
+		expect(screen.queryByLabelText('Search in Your Library')).toBeNull();
+		expect(screen.queryByRole('button', { name: 'Collapse Your Library' })).toBeNull();
+		expect(screen.getByRole('button', { name: 'Liked Songs' })).toBeInTheDocument();
 	});
 
 	it("resumes the account's queue on a device that has none", async () => {
@@ -204,7 +262,7 @@ describe('music page', () => {
 		routerMock.query = { slug: ['search'], q: 'first' };
 		render(<AlbumsPage />);
 		expect(await screen.findByText('11 albums match')).toBeInTheDocument();
-		expect(screen.getAllByText('120 albums · 1500 tracks')).toHaveLength(2);
+		expect(screen.getByText('120 albums · 1500 tracks')).toBeInTheDocument();
 		expect(screen.queryByText('11 albums · 260 tracks')).toBeNull();
 		expect(fetchMock).toHaveBeenCalledWith(expect.stringContaining('search=first'));
 	});

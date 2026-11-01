@@ -9,11 +9,13 @@ import ContextMenu, {
 } from '@/components/music/ContextMenu';
 import DownloadAlbumModal from '@/components/music/DownloadAlbumModal';
 import KeyboardShortcutsModal from '@/components/music/KeyboardShortcutsModal';
+import LibraryPane from '@/components/music/LibraryPane';
 import MusicPlayerBar from '@/components/music/MusicPlayerBar';
 import { MusicPlayerProvider, useMusicPlayer } from '@/components/music/player/MusicPlayerProvider';
 import { accountPersistence } from '@/components/music/player/persistence';
 import QueuePanel from '@/components/music/QueuePanel';
 import { musicHref, MusicRoute, parseMusicRoute } from '@/components/music/routes';
+import TopBar from '@/components/music/TopBar';
 import { QueuedTrack } from '@/components/music/types';
 import { MusicUserProvider, useMusicUser } from '@/components/music/user/MusicUserProvider';
 import { albumItems, trackRef, trackTitle } from '@/components/music/utils';
@@ -22,14 +24,14 @@ import { MusicAlbum, MusicLibraryResponse, MusicTrack } from '@/pages/api/music/
 import type { MusicPlayerStateResponse } from '@/pages/api/music/me/state';
 import { UnrestrictTrackResponse } from '@/pages/api/music/unrestrict';
 import { toasterPosition } from '@/utils/toastOptions';
-import { Keyboard, Library, Loader2, Music2, X } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { MouseEvent, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 
 const MUSIC_PAGE_SIZE = 48;
-const RECENT_ALBUM_LIMIT = 24;
+const RECENT_ALBUM_LIMIT = 12;
 const ALBUM_DOWNLOAD_DELAY_MS = 250;
 
 async function unrestrictTrack(
@@ -78,91 +80,20 @@ async function fetchAlbum(hash: string): Promise<MusicAlbum | null> {
 	return data.albums[0] ?? null;
 }
 
-interface SidebarAlbumButtonProps {
-	album: MusicAlbum;
-	isSelected: boolean;
-	onSelect: (album: MusicAlbum) => void;
-	onCoverLoaded: (album: MusicAlbum, coverUrl: string) => void;
-}
-
-function SidebarAlbumButton({
-	album,
-	isSelected,
-	onSelect,
-	onCoverLoaded,
-}: SidebarAlbumButtonProps) {
-	const [coverUrl, setCoverUrl] = useState(album.coverUrl);
-
-	useEffect(() => {
-		setCoverUrl(album.coverUrl);
-	}, [album.coverUrl]);
-
-	useEffect(() => {
-		if (coverUrl) return;
-		let isCancelled = false;
-
-		async function fetchCover() {
-			try {
-				const response = await fetch('/api/music/cover', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({
-						mbid: album.mbid,
-						artist: album.artist,
-						album: album.album,
-					}),
-				});
-
-				if (!response.ok) return;
-				const data = await response.json();
-				if (!isCancelled && data.coverUrl) {
-					setCoverUrl(data.coverUrl);
-					onCoverLoaded(album, data.coverUrl);
-				}
-			} catch (err) {
-				console.error(`Failed to fetch cover for ${album.album}:`, err);
-			}
-		}
-
-		fetchCover();
-		return () => {
-			isCancelled = true;
-		};
-	}, [album, coverUrl, onCoverLoaded]);
-
-	return (
-		<button
-			type="button"
-			onClick={() => onSelect(album)}
-			aria-current={isSelected ? 'true' : undefined}
-			aria-label={`Open ${album.album} by ${album.artist}`}
-			className={`flex w-full min-w-0 items-center gap-3 rounded-md px-3 py-2 text-left transition-colors ${
-				isSelected
-					? 'bg-white/10 text-white'
-					: 'text-gray-300 hover:bg-white/5 hover:text-white'
-			}`}
-		>
-			<div className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded bg-gray-800">
-				<Music2 className="h-4 w-4 text-gray-500" />
-				{coverUrl && (
-					// oxlint-disable-next-line nextjs/no-img-element
-					<img
-						src={coverUrl}
-						alt={album.album}
-						loading="lazy"
-						className="absolute inset-0 h-full w-full object-cover"
-						onError={(e) => {
-							(e.target as HTMLImageElement).style.display = 'none';
-						}}
-					/>
-				)}
-			</div>
-			<div className="min-w-0">
-				<p className="truncate text-sm font-medium">{album.album}</p>
-				<p className="truncate text-xs text-gray-400">{album.artist}</p>
-			</div>
-		</button>
+/** Whether the media query matches; follows the window as it resizes. */
+function useMediaQuery(query: string): boolean {
+	const [matches, setMatches] = useState(
+		() => typeof window !== 'undefined' && !!window.matchMedia?.(query).matches
 	);
+	useEffect(() => {
+		const list = window.matchMedia?.(query);
+		if (!list) return;
+		const update = () => setMatches(list.matches);
+		update();
+		list.addEventListener?.('change', update);
+		return () => list.removeEventListener?.('change', update);
+	}, [query]);
+	return matches;
 }
 
 const fullScreenSpinner = (
@@ -261,6 +192,12 @@ function MusicLibrary({
 		MusicLibraryResponse,
 		'totalAlbums' | 'totalTracks'
 	> | null>(null);
+
+	// Layout: phones below 768 px, tablets to 1023 px, desktops from 1024 px
+	const phone = !useMediaQuery('(min-width: 768px)');
+	const desktop = useMediaQuery('(min-width: 1024px)');
+	const [collapsedByUser, setCollapsedByUser] = useState(false);
+	const libraryCollapsed = !desktop || collapsedByUser;
 
 	// View state
 	const [isQueueOpen, setIsQueueOpen] = useState(false);
@@ -599,7 +536,6 @@ function MusicLibrary({
 		setMenu(menuAt(e, albumMenuItems(album, menuActions)));
 
 	const visibleAlbums = library?.albums ?? [];
-	const sidebarAlbums = useMemo(() => recentAlbums.slice(0, RECENT_ALBUM_LIMIT), [recentAlbums]);
 
 	const spinner = (
 		<div className="flex h-full items-center justify-center">
@@ -707,128 +643,44 @@ function MusicLibrary({
 				</title>
 			</Head>
 
-			<div className="flex h-screen flex-col bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white">
-				{/* Header */}
-				<header className="flex flex-col gap-3 border-b border-white/5 bg-black/30 px-4 py-3 backdrop-blur-md md:flex-row md:items-center md:justify-between md:px-6 md:py-4">
-					<div className="flex items-center justify-between">
-						<div className="flex items-center gap-2">
-							<Music2 className="h-5 w-5 text-green-500 md:h-6 md:w-6" />
-							<h1 className="text-lg font-bold md:text-xl">Music</h1>
-						</div>
-						{/* Stats + shortcuts - mobile */}
-						<div className="flex items-center gap-2 md:hidden">
-							{catalogTotals && (
-								<span className="text-xs text-gray-400">
-									{catalogTotals.totalAlbums} albums &middot;{' '}
-									{catalogTotals.totalTracks} tracks
-								</span>
-							)}
-							<button
-								type="button"
-								onClick={() => setShowShortcuts(true)}
-								className="flex h-6 w-6 items-center justify-center rounded-full border border-white/10 bg-white/5 text-xs text-gray-400"
-								aria-label="Keyboard shortcuts"
-								title="Keyboard shortcuts"
-							>
-								?
-							</button>
-						</div>
-					</div>
+			<div className="flex h-dvh flex-col bg-gradient-to-b from-gray-900 via-gray-900 to-black text-white">
+				<div className="relative flex min-h-0 flex-1 gap-2 p-2">
+					{!phone && (
+						<aside
+							className={`shrink-0 transition-[width] duration-200 ${
+								libraryCollapsed ? 'w-[76px]' : 'w-72'
+							}`}
+						>
+							<LibraryPane
+								route={route}
+								navigate={navigate}
+								collapsed={libraryCollapsed}
+								onToggleCollapsed={
+									desktop ? () => setCollapsedByUser((prev) => !prev) : undefined
+								}
+								onFocusSearch={() => searchInput.current?.focus()}
+							/>
+						</aside>
+					)}
 
-					{/* Search */}
-					<div className="relative w-full md:w-96">
-						<input
-							ref={registerSearchInput}
-							type="text"
-							placeholder="Search artists or albums..."
-							value={searchText}
-							onChange={(e) => search(e.target.value)}
-							aria-label="Search artists or albums"
-							className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-2 pr-9 text-sm placeholder-gray-400 outline-hidden backdrop-blur-sm transition-all duration-200 focus:border-green-500/50 focus:bg-white/10 focus:ring-1 focus:ring-green-500/30"
+					<div className="flex min-w-0 flex-1 flex-col overflow-hidden rounded-lg bg-black/25">
+						<TopBar
+							searchText={searchText}
+							onSearch={search}
+							registerSearchInput={registerSearchInput}
+							catalogTotals={catalogTotals}
+							onShowShortcuts={() => setShowShortcuts(true)}
 						/>
-						{searchText && (
-							<button
-								type="button"
-								onClick={() => search('')}
-								className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-0.5 text-gray-400 transition-colors hover:text-white"
-								aria-label="Clear search"
-								title="Clear search"
-							>
-								<X className="h-4 w-4" />
-							</button>
-						)}
-					</div>
-
-					{/* Stats + shortcuts button - desktop */}
-					<div className="hidden items-center gap-3 md:flex">
-						{catalogTotals && (
-							<div className="flex items-center gap-2 text-sm text-gray-400">
-								<Library className="h-4 w-4" />
-								<span>
-									{catalogTotals.totalAlbums} albums &middot;{' '}
-									{catalogTotals.totalTracks} tracks
-								</span>
-							</div>
-						)}
-						<button
-							type="button"
-							onClick={() => setShowShortcuts(true)}
-							className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-gray-400 transition-all duration-200 hover:border-white/20 hover:bg-white/10 hover:text-white"
-							aria-label="Keyboard shortcuts"
-							title="Keyboard shortcuts (?)"
+						<main
+							ref={mainRef}
+							onScroll={(e) =>
+								scrollByPath.current.set(router.asPath, e.currentTarget.scrollTop)
+							}
+							className="min-h-0 flex-1 overflow-y-auto"
 						>
-							<Keyboard className="h-3.5 w-3.5" />
-							<span>?</span>
-						</button>
+							{content}
+						</main>
 					</div>
-				</header>
-
-				<div className="flex min-h-0 flex-1">
-					<aside className="hidden w-72 flex-col border-r border-white/5 bg-black/25 lg:flex">
-						<div className="border-b border-white/5 p-4">
-							<button
-								type="button"
-								onClick={() => navigate({ name: 'home' })}
-								aria-current={!albumHash ? 'page' : undefined}
-								className={`flex w-full items-center gap-3 rounded-md px-3 py-2 text-left text-sm font-bold transition-colors ${
-									albumHash
-										? 'text-gray-300 hover:bg-white/5 hover:text-white'
-										: 'bg-white/10 text-white'
-								}`}
-							>
-								<Library className="h-4 w-4" />
-								Your Library
-							</button>
-						</div>
-						{/* The floating player bar sits over the bottom of this list. */}
-						<div
-							className={`min-h-0 flex-1 overflow-y-auto p-2 ${currentTrack ? 'pb-32' : ''}`}
-						>
-							<p className="px-3 py-2 text-xs font-bold text-gray-400 uppercase">
-								Recently added
-							</p>
-							{sidebarAlbums.map((album) => (
-								<SidebarAlbumButton
-									key={album.hash}
-									album={album}
-									isSelected={album.hash === albumHash}
-									onSelect={selectAlbum}
-									onCoverLoaded={handleCoverLoaded}
-								/>
-							))}
-						</div>
-					</aside>
-
-					{/* Main content */}
-					<main
-						ref={mainRef}
-						onScroll={(e) =>
-							scrollByPath.current.set(router.asPath, e.currentTarget.scrollTop)
-						}
-						className="flex-1 overflow-y-auto pb-24 md:pb-32"
-					>
-						{content}
-					</main>
 				</div>
 
 				{/* Queue Panel */}
@@ -848,7 +700,6 @@ function MusicLibrary({
 					/>
 				)}
 
-				{/* Floating Player Bar */}
 				{currentTrack && (
 					<MusicPlayerBar
 						currentTrack={currentTrack}
@@ -863,6 +714,12 @@ function MusicLibrary({
 						onToggleMute={player.toggleMute}
 						onToggleQueue={() => setIsQueueOpen((prev) => !prev)}
 						isQueueOpen={isQueueOpen}
+						isLiked={user.isLiked(currentTrack.track.id)}
+						onToggleLike={() => {
+							const ref = trackRef(currentTrack.track, currentTrack.album);
+							if (user.isLiked(currentTrack.track.id)) user.unlike(ref);
+							else user.like(ref);
+						}}
 					/>
 				)}
 			</div>

@@ -18,6 +18,7 @@ interface AlbumGridProps {
 	isPlaying: boolean;
 	onCoverLoaded?: (album: MusicAlbum, coverUrl: string) => void;
 	onAlbumMenu?: (e: MouseEvent, album: MusicAlbum) => void;
+	heading?: string;
 }
 
 const sortOptions: { value: SortOption; label: string; icon: typeof Clock }[] = [
@@ -39,15 +40,14 @@ export default function AlbumGrid({
 	isPlaying,
 	onCoverLoaded,
 	onAlbumMenu,
+	heading = 'Browse',
 }: AlbumGridProps) {
 	return (
 		<div className="p-3 md:p-6">
 			<div className="mb-3 flex justify-end md:mb-6 md:items-end md:justify-between">
 				<div className="hidden md:block">
-					<p className="text-xs font-bold text-gray-400 uppercase">Collection</p>
-					<h2 className="mt-1 text-2xl font-black text-white md:text-4xl">
-						Your Library
-					</h2>
+					<p className="text-xs font-bold text-gray-400 uppercase">Catalog</p>
+					<h2 className="mt-1 text-2xl font-black text-white md:text-4xl">{heading}</h2>
 					{matchCount !== undefined && (
 						<p className="mt-1 text-sm text-gray-400">
 							{matchCount} {matchCount === 1 ? 'album matches' : 'albums match'}
