@@ -723,7 +723,7 @@ function MusicLibrary({
 					{!phone && (
 						<aside
 							className={`shrink-0 transition-[width] duration-200 ${
-								libraryCollapsed ? 'w-[76px]' : 'w-72'
+								libraryCollapsed ? 'w-20' : 'w-72'
 							}`}
 						>
 							<LibraryPane
