@@ -1,5 +1,6 @@
 import type { MusicAlbum } from '@/pages/api/music/library';
 import { formatTrackTitle, removeExtension } from '@/utils/musicTracks';
+import type { MusicAlbumSummary } from '@/utils/musicRows';
 import type { DragEvent } from 'react';
 import { PlayableTrack, QueuedTrack } from './types';
 
@@ -36,6 +37,10 @@ export const trackRef = (track: PlayableTrack, album: { mbid: string }) => ({
 	fileId: track.fileId,
 	mbid: album.mbid,
 });
+
+/** A per-user API album as a catalog album, or null when no release of it is left. */
+export const catalogAlbum = (album: MusicAlbumSummary): MusicAlbum | null =>
+	album.hash ? { ...album, hash: album.hash, tracks: [], totalBytes: 0 } : null;
 
 export const albumItems = (album: MusicAlbum): QueuedTrack[] =>
 	album.tracks.map((track) => ({ track, album }));

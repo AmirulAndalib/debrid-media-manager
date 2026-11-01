@@ -8,6 +8,7 @@ import ContextMenu, {
 	trackMenuItems,
 } from '@/components/music/ContextMenu';
 import DownloadAlbumModal from '@/components/music/DownloadAlbumModal';
+import HomeView from '@/components/music/HomeView';
 import KeyboardShortcutsModal from '@/components/music/KeyboardShortcutsModal';
 import LibraryPane from '@/components/music/LibraryPane';
 import MusicPlayerBar from '@/components/music/MusicPlayerBar';
@@ -219,7 +220,7 @@ function MusicLibrary({
 	const route = parseMusicRoute(router.query.slug, router.query.q);
 	const albumHash = route.name === 'album' ? route.hash : undefined;
 	const catalogSearch = route.name === 'search' ? route.q : '';
-	const showsGrid = route.name !== 'album';
+	const showsGrid = route.name !== 'album' && route.name !== 'home';
 	const selectedAlbumSummary = library?.albums.find((a) => a.hash === albumHash) ?? null;
 	const [selectedAlbumDetail, setSelectedAlbumDetail] = useState<MusicAlbum | null>(null);
 	const [selectedAlbumLoading, setSelectedAlbumLoading] = useState(false);
@@ -600,6 +601,17 @@ function MusicLibrary({
 
 	let content: ReactNode;
 	switch (route.name) {
+		case 'home':
+			content = (
+				<HomeView
+					navigate={navigate}
+					newAlbums={recentAlbums}
+					onPlayAlbum={playAlbum}
+					onAlbumMenu={openAlbumMenu}
+					onCoverLoaded={handleCoverLoaded}
+				/>
+			);
+			break;
 		case 'album':
 			content =
 				selectedAlbum && selectedAlbum.tracks.length > 0 ? (

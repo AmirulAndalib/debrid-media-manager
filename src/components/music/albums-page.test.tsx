@@ -263,6 +263,7 @@ describe('music page', () => {
 	});
 
 	it("saves an album to the library from its card's menu", async () => {
+		routerMock.query = { slug: ['browse'] };
 		render(<AlbumsPage />);
 		fireEvent.click(
 			await screen.findByRole('button', { name: 'More options for First Album' })
@@ -328,7 +329,20 @@ describe('music page', () => {
 	});
 
 	// The grid lists summaries with no tracks (`summary=1`), as the live API does.
+	it('opens on Home with the newest albums in the catalog', async () => {
+		render(<AlbumsPage />);
+		const shelf = await screen.findByRole('region', { name: 'New in the catalog' });
+		expect(shelf).toHaveTextContent('First Album');
+		expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/^Good /);
+		expect(fetchMock).toHaveBeenCalledWith(
+			'/api/music/library?summary=1&page=1&limit=12&sortBy=recent'
+		);
+		// The catalog grid loads only when Browse or Search shows it.
+		expect(fetchMock).not.toHaveBeenCalledWith(expect.stringContaining('sortBy=name'));
+	});
+
 	it('plays an album from its card in the grid', async () => {
+		routerMock.query = { slug: ['browse'] };
 		const { container } = render(<AlbumsPage />);
 		fireEvent.click(
 			await screen.findByRole('button', { name: 'Play First Album by Test Artist' })
