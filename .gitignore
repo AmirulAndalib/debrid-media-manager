@@ -79,3 +79,6 @@ CLAUDE.md
 # Kodi addon (kodi/) Python artefacts
 __pycache__/
 .ruff_cache/
+
+# scripts/music-title-census.ts output, read by the backfill's --untitled
+music-title-census.json

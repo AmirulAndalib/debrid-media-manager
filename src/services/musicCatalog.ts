@@ -361,3 +361,24 @@ export async function withTracks(albums: MusicAlbum[]): Promise<MusicAlbum[]> {
 		})
 		.filter((album) => album.trackCount > 0);
 }
+
+export type TitleCensusReason =
+	'titled' | 'not enriched' | 'no source' | 'files > tracks' | 'files < tracks' | 'unmatched';
+
+/**
+ * Why an album (with its tracks, see `withTracks`) has untitled tracks, or
+ * 'titled' when it has none: never enriched, enriched without a release, or
+ * holding more or fewer files than its release has tracks.
+ */
+export function titleCensusReason(
+	album: Pick<MusicAlbum, 'tracks' | 'mbTrackCount'>,
+	meta: { enrichedAt: Date | null; mbReleaseId: string | null } | undefined
+): TitleCensusReason {
+	const files = album.tracks.length;
+	if (album.tracks.every((track) => track.title)) return 'titled';
+	if (!meta?.enrichedAt) return 'not enriched';
+	if (!meta.mbReleaseId || !album.mbTrackCount) return 'no source';
+	if (files > album.mbTrackCount) return 'files > tracks';
+	if (files < album.mbTrackCount) return 'files < tracks';
+	return 'unmatched';
+}

@@ -14,12 +14,14 @@
  *
  * Resumable and idempotent: a group is done once `enrichedAt` is set, in the
  * same transaction that writes it, so a rerun picks up where one stopped.
- * `--force` redoes groups already done.
+ * `--force` redoes groups already done; `--untitled` redoes only those the last
+ * `scripts/music-title-census.ts` found not fully titled (music-title-census.json).
  *
- *   npx tsx scripts/music-backfill-musicbrainz.ts [--limit N] [--mbid X] [--force]
+ *   npx tsx scripts/music-backfill-musicbrainz.ts [--limit N] [--mbid X] [--force] [--untitled]
  */
 import { PrismaClient } from '@prisma/client';
 import { config } from 'dotenv';
+import { readFileSync } from 'fs';
 import {
 	caaCoverUrl,
 	enrichment,
@@ -48,7 +50,8 @@ const option = (name: string) => {
 	const i = args.indexOf(name);
 	return i >= 0 ? args[i + 1] : undefined;
 };
-const force = args.includes('--force');
+const untitled = args.includes('--untitled');
+const force = args.includes('--force') || untitled;
 const onlyMbid = option('--mbid');
 const limit = option('--limit') ? parseInt(option('--limit')!, 10) : Infinity;
 if (!(limit > 0)) throw new Error('--limit must be a positive number');
@@ -82,9 +85,22 @@ async function main() {
 						})
 					).map((row) => row.mbid)
 				);
+		// The census's rows for albums it found not fully titled.
+		const wanted = untitled
+			? new Set(
+					(
+						JSON.parse(readFileSync('music-title-census.json', 'utf8')).albums as {
+							mbid: string;
+							reason: string;
+						}[]
+					)
+						.filter((album) => album.reason !== 'titled')
+						.map((album) => album.mbid)
+				)
+			: null;
 		const todo = groups
 			.map((group) => group.mbid)
-			.filter((mbid) => !done.has(mbid))
+			.filter((mbid) => !done.has(mbid) && (!wanted || wanted.has(mbid)))
 			.slice(0, limit);
 		console.log(`${groups.length} release groups, ${done.size} done, ${todo.length} to do`);
 
