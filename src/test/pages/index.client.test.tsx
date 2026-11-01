@@ -92,6 +92,7 @@ vi.mock('@/utils/withAuth', () => ({
 
 vi.mock('lucide-react', () => ({
 	__esModule: true,
+	FileCode: () => <svg data-testid="file-code-icon" />,
 	FolderTree: () => <svg data-testid="folder-tree-icon" />,
 	Settings: () => <svg data-testid="settings-icon" />,
 	Star: () => <svg data-testid="star-icon" />,
@@ -182,12 +183,16 @@ describe('IndexPage', () => {
 		expect(screen.queryByText(/Debrid Media Manager is loading/i)).not.toBeInTheDocument();
 	});
 
-	it('links the API page from the footer', () => {
+	it('links the API docs beside Settings, not only from the footer', () => {
 		currentUserMock.mockReturnValue(settledFixture);
 
 		render(<IndexPage />);
 
-		expect(screen.getByRole('link', { name: 'API' })).toHaveAttribute('href', '/api-docs');
+		const apiLink = screen.getByRole('link', { name: 'API docs' });
+		expect(apiLink).toHaveAttribute('href', '/api-docs');
+		expect(apiLink.parentElement).toBe(
+			screen.getByRole('link', { name: /Settings/i }).parentElement
+		);
 	});
 
 	// The zurg banner sits directly under the page title and above the search bar,

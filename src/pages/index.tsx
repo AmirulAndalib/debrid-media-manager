@@ -18,7 +18,7 @@ import { handleLogout } from '@/utils/logout';
 import { checkPremiumStatus } from '@/utils/premiumCheck';
 import { genericToastOptions, toasterPosition } from '@/utils/toastOptions';
 import { withAuth } from '@/utils/withAuth';
-import { Settings } from 'lucide-react';
+import { FileCode, Settings } from 'lucide-react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -321,8 +321,8 @@ function IndexPage() {
 							isLoading={isLoading}
 							isGuest={isGuest}
 						/>
-						{/* Settings and the sponsor features share a row. The features are
-						    folded like the guest-mode debrid cards: four always-open rows
+						{/* Settings, the API docs and the sponsor features share a row. The
+						    features are folded like the guest-mode debrid cards: four always-open rows
 						    pushed the rest of the page down for everyone, sponsor or not.
 						    Opened, the disclosure wraps onto a row of its own. */}
 						<div className="flex w-full flex-wrap items-start gap-3">
@@ -332,6 +332,13 @@ function IndexPage() {
 							>
 								<Settings className="mr-2 inline-block h-4 w-4 text-gray-400" />
 								Settings
+							</Link>
+							<Link
+								href="/api-docs"
+								className="haptic-sm flex flex-1 items-center justify-center rounded border-2 border-gray-500 bg-gray-800/30 px-2 py-2 text-sm font-medium whitespace-nowrap text-gray-100 transition-colors hover:bg-gray-700/50"
+							>
+								<FileCode className="mr-2 inline-block h-4 w-4 text-gray-400" />
+								API docs
 							</Link>
 							<details className="flex-1 rounded border-2 border-pink-500/40 bg-gray-800/30 open:basis-full">
 								<summary className="haptic-sm cursor-pointer px-2 py-2 text-center text-sm font-medium whitespace-nowrap text-gray-100 transition-colors hover:bg-gray-700/50">
@@ -416,9 +423,6 @@ function IndexPage() {
 							</button>
 						</div>
 						<div className="-mt-4 flex justify-center gap-4 text-xs text-gray-400">
-							<Link href="/api-docs" className="underline">
-								API
-							</Link>
 							<Link href="/copyright" className="underline">
 								Report copyright infringement
 							</Link>
