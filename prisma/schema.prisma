@@ -79,13 +79,24 @@ model ScrapedMusic {
 }
 
 model MusicMetadata {
-  mbid       String   @id @db.VarChar(36)
-  artistMbid String?  @db.VarChar(36)
-  artist     String   @db.VarChar(500)
-  album      String   @db.VarChar(500)
-  year       Int?
-  updatedAt  DateTime @updatedAt
-  coverUrl   String?  @db.VarChar(500)
+  mbid             String    @id @db.VarChar(36)
+  artistMbid       String?   @db.VarChar(36)
+  artist           String    @db.VarChar(500)
+  album            String    @db.VarChar(500)
+  year             Int?
+  updatedAt        DateTime  @updatedAt
+  coverUrl         String?   @db.VarChar(500)
+  /// MusicBrainz primary type (Album, Single, EP, Other…), or Compilation when that is a secondary type.
+  primaryType      String?   @db.VarChar(16)
+  /// MusicBrainz release-group genre names, a JSON string array.
+  genres           Json?
+  firstReleaseDate String?   @db.VarChar(10)
+  mbTrackCount     Int?
+  /// The release whose tracklist MusicTrackMetadata holds.
+  mbReleaseId      String?   @db.VarChar(36)
+  /// caa | itunes
+  coverSource      String?   @db.VarChar(16)
+  enrichedAt       DateTime?
 
   @@index([artist])
   @@index([year])
@@ -122,6 +133,31 @@ model AvailableMusicFile {
   availableMusic AvailableMusic @relation(fields: [hash], references: [hash], onDelete: Cascade)
 
   @@index([hash])
+}
+
+/// One track of the MusicBrainz release chosen for a MusicMetadata release group.
+model MusicTrackMetadata {
+  mbid          String  @db.VarChar(36)
+  disc          Int
+  position      Int
+  title         String  @db.VarChar(500)
+  lengthMs      Int?
+  recordingMbid String  @db.VarChar(36)
+  /// The track's credit, only when it differs from the album artist.
+  artist        String? @db.VarChar(500)
+
+  @@id([mbid, disc, position])
+  @@index([recordingMbid])
+  @@fulltext([title])
+}
+
+model MusicArtist {
+  mbid       String    @id @db.VarChar(36)
+  name       String    @db.VarChar(500)
+  sortName   String    @db.VarChar(500)
+  enrichedAt DateTime?
+
+  @@index([name])
 }
 
 model ScrapedXxx {
