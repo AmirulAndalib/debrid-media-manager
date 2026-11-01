@@ -66,6 +66,22 @@ describe('AlbumGrid', () => {
 		expect(screen.getByText('No albums match your search')).toBeInTheDocument();
 	});
 
+	it('says how many albums match while searching', () => {
+		const props = {
+			albums: [makeAlbum()],
+			onSelect: vi.fn(),
+			onPlay: vi.fn(),
+			sortBy: 'name' as const,
+			onSortChange: vi.fn(),
+			nowPlayingAlbumHash: null,
+			isPlaying: false,
+		};
+		const { rerender } = render(<AlbumGrid {...props} searchQuery="" matchCount={undefined} />);
+		expect(screen.queryByText(/match/)).toBeNull();
+		rerender(<AlbumGrid {...props} searchQuery="test" matchCount={1} />);
+		expect(screen.getByText('1 album matches')).toBeInTheDocument();
+	});
+
 	it('renders sort buttons', () => {
 		render(
 			<AlbumGrid

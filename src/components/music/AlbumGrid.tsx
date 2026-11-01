@@ -7,6 +7,8 @@ type SortOption = 'recent' | 'name' | 'artist' | 'year';
 interface AlbumGridProps {
 	albums: MusicAlbum[];
 	searchQuery: string;
+	/** Albums matching the search, shown while one is active. */
+	matchCount?: number;
 	onSelect: (album: MusicAlbum) => void;
 	onPlay: (album: MusicAlbum) => void;
 	sortBy: SortOption;
@@ -26,6 +28,7 @@ const sortOptions: { value: SortOption; label: string; icon: typeof Clock }[] = 
 export default function AlbumGrid({
 	albums,
 	searchQuery,
+	matchCount,
 	onSelect,
 	onPlay,
 	sortBy,
@@ -42,6 +45,11 @@ export default function AlbumGrid({
 					<h2 className="mt-1 text-2xl font-black text-white md:text-4xl">
 						Your Library
 					</h2>
+					{matchCount !== undefined && (
+						<p className="mt-1 text-sm text-gray-400">
+							{matchCount} {matchCount === 1 ? 'album matches' : 'albums match'}
+						</p>
+					)}
 				</div>
 				<div className="flex items-center gap-1">
 					{sortOptions.map(({ value, label, icon: Icon }) => (

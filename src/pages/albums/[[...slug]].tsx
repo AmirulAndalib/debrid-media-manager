@@ -189,6 +189,11 @@ function MusicLibrary({
 	const [libraryLoadingMore, setLibraryLoadingMore] = useState(false);
 	const [libraryError, setLibraryError] = useState<string | null>(null);
 	const [recentAlbums, setRecentAlbums] = useState<MusicAlbum[]>([]);
+	// From the unfiltered recent-albums request, so a search never changes them.
+	const [catalogTotals, setCatalogTotals] = useState<Pick<
+		MusicLibraryResponse,
+		'totalAlbums' | 'totalTracks'
+	> | null>(null);
 
 	// View state
 	const [searchQuery, setSearchQuery] = useState('');
@@ -332,6 +337,7 @@ function MusicLibrary({
 			const data: MusicLibraryResponse = await response.json();
 			if (requestId === recentAlbumsRequestId.current) {
 				setRecentAlbums(data.albums);
+				setCatalogTotals({ totalAlbums: data.totalAlbums, totalTracks: data.totalTracks });
 			}
 		} catch (err) {
 			console.error('Failed to fetch recent albums:', err);
@@ -515,10 +521,10 @@ function MusicLibrary({
 						</div>
 						{/* Stats + shortcuts - mobile */}
 						<div className="flex items-center gap-2 md:hidden">
-							{library && (
+							{catalogTotals && (
 								<span className="text-xs text-gray-400">
-									{library.totalAlbums} albums &middot; {library.totalTracks}{' '}
-									tracks
+									{catalogTotals.totalAlbums} albums &middot;{' '}
+									{catalogTotals.totalTracks} tracks
 								</span>
 							)}
 							<button
@@ -559,12 +565,12 @@ function MusicLibrary({
 
 					{/* Stats + shortcuts button - desktop */}
 					<div className="hidden items-center gap-3 md:flex">
-						{library && (
+						{catalogTotals && (
 							<div className="flex items-center gap-2 text-sm text-gray-400">
 								<Library className="h-4 w-4" />
 								<span>
-									{library.totalAlbums} albums &middot; {library.totalTracks}{' '}
-									tracks
+									{catalogTotals.totalAlbums} albums &middot;{' '}
+									{catalogTotals.totalTracks} tracks
 								</span>
 							</div>
 						)}
@@ -652,6 +658,9 @@ function MusicLibrary({
 								<AlbumGrid
 									albums={visibleAlbums}
 									searchQuery={searchQuery}
+									matchCount={
+										searchQuery.trim() ? library?.totalAlbums : undefined
+									}
 									onSelect={selectAlbum}
 									onPlay={playAlbum}
 									sortBy={sortBy}

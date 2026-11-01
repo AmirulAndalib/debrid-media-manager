@@ -106,6 +106,18 @@ describe('music page', () => {
 		expect(sidebarList).not.toHaveClass('pb-32');
 	});
 
+	it('keeps the catalog totals in the header while a search narrows the grid', async () => {
+		render(<AlbumsPage />);
+		expect(await screen.findAllByText('120 albums · 1500 tracks')).toHaveLength(2);
+
+		fireEvent.change(screen.getByLabelText('Search artists or albums'), {
+			target: { value: 'first' },
+		});
+		expect(await screen.findByText('11 albums match')).toBeInTheDocument();
+		expect(screen.getAllByText('120 albums · 1500 tracks')).toHaveLength(2);
+		expect(screen.queryByText('11 albums · 260 tracks')).toBeNull();
+	});
+
 	it('plays an album through the player provider and saves the queue', async () => {
 		routerMock.query = { slug: ['h1'] };
 		const { container } = render(<AlbumsPage />);
