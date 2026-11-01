@@ -32,6 +32,7 @@ const item = (hash: string, fileId: number, name = 'First Album'): QueuedTrack =
 		bytes: 1,
 		trackNumber: fileId,
 		filename: `0${fileId} - Song ${hash}${fileId}.flac`,
+		title: `Song ${hash}${fileId}`,
 	},
 	album: album(hash, name),
 });

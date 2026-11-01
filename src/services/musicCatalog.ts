@@ -1,15 +1,14 @@
 import { ImdbSearchService } from '@/services/database/imdbSearch';
 import { getBlocklist } from '@/services/takedown/blocklist';
 import {
-	extractTrackNumber,
-	formatTrackTitle,
 	getDirectory,
 	getFilename,
 	isAudioPath,
 	matchTrackMetadata,
+	trackPosition,
 } from '@/utils/musicTracks';
 import { prisma } from '@/utils/prisma';
-import { Prisma } from '@prisma/client';
+import { AvailableMusicFile, MusicTrackMetadata, Prisma } from '@prisma/client';
 
 export interface MusicTrack {
 	id: string;
@@ -18,13 +17,17 @@ export interface MusicTrack {
 	link: string;
 	path: string;
 	bytes: number;
+	/** The MusicBrainz position when matched, else the number in the file's name, else its place on its disc. */
 	trackNumber: number | null;
+	/** For downloads only: never shown. */
 	filename: string;
 	// Optional in the type only so older callers that build tracks by hand still
 	// compile; the API always sets them.
-	/** The MusicBrainz title when the file was matched to its tracklist, else the filename's. */
-	title?: string;
+	/** The MusicBrainz title when the file was matched to its tracklist, else null: never the filename's. */
+	title?: string | null;
 	durationMs?: number | null;
+	/** The disc the path names, else the matched MusicBrainz track's, else null. */
+	disc?: number | null;
 }
 
 export interface MusicAlbum {
@@ -279,10 +282,57 @@ export async function withPackFlags(albums: MusicAlbum[]): Promise<MusicAlbum[]>
 }
 
 /**
- * The albums with their audio tracks in album order (disc folder, then track
- * number, then name), titled and timed from MusicBrainz where a file matches
- * the stored tracklist. Albums without an audio file are dropped.
+ * An album's audio tracks in album order (folder, disc, then track number, then
+ * name), numbered, titled and timed from MusicBrainz where a file matches
+ * `tracklist`. Unmatched tracks have no title: a file's name is never one.
  */
+export function albumTracks(
+	files: AvailableMusicFile[],
+	tracklist: MusicTrackMetadata[]
+): MusicTrack[] {
+	const audio = files
+		.filter((file) => isAudioPath(file.path))
+		.filter((file, i, all) => all.findIndex((x) => x.file_id === file.file_id) === i)
+		.map((file) => ({ file, ...trackPosition(file.path, file.trackNumber) }))
+		.sort(
+			(a, b) =>
+				getDirectory(a.file.path).localeCompare(getDirectory(b.file.path), undefined, {
+					numeric: true,
+				}) ||
+				(a.disc ?? 0) - (b.disc ?? 0) ||
+				(a.track ?? 999) - (b.track ?? 999) ||
+				getFilename(a.file.path).localeCompare(getFilename(b.file.path))
+		);
+	const onDisc = new Map<number | null, number>();
+	const tracks: MusicTrack[] = audio.map(({ file, disc, track }) => {
+		onDisc.set(disc, (onDisc.get(disc) ?? 0) + 1);
+		return {
+			id: `${file.hash}-${file.file_id}`,
+			hash: file.hash,
+			fileId: file.file_id,
+			link: file.link,
+			path: file.path,
+			bytes: Number(file.bytes),
+			trackNumber: track ?? onDisc.get(disc)!,
+			filename: getFilename(file.path),
+			disc,
+		};
+	});
+	const matches = matchTrackMetadata(tracks, tracklist);
+	tracks.forEach((track, i) => {
+		const match = matches[i];
+		track.title = match?.title ?? null;
+		track.durationMs = match?.lengthMs ?? null;
+		if (match) {
+			track.trackNumber = match.position;
+			// The file's own disc decides where it sits, should its title match another's.
+			track.disc ??= match.disc;
+		}
+	});
+	return tracks;
+}
+
+/** The albums with their tracks (see `albumTracks`). Albums without an audio file are dropped. */
 export async function withTracks(albums: MusicAlbum[]): Promise<MusicAlbum[]> {
 	if (!albums.length) return albums;
 	const [files, tracklists] = await Promise.all([
@@ -296,44 +346,10 @@ export async function withTracks(albums: MusicAlbum[]): Promise<MusicAlbum[]> {
 
 	return albums
 		.map((album) => {
-			const audio = files
-				.filter((file) => file.hash === album.hash && isAudioPath(file.path))
-				.filter((file, i, all) => all.findIndex((x) => x.file_id === file.file_id) === i)
-				.map((file) => ({
-					file,
-					filename: getFilename(file.path),
-					number: file.trackNumber ?? extractTrackNumber(getFilename(file.path)),
-				}))
-				.sort(
-					(a, b) =>
-						getDirectory(a.file.path).localeCompare(
-							getDirectory(b.file.path),
-							undefined,
-							{
-								numeric: true,
-							}
-						) ||
-						(a.number ?? 999) - (b.number ?? 999) ||
-						a.filename.localeCompare(b.filename)
-				);
-			const tracks: MusicTrack[] = audio.map(({ file, filename, number }, index) => ({
-				id: `${album.hash}-${file.file_id}`,
-				hash: album.hash,
-				fileId: file.file_id,
-				link: file.link,
-				path: file.path,
-				bytes: Number(file.bytes),
-				trackNumber: number ?? index + 1,
-				filename,
-			}));
-			const matches = matchTrackMetadata(
-				tracks,
+			const tracks = albumTracks(
+				files.filter((file) => file.hash === album.hash),
 				tracklists.filter((track) => track.mbid === album.mbid)
 			);
-			tracks.forEach((track, i) => {
-				track.title = matches[i]?.title ?? formatTrackTitle(track.filename);
-				track.durationMs = matches[i]?.lengthMs ?? null;
-			});
 			return {
 				...album,
 				tracks,

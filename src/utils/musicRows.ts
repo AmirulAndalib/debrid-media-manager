@@ -1,4 +1,5 @@
 import type { MusicTrack } from '@/pages/api/music/library';
+import { albumTracks } from '@/services/musicCatalog';
 import { getBlocklist, isHashBlockedIn } from '@/services/takedown/blocklist';
 import type { MusicTrackRef } from '@/utils/musicUser';
 import { prisma } from '@/utils/prisma';
@@ -54,17 +55,6 @@ const metaSelect = {
 	year: true,
 	coverUrl: true,
 };
-const fileKey = (hash: string, fileId: number) => `${hash.toLowerCase()}-${fileId}`;
-
-// Same patterns as library.ts's extractTrackNumber, which it does not export.
-function extractTrackNumber(filename: string): number | null {
-	const match =
-		filename.match(/^(\d{1,3})\s*[-_.]\s*/) ??
-		filename.match(/^track\s*(\d{1,3})/i) ??
-		filename.match(/^\[(\d{1,3})\]/) ??
-		filename.match(/^(\d{1,3})\)/);
-	return match ? parseInt(match[1], 10) : null;
-}
 
 function summarize(
 	mbid: string,
@@ -84,58 +74,59 @@ function summarize(
 	};
 }
 
-/** Resolves stored track refs to playable rows, in input order, with one query per table. */
+/**
+ * Resolves stored track refs to playable rows, in input order, with one query
+ * per table. Each track is numbered, titled and timed as its album page has it.
+ */
 export async function resolveMusicRows(refs: MusicTrackRef[]): Promise<MusicTrackRow[]> {
 	if (refs.length === 0) return [];
 	const blocklist = await getBlocklist();
 	const hashes = [...new Set(refs.map((ref) => ref.hash))].filter(
 		(hash) => !isHashBlockedIn(blocklist, hash)
 	);
-	const fileIds = [...new Set(refs.map((ref) => ref.fileId))];
+	// Every file of each album: the tracklist is matched against the whole album.
 	const [files, releases] =
 		hashes.length === 0
 			? [[], []]
 			: await Promise.all([
-					prisma.availableMusicFile.findMany({
-						where: { hash: { in: hashes }, file_id: { in: fileIds } },
-					}),
+					prisma.availableMusicFile.findMany({ where: { hash: { in: hashes } } }),
 					prisma.availableMusic.findMany({
 						where: { hash: { in: hashes } },
 						select: releaseSelect,
 					}),
 				]);
-	const mbids = [...new Set([...refs.map((ref) => ref.mbid), ...releases.map((r) => r.mbid)])];
-	const metas = await prisma.musicMetadata.findMany({
-		where: { mbid: { in: mbids } },
-		select: metaSelect,
-	});
-
-	const fileByKey = new Map<string, (typeof files)[number]>();
-	for (const file of files) {
-		const key = fileKey(file.hash, file.file_id);
-		if (!fileByKey.has(key)) fileByKey.set(key, file);
-	}
 	const releaseByHash = new Map(releases.map((r) => [r.hash.toLowerCase(), r]));
+	const mbidOf = (ref: MusicTrackRef) =>
+		releaseByHash.get(ref.hash.toLowerCase())?.mbid ?? ref.mbid;
+	const mbids = [...new Set([...refs.map(mbidOf), ...releases.map((r) => r.mbid)])];
+	const [metas, tracklists] = await Promise.all([
+		prisma.musicMetadata.findMany({ where: { mbid: { in: mbids } }, select: metaSelect }),
+		files.length === 0
+			? []
+			: prisma.musicTrackMetadata.findMany({ where: { mbid: { in: mbids } } }),
+	]);
 	const metaByMbid = new Map(metas.map((m) => [m.mbid, m]));
 
+	const tracksByHash = new Map<string, MusicTrack[]>();
+	const tracksOf = (hash: string, mbid: string) => {
+		const key = hash.toLowerCase();
+		if (!tracksByHash.has(key)) {
+			tracksByHash.set(
+				key,
+				albumTracks(
+					files.filter((file) => file.hash.toLowerCase() === key),
+					tracklists.filter((track) => track.mbid === mbid)
+				)
+			);
+		}
+		return tracksByHash.get(key)!;
+	};
+
 	return refs.map((ref) => {
-		const file = fileByKey.get(fileKey(ref.hash, ref.fileId));
 		const release = releaseByHash.get(ref.hash.toLowerCase());
-		const mbid = release?.mbid ?? ref.mbid;
-		const filename = file ? file.path.split('/').pop() || file.path : '';
+		const mbid = mbidOf(ref);
 		return {
-			track: file
-				? {
-						id: `${file.hash}-${file.file_id}`,
-						hash: file.hash,
-						fileId: file.file_id,
-						link: file.link,
-						path: file.path,
-						bytes: Number(file.bytes),
-						trackNumber: file.trackNumber ?? extractTrackNumber(filename),
-						filename,
-					}
-				: null,
+			track: tracksOf(ref.hash, mbid).find((track) => track.fileId === ref.fileId) ?? null,
 			album: summarize(mbid, release, metaByMbid.get(mbid)),
 		};
 	});

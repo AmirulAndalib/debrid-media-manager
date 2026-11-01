@@ -1,0 +1,607 @@
+{
+	"artist-credit": [
+		{
+			"artist": {
+				"sort-name": "Monkees, The",
+				"type": "Group",
+				"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+				"name": "The Monkees",
+				"country": "US",
+				"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+				"disambiguation": ""
+			},
+			"joinphrase": "",
+			"name": "The Monkees"
+		}
+	],
+	"asin": null,
+	"barcode": "",
+	"country": "AR",
+	"cover-art-archive": {
+		"darkened": false,
+		"count": 0,
+		"artwork": false,
+		"front": false,
+		"back": false
+	},
+	"date": "1966",
+	"disambiguation": "mono",
+	"id": "0c6324c1-5968-4675-84bc-8f20b44cabc4",
+	"media": [
+		{
+			"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+			"track-offset": 0,
+			"tracks": [
+				{
+					"position": 1,
+					"title": "(Theme From) The Monkees",
+					"length": 140000,
+					"number": "A1",
+					"id": "c855138a-b132-4b92-8e3a-e8048c196ed3",
+					"recording": {
+						"artist-credit": [
+							{
+								"joinphrase": "",
+								"name": "The Monkees",
+								"artist": {
+									"sort-name": "Monkees, The",
+									"type": "Group",
+									"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+									"name": "The Monkees",
+									"country": "US",
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+								}
+							}
+						],
+						"disambiguation": "mono",
+						"first-release-date": "1966-10-10",
+						"length": 140000,
+						"id": "5760621b-94c3-44b6-a470-491e56828f34",
+						"title": "(Theme From) The Monkees (mono mix)",
+						"video": false
+					},
+					"artist-credit": [
+						{
+							"artist": {
+								"sort-name": "Monkees, The",
+								"type": "Group",
+								"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+								"name": "The Monkees",
+								"country": "US",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": ""
+							},
+							"joinphrase": "",
+							"name": "The Monkees"
+						}
+					]
+				},
+				{
+					"position": 2,
+					"id": "f451c92f-8bba-4ebd-94bd-686631f53634",
+					"number": "A2",
+					"length": 164000,
+					"title": "Saturday's Child",
+					"artist-credit": [
+						{
+							"artist": {
+								"sort-name": "Monkees, The",
+								"type": "Group",
+								"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+								"name": "The Monkees",
+								"country": "US",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": ""
+							},
+							"joinphrase": "",
+							"name": "The Monkees"
+						}
+					],
+					"recording": {
+						"first-release-date": "1966-10-10",
+						"title": "Saturday’s Child (mono mix)",
+						"video": false,
+						"id": "9523fd69-5665-43da-9c0d-72494cbe7dac",
+						"length": 164000,
+						"artist-credit": [
+							{
+								"artist": {
+									"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+									"type": "Group",
+									"sort-name": "Monkees, The",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"disambiguation": "",
+									"country": "US",
+									"name": "The Monkees"
+								},
+								"name": "The Monkees",
+								"joinphrase": ""
+							}
+						],
+						"disambiguation": "mono"
+					}
+				},
+				{
+					"recording": {
+						"first-release-date": "1966-10-10",
+						"video": false,
+						"title": "I Wanna Be Free (mono mix)",
+						"length": 144000,
+						"id": "fea99c36-89ea-4ca4-914f-b1c6f9c8f547",
+						"artist-credit": [
+							{
+								"joinphrase": "",
+								"name": "The Monkees",
+								"artist": {
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"disambiguation": "",
+									"country": "US",
+									"name": "The Monkees",
+									"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+									"type": "Group",
+									"sort-name": "Monkees, The"
+								}
+							}
+						],
+						"disambiguation": "mono"
+					},
+					"artist-credit": [
+						{
+							"artist": {
+								"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+								"type": "Group",
+								"sort-name": "Monkees, The",
+								"disambiguation": "",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"country": "US",
+								"name": "The Monkees"
+							},
+							"joinphrase": "",
+							"name": "The Monkees"
+						}
+					],
+					"position": 3,
+					"title": "I Wanna Be Free",
+					"length": 144000,
+					"id": "e4900de3-ce9c-4797-8422-86aea0c7738a",
+					"number": "A3"
+				},
+				{
+					"recording": {
+						"first-release-date": "1966-10-10",
+						"length": 153000,
+						"id": "6376cb11-bfcc-48dc-9160-75d8956a5663",
+						"title": "Tomorrow’s Gonna Be Another Day (mono mix)",
+						"video": false,
+						"artist-credit": [
+							{
+								"name": "The Monkees",
+								"joinphrase": "",
+								"artist": {
+									"country": "US",
+									"name": "The Monkees",
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"type": "Group",
+									"sort-name": "Monkees, The",
+									"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233"
+								}
+							}
+						],
+						"disambiguation": "mono"
+					},
+					"artist-credit": [
+						{
+							"name": "The Monkees",
+							"joinphrase": "",
+							"artist": {
+								"name": "The Monkees",
+								"country": "US",
+								"disambiguation": "",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"sort-name": "Monkees, The",
+								"type": "Group",
+								"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233"
+							}
+						}
+					],
+					"position": 4,
+					"length": 153000,
+					"id": "eaa95dab-cecb-49bd-bcf1-ab6ee4e36a93",
+					"number": "A4",
+					"title": "Tomorrow's Gonna Be Another Day"
+				},
+				{
+					"artist-credit": [
+						{
+							"artist": {
+								"type": "Group",
+								"sort-name": "Monkees, The",
+								"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+								"country": "US",
+								"name": "The Monkees",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": ""
+							},
+							"name": "The Monkees",
+							"joinphrase": ""
+						}
+					],
+					"recording": {
+						"first-release-date": "1966-10-10",
+						"video": false,
+						"title": "Papa Gene’s Blues (mono mix)",
+						"id": "6c210ded-f1eb-4f02-a1ea-6e13a68b5753",
+						"length": 115000,
+						"artist-credit": [
+							{
+								"artist": {
+									"name": "The Monkees",
+									"country": "US",
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"sort-name": "Monkees, The",
+									"type": "Group",
+									"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233"
+								},
+								"name": "The Monkees",
+								"joinphrase": ""
+							}
+						],
+						"disambiguation": "mono"
+					},
+					"position": 5,
+					"number": "A5",
+					"id": "bda2f8da-04de-4a9d-8b6c-230d00bc44b5",
+					"length": 115000,
+					"title": "Papa Jean's Blues"
+				},
+				{
+					"recording": {
+						"artist-credit": [
+							{
+								"artist": {
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"disambiguation": "",
+									"country": "US",
+									"name": "The Monkees",
+									"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+									"type": "Group",
+									"sort-name": "Monkees, The"
+								},
+								"name": "The Monkees",
+								"joinphrase": ""
+							}
+						],
+						"disambiguation": "mono",
+						"first-release-date": "1966-10-10",
+						"length": 152046,
+						"id": "41d1baa4-989c-4c28-a8f2-e443834bc9ec",
+						"title": "Take a Giant Step (mono mix)",
+						"video": false
+					},
+					"artist-credit": [
+						{
+							"artist": {
+								"sort-name": "Monkees, The",
+								"type": "Group",
+								"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+								"name": "The Monkees",
+								"country": "US",
+								"disambiguation": "",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+							},
+							"joinphrase": "",
+							"name": "The Monkees"
+						}
+					],
+					"length": 152046,
+					"number": "A6",
+					"id": "8b15e785-37db-49ea-b3bd-7bfa02197266",
+					"title": "Take A Giant Step",
+					"position": 6
+				},
+				{
+					"position": 7,
+					"id": "103895d8-44b7-4d91-8856-14741668212d",
+					"number": "B1",
+					"length": 160000,
+					"title": "Last Train To Clarksville",
+					"artist-credit": [
+						{
+							"name": "The Monkees",
+							"joinphrase": "",
+							"artist": {
+								"disambiguation": "",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"country": "US",
+								"name": "The Monkees",
+								"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+								"type": "Group",
+								"sort-name": "Monkees, The"
+							}
+						}
+					],
+					"recording": {
+						"id": "5afb6ed5-4db6-48f6-972b-f616f23c3912",
+						"length": 160000,
+						"title": "Last Train to Clarksville (mono mix)",
+						"video": false,
+						"first-release-date": "1966-10-10",
+						"disambiguation": "mono",
+						"artist-credit": [
+							{
+								"name": "The Monkees",
+								"joinphrase": "",
+								"artist": {
+									"sort-name": "Monkees, The",
+									"type": "Group",
+									"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+									"name": "The Monkees",
+									"country": "US",
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+								}
+							}
+						]
+					}
+				},
+				{
+					"artist-credit": [
+						{
+							"artist": {
+								"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+								"sort-name": "Monkees, The",
+								"type": "Group",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": "",
+								"name": "The Monkees",
+								"country": "US"
+							},
+							"joinphrase": "",
+							"name": "The Monkees"
+						}
+					],
+					"recording": {
+						"disambiguation": "mono",
+						"artist-credit": [
+							{
+								"joinphrase": "",
+								"name": "The Monkees",
+								"artist": {
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"name": "The Monkees",
+									"country": "US",
+									"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+									"sort-name": "Monkees, The",
+									"type": "Group"
+								}
+							}
+						],
+						"length": 128000,
+						"id": "ae4fe48d-af21-4193-8e2b-2dc2b5d71c70",
+						"title": "This Just Doesn’t Seem to Be My Day (mono mix)",
+						"video": false,
+						"first-release-date": "1966-10-10"
+					},
+					"position": 8,
+					"title": "This Just Doesn't Seem To Be My Day",
+					"number": "B2",
+					"id": "3c9b24f5-e64c-4740-a5c2-0be1be716b6b",
+					"length": 128000
+				},
+				{
+					"artist-credit": [
+						{
+							"artist": {
+								"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+								"sort-name": "Monkees, The",
+								"type": "Group",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"disambiguation": "",
+								"name": "The Monkees",
+								"country": "US"
+							},
+							"joinphrase": "",
+							"name": "The Monkees"
+						}
+					],
+					"recording": {
+						"video": false,
+						"title": "Let’s Dance On (mono mix)",
+						"id": "724fa3d2-9723-4240-bf09-3efd19f56f31",
+						"length": 150000,
+						"first-release-date": "1966-10-10",
+						"disambiguation": "mono",
+						"artist-credit": [
+							{
+								"name": "The Monkees",
+								"joinphrase": "",
+								"artist": {
+									"type": "Group",
+									"sort-name": "Monkees, The",
+									"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+									"country": "US",
+									"name": "The Monkees",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"disambiguation": ""
+								}
+							}
+						]
+					},
+					"position": 9,
+					"title": "Let's Dance On",
+					"id": "ebed630a-d7cb-477f-a220-c228e80abbca",
+					"number": "B3",
+					"length": 150000
+				},
+				{
+					"artist-credit": [
+						{
+							"artist": {
+								"name": "The Monkees",
+								"country": "US",
+								"disambiguation": "",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"sort-name": "Monkees, The",
+								"type": "Group",
+								"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233"
+							},
+							"name": "The Monkees",
+							"joinphrase": ""
+						}
+					],
+					"recording": {
+						"first-release-date": "1966-10-10",
+						"video": false,
+						"title": "I’ll Be True to You (mono mix)",
+						"length": 168000,
+						"id": "504b60f9-4ed1-49c4-9ded-febcacd9b715",
+						"artist-credit": [
+							{
+								"name": "The Monkees",
+								"joinphrase": "",
+								"artist": {
+									"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+									"type": "Group",
+									"sort-name": "Monkees, The",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"disambiguation": "",
+									"country": "US",
+									"name": "The Monkees"
+								}
+							}
+						],
+						"disambiguation": "mono"
+					},
+					"position": 10,
+					"number": "B4",
+					"id": "0eecc8af-49f8-4f0c-9a75-35f56f24b735",
+					"length": 168000,
+					"title": "I'll Be True To You"
+				},
+				{
+					"id": "2cc26077-57ae-4fb0-a33c-7e016bfe758a",
+					"number": "B5",
+					"length": 114000,
+					"title": "Sweet Young Thing",
+					"position": 11,
+					"artist-credit": [
+						{
+							"artist": {
+								"name": "The Monkees",
+								"country": "US",
+								"disambiguation": "",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"sort-name": "Monkees, The",
+								"type": "Group",
+								"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233"
+							},
+							"name": "The Monkees",
+							"joinphrase": ""
+						}
+					],
+					"recording": {
+						"id": "8c6211f1-7fec-4f73-a98c-5ca5ea3859a4",
+						"length": 114000,
+						"title": "Sweet Young Thing (mono mix)",
+						"video": false,
+						"first-release-date": "1966-10-10",
+						"disambiguation": "mono",
+						"artist-credit": [
+							{
+								"artist": {
+									"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+									"type": "Group",
+									"sort-name": "Monkees, The",
+									"disambiguation": "",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"country": "US",
+									"name": "The Monkees"
+								},
+								"joinphrase": "",
+								"name": "The Monkees"
+							}
+						]
+					}
+				},
+				{
+					"recording": {
+						"artist-credit": [
+							{
+								"name": "The Monkees",
+								"joinphrase": "",
+								"artist": {
+									"country": "US",
+									"name": "The Monkees",
+									"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+									"disambiguation": "",
+									"type": "Group",
+									"sort-name": "Monkees, The",
+									"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233"
+								}
+							}
+						],
+						"disambiguation": "mono",
+						"first-release-date": "1966-10-10",
+						"id": "d6234780-7be9-402f-83da-fe0a84de8f79",
+						"length": 158000,
+						"video": false,
+						"title": "Gonna Buy Me a Dog (mono mix)"
+					},
+					"artist-credit": [
+						{
+							"name": "The Monkees",
+							"joinphrase": "",
+							"artist": {
+								"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+								"sort-name": "Monkees, The",
+								"type": "Group",
+								"disambiguation": "",
+								"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+								"name": "The Monkees",
+								"country": "US"
+							}
+						}
+					],
+					"title": "Gonna Buy Me A Dog",
+					"length": 158000,
+					"id": "01468b09-7592-46c0-8fc5-b0845dfe91cc",
+					"number": "B6",
+					"position": 12
+				}
+			],
+			"id": "685d0841-81e5-3ecb-99a8-1e3574166f22",
+			"title": "",
+			"format": "12\" Vinyl",
+			"track-count": 12,
+			"position": 1
+		}
+	],
+	"packaging": null,
+	"packaging-id": null,
+	"quality": "normal",
+	"release-events": [
+		{
+			"area": {
+				"name": "Argentina",
+				"disambiguation": "",
+				"iso-3166-1-codes": ["AR"],
+				"type-id": null,
+				"sort-name": "Argentina",
+				"type": null,
+				"id": "0df04709-c7d8-3b55-a6ea-f3e5069a947b"
+			},
+			"date": "1966"
+		}
+	],
+	"status": "Official",
+	"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+	"text-representation": {
+		"language": null,
+		"script": null
+	},
+	"title": "The Monkees"
+}

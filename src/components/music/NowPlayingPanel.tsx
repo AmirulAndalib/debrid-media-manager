@@ -113,7 +113,11 @@ export default function NowPlayingPanel({
 						)}
 					</span>
 					<span className="min-w-0">
-						<span className="block truncate text-sm text-white">{title}</span>
+						<span
+							className={`block truncate text-sm text-white ${q.track.title ? '' : 'italic opacity-60'}`}
+						>
+							{title}
+						</span>
 						<span className="block truncate text-xs text-gray-400">
 							{q.album.artist}
 						</span>

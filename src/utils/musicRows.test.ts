@@ -1,4 +1,8 @@
+import { enrichment, MbRelease, MbReleaseGroup } from '@/services/musicBrainz';
 import { resetBlocklistForTests, setBlocklistForTests } from '@/services/takedown/blocklist';
+import monkees from '@/test/fixtures/music/library-dc925f67cd67936b4a8fbeb17d6decb648fd3479.json';
+import monkeesRelease from '@/test/fixtures/musicbrainz/release-0c6324c1-5968-4675-84bc-8f20b44cabc4.json';
+import monkeesGroup from '@/test/fixtures/musicbrainz/release-group-48e8b712-4f5d-34e0-9492-22f936854662.json';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('@/utils/prisma', () => ({
@@ -6,6 +10,7 @@ vi.mock('@/utils/prisma', () => ({
 		availableMusicFile: { findMany: vi.fn() },
 		availableMusic: { findMany: vi.fn() },
 		musicMetadata: { findMany: vi.fn() },
+		musicTrackMetadata: { findMany: vi.fn() },
 		musicPlaylistTrack: { groupBy: vi.fn(), findMany: vi.fn() },
 	},
 }));
@@ -51,6 +56,7 @@ describe('resolveMusicRows', () => {
 		vi.clearAllMocks();
 		resetBlocklistForTests();
 		setBlocklistForTests([]);
+		mocked.musicTrackMetadata.findMany.mockResolvedValue([]);
 	});
 
 	it('resolves every ref with one query per table, in input order', async () => {
@@ -78,8 +84,9 @@ describe('resolveMusicRows', () => {
 		expect(mocked.availableMusic.findMany).toHaveBeenCalledTimes(1);
 		expect(mocked.musicMetadata.findMany).toHaveBeenCalledTimes(1);
 		expect(mocked.availableMusicFile.findMany).toHaveBeenCalledWith({
-			where: { hash: { in: [H2, H1] }, file_id: { in: [5, 2, 1] } },
+			where: { hash: { in: [H2, H1] } },
 		});
+		expect(mocked.musicTrackMetadata.findMany).toHaveBeenCalledTimes(1);
 		expect(rows.map((r) => r.track?.id)).toEqual([`${H2}-5`, `${H1}-2`, `${H1}-1`]);
 		expect(rows[1]).toEqual({
 			track: {
@@ -91,6 +98,9 @@ describe('resolveMusicRows', () => {
 				bytes: 1002,
 				trackNumber: 2,
 				filename: '02 - Two.flac',
+				disc: null,
+				title: null,
+				durationMs: null,
 			},
 			album: {
 				hash: H1,
@@ -104,6 +114,42 @@ describe('resolveMusicRows', () => {
 			},
 		});
 		expect(rows[0].track?.trackNumber).toBe(7);
+	});
+
+	it("titles, numbers and times a track as its album's page does, never from its file", async () => {
+		// The Monkees' 4-disc deluxe set, enriched with the 12-track 1966 album.
+		const { tracks } = enrichment(
+			monkees.mbid,
+			monkeesGroup as unknown as MbReleaseGroup,
+			monkeesRelease as unknown as MbRelease
+		);
+		mocked.availableMusicFile.findMany.mockResolvedValue(
+			monkees.files.map((f) => ({
+				...f,
+				hash: monkees.hash,
+				link: '',
+				bytes: BigInt(f.bytes),
+			}))
+		);
+		mocked.availableMusic.findMany.mockResolvedValue([
+			release(monkees.hash, monkees.mbid, 61),
+		] as any);
+		mocked.musicMetadata.findMany.mockResolvedValue([meta(monkees.mbid, 'The Monkees')] as any);
+		mocked.musicTrackMetadata.findMany.mockResolvedValue(tracks as any);
+
+		// "/Disc 01/01_05 - Papa Gene's Blues…" and "/Disc 04/04_14 - Of You…".
+		const rows = await resolveMusicRows([
+			{ hash: monkees.hash, fileId: 6, mbid: monkees.mbid },
+			{ hash: monkees.hash, fileId: 61, mbid: monkees.mbid },
+		]);
+
+		expect(mocked.musicTrackMetadata.findMany).toHaveBeenCalledWith({
+			where: { mbid: { in: [monkees.mbid] } },
+		});
+		expect(rows.map((row) => row.track)).toMatchObject([
+			{ title: "Papa Jean's Blues", trackNumber: 5, disc: 1, durationMs: 115000 },
+			{ title: null, trackNumber: 14, disc: 4, durationMs: null },
+		]);
 	});
 
 	it('returns track null with the metadata album when the torrent is gone', async () => {
@@ -152,7 +198,7 @@ describe('resolveMusicRows', () => {
 		]);
 
 		expect(mocked.availableMusicFile.findMany).toHaveBeenCalledWith({
-			where: { hash: { in: [H1] }, file_id: { in: [1] } },
+			where: { hash: { in: [H1] } },
 		});
 		expect(rows[0].track).not.toBeNull();
 		expect(rows[1].track).toBeNull();

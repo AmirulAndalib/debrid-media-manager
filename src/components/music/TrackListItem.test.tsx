@@ -30,10 +30,10 @@ const makeAlbum = (overrides = {}) => ({
 });
 
 describe('TrackListItem', () => {
-	it('renders track filename without extension or leading track number', () => {
+	it('renders the MusicBrainz title', () => {
 		render(
 			<TrackListItem
-				track={makeTrack()}
+				track={makeTrack({ title: 'Test Song' })}
 				index={0}
 				album={makeAlbum()}
 				isCurrentTrack={false}
@@ -42,7 +42,23 @@ describe('TrackListItem', () => {
 				onDownload={vi.fn()}
 			/>
 		);
-		expect(screen.getByText('Test Song')).toBeInTheDocument();
+		expect(screen.getByText('Test Song')).not.toHaveClass('italic');
+	});
+
+	it('names an untitled track by its number, muted, never by its file', () => {
+		render(
+			<TrackListItem
+				track={makeTrack({ title: null })}
+				index={0}
+				album={makeAlbum()}
+				isCurrentTrack={false}
+				isPlaying={false}
+				onPlay={vi.fn()}
+			/>
+		);
+		expect(screen.getByText('Track 1')).toHaveClass('italic');
+		expect(screen.queryByText(/Test Song/)).toBeNull();
+		expect(screen.getByRole('button', { name: 'Play Track 1 by Test Artist' })).toBeVisible();
 	});
 
 	it('renders artist name', () => {

@@ -1,11 +1,6 @@
+import { formatTrackTitle, removeExtension } from '@/utils/musicTracks';
 import { describe, expect, it } from 'vitest';
-import {
-	formatDuration,
-	formatSize,
-	formatTrackTitle,
-	removeExtension,
-	shuffleArray,
-} from './utils';
+import { formatDuration, formatSize, shuffleArray, trackTitle } from './utils';
 
 describe('formatDuration', () => {
 	it('formats zero seconds', () => {
@@ -109,6 +104,21 @@ describe('formatTrackTitle', () => {
 
 	it('falls back to the filename when the prefix is the whole name', () => {
 		expect(formatTrackTitle('01.flac')).toBe('01');
+	});
+});
+
+describe('trackTitle', () => {
+	const track = { filename: '01_05 - Papa Gene’s Blues (Stereo Mix).flac', trackNumber: 5 };
+
+	it('is the MusicBrainz title', () => {
+		expect(trackTitle({ ...track, title: 'Papa Jean’s Blues' } as any)).toBe(
+			'Papa Jean’s Blues'
+		);
+	});
+
+	it('is the track number, never the filename, without one', () => {
+		expect(trackTitle({ ...track, title: null } as any)).toBe('Track 5');
+		expect(trackTitle({ ...track, trackNumber: null } as any)).toBe('Untitled track');
 	});
 });
 

@@ -1,8 +1,11 @@
 import handler from '@/pages/api/music/library';
 import { enrichment, MbRelease, MbReleaseGroup } from '@/services/musicBrainz';
+import monkees from '@/test/fixtures/music/library-dc925f67cd67936b4a8fbeb17d6decb648fd3479.json';
 import catalog from '@/test/fixtures/musicbrainz/catalog-2026-11-01.json';
 import release from '@/test/fixtures/musicbrainz/release-08205eae-c9e3-4174-8d69-2a67d742a19c.json';
+import monkeesRelease from '@/test/fixtures/musicbrainz/release-0c6324c1-5968-4675-84bc-8f20b44cabc4.json';
 import group from '@/test/fixtures/musicbrainz/release-group-4853b957-05f2-457b-ba47-18b2565abc69.json';
+import monkeesGroup from '@/test/fixtures/musicbrainz/release-group-48e8b712-4f5d-34e0-9492-22f936854662.json';
 import { createMockRequest, createMockResponse } from '@/test/utils/api';
 import type { Prisma } from '@prisma/client';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -389,9 +392,60 @@ describe('/api/music/library', () => {
 			expect(data.albums[0].pack).toBe(false);
 		});
 
-		it('titles a track from its filename without a tracklist', async () => {
+		it('titles no track from its file without a tracklist', async () => {
 			const data = await album([file(1, '/music/01 - Song.flac')]);
-			expect(data.albums[0].tracks[0]).toMatchObject({ title: 'Song', durationMs: null });
+			expect(data.albums[0].tracks[0]).toMatchObject({ title: null, durationMs: null });
+		});
+
+		describe("The Monkees' 4-disc deluxe set, named 01_01 - … to 04_15 - …", () => {
+			const files = monkees.files.map((f) => ({
+				...f,
+				hash: monkees.hash,
+				link: `https://example.com/${f.file_id}`,
+				bytes: BigInt(f.bytes),
+			}));
+			const serveMonkees = () =>
+				album(files, { hash: monkees.hash, mbid: monkees.mbid, fileCount: BigInt(61) });
+			// 12, 16, 18 and 15 tracks, each disc counted from 1.
+			const discs = [12, 16, 18, 15].flatMap((count, d) =>
+				Array.from({ length: count }, (_, i) => [d + 1, i + 1])
+			);
+
+			it('numbers tracks disc by disc and titles none from a file', async () => {
+				const { tracks } = (await serveMonkees()).albums[0];
+
+				expect(tracks.map((t: any) => [t.disc, t.trackNumber])).toEqual(discs);
+				expect(tracks.map((t: any) => t.title)).toEqual(Array(61).fill(null));
+				const served = JSON.stringify(
+					tracks.map(({ title, disc }: any) => ({ title, disc }))
+				);
+				expect(served).not.toMatch(/Monkees|Stereo Mix/);
+			});
+
+			it('titles a disc from MusicBrainz by disc and position once enriched', async () => {
+				// The release the backfill picks for it (see pickRelease): the 12-track 1966 album.
+				const { tracks: tracklist } = enrichment(
+					monkees.mbid,
+					monkeesGroup as unknown as MbReleaseGroup,
+					monkeesRelease as unknown as MbRelease
+				);
+				mockedPrisma.musicTrackMetadata.findMany.mockResolvedValue(tracklist as any);
+
+				const { tracks } = (await serveMonkees()).albums[0];
+
+				// Disc 1 is the album; MusicBrainz spells "Papa Jean's Blues", the file "Papa Gene's".
+				expect(tracks.slice(0, 12).map((t: any) => t.title)).toEqual(
+					tracklist.map((t) => t.title)
+				);
+				expect(tracks[4]).toMatchObject({
+					title: "Papa Jean's Blues",
+					disc: 1,
+					trackNumber: 5,
+					durationMs: 115000,
+				});
+				expect(tracks.slice(12).map((t: any) => t.title)).toEqual(Array(49).fill(null));
+				expect(tracks.map((t: any) => [t.disc, t.trackNumber])).toEqual(discs);
+			});
 		});
 	});
 

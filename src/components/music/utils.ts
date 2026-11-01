@@ -1,6 +1,5 @@
 import type { MusicAlbum } from '@/pages/api/music/library';
 import type { MusicAlbumSummary, MusicTrackRow } from '@/utils/musicRows';
-import { formatTrackTitle, removeExtension } from '@/utils/musicTracks';
 import type { DragEvent } from 'react';
 import { PlayableTrack, QueuedTrack } from './types';
 
@@ -17,10 +16,9 @@ export function formatSize(bytes: number): string {
 	return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
 }
 
-// Shared with the music API, which titles a track the same way when MusicBrainz has none.
-export { formatTrackTitle, removeExtension };
-
-export const trackTitle = (track: PlayableTrack) => track.title || formatTrackTitle(track.filename);
+/** The MusicBrainz title, else "Track 3": never anything from the file's name. */
+export const trackTitle = (track: PlayableTrack) =>
+	track.title || (track.trackNumber ? `Track ${track.trackNumber}` : 'Untitled track');
 
 export function shuffleArray<T>(array: T[]): T[] {
 	const shuffled = [...array];

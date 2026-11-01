@@ -1,5 +1,5 @@
 import catalog from '@/test/fixtures/musicbrainz/catalog-2026-11-01.json';
-import { getDirectory } from '@/utils/musicTracks';
+import { getDirectory, trackPosition } from '@/utils/musicTracks';
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import AlbumDetailView, { albumFacts, discDividers, formatLength } from './AlbumDetailView';
@@ -33,7 +33,10 @@ const makeAlbum = (overrides = {}) => ({
 	album: 'Test Album',
 	year: 2023,
 	coverUrl: null as string | null,
-	tracks: [makeTrack('t1', '01 - First.flac', 1), makeTrack('t2', '02 - Second.flac', 2)],
+	tracks: [
+		makeTrack('t1', '01 - First.flac', 1, { title: 'First' }),
+		makeTrack('t2', '02 - Second.flac', 2, { title: 'Second' }),
+	],
 	totalBytes: 60 * 1024 * 1024,
 	trackCount: 2,
 	...overrides,
@@ -107,6 +110,7 @@ describe('AlbumDetailView', () => {
 		const files = catalog.files[JUSTICE_HASH].map((file) => ({
 			...makeTrack(`j-${file.fileId}`, file.path.split('/').pop()!, file.trackNumber),
 			path: file.path,
+			disc: trackPosition(file.path, file.trackNumber).disc,
 		})).sort(
 			(a, b) =>
 				getDirectory(a.path).localeCompare(getDirectory(b.path), undefined, {
@@ -120,11 +124,14 @@ describe('AlbumDetailView', () => {
 		expect(screen.getAllByText(/^Disc \d$/).map((d) => d.textContent)).toEqual(
 			[1, 2, 3, 4, 5, 6, 7, 8].map((n) => `Disc ${n}`)
 		);
-		expect(discDividers(p.album.tracks.slice(0, 1))).toEqual([null]);
-		expect(discDividers([{ path: '/CD02/01.flac' }, { path: '/Bonus/01.flac' }])).toEqual([
+		expect(discDividers([{ disc: 1 }])).toEqual([null]);
+		expect(discDividers([{ disc: 1 }, { disc: 1 }, { disc: 2 }])).toEqual([
+			'Disc 1',
+			null,
 			'Disc 2',
-			'Bonus',
 		]);
+		// One disc and a bonus file that names none: nothing to divide.
+		expect(discDividers([{ disc: 1 }, { disc: null }])).toEqual([null, null]);
 	});
 
 	it('has Play, Shuffle, a heart, Download and a menu, and nothing else', () => {

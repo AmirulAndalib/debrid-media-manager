@@ -37,6 +37,7 @@ const entry = (id: string, fileId: number, available = true, cover = `https://c/
 				bytes: 1,
 				trackNumber: fileId,
 				filename: `Song ${fileId}.flac`,
+				title: `Song ${fileId}`,
 			}
 		: null,
 });

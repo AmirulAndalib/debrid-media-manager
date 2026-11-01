@@ -100,7 +100,7 @@ export default function TrackListItem({
 
 			<div className="flex flex-col overflow-hidden">
 				<span
-					className={`truncate font-medium ${isCurrentTrack ? 'text-green-500' : 'text-white'}`}
+					className={`truncate font-medium ${isCurrentTrack ? 'text-green-500' : 'text-white'} ${track.title ? '' : 'italic opacity-60'}`}
 				>
 					{trackTitle(track)}
 				</span>

@@ -1,0 +1,373 @@
+{
+	"_source": "GET https://debridmediamanager.com/api/music/library?hash=dc925f67cd67936b4a8fbeb17d6decb648fd3479, read 2026-11-01 before MusicBrainz enrichment: The Monkees (1966) as a 4-disc deluxe torrent, its 61 audio files in the order served, as AvailableMusicFile rows (RD links left out). It answered every trackNumber with the disc number and every title with the filename less its first number.",
+	"files": [
+		{
+			"file_id": 2,
+			"path": "/Disc 01/01_01 - (Theme From) The Monkees [Stereo Mix].flac",
+			"bytes": 89207501,
+			"trackNumber": 1
+		},
+		{
+			"file_id": 3,
+			"path": "/Disc 01/01_02 - Saturday's Child (Stereo Mix).flac",
+			"bytes": 104695793,
+			"trackNumber": 1
+		},
+		{
+			"file_id": 4,
+			"path": "/Disc 01/01_03 - I Wanna Be Free (Stereo Mix).flac",
+			"bytes": 91460139,
+			"trackNumber": 1
+		},
+		{
+			"file_id": 5,
+			"path": "/Disc 01/01_04 - Tomorrow's Gonna Be Another Day (Stereo Mix).flac",
+			"bytes": 100565780,
+			"trackNumber": 1
+		},
+		{
+			"file_id": 6,
+			"path": "/Disc 01/01_05 - Papa Gene's Blues (Stereo Mix).flac",
+			"bytes": 76625153,
+			"trackNumber": 1
+		},
+		{
+			"file_id": 7,
+			"path": "/Disc 01/01_06 - Take a Giant Step (Stereo Mix).flac",
+			"bytes": 97288915,
+			"trackNumber": 1
+		},
+		{
+			"file_id": 8,
+			"path": "/Disc 01/01_07 - Last Train to Clarksville (Stereo Mix).flac",
+			"bytes": 109365936,
+			"trackNumber": 1
+		},
+		{
+			"file_id": 9,
+			"path": "/Disc 01/01_08 - This Just Doesn't Seem to Be My Day (Stereo Mix).flac",
+			"bytes": 88983573,
+			"trackNumber": 1
+		},
+		{
+			"file_id": 10,
+			"path": "/Disc 01/01_09 - Let's Dance On (Stereo Mix).flac",
+			"bytes": 98656731,
+			"trackNumber": 1
+		},
+		{
+			"file_id": 11,
+			"path": "/Disc 01/01_10 - I'll Be True to You (Stereo Mix).flac",
+			"bytes": 109102657,
+			"trackNumber": 1
+		},
+		{
+			"file_id": 12,
+			"path": "/Disc 01/01_11 - Sweet Young Thing (Stereo Mix).flac",
+			"bytes": 77827138,
+			"trackNumber": 1
+		},
+		{
+			"file_id": 13,
+			"path": "/Disc 01/01_12 - Gonna Buy Me a Dog (Stereo Mix).flac",
+			"bytes": 102137782,
+			"trackNumber": 1
+		},
+		{
+			"file_id": 14,
+			"path": "/Disc 02/02_01 - (Theme From) The Monkees [Mono Mix].flac",
+			"bytes": 11671024,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 15,
+			"path": "/Disc 02/02_02 - Saturday's Child (Mono Mix).flac",
+			"bytes": 13494566,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 16,
+			"path": "/Disc 02/02_03 - I Wanna Be Free (Mono Mix).flac",
+			"bytes": 11500071,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 17,
+			"path": "/Disc 02/02_04 - Tomorrow's Gonna Be Another Day (Mono Mix).flac",
+			"bytes": 14478431,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 18,
+			"path": "/Disc 02/02_05 - Papa Gene's Blues (Mono Mix).flac",
+			"bytes": 11297499,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 19,
+			"path": "/Disc 02/02_06 - Take a Giant Step (Mono Mix).flac",
+			"bytes": 13738700,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 20,
+			"path": "/Disc 02/02_07 - Last Train to Clarksville (Mono Mix).flac",
+			"bytes": 16027913,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 21,
+			"path": "/Disc 02/02_08 - This Just Doesn't Seem to Be My Day (Mono Mix).flac",
+			"bytes": 11654111,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 22,
+			"path": "/Disc 02/02_09 - Let's Dance On (Mono Mix).flac",
+			"bytes": 14198959,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 23,
+			"path": "/Disc 02/02_10 - I'll Be True to You (Mono Mix).flac",
+			"bytes": 14945048,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 24,
+			"path": "/Disc 02/02_11 - Sweet Young Thing (Mono Mix).flac",
+			"bytes": 11714138,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 25,
+			"path": "/Disc 02/02_12 - Gonna Buy Me a Dog (Mono Mix).flac",
+			"bytes": 14256869,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 26,
+			"path": "/Disc 02/02_13 - I Wanna Be Free (Rehearsal).flac",
+			"bytes": 8655269,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 27,
+			"path": "/Disc 02/02_14 - I Wanna Be Free (Demo - Take Twelve).flac",
+			"bytes": 6963009,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 28,
+			"path": "/Disc 02/02_15 - I Wanna Be Free (Overdubbed Demo - Take 2).flac",
+			"bytes": 7469936,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 29,
+			"path": "/Disc 02/02_16 - Propinquity (I've Just Begun to Care) [Demo] [2006 Remaster].flac",
+			"bytes": 9192786,
+			"trackNumber": 2
+		},
+		{
+			"file_id": 30,
+			"path": "/Disc 03/03_01 - Monkees NBC Promo Spot.flac",
+			"bytes": 2409614,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 31,
+			"path": "/Disc 03/03_02 - (Theme From) The Monkees [TV Version].flac",
+			"bytes": 4791476,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 32,
+			"path": "/Disc 03/03_03 - You Just May Be the One (Mono TV Version).flac",
+			"bytes": 10123046,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 33,
+			"path": "/Disc 03/03_04 - This Just Doesn't Seem to Be My Day (TV Version) [Mono].flac",
+			"bytes": 10829520,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 34,
+			"path": "/Disc 03/03_05 - Take a Giant Step (Mono TV Version).flac",
+			"bytes": 12233635,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 35,
+			"path": "/Disc 03/03_06 - All the King's Horses (Mono TV Version).flac",
+			"bytes": 11357206,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 36,
+			"path": "/Disc 03/03_07 - I Wanna Be Free (Fast Version) [Mono TV Mix].flac",
+			"bytes": 13270132,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 37,
+			"path": "/Disc 03/03_08 - The Kind of Girl I Could Love (Alternate Mono Mix).flac",
+			"bytes": 10462915,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 38,
+			"path": "/Disc 03/03_09 - Saturday's Child (Mono TV Version).flac",
+			"bytes": 12122861,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 39,
+			"path": "/Disc 03/03_10 - (Theme From) The Monkees [Second Version].flac",
+			"bytes": 5233086,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 40,
+			"path": "/Disc 03/03_11 - All the King's Horses (Alternate Vocal Take).flac",
+			"bytes": 12261334,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 41,
+			"path": "/Disc 03/03_12 - The Kind of Girl I Could Love (Alternate Vocal Take).flac",
+			"bytes": 15284110,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 42,
+			"path": "/Disc 03/03_13 - I Don't Think You Know Me (Micky's Vocal).flac",
+			"bytes": 16228783,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 43,
+			"path": "/Disc 03/03_14 - So Goes Love (Take One).flac",
+			"bytes": 21203990,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 44,
+			"path": "/Disc 03/03_15 - So Goes Love (Alternate Vocal Take).flac",
+			"bytes": 24483460,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 45,
+			"path": "/Disc 03/03_16 - Papa Gene's Blues (Alternate Vocal Take).flac",
+			"bytes": 15976048,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 46,
+			"path": "/Disc 03/03_17 - Kellogg's Jingle.flac",
+			"bytes": 1468832,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 47,
+			"path": "/Disc 03/03_18 - Monkees Radio Spot.flac",
+			"bytes": 6447376,
+			"trackNumber": 3
+		},
+		{
+			"file_id": 48,
+			"path": "/Disc 04/04_01 - (Theme From) The Monkees [Version One] [Master Backing Track].flac",
+			"bytes": 11832025,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 49,
+			"path": "/Disc 04/04_02 - Let's Dance On (Master Backing Track).flac",
+			"bytes": 12588873,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 50,
+			"path": "/Disc 04/04_03 - This Just Doesn't Seem to Be My Day (Master Backing Track).flac",
+			"bytes": 16402389,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 51,
+			"path": "/Disc 04/04_04 - Gonna Buy Me a Dog (Version One) [Backing Track Take Five].flac",
+			"bytes": 23861559,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 52,
+			"path": "/Disc 04/04_05 - Papa Gene's Blues (Backing Track - Take One).flac",
+			"bytes": 15538358,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 53,
+			"path": "/Disc 04/04_06 - I Won't Be the Same without Her (Backing Track - Take Six).flac",
+			"bytes": 19725820,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 54,
+			"path": "/Disc 04/04_07 - Sweet Young Thing (Backing Track - Take One).flac",
+			"bytes": 14918888,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 55,
+			"path": "/Disc 04/04_08 - I Wanna Be Free (Version Two - Backing Track Take Six).flac",
+			"bytes": 15200122,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 56,
+			"path": "/Disc 04/04_09 - I Wanna Be Free (Version Three - Backing Track Take Three).flac",
+			"bytes": 22560941,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 57,
+			"path": "/Disc 04/04_10 - Jokes (Backing Track).flac",
+			"bytes": 9148223,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 58,
+			"path": "/Disc 04/04_11 - Tomorrow's Gonna Be Another Day (Master Backing Track).flac",
+			"bytes": 22362244,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 59,
+			"path": "/Disc 04/04_12 - Gonna Buy Me a Dog (Version Two) [Backing Track Take Two].flac",
+			"bytes": 18325941,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 60,
+			"path": "/Disc 04/04_13 - Mary, Mary (Backing Track - Take One).flac",
+			"bytes": 19564509,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 61,
+			"path": "/Disc 04/04_14 - Of You (Backing Track - Take One).flac",
+			"bytes": 15692254,
+			"trackNumber": 4
+		},
+		{
+			"file_id": 62,
+			"path": "/Disc 04/04_15 - You Just May Be the One (Rehearsal & Backing Track - Take Nineteen).flac",
+			"bytes": 19806469,
+			"trackNumber": 4
+		}
+	],
+	"hash": "dc925f67cd67936b4a8fbeb17d6decb648fd3479",
+	"mbid": "48e8b712-4f5d-34e0-9492-22f936854662"
+}

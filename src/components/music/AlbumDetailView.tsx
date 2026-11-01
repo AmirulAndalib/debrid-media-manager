@@ -1,5 +1,4 @@
 import { MusicAlbum, MusicTrack } from '@/pages/api/music/library';
-import { getDirectory } from '@/utils/musicTracks';
 import { Disc3, Download, Ellipsis, Heart, Pause, Play, Shuffle } from 'lucide-react';
 import { CSSProperties, Fragment, MouseEvent, useEffect, useRef, useState } from 'react';
 import { useCoverTint } from './coverTint';
@@ -41,21 +40,14 @@ export function albumFacts(album: MusicAlbum): string {
 		.join(' · ');
 }
 
-/**
- * The divider before each track that starts a folder ("Disc 2" for a CD2 or
- * Disc 2 folder, else the folder's name), or null; all null for one folder.
- */
-export function discDividers(tracks: { path: string }[]): (string | null)[] {
-	const folders = tracks.map((track) => getDirectory(track.path));
-	if (new Set(folders).size < 2) return folders.map(() => null);
-	let group = 0;
-	return folders.map((folder, i) => {
-		if (i > 0 && folder === folders[i - 1]) return null;
-		group++;
-		const name = folder.split('/').filter(Boolean).pop() ?? '';
-		const disc = /\b(?:cd|dis[ck])\s*0*(\d+)/i.exec(name);
-		return disc ? `Disc ${disc[1]}` : name || `Disc ${group}`;
-	});
+/** "Disc 2" before each track that starts a disc, or null; all null for one disc. */
+export function discDividers(tracks: { disc?: number | null }[]): (string | null)[] {
+	const several = new Set(tracks.map((t) => t.disc).filter((disc) => disc != null)).size > 1;
+	return tracks.map((track, i) =>
+		several && track.disc != null && track.disc !== tracks[i - 1]?.disc
+			? `Disc ${track.disc}`
+			: null
+	);
 }
 
 export default function AlbumDetailView({

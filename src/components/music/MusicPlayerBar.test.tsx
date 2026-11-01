@@ -53,10 +53,10 @@ const defaultProps = () => ({
 });
 
 describe('MusicPlayerBar', () => {
-	it('renders track name without extension or leading track number', () => {
+	it('names a track MusicBrainz has no title for by its number, never its file', () => {
 		render(<MusicPlayerBar {...defaultProps()} />);
-		const trackNames = screen.getAllByText('Song');
-		expect(trackNames.length).toBeGreaterThan(0);
+		expect(screen.getAllByText('Track 1').length).toBeGreaterThan(0);
+		expect(screen.queryByText(/Song/)).toBeNull();
 	});
 
 	it('renders the catalog title when the API sends one', () => {

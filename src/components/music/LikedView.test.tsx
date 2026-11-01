@@ -35,6 +35,7 @@ const row = (fileId: number, available = true) => ({
 				bytes: 1,
 				trackNumber: fileId,
 				filename: `0${fileId} - Song ${fileId}.flac`,
+				title: `Song ${fileId}`,
 			}
 		: null,
 });

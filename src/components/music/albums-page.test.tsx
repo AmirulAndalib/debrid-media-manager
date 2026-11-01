@@ -23,6 +23,7 @@ vi.mock('@/hooks/auth', () => ({
 import AlbumsPage from '@/pages/albums/[[...slug]]';
 
 const track = (fileId: number, filename: string) => ({
+	title: filename.slice(5, -5),
 	id: `h1-${fileId}`,
 	hash: 'h1',
 	fileId,

@@ -1,0 +1,2466 @@
+{
+	"artist-credit": [
+		{
+			"joinphrase": "",
+			"artist": {
+				"genres": [
+					{
+						"name": "country pop",
+						"disambiguation": "",
+						"count": 2,
+						"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1"
+					},
+					{
+						"name": "pop",
+						"count": 7,
+						"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+						"disambiguation": ""
+					},
+					{
+						"name": "pop rock",
+						"disambiguation": "",
+						"count": 2,
+						"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+					},
+					{
+						"disambiguation": "",
+						"count": 2,
+						"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+						"name": "psychedelic pop"
+					},
+					{
+						"name": "rock",
+						"disambiguation": "",
+						"count": 2,
+						"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+					},
+					{
+						"name": "sunshine pop",
+						"count": 5,
+						"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+						"disambiguation": ""
+					}
+				],
+				"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+				"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+				"name": "The Monkees",
+				"disambiguation": "",
+				"country": "US",
+				"type": "Group",
+				"sort-name": "Monkees, The"
+			},
+			"name": "The Monkees"
+		}
+	],
+	"disambiguation": "",
+	"first-release-date": "1966-10-10",
+	"genres": [
+		{
+			"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+			"count": 1,
+			"disambiguation": "",
+			"name": "pop"
+		},
+		{
+			"name": "pop rock",
+			"count": 2,
+			"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+			"disambiguation": ""
+		},
+		{
+			"name": "rock",
+			"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+			"count": 2,
+			"disambiguation": ""
+		},
+		{
+			"name": "sunshine pop",
+			"disambiguation": "",
+			"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+			"count": 1
+		}
+	],
+	"id": "48e8b712-4f5d-34e0-9492-22f936854662",
+	"primary-type": "Album",
+	"primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+	"releases": [
+		{
+			"media": [
+				{
+					"track-count": 12,
+					"format": "12\" Vinyl",
+					"title": "",
+					"position": 1,
+					"id": "ab5c3a71-16ae-3be3-85ac-42a58fe43226",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64"
+				}
+			],
+			"id": "a778b7ef-c6e3-43af-9c68-5681239b117f",
+			"packaging": null,
+			"status": "Official",
+			"disambiguation": "mono",
+			"country": "CA",
+			"quality": "normal",
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"name": "The Monkees",
+						"sort-name": "Monkees, The",
+						"type": "Group",
+						"country": "US",
+						"disambiguation": "",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"genres": [
+							{
+								"disambiguation": "",
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"name": "country pop"
+							},
+							{
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 7,
+								"disambiguation": "",
+								"name": "pop"
+							},
+							{
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2,
+								"name": "pop rock"
+							},
+							{
+								"name": "psychedelic pop",
+								"disambiguation": "",
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 2,
+								"disambiguation": "",
+								"name": "rock"
+							},
+							{
+								"disambiguation": "",
+								"count": 5,
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"name": "sunshine pop"
+							}
+						]
+					},
+					"name": "The Monkees"
+				}
+			],
+			"barcode": "",
+			"genres": [],
+			"date": "1966-10-10",
+			"title": "The Monkees",
+			"packaging-id": null,
+			"release-events": [
+				{
+					"area": {
+						"disambiguation": "",
+						"type": null,
+						"sort-name": "Canada",
+						"name": "Canada",
+						"iso-3166-1-codes": ["CA"],
+						"type-id": null,
+						"id": "71bbafaa-e825-3e15-8ca9-017dcad1748b"
+					},
+					"date": "1966-10-10"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"text-representation": {
+				"language": "eng",
+				"script": "Latn"
+			}
+		},
+		{
+			"disambiguation": "mono, repress",
+			"country": "US",
+			"packaging": "Cardboard/Paper Sleeve",
+			"status": "Official",
+			"media": [
+				{
+					"id": "e511016b-a71d-377d-ae71-6ac9006a3042",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"format": "12\" Vinyl",
+					"track-count": 12,
+					"position": 1,
+					"title": ""
+				}
+			],
+			"id": "9f4bad72-4b43-45c4-9de8-11066ecc7efd",
+			"release-events": [
+				{
+					"date": "1966-10-10",
+					"area": {
+						"disambiguation": "",
+						"sort-name": "United States",
+						"type": null,
+						"name": "United States",
+						"iso-3166-1-codes": ["US"],
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"type-id": null
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": "f7101ce3-0384-39ce-9fde-fbbd0044d35f",
+			"text-representation": {
+				"language": "eng",
+				"script": "Latn"
+			},
+			"date": "1966-10-10",
+			"title": "The Monkees",
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"joinphrase": "",
+					"artist": {
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"genres": [
+							{
+								"name": "country pop",
+								"count": 2,
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"disambiguation": ""
+							},
+							{
+								"name": "pop",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 7,
+								"disambiguation": ""
+							},
+							{
+								"count": 2,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"name": "psychedelic pop",
+								"disambiguation": "",
+								"count": 2,
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58"
+							},
+							{
+								"name": "rock",
+								"disambiguation": "",
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+							},
+							{
+								"disambiguation": "",
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5,
+								"name": "sunshine pop"
+							}
+						],
+						"name": "The Monkees",
+						"type": "Group",
+						"sort-name": "Monkees, The",
+						"country": "US",
+						"disambiguation": ""
+					}
+				}
+			],
+			"quality": "normal",
+			"genres": [],
+			"barcode": ""
+		},
+		{
+			"media": [
+				{
+					"title": "",
+					"position": 1,
+					"track-count": 12,
+					"format": "12\" Vinyl",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"id": "d5bf41e9-2e59-3189-abd7-38e815e31ea0"
+				}
+			],
+			"id": "08e916f6-07ca-3dc6-84bc-dd67decd699b",
+			"country": "US",
+			"disambiguation": "stereo",
+			"status": "Official",
+			"packaging": "Cardboard/Paper Sleeve",
+			"genres": [],
+			"barcode": "",
+			"artist-credit": [
+				{
+					"artist": {
+						"country": "US",
+						"disambiguation": "",
+						"sort-name": "Monkees, The",
+						"type": "Group",
+						"name": "The Monkees",
+						"genres": [
+							{
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"disambiguation": "",
+								"name": "country pop"
+							},
+							{
+								"disambiguation": "",
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"disambiguation": "",
+								"count": 2,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+							},
+							{
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2,
+								"disambiguation": "",
+								"name": "psychedelic pop"
+							},
+							{
+								"disambiguation": "",
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"name": "rock"
+							},
+							{
+								"name": "sunshine pop",
+								"count": 5,
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"disambiguation": ""
+							}
+						],
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b"
+					},
+					"joinphrase": "",
+					"name": "The Monkees"
+				}
+			],
+			"quality": "normal",
+			"text-representation": {
+				"script": "Latn",
+				"language": "eng"
+			},
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"area": {
+						"sort-name": "United States",
+						"type": null,
+						"disambiguation": "",
+						"name": "United States",
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"type-id": null,
+						"iso-3166-1-codes": ["US"]
+					},
+					"date": "1966-10-10"
+				}
+			],
+			"packaging-id": "f7101ce3-0384-39ce-9fde-fbbd0044d35f",
+			"title": "The Monkees",
+			"date": "1966-10-10"
+		},
+		{
+			"artist-credit": [
+				{
+					"artist": {
+						"genres": [
+							{
+								"count": 2,
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"disambiguation": "",
+								"name": "country pop"
+							},
+							{
+								"name": "pop",
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": ""
+							},
+							{
+								"name": "pop rock",
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2
+							},
+							{
+								"name": "psychedelic pop",
+								"disambiguation": "",
+								"count": 2,
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58"
+							},
+							{
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"name": "rock"
+							},
+							{
+								"disambiguation": "",
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5,
+								"name": "sunshine pop"
+							}
+						],
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"name": "The Monkees",
+						"disambiguation": "",
+						"country": "US",
+						"type": "Group",
+						"sort-name": "Monkees, The"
+					},
+					"joinphrase": "",
+					"name": "The Monkees"
+				}
+			],
+			"quality": "normal",
+			"genres": [],
+			"barcode": "",
+			"release-events": [
+				{
+					"area": {
+						"type": null,
+						"sort-name": "United States",
+						"disambiguation": "",
+						"name": "United States",
+						"type-id": null,
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"iso-3166-1-codes": ["US"]
+					},
+					"date": "1966-10-10"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": "f7101ce3-0384-39ce-9fde-fbbd0044d35f",
+			"text-representation": {
+				"script": "Latn",
+				"language": "eng"
+			},
+			"date": "1966-10-10",
+			"title": "The Monkees",
+			"id": "a9fa24c8-d66b-4559-90c0-80f626d86173",
+			"media": [
+				{
+					"position": 1,
+					"title": "",
+					"track-count": 12,
+					"format": "12\" Vinyl",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"id": "5029e05e-3b36-34e3-abfd-3831c02b6eaa"
+				}
+			],
+			"disambiguation": "mono, misprint, Hollywood pressing",
+			"country": "US",
+			"packaging": "Cardboard/Paper Sleeve",
+			"status": "Official"
+		},
+		{
+			"disambiguation": "",
+			"country": "US",
+			"packaging": null,
+			"status": "Official",
+			"id": "dbecfb09-3072-4cb0-8601-e76929bf0759",
+			"media": [
+				{
+					"id": "66e4d66c-5de3-37fb-b973-4f61cd78631d",
+					"format-id": "49b49ca7-d2d8-4d36-a7dd-d61363ee3697",
+					"track-count": 12,
+					"format": "8-Track Cartridge",
+					"title": "",
+					"position": 1
+				}
+			],
+			"text-representation": {
+				"language": "eng",
+				"script": "Latn"
+			},
+			"packaging-id": null,
+			"release-events": [
+				{
+					"area": {
+						"iso-3166-1-codes": ["US"],
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"type-id": null,
+						"name": "United States",
+						"disambiguation": "",
+						"sort-name": "United States",
+						"type": null
+					},
+					"date": "1966-10-10"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"title": "The Monkees",
+			"date": "1966-10-10",
+			"barcode": "",
+			"genres": [],
+			"quality": "normal",
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"artist": {
+						"genres": [
+							{
+								"count": 2,
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"disambiguation": "",
+								"name": "country pop"
+							},
+							{
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"name": "pop"
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2,
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"disambiguation": "",
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2,
+								"name": "psychedelic pop"
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 2,
+								"disambiguation": "",
+								"name": "rock"
+							},
+							{
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5,
+								"disambiguation": "",
+								"name": "sunshine pop"
+							}
+						],
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"disambiguation": "",
+						"country": "US",
+						"sort-name": "Monkees, The",
+						"type": "Group",
+						"name": "The Monkees"
+					},
+					"joinphrase": ""
+				}
+			]
+		},
+		{
+			"date": "1966-10-10",
+			"title": "The Monkees",
+			"packaging-id": "f7101ce3-0384-39ce-9fde-fbbd0044d35f",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"area": {
+						"iso-3166-1-codes": ["US"],
+						"type-id": null,
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"disambiguation": "",
+						"type": null,
+						"sort-name": "United States",
+						"name": "United States"
+					},
+					"date": "1966-10-10"
+				}
+			],
+			"text-representation": {
+				"language": "eng",
+				"script": "Latn"
+			},
+			"quality": "normal",
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"joinphrase": "",
+					"artist": {
+						"name": "The Monkees",
+						"type": "Group",
+						"sort-name": "Monkees, The",
+						"disambiguation": "",
+						"country": "US",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"genres": [
+							{
+								"disambiguation": "",
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"name": "country pop"
+							},
+							{
+								"name": "pop",
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": ""
+							},
+							{
+								"name": "pop rock",
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2
+							},
+							{
+								"count": 2,
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"disambiguation": "",
+								"name": "psychedelic pop"
+							},
+							{
+								"name": "rock",
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": ""
+							},
+							{
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5,
+								"disambiguation": "",
+								"name": "sunshine pop"
+							}
+						]
+					}
+				}
+			],
+			"barcode": "",
+			"genres": [],
+			"status": "Official",
+			"packaging": "Cardboard/Paper Sleeve",
+			"country": "US",
+			"disambiguation": "stereo, misprint, Hollywood pressing",
+			"media": [
+				{
+					"id": "3a84cd8f-5695-3a50-b953-cfb11877222b",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"format": "12\" Vinyl",
+					"track-count": 12,
+					"position": 1,
+					"title": ""
+				}
+			],
+			"id": "33bef8bf-bc27-4c36-8a60-f1eddc8c4ac7"
+		},
+		{
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"sort-name": "Monkees, The",
+						"type": "Group",
+						"country": "US",
+						"disambiguation": "",
+						"name": "The Monkees",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"genres": [
+							{
+								"disambiguation": "",
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"name": "country pop"
+							},
+							{
+								"name": "pop",
+								"disambiguation": "",
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791"
+							},
+							{
+								"name": "pop rock",
+								"count": 2,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": ""
+							},
+							{
+								"name": "psychedelic pop",
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2,
+								"disambiguation": ""
+							},
+							{
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"name": "rock"
+							},
+							{
+								"name": "sunshine pop",
+								"disambiguation": "",
+								"count": 5,
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9"
+							}
+						]
+					},
+					"name": "The Monkees"
+				}
+			],
+			"quality": "normal",
+			"genres": [],
+			"barcode": "",
+			"date": "1966-10",
+			"title": "The Monkees",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"area": {
+						"name": "Australia",
+						"disambiguation": "",
+						"sort-name": "Australia",
+						"type": null,
+						"iso-3166-1-codes": ["AU"],
+						"id": "106e0bec-b638-3b37-b731-f53d507dc00e",
+						"type-id": null
+					},
+					"date": "1966-10"
+				}
+			],
+			"packaging-id": null,
+			"text-representation": {
+				"language": "eng",
+				"script": "Latn"
+			},
+			"id": "6f51fcfc-bc41-4ad0-9014-be8142a9cbb2",
+			"media": [
+				{
+					"title": "",
+					"position": 1,
+					"track-count": 12,
+					"format": "12\" Vinyl",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"id": "05adece6-13dd-3aba-b756-ff75c6878574"
+				}
+			],
+			"packaging": null,
+			"status": "Official",
+			"disambiguation": "stereo",
+			"country": "AU"
+		},
+		{
+			"id": "0c6324c1-5968-4675-84bc-8f20b44cabc4",
+			"media": [
+				{
+					"id": "685d0841-81e5-3ecb-99a8-1e3574166f22",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"track-count": 12,
+					"format": "12\" Vinyl",
+					"position": 1,
+					"title": ""
+				}
+			],
+			"country": "AR",
+			"disambiguation": "mono",
+			"status": "Official",
+			"packaging": null,
+			"genres": [],
+			"barcode": "",
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"joinphrase": "",
+					"artist": {
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"genres": [
+							{
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"disambiguation": "",
+								"name": "country pop"
+							},
+							{
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"count": 2,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": ""
+							},
+							{
+								"name": "psychedelic pop",
+								"disambiguation": "",
+								"count": 2,
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58"
+							},
+							{
+								"name": "rock",
+								"disambiguation": "",
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+							},
+							{
+								"name": "sunshine pop",
+								"disambiguation": "",
+								"count": 5,
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9"
+							}
+						],
+						"name": "The Monkees",
+						"sort-name": "Monkees, The",
+						"type": "Group",
+						"disambiguation": "",
+						"country": "US"
+					}
+				}
+			],
+			"quality": "normal",
+			"text-representation": {
+				"script": null,
+				"language": null
+			},
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"area": {
+						"disambiguation": "",
+						"sort-name": "Argentina",
+						"type": null,
+						"name": "Argentina",
+						"iso-3166-1-codes": ["AR"],
+						"id": "0df04709-c7d8-3b55-a6ea-f3e5069a947b",
+						"type-id": null
+					},
+					"date": "1966"
+				}
+			],
+			"packaging-id": null,
+			"title": "The Monkees",
+			"date": "1966"
+		},
+		{
+			"media": [
+				{
+					"track-count": 12,
+					"format": "12\" Vinyl",
+					"title": "",
+					"position": 1,
+					"id": "36838001-3ba3-3549-a470-8b88c765ad9f",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64"
+				}
+			],
+			"id": "e5eb664c-3eb1-4114-85d9-03c1a79d9fdf",
+			"packaging": null,
+			"status": "Official",
+			"country": "AU",
+			"disambiguation": "mono",
+			"artist-credit": [
+				{
+					"artist": {
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"genres": [
+							{
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"disambiguation": "",
+								"name": "country pop"
+							},
+							{
+								"name": "pop",
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 7
+							},
+							{
+								"disambiguation": "",
+								"count": 2,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"name": "pop rock"
+							},
+							{
+								"count": 2,
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"disambiguation": "",
+								"name": "psychedelic pop"
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 2,
+								"disambiguation": "",
+								"name": "rock"
+							},
+							{
+								"name": "sunshine pop",
+								"count": 5,
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"disambiguation": ""
+							}
+						],
+						"name": "The Monkees",
+						"sort-name": "Monkees, The",
+						"type": "Group",
+						"country": "US",
+						"disambiguation": ""
+					},
+					"joinphrase": "",
+					"name": "The Monkees"
+				}
+			],
+			"quality": "normal",
+			"genres": [],
+			"barcode": "",
+			"date": "1966",
+			"title": "The Monkees",
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "1966",
+					"area": {
+						"iso-3166-1-codes": ["AU"],
+						"type-id": null,
+						"id": "106e0bec-b638-3b37-b731-f53d507dc00e",
+						"disambiguation": "",
+						"type": null,
+						"sort-name": "Australia",
+						"name": "Australia"
+					}
+				}
+			],
+			"packaging-id": null,
+			"text-representation": {
+				"script": "Latn",
+				"language": "eng"
+			}
+		},
+		{
+			"release-events": [
+				{
+					"date": "1966",
+					"area": {
+						"type": null,
+						"sort-name": "Brazil",
+						"disambiguation": "",
+						"name": "Brazil",
+						"type-id": null,
+						"id": "f45b47f8-5796-386e-b172-6c31b009a5d8",
+						"iso-3166-1-codes": ["BR"]
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": null,
+			"text-representation": {
+				"script": null,
+				"language": null
+			},
+			"date": "1966",
+			"title": "The Monkees",
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"joinphrase": "",
+					"artist": {
+						"genres": [
+							{
+								"name": "country pop",
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"disambiguation": ""
+							},
+							{
+								"name": "pop",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 7,
+								"disambiguation": ""
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2,
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"name": "psychedelic pop",
+								"disambiguation": "",
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2
+							},
+							{
+								"name": "rock",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 2,
+								"disambiguation": ""
+							},
+							{
+								"name": "sunshine pop",
+								"disambiguation": "",
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5
+							}
+						],
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"name": "The Monkees",
+						"disambiguation": "",
+						"country": "US",
+						"sort-name": "Monkees, The",
+						"type": "Group"
+					}
+				}
+			],
+			"quality": "normal",
+			"genres": [],
+			"barcode": "",
+			"country": "BR",
+			"disambiguation": "mono",
+			"status": "Official",
+			"packaging": null,
+			"media": [
+				{
+					"track-count": 12,
+					"format": "12\" Vinyl",
+					"title": "",
+					"position": 1,
+					"id": "6b9f83e7-e1f4-38a8-bee7-c29a928b6743",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64"
+				}
+			],
+			"id": "241408af-dd7b-490f-a413-92acf8f28c71"
+		},
+		{
+			"genres": [],
+			"barcode": "",
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"joinphrase": "",
+					"artist": {
+						"genres": [
+							{
+								"disambiguation": "",
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"name": "country pop"
+							},
+							{
+								"name": "pop",
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": ""
+							},
+							{
+								"name": "pop rock",
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2
+							},
+							{
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2,
+								"disambiguation": "",
+								"name": "psychedelic pop"
+							},
+							{
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"name": "rock"
+							},
+							{
+								"name": "sunshine pop",
+								"disambiguation": "",
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5
+							}
+						],
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"disambiguation": "",
+						"country": "US",
+						"type": "Group",
+						"sort-name": "Monkees, The",
+						"name": "The Monkees"
+					}
+				}
+			],
+			"quality": "normal",
+			"title": "The Monkees",
+			"date": "1966",
+			"text-representation": {
+				"language": "eng",
+				"script": "Latn"
+			},
+			"release-events": [
+				{
+					"date": "1966",
+					"area": {
+						"sort-name": "Canada",
+						"type": null,
+						"disambiguation": "",
+						"name": "Canada",
+						"id": "71bbafaa-e825-3e15-8ca9-017dcad1748b",
+						"type-id": null,
+						"iso-3166-1-codes": ["CA"]
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": null,
+			"id": "23240180-48cd-4dc3-a2e2-38064087041a",
+			"media": [
+				{
+					"track-count": 12,
+					"format": "12\" Vinyl",
+					"title": "",
+					"position": 1,
+					"id": "832ce2bb-fa8c-3be2-8706-9e575599e3b9",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64"
+				}
+			],
+			"status": "Official",
+			"packaging": null,
+			"disambiguation": "stereo",
+			"country": "CA"
+		},
+		{
+			"date": "1966",
+			"title": "The Monkees",
+			"release-events": [
+				{
+					"date": "1966",
+					"area": {
+						"type-id": null,
+						"id": "08310658-51eb-3801-80de-5a0739207115",
+						"iso-3166-1-codes": ["FR"],
+						"type": null,
+						"sort-name": "France",
+						"disambiguation": "",
+						"name": "France"
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": null,
+			"text-representation": {
+				"script": null,
+				"language": null
+			},
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"genres": [
+							{
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"disambiguation": "",
+								"name": "country pop"
+							},
+							{
+								"name": "pop",
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": ""
+							},
+							{
+								"count": 2,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"name": "psychedelic pop",
+								"count": 2,
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"disambiguation": ""
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 2,
+								"disambiguation": "",
+								"name": "rock"
+							},
+							{
+								"name": "sunshine pop",
+								"disambiguation": "",
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5
+							}
+						],
+						"name": "The Monkees",
+						"sort-name": "Monkees, The",
+						"type": "Group",
+						"disambiguation": "",
+						"country": "US"
+					},
+					"name": "The Monkees"
+				}
+			],
+			"quality": "normal",
+			"genres": [],
+			"barcode": "",
+			"status": "Official",
+			"packaging": null,
+			"disambiguation": "mono",
+			"country": "FR",
+			"id": "d9393d13-06c5-4d5d-abc6-8f24254a3f89",
+			"media": [
+				{
+					"id": "cdd742ad-5935-3861-aa59-686c9a19dd8d",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"format": "12\" Vinyl",
+					"track-count": 12,
+					"position": 1,
+					"title": ""
+				}
+			]
+		},
+		{
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"joinphrase": "",
+					"artist": {
+						"disambiguation": "",
+						"country": "US",
+						"type": "Group",
+						"sort-name": "Monkees, The",
+						"name": "The Monkees",
+						"genres": [
+							{
+								"name": "country pop",
+								"count": 2,
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"disambiguation": ""
+							},
+							{
+								"disambiguation": "",
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"name": "pop"
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2,
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"disambiguation": "",
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2,
+								"name": "psychedelic pop"
+							},
+							{
+								"name": "rock",
+								"disambiguation": "",
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+							},
+							{
+								"name": "sunshine pop",
+								"disambiguation": "",
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5
+							}
+						],
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233"
+					}
+				}
+			],
+			"quality": "normal",
+			"genres": [],
+			"barcode": "",
+			"release-events": [
+				{
+					"area": {
+						"id": "85752fda-13c4-31a3-bee5-0e5cb1f51dad",
+						"type-id": null,
+						"iso-3166-1-codes": ["DE"],
+						"sort-name": "Germany",
+						"type": null,
+						"disambiguation": "",
+						"name": "Germany"
+					},
+					"date": "1966"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": null,
+			"text-representation": {
+				"language": null,
+				"script": null
+			},
+			"date": "1966",
+			"title": "The Monkees",
+			"id": "ccd5bee5-bd45-4fcf-a42c-02d6692e02b2",
+			"media": [
+				{
+					"title": "",
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 12,
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"id": "0002eb54-9f51-39cb-a8ab-e3f885081807"
+				}
+			],
+			"disambiguation": "",
+			"country": "DE",
+			"status": "Official",
+			"packaging": null
+		},
+		{
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"artist": {
+						"sort-name": "Monkees, The",
+						"type": "Group",
+						"country": "US",
+						"disambiguation": "",
+						"name": "The Monkees",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"genres": [
+							{
+								"name": "country pop",
+								"disambiguation": "",
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2
+							},
+							{
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 7,
+								"disambiguation": "",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"count": 2,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": ""
+							},
+							{
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2,
+								"disambiguation": "",
+								"name": "psychedelic pop"
+							},
+							{
+								"name": "rock",
+								"disambiguation": "",
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798"
+							},
+							{
+								"name": "sunshine pop",
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5,
+								"disambiguation": ""
+							}
+						]
+					},
+					"joinphrase": ""
+				}
+			],
+			"quality": "normal",
+			"genres": [],
+			"barcode": "",
+			"release-events": [
+				{
+					"date": "1966",
+					"area": {
+						"name": "Mexico",
+						"sort-name": "Mexico",
+						"type": null,
+						"disambiguation": "",
+						"id": "3e08b2cd-69f3-317c-b1e4-e71be581839e",
+						"type-id": null,
+						"iso-3166-1-codes": ["MX"]
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": null,
+			"text-representation": {
+				"script": null,
+				"language": null
+			},
+			"date": "1966",
+			"title": "The Monkees",
+			"id": "2acb5674-1b8f-474a-adfd-256a0115ae7c",
+			"media": [
+				{
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"id": "bd0134ca-b840-3950-80b7-7cd882aab49e",
+					"position": 1,
+					"title": "",
+					"format": "12\" Vinyl",
+					"track-count": 12
+				}
+			],
+			"country": "MX",
+			"disambiguation": "mono",
+			"packaging": null,
+			"status": "Official"
+		},
+		{
+			"packaging": null,
+			"status": "Official",
+			"country": "NZ",
+			"disambiguation": "mono",
+			"id": "c3dd6dee-99ef-4a02-94cd-c63e5ca3b5e8",
+			"media": [
+				{
+					"format": "12\" Vinyl",
+					"track-count": 12,
+					"title": "",
+					"position": 1,
+					"id": "b7d372ec-363e-3434-9bfa-f183d4f4aff5",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64"
+				}
+			],
+			"title": "The Monkees",
+			"date": "1966",
+			"text-representation": {
+				"language": "eng",
+				"script": "Latn"
+			},
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "1966",
+					"area": {
+						"name": "New Zealand",
+						"disambiguation": "",
+						"sort-name": "New Zealand",
+						"type": null,
+						"iso-3166-1-codes": ["NZ"],
+						"id": "8524c7d9-f472-3890-a458-f28d5081d9c4",
+						"type-id": null
+					}
+				}
+			],
+			"packaging-id": null,
+			"genres": [],
+			"barcode": "",
+			"artist-credit": [
+				{
+					"artist": {
+						"name": "The Monkees",
+						"disambiguation": "",
+						"country": "US",
+						"type": "Group",
+						"sort-name": "Monkees, The",
+						"genres": [
+							{
+								"disambiguation": "",
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"name": "country pop"
+							},
+							{
+								"name": "pop",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 7,
+								"disambiguation": ""
+							},
+							{
+								"name": "pop rock",
+								"disambiguation": "",
+								"count": 2,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e"
+							},
+							{
+								"count": 2,
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"disambiguation": "",
+								"name": "psychedelic pop"
+							},
+							{
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 2,
+								"disambiguation": "",
+								"name": "rock"
+							},
+							{
+								"disambiguation": "",
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5,
+								"name": "sunshine pop"
+							}
+						],
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233"
+					},
+					"joinphrase": "",
+					"name": "The Monkees"
+				}
+			],
+			"quality": "normal"
+		},
+		{
+			"country": "PE",
+			"disambiguation": "stereo",
+			"packaging": null,
+			"status": "Official",
+			"media": [
+				{
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"id": "54a1e1af-030a-3f11-9884-400ee3781136",
+					"position": 1,
+					"title": "",
+					"track-count": 12,
+					"format": "12\" Vinyl"
+				}
+			],
+			"id": "411efde9-73b5-45b8-b49c-cbada81f4f0a",
+			"packaging-id": null,
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"area": {
+						"id": "719f6082-95c7-3dd5-9503-e143010a6cc1",
+						"type-id": null,
+						"iso-3166-1-codes": ["PE"],
+						"sort-name": "Peru",
+						"type": null,
+						"disambiguation": "",
+						"name": "Peru"
+					},
+					"date": "1966"
+				}
+			],
+			"text-representation": {
+				"script": null,
+				"language": null
+			},
+			"date": "1966",
+			"title": "The Monkees",
+			"quality": "normal",
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"genres": [
+							{
+								"name": "country pop",
+								"count": 2,
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"disambiguation": ""
+							},
+							{
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"name": "pop"
+							},
+							{
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2,
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2,
+								"disambiguation": "",
+								"name": "psychedelic pop"
+							},
+							{
+								"name": "rock",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 2,
+								"disambiguation": ""
+							},
+							{
+								"name": "sunshine pop",
+								"disambiguation": "",
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5
+							}
+						],
+						"sort-name": "Monkees, The",
+						"type": "Group",
+						"country": "US",
+						"disambiguation": "",
+						"name": "The Monkees"
+					},
+					"name": "The Monkees"
+				}
+			],
+			"barcode": null,
+			"genres": []
+		},
+		{
+			"text-representation": {
+				"script": null,
+				"language": null
+			},
+			"packaging-id": null,
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "1966",
+					"area": {
+						"iso-3166-1-codes": ["PH"],
+						"type-id": null,
+						"id": "786532a5-2e36-315a-bdf2-221dc1b64b72",
+						"disambiguation": "",
+						"type": null,
+						"sort-name": "Philippines",
+						"name": "Philippines"
+					}
+				}
+			],
+			"title": "The Monkees",
+			"date": "1966",
+			"barcode": "",
+			"genres": [],
+			"quality": "normal",
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"genres": [
+							{
+								"disambiguation": "",
+								"count": 2,
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"name": "country pop"
+							},
+							{
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2,
+								"disambiguation": ""
+							},
+							{
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2,
+								"disambiguation": "",
+								"name": "psychedelic pop"
+							},
+							{
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"name": "rock"
+							},
+							{
+								"name": "sunshine pop",
+								"count": 5,
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"disambiguation": ""
+							}
+						],
+						"type": "Group",
+						"sort-name": "Monkees, The",
+						"country": "US",
+						"disambiguation": "",
+						"name": "The Monkees"
+					},
+					"name": "The Monkees"
+				}
+			],
+			"disambiguation": "mono",
+			"country": "PH",
+			"status": "Official",
+			"packaging": null,
+			"id": "af86844e-105b-4e44-81b8-5604ecd51d46",
+			"media": [
+				{
+					"id": "3f4ccbc9-193f-31a7-b411-0b2f1fcd8cac",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"format": "12\" Vinyl",
+					"track-count": 12,
+					"title": "",
+					"position": 1
+				}
+			]
+		},
+		{
+			"country": "GB",
+			"disambiguation": "mono",
+			"status": "Official",
+			"packaging": "Cardboard/Paper Sleeve",
+			"id": "c0308e7c-8dce-4c72-b0a1-faf053005576",
+			"media": [
+				{
+					"track-count": 12,
+					"format": "12\" Vinyl",
+					"position": 1,
+					"title": "",
+					"id": "ff725bfc-bee0-3fee-b410-d275ec76939b",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64"
+				}
+			],
+			"release-events": [
+				{
+					"date": "1966",
+					"area": {
+						"name": "United Kingdom",
+						"sort-name": "United Kingdom",
+						"type": null,
+						"disambiguation": "",
+						"id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+						"type-id": null,
+						"iso-3166-1-codes": ["GB"]
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": "f7101ce3-0384-39ce-9fde-fbbd0044d35f",
+			"text-representation": {
+				"language": "eng",
+				"script": "Latn"
+			},
+			"date": "1966",
+			"title": "The Monkees",
+			"artist-credit": [
+				{
+					"joinphrase": "",
+					"artist": {
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"genres": [
+							{
+								"name": "country pop",
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"disambiguation": ""
+							},
+							{
+								"name": "pop",
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": ""
+							},
+							{
+								"name": "pop rock",
+								"count": 2,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": ""
+							},
+							{
+								"count": 2,
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"disambiguation": "",
+								"name": "psychedelic pop"
+							},
+							{
+								"disambiguation": "",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 2,
+								"name": "rock"
+							},
+							{
+								"name": "sunshine pop",
+								"disambiguation": "",
+								"count": 5,
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9"
+							}
+						],
+						"sort-name": "Monkees, The",
+						"type": "Group",
+						"disambiguation": "",
+						"country": "US",
+						"name": "The Monkees"
+					},
+					"name": "The Monkees"
+				}
+			],
+			"quality": "normal",
+			"genres": [],
+			"barcode": ""
+		},
+		{
+			"id": "a9e0fa3e-8a36-4964-aeed-6e36ebd27bc5",
+			"media": [
+				{
+					"track-count": 12,
+					"format": "12\" Vinyl",
+					"position": 1,
+					"title": "",
+					"id": "f1fa0aa8-9303-4c08-87ee-24abc018b8ed",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64"
+				}
+			],
+			"packaging": "Cardboard/Paper Sleeve",
+			"status": null,
+			"disambiguation": "mono, Hollywood pressing",
+			"country": "US",
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"joinphrase": "",
+					"artist": {
+						"name": "The Monkees",
+						"disambiguation": "",
+						"country": "US",
+						"type": "Group",
+						"sort-name": "Monkees, The",
+						"genres": [
+							{
+								"name": "country pop",
+								"disambiguation": "",
+								"count": 2,
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1"
+							},
+							{
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": "",
+								"name": "pop"
+							},
+							{
+								"count": 2,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"name": "psychedelic pop",
+								"count": 2,
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"disambiguation": ""
+							},
+							{
+								"name": "rock",
+								"disambiguation": "",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 2
+							},
+							{
+								"disambiguation": "",
+								"count": 5,
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"name": "sunshine pop"
+							}
+						],
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233"
+					}
+				}
+			],
+			"quality": "normal",
+			"genres": [],
+			"barcode": null,
+			"date": "1966",
+			"title": "The Monkees",
+			"status-id": null,
+			"release-events": [
+				{
+					"date": "1966",
+					"area": {
+						"name": "United States",
+						"disambiguation": "",
+						"sort-name": "United States",
+						"type": null,
+						"iso-3166-1-codes": ["US"],
+						"id": "489ce91b-6658-3307-9877-795b68554c98",
+						"type-id": null
+					}
+				}
+			],
+			"packaging-id": "f7101ce3-0384-39ce-9fde-fbbd0044d35f",
+			"text-representation": {
+				"language": null,
+				"script": null
+			}
+		},
+		{
+			"genres": [],
+			"barcode": "",
+			"artist-credit": [
+				{
+					"artist": {
+						"genres": [
+							{
+								"disambiguation": "",
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"name": "country pop"
+							},
+							{
+								"name": "pop",
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 7
+							},
+							{
+								"name": "pop rock",
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2
+							},
+							{
+								"disambiguation": "",
+								"count": 2,
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"name": "psychedelic pop"
+							},
+							{
+								"name": "rock",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 2,
+								"disambiguation": ""
+							},
+							{
+								"name": "sunshine pop",
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5,
+								"disambiguation": ""
+							}
+						],
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"disambiguation": "",
+						"country": "US",
+						"sort-name": "Monkees, The",
+						"type": "Group",
+						"name": "The Monkees"
+					},
+					"joinphrase": "",
+					"name": "The Monkees"
+				}
+			],
+			"quality": "normal",
+			"title": "The Monkees",
+			"date": "1966",
+			"text-representation": {
+				"language": null,
+				"script": null
+			},
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "1966",
+					"area": {
+						"id": "ea88d395-87c9-3c47-b49a-114cad41fd39",
+						"type-id": null,
+						"iso-3166-1-codes": ["UY"],
+						"name": "Uruguay",
+						"sort-name": "Uruguay",
+						"type": null,
+						"disambiguation": ""
+					}
+				}
+			],
+			"packaging-id": null,
+			"media": [
+				{
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"id": "2f0fc7a9-80c4-3486-a78c-b57f7c2c16f6",
+					"title": "",
+					"position": 1,
+					"track-count": 12,
+					"format": "12\" Vinyl"
+				}
+			],
+			"id": "0cac9460-8a31-4ee3-b04e-337fdeb73cbe",
+			"packaging": null,
+			"status": "Official",
+			"country": "UY",
+			"disambiguation": "mono"
+		},
+		{
+			"date": "1966",
+			"title": "The Monkees",
+			"release-events": [
+				{
+					"date": "1966",
+					"area": {
+						"name": "Venezuela",
+						"disambiguation": "",
+						"sort-name": "Venezuela",
+						"type": null,
+						"iso-3166-1-codes": ["VE"],
+						"id": "2ac90d6b-04fa-3006-8a91-89da01032365",
+						"type-id": null
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"packaging-id": null,
+			"text-representation": {
+				"language": "spa",
+				"script": null
+			},
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"joinphrase": "",
+					"artist": {
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"genres": [
+							{
+								"disambiguation": "",
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"name": "country pop"
+							},
+							{
+								"name": "pop",
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": ""
+							},
+							{
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2,
+								"name": "pop rock"
+							},
+							{
+								"disambiguation": "",
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2,
+								"name": "psychedelic pop"
+							},
+							{
+								"disambiguation": "",
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"name": "rock"
+							},
+							{
+								"count": 5,
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"disambiguation": "",
+								"name": "sunshine pop"
+							}
+						],
+						"name": "The Monkees",
+						"type": "Group",
+						"sort-name": "Monkees, The",
+						"country": "US",
+						"disambiguation": ""
+					}
+				}
+			],
+			"quality": "normal",
+			"genres": [],
+			"barcode": "",
+			"packaging": null,
+			"status": "Official",
+			"country": "VE",
+			"disambiguation": "",
+			"id": "1a62f35f-2e77-4970-92ac-1a6010f58b80",
+			"media": [
+				{
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"id": "af59ea24-af1b-3f61-9c44-a4cfd6d014fa",
+					"position": 1,
+					"title": "",
+					"format": "12\" Vinyl",
+					"track-count": 12
+				}
+			]
+		},
+		{
+			"media": [
+				{
+					"id": "1ae28de5-027b-3bd8-91aa-ebe637709438",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"track-count": 12,
+					"format": "12\" Vinyl",
+					"title": "",
+					"position": 1
+				}
+			],
+			"id": "4fe60a3e-f258-43c0-88b8-8eb745da8da1",
+			"packaging": null,
+			"status": "Official",
+			"disambiguation": "mono",
+			"country": "GB",
+			"quality": "normal",
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"artist": {
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"genres": [
+							{
+								"name": "country pop",
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"disambiguation": ""
+							},
+							{
+								"name": "pop",
+								"disambiguation": "",
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 7
+							},
+							{
+								"name": "pop rock",
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2
+							},
+							{
+								"name": "psychedelic pop",
+								"count": 2,
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"disambiguation": ""
+							},
+							{
+								"disambiguation": "",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 2,
+								"name": "rock"
+							},
+							{
+								"name": "sunshine pop",
+								"disambiguation": "",
+								"count": 5,
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9"
+							}
+						],
+						"sort-name": "Monkees, The",
+						"type": "Group",
+						"disambiguation": "",
+						"country": "US",
+						"name": "The Monkees"
+					},
+					"joinphrase": ""
+				}
+			],
+			"barcode": "",
+			"genres": [],
+			"date": "1967-01",
+			"title": "The Monkees",
+			"packaging-id": null,
+			"release-events": [
+				{
+					"date": "1967-01",
+					"area": {
+						"iso-3166-1-codes": ["GB"],
+						"type-id": null,
+						"id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+						"name": "United Kingdom",
+						"disambiguation": "",
+						"type": null,
+						"sort-name": "United Kingdom"
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"text-representation": {
+				"script": "Latn",
+				"language": "eng"
+			}
+		},
+		{
+			"packaging": null,
+			"status": "Official",
+			"country": "CL",
+			"disambiguation": "mono",
+			"media": [
+				{
+					"title": "",
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 12,
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"id": "7457746f-ea58-3aa7-a4bd-5d51fc2bff44"
+				}
+			],
+			"id": "8625d83b-9250-4aec-9440-6729d630e2e1",
+			"title": "The Monkees",
+			"date": "1967-03-09",
+			"text-representation": {
+				"script": null,
+				"language": null
+			},
+			"packaging-id": null,
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"release-events": [
+				{
+					"date": "1967-03-09",
+					"area": {
+						"iso-3166-1-codes": ["CL"],
+						"type-id": null,
+						"id": "82d5f4d6-aed4-3ff5-81d1-5363ac6e97a7",
+						"name": "Chile",
+						"disambiguation": "",
+						"type": null,
+						"sort-name": "Chile"
+					}
+				}
+			],
+			"barcode": "",
+			"genres": [],
+			"quality": "normal",
+			"artist-credit": [
+				{
+					"artist": {
+						"disambiguation": "",
+						"country": "US",
+						"type": "Group",
+						"sort-name": "Monkees, The",
+						"name": "The Monkees",
+						"genres": [
+							{
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"count": 2,
+								"disambiguation": "",
+								"name": "country pop"
+							},
+							{
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"count": 7,
+								"disambiguation": "",
+								"name": "pop"
+							},
+							{
+								"name": "pop rock",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2,
+								"disambiguation": ""
+							},
+							{
+								"name": "psychedelic pop",
+								"disambiguation": "",
+								"count": 2,
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58"
+							},
+							{
+								"name": "rock",
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": ""
+							},
+							{
+								"name": "sunshine pop",
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5,
+								"disambiguation": ""
+							}
+						],
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233"
+					},
+					"joinphrase": "",
+					"name": "The Monkees"
+				}
+			]
+		},
+		{
+			"id": "9c7b55a3-ea47-4ff1-ab50-94387715f674",
+			"media": [
+				{
+					"format": "12\" Vinyl",
+					"track-count": 12,
+					"position": 1,
+					"title": "",
+					"id": "5b95947f-e5ae-3260-94f3-f25d9f282c20",
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64"
+				}
+			],
+			"status": "Official",
+			"packaging": null,
+			"country": "AU",
+			"disambiguation": "stereo",
+			"barcode": "",
+			"genres": [],
+			"quality": "normal",
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"joinphrase": "",
+					"artist": {
+						"genres": [
+							{
+								"name": "country pop",
+								"disambiguation": "",
+								"count": 2,
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1"
+							},
+							{
+								"name": "pop",
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"disambiguation": ""
+							},
+							{
+								"count": 2,
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"disambiguation": "",
+								"name": "pop rock"
+							},
+							{
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2,
+								"disambiguation": "",
+								"name": "psychedelic pop"
+							},
+							{
+								"disambiguation": "",
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"count": 2,
+								"name": "rock"
+							},
+							{
+								"count": 5,
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"disambiguation": "",
+								"name": "sunshine pop"
+							}
+						],
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"country": "US",
+						"disambiguation": "",
+						"type": "Group",
+						"sort-name": "Monkees, The",
+						"name": "The Monkees"
+					}
+				}
+			],
+			"title": "The Monkees",
+			"date": "1967",
+			"text-representation": {
+				"language": "eng",
+				"script": "Latn"
+			},
+			"packaging-id": null,
+			"release-events": [
+				{
+					"date": "1967",
+					"area": {
+						"sort-name": "Australia",
+						"type": null,
+						"disambiguation": "",
+						"name": "Australia",
+						"id": "106e0bec-b638-3b37-b731-f53d507dc00e",
+						"type-id": null,
+						"iso-3166-1-codes": ["AU"]
+					}
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe"
+		},
+		{
+			"text-representation": {
+				"language": "eng",
+				"script": "Latn"
+			},
+			"packaging-id": null,
+			"release-events": [
+				{
+					"area": {
+						"id": "106e0bec-b638-3b37-b731-f53d507dc00e",
+						"type-id": null,
+						"iso-3166-1-codes": ["AU"],
+						"name": "Australia",
+						"sort-name": "Australia",
+						"type": null,
+						"disambiguation": ""
+					},
+					"date": "1967"
+				}
+			],
+			"status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+			"title": "The Monkees",
+			"date": "1967",
+			"barcode": "",
+			"genres": [],
+			"quality": "normal",
+			"artist-credit": [
+				{
+					"name": "The Monkees",
+					"artist": {
+						"type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+						"id": "b8549efe-f4fd-4dc0-8ef1-226e9c400233",
+						"genres": [
+							{
+								"disambiguation": "",
+								"count": 2,
+								"id": "2de61e9c-de1d-47c8-999d-5b44c0cfeca1",
+								"name": "country pop"
+							},
+							{
+								"disambiguation": "",
+								"count": 7,
+								"id": "911c7bbb-172d-4df8-9478-dbff4296e791",
+								"name": "pop"
+							},
+							{
+								"disambiguation": "",
+								"id": "797e2e85-5ffd-495c-a757-8b4079052f0e",
+								"count": 2,
+								"name": "pop rock"
+							},
+							{
+								"disambiguation": "",
+								"id": "2aeb5340-c474-4677-b9a6-35ddac9b6a58",
+								"count": 2,
+								"name": "psychedelic pop"
+							},
+							{
+								"count": 2,
+								"id": "0e3fc579-2d24-4f20-9dae-736e1ec78798",
+								"disambiguation": "",
+								"name": "rock"
+							},
+							{
+								"disambiguation": "",
+								"id": "68b80b55-c919-4258-ac7a-55fb6c927ed9",
+								"count": 5,
+								"name": "sunshine pop"
+							}
+						],
+						"type": "Group",
+						"sort-name": "Monkees, The",
+						"disambiguation": "",
+						"country": "US",
+						"name": "The Monkees"
+					},
+					"joinphrase": ""
+				}
+			],
+			"disambiguation": "mono",
+			"country": "AU",
+			"packaging": null,
+			"status": "Official",
+			"media": [
+				{
+					"format-id": "3e9080b0-5e6c-34ab-bd15-f526b6306a64",
+					"id": "c739abbf-df8c-3615-a9a3-a4a50ccc0893",
+					"title": "",
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 12
+				}
+			],
+			"id": "ea658a9f-ec6b-45ed-a951-5872eae194d7"
+		}
+	],
+	"secondary-type-ids": [],
+	"secondary-types": [],
+	"title": "The Monkees"
+}
