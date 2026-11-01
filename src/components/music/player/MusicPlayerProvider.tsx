@@ -10,7 +10,7 @@ import {
 	useState,
 } from 'react';
 import { PlayerState, QueuedTrack } from '../types';
-import { formatTrackTitle } from '../utils';
+import { trackTitle } from '../utils';
 import { PlayerPersistence } from './persistence';
 import {
 	advance,
@@ -272,7 +272,7 @@ export function MusicPlayerProvider({
 	useEffect(() => {
 		if (!('mediaSession' in navigator) || !nowItem) return;
 		navigator.mediaSession.metadata = new MediaMetadata({
-			title: formatTrackTitle(nowItem.track.filename),
+			title: trackTitle(nowItem.track),
 			artist: nowItem.album.artist,
 			album: nowItem.album.album,
 			...(nowItem.album.coverUrl

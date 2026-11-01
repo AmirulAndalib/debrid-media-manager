@@ -58,6 +58,21 @@ describe('MusicPlayerBar', () => {
 		expect(trackNames.length).toBeGreaterThan(0);
 	});
 
+	it('renders the catalog title when the API sends one', () => {
+		const { currentTrack, ...props } = defaultProps();
+		render(
+			<MusicPlayerBar
+				{...props}
+				currentTrack={{
+					...currentTrack,
+					track: { ...currentTrack.track, title: 'Catalog Title' },
+				}}
+			/>
+		);
+		expect(screen.getAllByText('Catalog Title').length).toBeGreaterThan(0);
+		expect(screen.queryByText('Song')).toBeNull();
+	});
+
 	it('renders artist name', () => {
 		render(<MusicPlayerBar {...defaultProps()} />);
 		const artists = screen.getAllByText('Test Artist');

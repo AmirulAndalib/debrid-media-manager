@@ -1,10 +1,11 @@
 import { MusicAlbum, MusicTrack } from '@/pages/api/music/library';
 import { Download, ListEnd, Loader2, Play, X } from 'lucide-react';
 import { useState } from 'react';
-import { formatSize, formatTrackTitle } from './utils';
+import { PlayableTrack } from './types';
+import { formatDuration, formatSize, trackTitle } from './utils';
 
 interface TrackListItemProps {
-	track: MusicTrack;
+	track: PlayableTrack;
 	index: number;
 	album: MusicAlbum;
 	isCurrentTrack: boolean;
@@ -45,7 +46,7 @@ export default function TrackListItem({
 		<button
 			type="button"
 			onClick={onPlay}
-			aria-label={`Play ${formatTrackTitle(track.filename)} by ${album.artist}`}
+			aria-label={`Play ${trackTitle(track)} by ${album.artist}`}
 			className={`group grid w-full grid-cols-[32px_1fr_auto_auto] items-center gap-2 rounded-lg px-3 py-2.5 text-left transition-all duration-200 sm:grid-cols-[40px_1fr_auto_auto] sm:gap-4 sm:px-4 sm:py-3 ${
 				isCurrentTrack
 					? 'border-l-[3px] border-l-green-500 bg-green-500/10 pl-[calc(1rem-3px)] text-green-500'
@@ -81,7 +82,7 @@ export default function TrackListItem({
 				<span
 					className={`truncate font-medium ${isCurrentTrack ? 'text-green-500' : 'text-white'}`}
 				>
-					{formatTrackTitle(track.filename)}
+					{trackTitle(track)}
 				</span>
 				<span className="truncate text-xs text-gray-500 group-hover:text-gray-400">
 					{album.artist}
@@ -89,7 +90,9 @@ export default function TrackListItem({
 			</div>
 
 			<span className="font-mono text-sm text-gray-500 group-hover:text-gray-400">
-				{formatSize(track.bytes)}
+				{track.durationMs != null
+					? formatDuration(track.durationMs / 1000)
+					: formatSize(track.bytes)}
 			</span>
 
 			<div className="flex items-center gap-0.5">
@@ -99,7 +102,7 @@ export default function TrackListItem({
 							e.stopPropagation();
 							onPlayNext(track, album);
 						}}
-						className="flex items-center justify-center rounded-full p-1.5 text-gray-500 opacity-0 transition-all duration-200 hover:bg-white/10 hover:text-white group-hover:opacity-100"
+						className="flex items-center justify-center rounded-full p-1.5 text-gray-500 opacity-0 transition-all duration-200 group-hover:opacity-100 hover:bg-white/10 hover:text-white"
 						title="Play next"
 					>
 						<ListEnd className="h-4 w-4" />

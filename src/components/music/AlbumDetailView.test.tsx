@@ -69,6 +69,18 @@ describe('AlbumDetailView', () => {
 		expect(screen.getByText('60.0 MB')).toBeInTheDocument();
 	});
 
+	it('heads the last column Time once tracks carry durations', () => {
+		const props = defaultProps();
+		render(<AlbumDetailView {...props} />);
+		expect(screen.getByText('Size')).toBeInTheDocument();
+		props.album = makeAlbum({
+			tracks: props.album.tracks.map((t) => ({ ...t, durationMs: 61_000 })),
+		});
+		render(<AlbumDetailView {...props} />);
+		expect(screen.getByText('Time')).toBeInTheDocument();
+		expect(screen.getAllByText('1:01')).toHaveLength(2);
+	});
+
 	it('renders all tracks', () => {
 		render(<AlbumDetailView {...defaultProps()} />);
 		expect(screen.getByText('First')).toBeInTheDocument();

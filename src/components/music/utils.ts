@@ -1,3 +1,5 @@
+import { PlayableTrack } from './types';
+
 export function formatDuration(seconds: number): string {
 	if (!seconds || !isFinite(seconds)) return '0:00';
 	const mins = Math.floor(seconds / 60);
@@ -25,6 +27,8 @@ export function formatTrackTitle(filename: string): string {
 		.trim();
 	return formattedTitle || title;
 }
+
+export const trackTitle = (track: PlayableTrack) => track.title || formatTrackTitle(track.filename);
 
 export function shuffleArray<T>(array: T[]): T[] {
 	const shuffled = [...array];

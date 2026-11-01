@@ -74,6 +74,26 @@ describe('TrackListItem', () => {
 		expect(screen.getByText('30.0 MB')).toBeInTheDocument();
 	});
 
+	it('shows the catalog title and length when the API sends them', () => {
+		render(
+			<TrackListItem
+				track={{ ...makeTrack(), title: 'Real Title', durationMs: 245_000 }}
+				index={0}
+				album={makeAlbum()}
+				isCurrentTrack={false}
+				isPlaying={false}
+				onPlay={vi.fn()}
+				onDownload={vi.fn()}
+			/>
+		);
+		expect(screen.getByText('Real Title')).toBeInTheDocument();
+		expect(screen.getByText('4:05')).toBeInTheDocument();
+		expect(screen.queryByText('30.0 MB')).toBeNull();
+		expect(
+			screen.getByRole('button', { name: 'Play Real Title by Test Artist' })
+		).toBeInTheDocument();
+	});
+
 	it('calls onPlay when clicked', async () => {
 		const onPlay = vi.fn();
 		render(

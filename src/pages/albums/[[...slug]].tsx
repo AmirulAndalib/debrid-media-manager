@@ -6,7 +6,7 @@ import { MusicPlayerProvider, useMusicPlayer } from '@/components/music/player/M
 import { localStoragePersistence } from '@/components/music/player/persistence';
 import QueuePanel from '@/components/music/QueuePanel';
 import { QueuedTrack } from '@/components/music/types';
-import { formatTrackTitle } from '@/components/music/utils';
+import { trackTitle } from '@/components/music/utils';
 import { useRealDebridAccessToken } from '@/hooks/auth';
 import { MusicAlbum, MusicLibraryResponse, MusicTrack } from '@/pages/api/music/library';
 import { UnrestrictTrackResponse } from '@/pages/api/music/unrestrict';
@@ -504,7 +504,7 @@ function MusicLibrary({
 			<Head>
 				<title>
 					{currentTrack && player.isPlaying
-						? `${formatTrackTitle(currentTrack.track.filename)} - ${currentTrack.album.artist} - DMM`
+						? `${trackTitle(currentTrack.track)} - ${currentTrack.album.artist} - DMM`
 						: selectedAlbum
 							? `${selectedAlbum.album} - ${selectedAlbum.artist} - DMM`
 							: 'Music - DMM'}

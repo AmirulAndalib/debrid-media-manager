@@ -3,7 +3,7 @@ import { ChevronLeft, Disc3, Download, ListEnd, Loader2, Play } from 'lucide-rea
 import { useEffect, useState } from 'react';
 import DownloadAlbumModal from './DownloadAlbumModal';
 import TrackListItem from './TrackListItem';
-import { PlayerState, QueuedTrack } from './types';
+import { PlayableTrack, PlayerState, QueuedTrack } from './types';
 import { formatSize } from './utils';
 
 interface AlbumDetailViewProps {
@@ -194,7 +194,11 @@ export default function AlbumDetailView({
 					<div className="mb-4 grid grid-cols-[40px_1fr_auto_auto] gap-4 border-b border-white/10 px-4 py-2 text-xs font-medium tracking-wider text-gray-400 uppercase">
 						<span className="text-center">#</span>
 						<span>Title</span>
-						<span className="text-right">Size</span>
+						<span className="text-right">
+							{album.tracks.some((t: PlayableTrack) => t.durationMs != null)
+								? 'Time'
+								: 'Size'}
+						</span>
 						<span className="w-7" />
 					</div>
 

@@ -11,8 +11,11 @@ export interface PlayerState {
 	isShuffled: boolean;
 }
 
+/** A library track; the catalog API adds `title` and `durationMs` when it knows them. */
+export type PlayableTrack = MusicTrack & { title?: string; durationMs?: number | null };
+
 export interface QueuedTrack {
-	track: MusicTrack;
+	track: PlayableTrack;
 	album: MusicAlbum;
 	streamUrl?: string;
 }
