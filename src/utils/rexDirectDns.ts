@@ -1,11 +1,17 @@
+import { isIPv4 } from 'node:net';
+
 /**
  * Point `<hash>.rex-direct.debridmediamanager.com` at a rex server's own IP
- * (`src/pages/api/rex-direct/register`).
+ * (`src/pages/api/rex-direct/register`), and its LAN name `lan.<hash>.rex-direct…`
+ * at the server's address on its home network.
  *
- * The IP is always the request's source address, never a value the caller sends,
- * so the service cannot be used to aim a name under our domain at someone else's
- * server. The Cloudflare token is zone-scoped to DNS edit on this one zone and
- * lives only in the server env.
+ * The public name's IP is always the request's source address, never a value the
+ * caller sends, so the service cannot be used to aim a name under our domain at
+ * someone else's server. The LAN name's IP is caller-supplied, which is safe only
+ * because it must be an RFC 1918 private address (`isRfc1918Ipv4`): those are not
+ * routable on the internet, so nobody can aim our domain at a public host through it.
+ * The Cloudflare token is zone-scoped to DNS edit on this one zone and lives only in
+ * the server env.
  *
  * The record is looked up through the Cloudflare API, never a DNS resolver: a
  * resolver query for a name that does not exist yet is negatively cached by the
@@ -26,6 +32,18 @@ function config() {
 
 export function rexDirectHostname(hash: string): string {
 	return `${hash}.${config().base}`;
+}
+
+/** One label under the server's own name, so its `*.<hash>…` certificate covers it. */
+export function rexDirectLanHostname(hash: string): string {
+	return `lan.${rexDirectHostname(hash)}`;
+}
+
+/** A dotted IPv4 literal in 10/8, 172.16/12 or 192.168/16, the only LAN IPs we point a name at. */
+export function isRfc1918Ipv4(ip: string): boolean {
+	if (!isIPv4(ip)) return false;
+	const [a, b] = ip.split('.').map(Number);
+	return a === 10 || (a === 172 && b >= 16 && b <= 31) || (a === 192 && b === 168);
 }
 
 async function cf(path: string, init: RequestInit, token: string): Promise<any> {

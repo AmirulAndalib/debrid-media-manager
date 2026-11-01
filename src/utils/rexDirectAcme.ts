@@ -71,6 +71,11 @@ export interface IssuedCert {
 	expiresAt: Date;
 }
 
+/** Whether a stored fullchain covers the LAN name: ordered with the wildcard, not before it. */
+export function rexDirectCertCoversLan(certificate: string, hostname: string): boolean {
+	return acme.crypto.readCertificateInfo(certificate).domains.altNames.includes(`*.${hostname}`);
+}
+
 export async function issueRexDirectCert(hostname: string): Promise<IssuedCert> {
 	const { accountKey, externalAccountBinding, email, directoryUrl } = config();
 	const client = new acme.Client({ directoryUrl, accountKey, externalAccountBinding });

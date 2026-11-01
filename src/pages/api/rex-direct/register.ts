@@ -1,8 +1,13 @@
 import { repository as db } from '@/services/repository';
 import { getClientIpFromRequest } from '@/utils/clientIp';
 import { plexServerOwner } from '@/utils/plexServerOwner';
-import { issueRexDirectCert } from '@/utils/rexDirectAcme';
-import { rexDirectHostname, upsertRexDirectRecord } from '@/utils/rexDirectDns';
+import { issueRexDirectCert, rexDirectCertCoversLan } from '@/utils/rexDirectAcme';
+import {
+	isRfc1918Ipv4,
+	rexDirectHostname,
+	rexDirectLanHostname,
+	upsertRexDirectRecord,
+} from '@/utils/rexDirectDns';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 /**
@@ -17,10 +22,18 @@ import { NextApiRequest, NextApiResponse } from 'next';
  * that account. Each server gets a certificate of its own (`utils/rexDirectAcme`),
  * ordered in the background: until it is stored the answer is 202 with retryAfter.
  *
+ * A server may also send `lanIp`, its address on its home network, for a LAN name
+ * `lan.<hash>…` that reaches it over HTTPS at home without a port forward. Its
+ * certificate covers `*.<hash>…` for that; one from before LAN names is reordered in
+ * the background while the old one is still answered, and `lanHostname` is returned
+ * only once the answered certificate covers it.
+ *
  * The sponsor-key path (`x-api-key`) is what rex builds before 2026-10-19 send;
- * they get the shared wildcard as before. The A record is always set to the
- * request's source IP, never a caller-supplied one, and a server only ever
- * touches its own hash.
+ * they get the shared wildcard as before and no LAN name. The public A record is
+ * always the request's source IP, never a caller-supplied one. The LAN record is
+ * caller-supplied, which is safe only because it must be an RFC 1918 address: those
+ * are not routable, so nobody can aim our domain at a public host through it. A
+ * server only ever touches its own hash.
  */
 const MAX_NAMES_PER_ACCOUNT = 10;
 const RENEW_BEFORE_MS = 30 * 24 * 3600_000;
@@ -61,6 +74,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			.json({ error: 'Missing X-Plex-Token header: claim the server first' });
 	}
 
+	// Only a claimed server gets a LAN name; the sponsor-key path ignores lanIp.
+	const lanIp = plexAccountId && typeof req.body?.lanIp === 'string' ? req.body.lanIp : '';
+	if (lanIp && !isRfc1918Ipv4(lanIp)) {
+		return res.status(400).json({ error: 'Invalid lanIp' });
+	}
+
 	const ip = getClientIpFromRequest(req);
 	if (!/^[0-9.]{7,15}$/.test(ip) && !ip.includes(':')) {
 		return res.status(400).json({ error: 'Could not determine a source IP' });
@@ -99,6 +118,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		await upsertRexDirectRecord(hostname, ip);
 		await db.rexDirectRecordIp(machineIdentifier, ip);
 	}
+	if (lanIp && (await db.rexDirectLastLanIp(machineIdentifier)) !== lanIp) {
+		await upsertRexDirectRecord(rexDirectLanHostname(hash), lanIp);
+		await db.rexDirectRecordLanIp(machineIdentifier, lanIp);
+	}
 
 	if (wildcard) {
 		return res.status(200).json({
@@ -112,7 +135,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	const cert = await db.rexDirectServerCert(machineIdentifier);
 	const now = Date.now();
-	if (!cert || cert.expiresAt.getTime() - now < RENEW_BEFORE_MS) {
+	// A certificate from before LAN names lacks the wildcard: reorder it, and keep
+	// answering it meanwhile so the public name works.
+	const coversLan = !!lanIp && !!cert && rexDirectCertCoversLan(cert.certificate, hostname);
+	if (!cert || cert.expiresAt.getTime() - now < RENEW_BEFORE_MS || (lanIp && !coversLan)) {
 		await orderCertificate(machineIdentifier, hostname);
 	}
 	if (!cert || cert.expiresAt.getTime() <= now) {
@@ -127,6 +153,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		hostname,
 		hash,
 		ip,
+		...(coversLan && { lanHostname: rexDirectLanHostname(hash), lanIp }),
 		certificate: cert.certificate,
 		privateKey: cert.privateKey,
 	});

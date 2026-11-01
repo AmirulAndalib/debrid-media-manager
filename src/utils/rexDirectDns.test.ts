@@ -1,5 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { rexDirectHostname, upsertRexDirectRecord } from './rexDirectDns';
+import {
+	isRfc1918Ipv4,
+	rexDirectHostname,
+	rexDirectLanHostname,
+	upsertRexDirectRecord,
+} from './rexDirectDns';
 
 const OLD = process.env;
 
@@ -19,6 +24,52 @@ describe('rexDirectDns', () => {
 
 	it('builds the hostname under the configured base', () => {
 		expect(rexDirectHostname('abc')).toBe('abc.rex-direct.debridmediamanager.com');
+	});
+
+	it("builds the LAN name one label under the server's own, inside its wildcard", () => {
+		expect(rexDirectLanHostname('abc')).toBe('lan.abc.rex-direct.debridmediamanager.com');
+	});
+
+	// A caller picks the LAN record's address: only a private, unroutable one, so the
+	// name can never be aimed at someone else's public host.
+	it.each([
+		'10.0.0.0',
+		'10.255.255.255',
+		'172.16.0.1',
+		'172.31.255.255',
+		'192.168.0.0',
+		'192.168.88.244',
+	])('accepts the RFC 1918 address %s as a LAN IP', (ip) => {
+		expect(isRfc1918Ipv4(ip)).toBe(true);
+	});
+
+	it.each([
+		'9.255.255.255',
+		'11.0.0.0',
+		'172.15.255.255',
+		'172.32.0.0',
+		'192.167.255.255',
+		'192.169.0.0',
+		'203.0.113.7',
+		'100.64.0.1',
+		'127.0.0.1',
+		'169.254.1.1',
+		'0.0.0.0',
+		'fd00::1',
+		'fe80::1',
+		'::ffff:192.168.1.1',
+		'192.168.1',
+		'192.168.1.1.1',
+		'192.168.001.1',
+		'192.168.1.256',
+		' 192.168.1.1',
+		'192.168.1.1\n',
+		'10.0.0.1/8',
+		'0x0a.0.0.1',
+		'lan',
+		'',
+	])('refuses %j as a LAN IP', (ip) => {
+		expect(isRfc1918Ipv4(ip)).toBe(false);
 	});
 
 	it('creates the A record when none exists', async () => {

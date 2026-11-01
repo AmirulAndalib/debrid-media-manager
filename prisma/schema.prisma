@@ -1388,6 +1388,9 @@ model RexDirectName {
   /// The source IP the A record was last pointed at, so an unchanged heartbeat
   /// skips the Cloudflare write.
   lastIp            String?   @db.VarChar(64)
+  /// The private (RFC 1918) IP the server sent as `lanIp`, which its LAN name
+  /// `lan.<hash>…` was last pointed at; same skip as lastIp.
+  lastLanIp         String?   @db.VarChar(64)
   /// This server's own certificate for its name (ZeroSSL, `utils/rexDirectAcme`).
   certificate       String?   @db.MediumText
   privateKey        String?   @db.Text

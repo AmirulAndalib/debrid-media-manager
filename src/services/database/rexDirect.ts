@@ -81,6 +81,22 @@ export class RexDirectService extends DatabaseClient {
 		});
 	}
 
+	/** The private IP the LAN name was last pointed at, for the same skip as `lastIp`. */
+	public async lastLanIp(machineIdentifier: string): Promise<string | null> {
+		const row = await this.prisma.rexDirectName.findUnique({
+			where: { machineIdentifier },
+			select: { lastLanIp: true },
+		});
+		return row?.lastLanIp ?? null;
+	}
+
+	public async recordLanIp(machineIdentifier: string, lanIp: string): Promise<void> {
+		await this.prisma.rexDirectName.update({
+			where: { machineIdentifier },
+			data: { lastLanIp: lanIp },
+		});
+	}
+
 	/** Whether this machine already has a name: a new one counts against its account's cap. */
 	public async exists(machineIdentifier: string): Promise<boolean> {
 		return (await this.prisma.rexDirectName.count({ where: { machineIdentifier } })) > 0;

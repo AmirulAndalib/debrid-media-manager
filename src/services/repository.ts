@@ -1594,6 +1594,14 @@ export class Repository {
 		return this.rexDirectService.recordIp(machineIdentifier, ip);
 	}
 
+	public rexDirectLastLanIp(machineIdentifier: string) {
+		return this.rexDirectService.lastLanIp(machineIdentifier);
+	}
+
+	public rexDirectRecordLanIp(machineIdentifier: string, lanIp: string) {
+		return this.rexDirectService.recordLanIp(machineIdentifier, lanIp);
+	}
+
 	public rexDirectGetCert() {
 		return this.rexDirectService.getCert();
 	}
