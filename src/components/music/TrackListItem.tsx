@@ -1,5 +1,5 @@
 import { MusicAlbum, MusicTrack } from '@/pages/api/music/library';
-import { Download, Ellipsis, Heart, ListEnd, Loader2, Play, X } from 'lucide-react';
+import { Download, Ellipsis, Heart, ListEnd, Loader2, LucideIcon, Play, X } from 'lucide-react';
 import { MouseEvent, useState } from 'react';
 import { PlayableTrack } from './types';
 import { formatDuration, formatSize, trackTitle } from './utils';
@@ -173,5 +173,41 @@ export default function TrackListItem({
 				)}
 			</div>
 		</button>
+	);
+}
+
+/** A liked or playlist track whose file left the catalog: listed, never played. */
+export function UnavailableTrackRow({
+	index,
+	albumName,
+	action,
+}: {
+	index: number;
+	albumName?: string | null;
+	action: { label: string; icon: LucideIcon; active?: boolean; onClick: () => void };
+}) {
+	const Icon = action.icon;
+	return (
+		<div
+			aria-disabled="true"
+			className="grid w-full grid-cols-[32px_1fr_auto] items-center gap-2 rounded-lg border-l-[3px] border-l-transparent px-3 py-2.5 text-gray-600 sm:grid-cols-[40px_1fr_auto] sm:gap-4 sm:px-4 sm:py-3"
+		>
+			<span className="text-center font-mono text-sm">{index + 1}</span>
+			<span className="flex min-w-0 flex-col">
+				<span className="truncate font-medium">{albumName ?? 'Unknown album'}</span>
+				<span className="truncate text-xs">No longer available</span>
+			</span>
+			<button
+				type="button"
+				onClick={action.onClick}
+				aria-label={action.label}
+				title={action.label}
+				className={`flex items-center justify-center rounded-full p-1.5 transition-colors hover:bg-white/10 ${
+					action.active ? 'text-green-500' : 'text-gray-500 hover:text-white'
+				}`}
+			>
+				<Icon className="h-4 w-4" fill={action.active ? 'currentColor' : 'none'} />
+			</button>
+		</div>
 	);
 }

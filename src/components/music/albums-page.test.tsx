@@ -375,6 +375,31 @@ describe('music page', () => {
 		);
 	});
 
+	it('plays Liked Songs in the liked context', async () => {
+		me['likes?ids=1'] = { ids: ['h1-2'] };
+		me['likes?page=1&limit=50'] = {
+			items: [
+				{
+					hash: 'h1',
+					fileId: 2,
+					mbid: 'mb1',
+					likedAt: '',
+					track: fullAlbum.tracks[1],
+					album: summary,
+				},
+			],
+			total: 1,
+			hasMore: false,
+		};
+		routerMock.query = { slug: ['liked'] };
+		const { container } = render(<AlbumsPage />);
+		fireEvent.click(await screen.findByRole('button', { name: 'Play Closing by Test Artist' }));
+		await waitFor(() =>
+			expect(container.querySelector('audio')).toHaveAttribute('src', 'https://cdn.example/2')
+		);
+		expect(JSON.parse(localStorage.getItem('music:player')!).queue.contextId).toBe('liked');
+	});
+
 	it('plays an album from its card in the grid', async () => {
 		routerMock.query = { slug: ['browse'] };
 		const { container } = render(<AlbumsPage />);

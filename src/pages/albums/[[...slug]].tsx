@@ -11,6 +11,7 @@ import DownloadAlbumModal from '@/components/music/DownloadAlbumModal';
 import HomeView from '@/components/music/HomeView';
 import KeyboardShortcutsModal from '@/components/music/KeyboardShortcutsModal';
 import LibraryPane from '@/components/music/LibraryPane';
+import LikedView from '@/components/music/LikedView';
 import MusicPlayerBar from '@/components/music/MusicPlayerBar';
 import NowPlayingPanel from '@/components/music/NowPlayingPanel';
 import { MusicPlayerProvider, useMusicPlayer } from '@/components/music/player/MusicPlayerProvider';
@@ -226,7 +227,7 @@ function MusicLibrary({
 			: null;
 	const catalogSearch = route.name === 'search' ? route.q : (artistName ?? '');
 	const showsGrid =
-		!['album', 'home', 'library'].includes(route.name) &&
+		!['album', 'home', 'library', 'liked'].includes(route.name) &&
 		(route.name !== 'artist' || artistName !== null);
 	const selectedAlbumSummary = library?.albums.find((a) => a.hash === albumHash) ?? null;
 	const [selectedAlbumDetail, setSelectedAlbumDetail] = useState<MusicAlbum | null>(null);
@@ -678,6 +679,9 @@ function MusicLibrary({
 					{artistName && grid}
 				</>
 			);
+			break;
+		case 'liked':
+			content = <LikedView onTrackMenu={openTrackMenu} onDownload={downloadTrack} />;
 			break;
 		case 'library':
 			content = (
