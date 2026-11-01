@@ -1,6 +1,7 @@
 import {
 	enrichment,
 	fromLidarr,
+	isArtistPack,
 	LidarrAlbum,
 	pickRelease,
 	titlePool,
@@ -8,9 +9,12 @@ import {
 import lz2Album from '@/test/fixtures/lidarr/album-33b4653d-006e-3cc1-8afb-386b15a6cd6e.json';
 import monkeesAlbum from '@/test/fixtures/lidarr/album-48e8b712-4f5d-34e0-9492-22f936854662.json';
 import adeleAlbum from '@/test/fixtures/lidarr/album-5537624c-3d2f-4f5c-8099-df916082c85c.json';
+import ppmSingle from '@/test/fixtures/lidarr/album-7b1cac6e-dc17-427f-9c3a-a29a5e2b363c.json';
+import ppmAlbum from '@/test/fixtures/lidarr/album-de208292-8db5-3aed-a14a-b37a84d8c521.json';
 import chopin from '@/test/fixtures/music/library-0380fe617494cfc4a0b969639ad8a277ab366478.json';
 import adele from '@/test/fixtures/music/library-454eb44cc1839dd1b35bf22b9a47edeacca69e67.json';
 import lz2 from '@/test/fixtures/music/library-700d948d78ff200d34d643d4474365ea0b698fd7.json';
+import ppm from '@/test/fixtures/music/library-b9c65409f9789626e007ccdd8b5675a0e0d34a73.json';
 import monkees from '@/test/fixtures/music/library-dc925f67cd67936b4a8fbeb17d6decb648fd3479.json';
 import { discTrackCounts, getFilename } from '@/utils/musicTracks';
 import { describe, expect, it, vi } from 'vitest';
@@ -25,8 +29,16 @@ type Library = {
 	files: { file_id: number; path: string; bytes: number; trackNumber: number | null }[];
 };
 
-/** A torrent's real files as the album page serves them against `album`'s stored rows. */
-function served(library: Library, album?: LidarrAlbum, releaseId?: string) {
+/**
+ * A torrent's real files as the album page serves them against `album`'s
+ * stored rows, with `artistAlbums` as the artist pool's groups.
+ */
+function served(
+	library: Library,
+	album?: LidarrAlbum,
+	releaseId?: string,
+	artistAlbums: LidarrAlbum[] = []
+) {
 	const files = library.files.map((file) => ({
 		...file,
 		hash: library.hash,
@@ -45,7 +57,20 @@ function served(library: Library, album?: LidarrAlbum, releaseId?: string) {
 		group,
 		releases.find((r) => r.id === id)!
 	);
-	const rows = [...tracks, ...titlePool(library.mbid, group, releases, tracks)];
+	const pool = titlePool(library.mbid, group, releases, tracks);
+	const artistPool = isArtistPack(paths.length, tracks.length, {
+		mbid: metadata.artistMbid,
+		name: metadata.artist,
+	})
+		? titlePool(
+				library.mbid,
+				group,
+				artistAlbums.flatMap((other) => fromLidarr(other).releases),
+				[...tracks, ...pool],
+				pool.length
+			)
+		: [];
+	const rows = [...tracks, ...pool, ...artistPool];
 	return {
 		tracks: albumTracks(files, rows as Parameters<typeof albumTracks>[1], library.artist),
 		mbTrackCount: metadata.mbTrackCount,
@@ -71,6 +96,36 @@ describe('albumTracks', () => {
 			'Why Do You Love Me',
 		]);
 		expect(titleCensusReason(album, enriched)).toBe('titled');
+	});
+
+	it("titles an album filed under its single from the artist's other groups", () => {
+		// The Beatles' Please Please Me, 14 files, filed under the 2-track single
+		// Please Please Me / Ask Me Why (census 2026-11-01: 4 titled).
+		const single = ppmSingle as unknown as LidarrAlbum;
+		const before = served(ppm, single).tracks.map((track) => track.title);
+		const after = served(ppm, single, undefined, [ppmAlbum as unknown as LidarrAlbum]);
+		const titles = after.tracks.map((track) => track.title);
+
+		expect(after.mbTrackCount).toBe(2);
+		expect(before.filter(Boolean)).toHaveLength(4);
+		expect(titles.slice(2)).toEqual([
+			'Anna (Go to Him)',
+			'Chains',
+			'Boys',
+			'Ask Me Why',
+			'Please Please Me',
+			'Love Me Do',
+			'P.S. I Love You',
+			'Baby It’s You',
+			'Do You Want to Know a Secret',
+			'A Taste of Honey',
+			'There’s a Place',
+			'Twist and Shout',
+		]);
+		// 01 and 02 keep the single's titles by position, as before.
+		expect(titles.slice(0, 2)).toEqual(before.slice(0, 2));
+		const rows = after.tracks.filter((track) => track.title === 'Chains');
+		expect(rows[0]).toMatchObject({ trackNumber: 4, durationMs: expect.any(Number) });
 	});
 });
 

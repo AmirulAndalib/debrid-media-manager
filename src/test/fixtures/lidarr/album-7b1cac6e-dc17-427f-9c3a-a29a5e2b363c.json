@@ -1,0 +1,692 @@
+{
+	"Releases": [
+		{
+			"Id": "857b8526-bd30-41a4-af06-c972afcea52d",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-02-01",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": null,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": null,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "195f6a44-c29a-4a5f-9aef-bc88a216e811",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1964-01-01",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 123000,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 145000,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "4bf10663-2fc2-4e9b-870b-c0498705c0ac",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1976-03-06",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": null,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": null,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "2a823f08-148b-4efb-9dce-a4c09642c43c",
+			"Media": [
+				{
+					"Format": "8cm CD",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1988-11-28",
+			"Status": "Official",
+			"Title": "Please Please Me",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 123000,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 145000,
+					"MediumNumber": 1,
+					"RecordingId": "04532aae-d0cb-403c-8e09-7ea1716a124c",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "63b91d42-161c-4313-9f07-3e6650fa1aab",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-01-11",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": null,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": null,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "710bdd49-f9bc-443a-9cbc-87ae099af093",
+			"Media": [
+				{
+					"Format": "8cm CD",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1988-11-30",
+			"Status": "Official",
+			"Title": "Please Please Me",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 123000,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 145000,
+					"MediumNumber": 1,
+					"RecordingId": "04532aae-d0cb-403c-8e09-7ea1716a124c",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "f4214743-6753-4eea-acef-7a3ac4bc89c3",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-02-01",
+			"Status": "Promotion",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 120000,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 142000,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "dfd0dbf8-67e8-4dc0-acb1-c684ded1c501",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-01-01",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": null,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": null,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "32f132b7-483b-4c42-8b5e-5a511f37c08e",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-04-01",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": null,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": null,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "ee397a6d-c56f-45ea-9955-d203d2fea708",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-02-07",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 120000,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 142000,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "231aae8a-fd9a-42b4-bb2e-0b2e94f202fa",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-02-07",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 120000,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 142000,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "08a76e48-4d6a-3d9f-a25b-5d96166a05ae",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-02-07",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask My Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 120000,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 142000,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "4b4c9d63-f4ad-41e0-9065-a645ea5f9115",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-03-01",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 120000,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 142000,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "8d09b10f-8578-46d9-bd4e-e5254c8b6855",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-04-01",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 120000,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 142000,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "15e0263c-5c64-48ff-840b-fcfe169b5344",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1983-01-10",
+			"Status": "Official",
+			"Title": "Please Please Me",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 123000,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 145000,
+					"MediumNumber": 1,
+					"RecordingId": "04532aae-d0cb-403c-8e09-7ea1716a124c",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "00ccb5d2-8b8e-4ec4-9199-64125a0a5341",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1983-01-10",
+			"Status": "Official",
+			"Title": "Please Please Me",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 123000,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 145000,
+					"MediumNumber": 1,
+					"RecordingId": "04532aae-d0cb-403c-8e09-7ea1716a124c",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "f4d06880-44bf-44e6-84f7-7b26a1a89c5c",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1964-01-01",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 120000,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 142000,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "f7a739ac-45d2-377a-b84f-b3789dd471cd",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-02-21",
+			"Status": "Official",
+			"Title": "Please Please Me",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 123000,
+					"MediumNumber": 1,
+					"RecordingId": "b720b11f-2c00-4f48-83b9-4aa9d3207e8c",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 145000,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "7a6b0ed9-64e6-39e9-be92-3df383ccf65c",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-04-09",
+			"Status": "Official",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 123000,
+					"MediumNumber": 1,
+					"RecordingId": "b720b11f-2c00-4f48-83b9-4aa9d3207e8c",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": 145000,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		},
+		{
+			"Id": "f8b4bec0-d9d7-4e94-8db8-2d2f9a76f4e0",
+			"Media": [
+				{
+					"Format": "7\" Vinyl",
+					"Position": 1
+				}
+			],
+			"ReleaseDate": "1963-01-01",
+			"Status": "Promotion",
+			"Title": "Please Please Me / Ask Me Why",
+			"TrackCount": 2,
+			"Tracks": [
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": null,
+					"MediumNumber": 1,
+					"RecordingId": "875c1cf7-f568-4f0d-b5e3-bc8a7614269a",
+					"TrackName": "Please Please Me",
+					"TrackPosition": 1
+				},
+				{
+					"ArtistId": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+					"DurationMs": null,
+					"MediumNumber": 1,
+					"RecordingId": "c8da403f-3c34-48b0-ae9e-7aa419df07c3",
+					"TrackName": "Ask Me Why",
+					"TrackPosition": 2
+				}
+			]
+		}
+	],
+	"_source": "GET https://api.lidarr.audio/api/v0.4/album/7b1cac6e-dc17-427f-9c3a-a29a5e2b363c, read 2026-11-01: The Beatles, Please Please Me / Ask Me Why (1963), the single the catalog files the album Please Please Me under; all 20 releases. Trimmed to the fields DMM reads (album: id, title, type, secondarytypes, releasedate, artistid, genres, images CoverType/Url, artists id/artistname/sortname/artistaliases; release: Id, Title, Status, ReleaseDate, Media Format/Position, TrackCount, Tracks; track: TrackName, TrackPosition, MediumNumber, DurationMs, RecordingId, ArtistId); nothing else changed.",
+	"artistid": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+	"artists": [
+		{
+			"artistaliases": [
+				"披頭四",
+				"The Beatles",
+				"Les Beatles",
+				"ザ・ビートルズ",
+				"Los Beatles",
+				"البيتلز",
+				"ዘ ቢተልስ",
+				"দ্য বিটল্‌স",
+				"بیتلز",
+				"ધ બિટલ્સ",
+				"הביטלס",
+				"더 비틀즈",
+				"द बीटल्स",
+				"Bítlarnir",
+				"ದಿ ಬೀಟಲ್ಸ್",
+				"ദി ബീറ്റിൽസ്",
+				"Битлси",
+				"ਦ ਬੀਟਲਜ਼",
+				"பீட்டில்ஸ்",
+				"ద బీటిల్స్",
+				"เดอะบีเทิลส์",
+				"بیٹلز",
+				"ბითლზი",
+				"Die Beatles",
+				"I Beatles",
+				"The Silver Beatles",
+				"披头士",
+				"Битлз",
+				"Бітлз",
+				"די ביטלס",
+				"ᱫᱚ ᱵᱤᱴᱞᱮᱥ",
+				"द बिटल्स",
+				"ဘီးတဲလ်အဖွဲ့",
+				"Պիթլս",
+				"披頭四樂隊",
+				"Beatles",
+				"披頭四樂團",
+				"披头士乐队",
+				"披头士乐队",
+				"비틀스",
+				"ビートルズ"
+			],
+			"artistname": "The Beatles",
+			"id": "b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d",
+			"sortname": "Beatles, The"
+		}
+	],
+	"genres": ["Pop", "Rock", "Merseybeat"],
+	"id": "7b1cac6e-dc17-427f-9c3a-a29a5e2b363c",
+	"images": [
+		{
+			"CoverType": "Cover",
+			"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/63b91d42-161c-4313-9f07-3e6650fa1aab/15033075432-1200.jpg"
+		},
+		{
+			"CoverType": "Disc",
+			"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/63b91d42-161c-4313-9f07-3e6650fa1aab/15033079285-1200.jpg"
+		}
+	],
+	"releasedate": "1963-01-11",
+	"secondarytypes": [],
+	"title": "Please Please Me / Ask Me Why",
+	"type": "Single"
+}

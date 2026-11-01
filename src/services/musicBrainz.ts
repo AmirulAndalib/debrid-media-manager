@@ -1,4 +1,4 @@
-import { normalizeTitle, similarTitle } from '@/utils/musicTracks';
+import { getDirectory, normalizeTitle, similarTitle } from '@/utils/musicTracks';
 import * as v from '@badrap/valita';
 
 // MusicBrainz asks for one request a second and a User-Agent that names the
@@ -223,6 +223,26 @@ async function lidarr(path: string): Promise<unknown | null> {
 export async function fetchLidarrAlbum(mbid: string): Promise<LidarrAlbum | null> {
 	const json = await lidarr(`album/${mbid}`);
 	return json === null ? null : LidarrAlbum.parse(json, { mode: 'strip' });
+}
+
+const LidarrDiscography = v.object({
+	Albums: v.array(
+		v.object({
+			Id: v.string(),
+			Title: v.string(),
+			Type: v.string().nullable().optional(),
+			SecondaryTypes: v.array(v.string()).nullable().optional(),
+			ReleaseStatuses: v.array(v.string()).nullable().optional(),
+			ReleaseDate: v.string().nullable().optional(),
+		})
+	),
+});
+export type LidarrArtistAlbum = v.Infer<typeof LidarrDiscography>['Albums'][number];
+
+/** The artist's release groups as Lidarr lists them, without tracks; null when it has none. */
+export async function fetchLidarrArtist(mbid: string): Promise<LidarrArtistAlbum[] | null> {
+	const json = await lidarr(`artist/${mbid}`);
+	return json === null ? null : LidarrDiscography.parse(json, { mode: 'strip' }).Albums;
 }
 
 /** Lidarr's album search, for a group MusicBrainz no longer has. */
@@ -476,13 +496,15 @@ export function enrichment(mbid: string, group: MbReleaseGroup, release: MbRelea
 
 /**
  * Disc 0: every other title the group's releases give its recordings, once
- * each, for files the chosen release does not title (see `matchTrackMetadata`).
+ * each, for files the chosen release does not title (see `matchTrackMetadata`),
+ * numbered from `after` + 1.
  */
 export function titlePool(
 	mbid: string,
 	group: MbReleaseGroup,
 	releases: MbRelease[],
-	chosen: { title: string }[]
+	chosen: { title: string }[],
+	after = 0
 ) {
 	const seen = new Set(chosen.map((track) => normalizeTitle(track.title)));
 	return releases
@@ -491,5 +513,74 @@ export function titlePool(
 			const key = normalizeTitle(track.title);
 			return !seen.has(key) && !!seen.add(key);
 		})
-		.map((track, i) => ({ ...track, disc: 0, position: i + 1 }));
+		.map((track, i) => ({ ...track, disc: 0, position: after + i + 1 }));
+}
+
+// Each costs a Lidarr request, half a second.
+const ARTIST_POOL_ALBUMS = 40;
+
+/**
+ * Whether a torrent's audio files are likely a pack of its artist's albums
+ * filed under one group: more than a few beyond the chosen release's tracks,
+ * and an artist to ask for, not Various Artists.
+ */
+export const isArtistPack = (
+	files: number,
+	tracks: number,
+	artist: { mbid: string | null; name: string }
+) => files > tracks + 3 && !!artist.mbid && !/^various artists$/i.test(artist.name.trim());
+
+/**
+ * The ids of at most 40 of an artist's groups to title a pack of theirs from:
+ * those whose title one of `names` holds (the album's titles, the pack's
+ * folders: "Please Please Me / Ask Me Why", "(1971) - The Doors - Other
+ * Voices") first, then official studio albums, then other official groups,
+ * then the rest, each oldest first. Never `except`, the group itself.
+ */
+export function artistPoolAlbums(
+	albums: LidarrArtistAlbum[],
+	except: string,
+	names: string[]
+): string[] {
+	const named = names.map(normalizeTitle).join('/');
+	const rank = (album: LidarrArtistAlbum) => {
+		const title = normalizeTitle(album.Title);
+		if (title && named.includes(title)) return 0;
+		if (!album.ReleaseStatuses?.includes('Official')) return 3;
+		const studio =
+			album.Type === 'Album' &&
+			(album.SecondaryTypes ?? []).every((type) => type === 'Soundtrack');
+		return studio ? 1 : 2;
+	};
+	return albums
+		.filter((album) => album.Id !== except)
+		.map((album) => ({
+			id: album.Id,
+			rank: rank(album),
+			date: lidarrDate(album.ReleaseDate) ?? '9999',
+		}))
+		.sort((a, b) => a.rank - b.rank || a.date.localeCompare(b.date))
+		.slice(0, ARTIST_POOL_ALBUMS)
+		.map((album) => album.id);
+}
+
+/**
+ * Every release of the artist's groups a pack filed under `album` may hold
+ * (see `artistPoolAlbums`): Lidarr's artist, then each group, paced like every
+ * Lidarr request. None when Lidarr has no such artist; a group that fails is
+ * left out.
+ */
+export async function fetchArtistPoolReleases(
+	artistMbid: string,
+	album: { mbid: string; titles: string[] },
+	paths: string[]
+): Promise<MbRelease[]> {
+	const albums = (await fetchLidarrArtist(artistMbid)) ?? [];
+	const folders = [...new Set(paths.map(getDirectory))];
+	const releases: MbRelease[] = [];
+	for (const id of artistPoolAlbums(albums, album.mbid, [...album.titles, ...folders])) {
+		const found = await fetchLidarrAlbum(id).catch(() => null);
+		if (found) releases.push(...fromLidarr(found).releases);
+	}
+	return releases;
 }

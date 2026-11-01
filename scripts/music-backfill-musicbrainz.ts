@@ -2,11 +2,14 @@
  * Enrich every release group in the music catalog: its type, genres and first
  * release date, the tracklist of one of its releases (titles and lengths for
  * the player), every other title its releases give (disc 0, for files that
- * release leaves untitled), its artists, and its cover: the Cover Art Archive's
- * for the group, else Lidarr's for one of its releases, copied into the B2
- * bucket behind posters0…9.debridmediamanager.com when B2_KEY_ID and
- * B2_APP_KEY are set (one download at a time, 10 s each; a failed copy keeps
- * the archive's URL). Albums already copied (`coverSource` b2) keep theirs.
+ * release leaves untitled) and, when the torrent holds more than a few files
+ * beyond that release (a pack of the artist's albums filed under one group,
+ * see `isArtistPack`), every title of up to 40 of the artist's other groups
+ * (up to 41 more Lidarr requests, ~20 s), its artists, and its cover: the
+ * Cover Art Archive's for the group, else Lidarr's for one of its releases,
+ * copied into the B2 bucket behind posters0…9.debridmediamanager.com when
+ * B2_KEY_ID and B2_APP_KEY are set (one download at a time, 10 s each; a failed
+ * copy keeps the archive's URL). Albums already copied (`coverSource` b2) keep theirs.
  *
  * `MusicMetadata.mbid` is a release group. Lidarr's metadata server is asked
  * first: one request, at most two a second, gives every release with its
@@ -32,12 +35,14 @@ import { canMirrorAlbumArt, mirrorAlbumArt } from '../src/services/albumArt';
 import {
 	caaCoverUrl,
 	enrichment,
+	fetchArtistPoolReleases,
 	fetchLidarrAlbum,
 	fetchRelease,
 	fetchReleaseGroup,
 	findLidarrAlbum,
 	fromLidarr,
 	hasCaaCover,
+	isArtistPack,
 	LidarrAlbum,
 	lidarrCoverRelease,
 	lidarrCoverUrl,
@@ -260,8 +265,30 @@ async function main() {
 				const pool = titlePool(mbid, group, releases, tracks);
 				const existing = await prisma.musicMetadata.findUnique({
 					where: { mbid },
-					select: { coverSource: true },
+					select: { coverSource: true, album: true },
 				});
+				const artistPool = isArtistPack(paths.length, tracks.length, {
+					mbid: metadata.artistMbid,
+					name: metadata.artist,
+				})
+					? titlePool(
+							mbid,
+							group,
+							await fetchArtistPoolReleases(
+								metadata.artistMbid!,
+								{ mbid: group.id, titles: [existing?.album ?? '', group.title] },
+								paths
+							).catch((error) => {
+								console.warn(
+									`${prefix}: artist titles failed:`,
+									(error as Error).message
+								);
+								return [];
+							}),
+							[...tracks, ...pool],
+							pool.length
+						)
+					: null;
 				// A group found by name has its art under the other id: its release's.
 				const coverRelease = album && lidarrCoverRelease(album);
 				const cover = await albumCover(
@@ -282,7 +309,9 @@ async function main() {
 
 				await prisma.$transaction([
 					prisma.musicTrackMetadata.deleteMany({ where: { mbid } }),
-					prisma.musicTrackMetadata.createMany({ data: [...tracks, ...pool] }),
+					prisma.musicTrackMetadata.createMany({
+						data: [...tracks, ...pool, ...(artistPool ?? [])],
+					}),
 					...artists.map((credit) =>
 						prisma.musicArtist.upsert({
 							where: { mbid: credit.mbid },
@@ -311,7 +340,8 @@ async function main() {
 					`${prefix}: ${artist} - ${title}, ${metadata.primaryType ?? 'no type'}, from ${source}, ` +
 						(release && picked
 							? `release ${release.id} by ${picked.rule} with ${tracks.length} tracks ` +
-								`for ${paths.length} files, ${pool.length} more titles`
+								`for ${paths.length} files, ${pool.length} more titles` +
+								(artistPool ? `, +${artistPool.length} artist titles` : '')
 							: 'no release') +
 						(cover ? `, cover ${cover.coverUrl}` : '')
 				);

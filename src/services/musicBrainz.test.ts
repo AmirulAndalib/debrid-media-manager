@@ -1,5 +1,7 @@
 import lz2Album from '@/test/fixtures/lidarr/album-33b4653d-006e-3cc1-8afb-386b15a6cd6e.json';
 import monkeesAlbum from '@/test/fixtures/lidarr/album-48e8b712-4f5d-34e0-9492-22f936854662.json';
+import ppmAlbum from '@/test/fixtures/lidarr/album-de208292-8db5-3aed-a14a-b37a84d8c521.json';
+import beatles from '@/test/fixtures/lidarr/artist-b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d.json';
 import bebeSearch from '@/test/fixtures/lidarr/search-bebe-rexha-the-lost-songs.json';
 import chopinSearch from '@/test/fixtures/lidarr/search-chopin-les-nocturnes.json';
 import chopin from '@/test/fixtures/music/library-0380fe617494cfc4a0b969639ad8a277ab366478.json';
@@ -18,13 +20,16 @@ import { discTrackCounts, getFilename, normalizeTitle } from '@/utils/musicTrack
 import { albumArtUrl } from '@/utils/posterHost';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+	artistPoolAlbums,
 	enrichment,
+	fetchArtistPoolReleases,
 	fetchLidarrAlbum,
 	fetchRelease,
 	fetchReleaseGroup,
 	findLidarrAlbum,
 	fromLidarr,
 	hasCaaCover,
+	isArtistPack,
 	LidarrAlbum,
 	lidarrCoverRelease,
 	lidarrCoverUrl,
@@ -42,6 +47,11 @@ import {
 // Japanese one (13), recorded from musicbrainz.org on 2026-11-01.
 const TRE = '4853b957-05f2-457b-ba47-18b2565abc69';
 const MONKEES = '48e8b712-4f5d-34e0-9492-22f936854662';
+// The Beatles; the catalog files their album Please Please Me (PPM_ALBUM) under
+// the single Please Please Me / Ask Me Why (PPM_SINGLE).
+const BEATLES = 'b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d';
+const PPM_SINGLE = '7b1cac6e-dc17-427f-9c3a-a29a5e2b363c';
+const PPM_ALBUM = 'de208292-8db5-3aed-a14a-b37a84d8c521';
 // Lidarr's album answers, recorded 2026-11-01: every release with its tracks.
 const monkeesLidarr = fromLidarr(monkeesAlbum as unknown as LidarrAlbum);
 const lz2Lidarr = fromLidarr(lz2Album as unknown as LidarrAlbum);
@@ -211,6 +221,38 @@ describe('fetching', () => {
 		const failed = fetchLidarrAlbum(MONKEES).catch((error: Error) => error.message);
 		await vi.runAllTimersAsync();
 		expect(await failed).toMatch(/502/);
+	});
+
+	it("asks for an artist's albums, then each of the 40 a pack may hold, twice a second", async () => {
+		fetchMock.mockImplementation(async (url: string) =>
+			url.endsWith(`/artist/${BEATLES}`)
+				? json(beatles)
+				: url.endsWith(`/album/${PPM_ALBUM}`)
+					? json(ppmAlbum)
+					: json({ error: 'Not found' }, 404)
+		);
+		const start = Date.now();
+		const releases = fetchArtistPoolReleases(
+			BEATLES,
+			{ mbid: PPM_SINGLE, titles: ['Please Please Me', 'Please Please Me / Ask Me Why'] },
+			['/01. I Saw Her Standing There.flac']
+		);
+		await vi.runAllTimersAsync();
+
+		expect((await releases).map((release) => release.id)).toEqual(
+			ppmAlbum.Releases.map((release) => release.Id)
+		);
+		expect(fetchMock).toHaveBeenCalledTimes(41);
+		expect(fetchMock.mock.calls.slice(0, 2).map(([url]) => url)).toEqual([
+			`https://api.lidarr.audio/api/v0.4/artist/${BEATLES}`,
+			`https://api.lidarr.audio/api/v0.4/album/${PPM_ALBUM}`,
+		]);
+		expect(Date.now() - start).toBeGreaterThanOrEqual(40 * 500);
+
+		fetchMock.mockResolvedValueOnce(json({ error: 'Not found' }, 404));
+		const none = fetchArtistPoolReleases(BEATLES, { mbid: PPM_SINGLE, titles: [] }, []);
+		await vi.runAllTimersAsync();
+		expect(await none).toEqual([]);
 	});
 
 	it('finds Cover Art Archive art by its redirect', async () => {
@@ -418,6 +460,44 @@ describe('enrichment', () => {
 			primaryType: 'Album',
 		});
 		expect(tracks).toEqual([]);
+	});
+});
+
+describe('artist pools', () => {
+	it('are asked for a pack of more than a few files beyond the release, by a known artist', () => {
+		const artist = { mbid: BEATLES, name: 'The Beatles' };
+		expect(isArtistPack(14, 2, artist)).toBe(true);
+		expect(isArtistPack(14, 11, artist)).toBe(false);
+		expect(isArtistPack(14, 0, { mbid: null, name: 'The Beatles' })).toBe(false);
+		expect(
+			isArtistPack(14, 2, {
+				mbid: '89ad4ac3-39f7-470e-963a-56509c546377',
+				name: 'Various Artists',
+			})
+		).toBe(false);
+	});
+
+	it('take the albums the names hold first, then the studio albums, 40 at most', () => {
+		const albums = beatles.Albums;
+		const ids = artistPoolAlbums(albums, PPM_SINGLE, [
+			'Please Please Me',
+			'Please Please Me / Ask Me Why',
+			'/',
+		]);
+		const titles = ids.map((id) => albums.find((album) => album.Id === id)!.Title);
+		expect(ids).toHaveLength(40);
+		expect(ids).not.toContain(PPM_SINGLE);
+		// The album, and the single "Why", which "Ask Me Why" also names.
+		expect(titles.slice(0, 2)).toEqual(['Please Please Me', 'Why']);
+		expect(titles.slice(2, 4)).toEqual(['With The Beatles', 'Introducing… The Beatles']);
+		expect(titles).toEqual(
+			expect.arrayContaining(['A Hard Day’s Night', 'Help!', 'Abbey Road', 'Let It Be'])
+		);
+		// A folder names an album too ("(1971) - The Doors - Other Voices").
+		const help = artistPoolAlbums(albums, PPM_SINGLE, ['Help!', '/Disc 1 - Abbey Road/']);
+		expect(
+			help.slice(0, 3).map((id) => albums.find((album) => album.Id === id)!.Title)
+		).toEqual(['Help!', 'Help!', 'Abbey Road']);
 	});
 });
 

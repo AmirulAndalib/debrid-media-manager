@@ -1,0 +1,93 @@
+{
+	"_source": "GET https://debridmediamanager.com/api/music/library?hash=b9c65409f9789626e007ccdd8b5675a0e0d34a73, read 2026-11-01: The Beatles, Please Please Me, the 14-track album filed under the 2-track single Please Please Me / Ask Me Why; its 14 audio files in the order served, as AvailableMusicFile rows (RD links left out). It served 4 titled: 01 and 02 by the single's positions, 06 and 07 by name. trackNumber is null: the API serves the matched position, not the stored number, and every file names its own.",
+	"album": "Please Please Me",
+	"artist": "The Beatles",
+	"files": [
+		{
+			"bytes": 68792618,
+			"file_id": 1,
+			"path": "/01. I Saw Her Standing There.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 43402260,
+			"file_id": 2,
+			"path": "/02. Misery.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 67119851,
+			"file_id": 3,
+			"path": "/03. Anna (Go To Him).flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 55962837,
+			"file_id": 4,
+			"path": "/04. Chains.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 56064679,
+			"file_id": 5,
+			"path": "/05. Boys.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 54645259,
+			"file_id": 6,
+			"path": "/06. Ask Me Why.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 45704543,
+			"file_id": 7,
+			"path": "/07. Please Please Me.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 55462349,
+			"file_id": 8,
+			"path": "/08. Love Me Do.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 48625540,
+			"file_id": 9,
+			"path": "/09. P.S. I Love You.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 62807116,
+			"file_id": 10,
+			"path": "/10. Baby It's You.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 46403961,
+			"file_id": 11,
+			"path": "/11. Do You Want To Know A Secret.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 48224899,
+			"file_id": 12,
+			"path": "/12. A Taste Of Honey.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 44200741,
+			"file_id": 13,
+			"path": "/13. There's A Place.flac",
+			"trackNumber": null
+		},
+		{
+			"bytes": 63458431,
+			"file_id": 14,
+			"path": "/14. Twist And Shout.flac",
+			"trackNumber": null
+		}
+	],
+	"hash": "b9c65409f9789626e007ccdd8b5675a0e0d34a73",
+	"mbid": "7b1cac6e-dc17-427f-9c3a-a29a5e2b363c"
+}
