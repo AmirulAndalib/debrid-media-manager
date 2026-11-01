@@ -58,6 +58,14 @@ async function unrestrictTrack(
 	}
 }
 
+// Library and search results are summaries without tracks; this request has them.
+async function fetchAlbum(hash: string): Promise<MusicAlbum | null> {
+	const response = await fetch(`/api/music/library?hash=${encodeURIComponent(hash)}`);
+	if (!response.ok) throw new Error('Failed to fetch album');
+	const data: MusicLibraryResponse = await response.json();
+	return data.albums[0] ?? null;
+}
+
 const albumItems = (album: MusicAlbum): QueuedTrack[] =>
 	album.tracks.map((track) => ({ track, album }));
 
@@ -402,12 +410,7 @@ function MusicLibrary({
 		async function fetchAlbumDetail() {
 			try {
 				setSelectedAlbumLoading(true);
-				const response = await fetch(
-					`/api/music/library?hash=${encodeURIComponent(activeAlbumHash)}`
-				);
-				if (!response.ok) throw new Error('Failed to fetch album');
-				const data: MusicLibraryResponse = await response.json();
-				const album = data.albums[0] ?? null;
+				const album = await fetchAlbum(activeAlbumHash);
 				if (!isCancelled) {
 					setSelectedAlbumDetail(album);
 					if (album) {
@@ -466,8 +469,14 @@ function MusicLibrary({
 		return () => window.removeEventListener('keydown', handleKeyDown);
 	}, []);
 
-	const playAlbum = (album: MusicAlbum, startIndex: number = 0) =>
-		player.playContext(albumItems(album), startIndex, `album:${album.hash}`);
+	const playAlbum = async (album: MusicAlbum, startIndex: number = 0) => {
+		try {
+			const full = album.tracks.length ? album : await fetchAlbum(album.hash);
+			if (full) player.playContext(albumItems(full), startIndex, `album:${full.hash}`);
+		} catch (err) {
+			console.error('Failed to play album:', err);
+		}
+	};
 
 	// Download a track
 	const triggerBrowserDownload = (streamUrl: string, filename: string) => {

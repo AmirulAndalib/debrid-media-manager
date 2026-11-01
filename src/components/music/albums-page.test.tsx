@@ -118,6 +118,18 @@ describe('music page', () => {
 		expect(screen.queryByText('11 albums · 260 tracks')).toBeNull();
 	});
 
+	// The grid lists summaries with no tracks (`summary=1`), as the live API does.
+	it('plays an album from its card in the grid', async () => {
+		const { container } = render(<AlbumsPage />);
+		fireEvent.click(
+			await screen.findByRole('button', { name: 'Play First Album by Test Artist' })
+		);
+		await waitFor(() =>
+			expect(container.querySelector('audio')).toHaveAttribute('src', 'https://cdn.example/1')
+		);
+		expect(fetchMock).toHaveBeenCalledWith('/api/music/library?hash=h1');
+	});
+
 	it('plays an album through the player provider and saves the queue', async () => {
 		routerMock.query = { slug: ['h1'] };
 		const { container } = render(<AlbumsPage />);
