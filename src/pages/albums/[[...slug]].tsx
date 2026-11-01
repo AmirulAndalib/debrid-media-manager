@@ -598,7 +598,10 @@ function MusicLibrary({
 								Your Library
 							</button>
 						</div>
-						<div className="min-h-0 flex-1 overflow-y-auto p-2">
+						{/* The floating player bar sits over the bottom of this list. */}
+						<div
+							className={`min-h-0 flex-1 overflow-y-auto p-2 ${currentTrack ? 'pb-32' : ''}`}
+						>
 							<p className="px-3 py-2 text-xs font-bold text-gray-400 uppercase">
 								Recently added
 							</p>
