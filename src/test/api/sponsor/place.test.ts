@@ -95,6 +95,48 @@ describe('/api/sponsor/place', () => {
 		]);
 	});
 
+	// an older zurg that does not read `part` would file a second part as a copy of the episode
+	it('hands `parts` over on every release and answers every file with its part', async () => {
+		const file = (part?: number) => ({
+			path: 'Lost.S04E14.mkv',
+			season: 4,
+			episode: 13,
+			episodeEnd: null,
+			how: 'aligned' as const,
+			tmdbEpisodeId: 334007,
+			...(part ? { part } : {}),
+		});
+		const placed = { kind: 'tv' as const, imdbId: 'tt0411008', tmdbId: 4607 };
+		mockPlace.mockResolvedValueOnce({
+			releases: [{ ...placed, files: [file(), file(2)] }],
+			complete: true,
+		});
+		const res = createMockResponse();
+		await handler(post({ releases: [CONAN], parts: true }), res);
+
+		expect(mockPlace.mock.calls[0][0]).toEqual([
+			{ name: CONAN.name, hash: null, imdbId: null, files: CONAN.files, parts: true },
+		]);
+		expect(res.json).toHaveBeenCalledWith(
+			expect.objectContaining({
+				releases: [
+					{ ...placed, title: 'Titled', files: [{ ...file(), part: null }, file(2)] },
+				],
+			})
+		);
+	});
+
+	it('answers without `part` where the request does not ask for parts', async () => {
+		mockPlace.mockResolvedValueOnce({
+			releases: [{ kind: null, imdbId: null, tmdbId: null, files: [] }],
+			complete: true,
+		});
+		const res = createMockResponse();
+		await handler(post({ releases: [CONAN], parts: false }), res);
+
+		expect(mockPlace.mock.calls[0][0][0]).not.toHaveProperty('parts');
+	});
+
 	// zurg keeps a placement until it asks again a day or a week on, so a fix to the rules
 	// reached rex-fun's releases only that much later (2026-10-22); a caller holding answers
 	// from older rules asks about them again
@@ -137,6 +179,7 @@ describe('/api/sponsor/place', () => {
 		['a release without files', { releases: [{ name: 'Pack' }] }],
 		['a file without a path', { releases: [{ name: 'Pack', files: [{ folder: '' }] }] }],
 		['a numeric imdbId', { releases: [{ ...CONAN, imdbId: 131179 }] }],
+		['parts that is no boolean', { releases: [CONAN], parts: 'yes' }],
 	])('refuses %s', async (_, body) => {
 		const res = createMockResponse();
 		await handler(post(body), res);

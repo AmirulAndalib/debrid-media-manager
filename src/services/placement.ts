@@ -19,16 +19,20 @@ import { repository } from '@/services/repository';
 import {
 	absoluteFolders,
 	airDated,
+	alignTvdb,
 	buildAnimeIndex,
 	fansubShaped,
 	fileNumbers,
 	keepImdbOrder,
 	lookupAnime,
+	numberedByTvdb,
 	parseName,
 	placeFile,
 	specialOf,
+	stackedParts,
 	titleOf,
 	yieldToTitles,
+	type AlignedEpisode,
 	type AnimeIndex,
 	type ImdbLookup,
 	type Placement,
@@ -48,7 +52,7 @@ import { getTmdbAuth } from '@/utils/tmdbAuth';
  * releases they discarded). A caller that starts reading a field decides for itself whether to
  * ask again (zurg's placementReader). Deploys that place nothing differently keep it.
  */
-export const PLACEMENT_RULES = '2026-11-01.1';
+export const PLACEMENT_RULES = '2026-11-01.2';
 
 export interface PlaceRequest {
 	name: string;
@@ -56,6 +60,8 @@ export interface PlaceRequest {
 	imdbId: string | null;
 	/** `folder`: where the provider lists the file inside the release, `""` at its top, null when unknown. */
 	files: { path: string; folder: string | null }[];
+	/** The caller reads `part`: a file may be placed as one part of TMDB's episode. */
+	parts?: true;
 }
 
 export interface PlacedFile {
@@ -70,6 +76,12 @@ export interface PlacedFile {
 	 * is unplaced or placed on IMDb's numbering.
 	 */
 	tmdbEpisodeId: number | null;
+	/**
+	 * The file's part of TMDB's episode (1, 2, …), where it holds only one: TVDB's S04E14 of Lost
+	 * is the second part of TMDB's S4E13. Null where the file is the whole episode; only for a
+	 * request that sends `parts`.
+	 */
+	part?: number | null;
 	/**
 	 * A film inside a show's release, named on its own (`[Movie 02] Heroes Rising` in a My Hero
 	 * Academia pack): `kind` `movie` with the film's ids, present only on such files.
@@ -133,8 +145,8 @@ export interface PlacementSources {
 	identifier(names: string[]): Promise<Map<string, IdentifierResult> | null>;
 	/** TheTVDB's series for an IMDb id (`search/remoteid`); absent or null where TVDB cannot be asked. */
 	tvdbSeriesOf?(imdbId: string): Promise<number[] | null>;
-	/** A TheTVDB series' episodes in its default (aired) order, which Plex numbers by. */
-	tvdbEpisodes?(tvdbId: number): Promise<any[] | null>;
+	/** A TheTVDB series' episodes in its default (aired) order, which Plex numbers by, or its DVD order. */
+	tvdbEpisodes?(tvdbId: number, order?: 'dvd'): Promise<any[] | null>;
 }
 
 /** Releases placed at once; each one's files go one after another, sharing its lookups. */
@@ -925,6 +937,8 @@ async function placeOnShow(
 		),
 	};
 	placement.tvdbOrder = tvdbOrderLookup(showId, sources, TVDB_ORDER);
+	placement.aligned = alignedLookup(showId, details, sources, release);
+	if (release.parts) placement.parts = true;
 	if (DUBBED.test(release.name)) placement.dubOrder = tvdbOrderLookup(showId, sources, DUB_ORDER);
 	placement.packOrder = await packOrderLookup(release, placement.seasons, showId, sources);
 	placement.namedRun = await namedRunLookup(release, placement.seasons, episodes);
@@ -945,12 +959,19 @@ async function placeFiles(
 	how: (found: Placement) => PlacementRule | null = (found) => found.how,
 	byTitle = false
 ): Promise<PlacedRelease> {
-	const numbers = absoluteFolders(
-		release.files.map((file) => ({
-			folder: file.folder,
-			numbers: fileNumbers(release.name, file.folder, file.path, release.files.length === 1),
-		})),
-		placement.seasons
+	const numbers = stackedParts(
+		absoluteFolders(
+			release.files.map((file) => ({
+				folder: file.folder,
+				numbers: fileNumbers(
+					release.name,
+					file.folder,
+					file.path,
+					release.files.length === 1
+				),
+			})),
+			placement.seasons
+		)
 	);
 	// a release's one file named by a hash is titled as the release: Usenet's
 	// `SpongeBob.SquarePants.1999.S10E25.Yeti.Krabs.…` holds `1501ec8cb21ed376ee71db04c4bb2dfb.mkv`
@@ -958,6 +979,17 @@ async function placeFiles(
 		const stem = (path.split('/').pop() ?? path).replace(/\.[a-z0-9]{2,4}$/i, '');
 		return release.files.length === 1 && /^[0-9a-f]{16,}$/i.test(stem) ? release.name : path;
 	};
+	// a release whose titles name TMDB's episodes at its own numbers, where TVDB's list differs,
+	// numbers as TMDB does
+	if (
+		placement.aligned &&
+		!(await numberedByTvdb(
+			placement,
+			release.files.map((file) => titledAs(file.path)),
+			numbers
+		))
+	)
+		placement = { ...placement, aligned: undefined };
 	const placed: (Placement | null)[] = [];
 	for (const [at, file] of release.files.entries()) {
 		placed.push(
@@ -1048,6 +1080,21 @@ async function placeFiles(
 			? found
 			: { ...between, episodeEnd: null, how: before.how };
 	});
+	// the one file of an episode beside a later part of it named so is its first: `Lost.S01E24`
+	// beside `Lost.S01E24.Part.2`
+	const parted = placement.parts
+		? kept.map((found) => {
+				const same = (other: Placement | null) =>
+					other?.season === found?.season && other?.episode === found?.episode;
+				return found &&
+					!found.part &&
+					found.episodeEnd === null &&
+					kept.some((other) => same(other) && (other?.part ?? 0) > 1) &&
+					kept.filter((other) => same(other) && !other?.part).length === 1
+					? { ...found, part: 1 }
+					: found;
+			})
+		: kept;
 	// every rule lands on an episode of TMDB's season lists, which carry its id; IMDb's list has none
 	const episodeId = async (found: Placement) =>
 		placement.tmdbId > 0
@@ -1057,7 +1104,7 @@ async function placeFiles(
 			: null;
 	const placedAnswer = answer(
 		await Promise.all(
-			kept.map(async (found, at) => {
+			parted.map(async (found, at) => {
 				const path = release.files[at].path;
 				const rule = found && how(found);
 				return found && rule
@@ -1068,6 +1115,7 @@ async function placeFiles(
 							episodeEnd: found.episodeEnd,
 							how: rule,
 							tmdbEpisodeId: await episodeId(found),
+							...(found.part ? { part: found.part } : {}),
 						}
 					: unplaced(path);
 			})
@@ -1293,6 +1341,139 @@ async function packOrderLookup(
 		used.has(season) ? (order.get(season)?.[episode - 1] ?? null) : null;
 }
 
+/** A show's `alignTvdb` in one of TVDB's orders, with the last episode each list numbers a season to. */
+interface Alignment {
+	aligned: Map<string, AlignedEpisode | null>;
+	tvdbLast: Map<number, number>;
+	tmdbLast: Map<number, number>;
+}
+
+/** Each show's alignments, kept as long as the season lists they are read from. */
+const alignments = new WeakMap<
+	PlacementSources,
+	Map<string, { until: number; alignment: Promise<Alignment | null> }>
+>();
+const ALIGNMENT_MS = 12 * 3600_000;
+
+const listedEpisodes = (rows: any[], season: string, episode: string, aired: string) =>
+	rows.flatMap((row) =>
+		Number.isInteger(row?.[season]) && Number.isInteger(row?.[episode])
+			? [
+					{
+						season: row[season] as number,
+						episode: row[episode] as number,
+						airDate: typeof row[aired] === 'string' ? (row[aired] as string) : null,
+						name: typeof row.name === 'string' ? (row.name as string) : '',
+						runtime:
+							typeof row.runtime === 'number' && row.runtime > 0 ? row.runtime : null,
+					},
+				]
+			: []
+	);
+
+const lastOf = (rows: { season: number; episode: number }[]) => {
+	const last = new Map<number, number>();
+	for (const row of rows) last.set(row.season, Math.max(last.get(row.season) ?? 0, row.episode));
+	return last;
+};
+
+/** A show's alignment in TVDB's `order`, read once per show and kept; null where a list cannot be read. */
+function showAlignment(
+	showId: number,
+	details: any,
+	tvdbId: number,
+	sources: PlacementSources,
+	order?: 'dvd'
+) {
+	const shows = alignments.get(sources) ?? new Map();
+	alignments.set(sources, shows);
+	const at = `${showId}/${order ?? 'default'}`;
+	let cached = shows.get(at);
+	if (!cached || cached.until < Date.now()) {
+		const read = async (): Promise<Alignment | null> => {
+			const listed = await sources.tvdbEpisodes!(tvdbId, order);
+			const seasons = await Promise.all(
+				(details.seasons as any[])
+					.filter((row) => Number.isInteger(row?.season_number))
+					.map((row) => sources.season(showId, row.season_number))
+			);
+			if (!listed || seasons.some((list) => !Array.isArray(list?.episodes))) return null;
+			const tvdb = listedEpisodes(listed, 'seasonNumber', 'number', 'aired');
+			const tmdb = listedEpisodes(
+				seasons.flatMap((list) => list.episodes),
+				'season_number',
+				'episode_number',
+				'air_date'
+			);
+			return {
+				aligned: alignTvdb(tvdb, tmdb),
+				tvdbLast: lastOf(tvdb),
+				tmdbLast: lastOf(tmdb),
+			};
+		};
+		const alignment = read().catch(() => null);
+		cached = { until: Date.now() + ALIGNMENT_MS, alignment };
+		shows.set(at, cached);
+		// a list that could not be read is asked again next time
+		void alignment.then((found) => found || shows.delete(at));
+	}
+	return cached.alignment;
+}
+
+/**
+ * TMDB's episode for TVDB's numbers on a show whose TVDB id TMDB records (`alignTvdb`), read once
+ * a file asks; undefined for every number where a list cannot be had. TVDB's aired order, but its
+ * DVD order for a season the release numbers past both that and TMDB's list: HiQVE's Lost BluRay
+ * numbers "Exodus (2)", TVDB's aired S1E24 and TMDB's, as E24 and E25. A show TMDB records no
+ * TVDB id for is `tvdbLook`'s.
+ */
+function alignedLookup(
+	showId: number,
+	details: any,
+	sources: PlacementSources,
+	release: PlaceRequest
+): PlacementShow['aligned'] {
+	const tvdbId = Number(details.external_ids?.tvdb_id);
+	if (!sources.tvdbEpisodes || !(tvdbId > 0)) return undefined;
+	const choose = async () => {
+		const aired = await showAlignment(showId, details, tvdbId, sources);
+		if (!aired) return null;
+		const last = new Map<number, number>();
+		for (const file of release.files) {
+			const numbers = fileNumbers(
+				release.name,
+				file.folder,
+				file.path,
+				release.files.length === 1
+			);
+			if (numbers?.season != null && numbers.season > 0)
+				last.set(
+					numbers.season,
+					Math.max(last.get(numbers.season) ?? 0, numbers.end ?? numbers.episode)
+				);
+		}
+		const past = [...last].filter(
+			([season, episode]) =>
+				episode > (aired.tvdbLast.get(season) ?? Infinity) &&
+				episode > (aired.tmdbLast.get(season) ?? Infinity)
+		);
+		const dvd = past.length
+			? await showAlignment(showId, details, tvdbId, sources, 'dvd')
+			: null;
+		const onDvd = new Set(
+			past.flatMap(([season, episode]) =>
+				(dvd?.tvdbLast.get(season) ?? 0) >= episode ? [season] : []
+			)
+		);
+		return (season: number) => (onDvd.has(season) ? dvd! : aired).aligned;
+	};
+	let chosen: ReturnType<typeof choose> | null = null;
+	return async (season, episode) => {
+		chosen ??= choose();
+		return (await chosen)?.(season).get(`${season}|${episode}`);
+	};
+}
+
 function tvdbOrderLookup(
 	tmdbId: number,
 	sources: PlacementSources,
@@ -1407,12 +1588,14 @@ export const cachedSources: PlacementSources = {
 					.map((row: any) => row?.series?.id)
 					.filter((id: unknown) => typeof id === 'number')
 		),
-	tvdbEpisodes: async (tvdbId) => {
+	tvdbEpisodes: async (tvdbId, order) => {
 		const episodes: any[] = [];
 		// 500 a page: Kitchen Nightmares' 126 episodes are one
 		for (let page = 0; page < 20; page++) {
 			const answer = await settle(() =>
-				getMetadataCache().getTvdb(`series/${tvdbId}/episodes/default?page=${page}`)
+				getMetadataCache().getTvdb(
+					`series/${tvdbId}/episodes/${order ?? 'default'}?page=${page}`
+				)
 			);
 			if (!answer) return null;
 			episodes.push(...(answer.data?.episodes ?? []));

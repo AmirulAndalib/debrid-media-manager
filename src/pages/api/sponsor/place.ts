@@ -18,10 +18,11 @@ const BUDGET_MS = 25_000;
 const IMDB_ID = /^tt\d{7,}$/;
 
 function parseReleases(body: unknown): PlaceRequest[] | null {
-	const releases = (body as { releases?: unknown } | undefined)?.releases;
+	const { releases, parts } = (body ?? {}) as { releases?: unknown; parts?: unknown };
 	if (!Array.isArray(releases) || releases.length === 0 || releases.length > MAX_RELEASES) {
 		return null;
 	}
+	if (parts != null && typeof parts !== 'boolean') return null;
 	let files = 0;
 	const out: PlaceRequest[] = [];
 	for (const raw of releases) {
@@ -48,6 +49,8 @@ function parseReleases(body: unknown): PlaceRequest[] | null {
 			// zurg sends "" when it knows nothing
 			imdbId: typeof imdbId === 'string' && IMDB_ID.test(imdbId) ? imdbId : null,
 			files: parsed,
+			// a caller that reads `part`: an older one files a second part as a copy of the episode
+			...(parts ? { parts: true as const } : {}),
 		});
 	}
 	return out;
@@ -55,9 +58,10 @@ function parseReleases(body: unknown): PlaceRequest[] | null {
 
 /**
  * What each release of a sponsor's library is, and its files' TMDB season and episode:
- * `{"releases": [{name, hash?, imdbId?, files: [{path, folder}]}]}` answers
- * `{"releases": [{kind, imdbId, tmdbId, files: [{path, season, episode, episodeEnd, how}]}],
- * "complete", "rules"}` in request order. See docs/sponsor-api.md.
+ * `{"releases": [{name, hash?, imdbId?, files: [{path, folder}]}], "parts"?: true}` answers
+ * `{"releases": [{kind, imdbId, tmdbId, files: [{path, season, episode, episodeEnd, how, part?}]}],
+ * "complete", "rules"}` in request order; every file carries `part` when `parts` was sent. See
+ * docs/sponsor-api.md.
  */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method !== 'POST') {
@@ -78,7 +82,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	const releases = parseReleases(req.body);
 	if (!releases) {
 		return res.status(400).json({
-			error: `Expected {"releases": [{"name": string, "hash"?: string, "imdbId"?: string, "files": [{"path": string, "folder"?: string}]}]} with 1-${MAX_RELEASES} releases and at most ${MAX_FILES} files`,
+			error: `Expected {"releases": [{"name": string, "hash"?: string, "imdbId"?: string, "files": [{"path": string, "folder"?: string}]}], "parts"?: boolean} with 1-${MAX_RELEASES} releases and at most ${MAX_FILES} files`,
 		});
 	}
 
@@ -92,7 +96,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			return results.map((result) => result ?? (complete ? null : undefined));
 		};
 		const placed = await placeReleases(releases, identify, cachedSources, deadline);
-		const named = await Promise.all(placed.releases.map((r) => titled(r, cachedSources)));
+		const parts = releases[0].parts;
+		const named = await Promise.all(
+			placed.releases.map(async (r) => {
+				const release = await titled(r, cachedSources);
+				return parts
+					? {
+							...release,
+							files: release.files.map((f) => ({ ...f, part: f.part ?? null })),
+						}
+					: release;
+			})
+		);
 		return res.status(200).json({ ...placed, releases: named, rules: PLACEMENT_RULES });
 	} catch (error) {
 		console.error('Failed to place sponsor releases', error);

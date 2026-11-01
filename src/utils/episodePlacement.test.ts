@@ -1,14 +1,18 @@
 import debridLinkSeedbox from '@/test/fixtures/debridlink/seedbox-list-2026-09-06.json';
+import lost from '@/test/fixtures/placement/lost-tvdb-order.json';
 import packs from '@/test/fixtures/placement/pack-folders.json';
 import releases from '@/test/fixtures/placement/releases.json';
 import hard from '@/test/fixtures/placement/unplaced-episodes.json';
 import frierenAddons from '@/test/fixtures/seasonEpisodes/addons-tt22248376-s1.json';
 import {
 	airDates,
+	alignTvdb,
 	fileNumbers,
 	normalizeTitle,
 	parseName,
+	stackedParts,
 	titleText,
+	type ListedEpisode,
 } from '@/utils/episodePlacement';
 import { describe, expect, it } from 'vitest';
 
@@ -220,5 +224,93 @@ describe('parseName on real names a ptt upgrade misread', () => {
 
 	it.each(names)('names no season in %s', (name) => {
 		expect(parseName(name).season).toBeNull();
+	});
+});
+
+describe('alignTvdb', () => {
+	// TVDB's and TMDB's own lists of Lost (TheTVDB 73739, TMDB 4607), 2026-11-01
+	const tvdb = (order: '73739' | '73739/dvd'): ListedEpisode[] =>
+		lost.answers.tvdbEpisodes[order].data.episodes.map((row) => ({
+			season: row.seasonNumber,
+			episode: row.number,
+			airDate: row.aired,
+			name: row.name,
+			runtime: row.runtime,
+		}));
+	const tmdb: ListedEpisode[] = Object.values(lost.answers.season).flatMap((list) =>
+		list.episodes.map((row) => ({
+			season: row.season_number,
+			episode: row.episode_number,
+			airDate: row.air_date,
+			name: row.name,
+			runtime: row.runtime,
+		}))
+	);
+	const part = (season: number, episode: number, part: number) => ({
+		season,
+		episode,
+		episodeEnd: null,
+		part,
+	});
+
+	it("maps TVDB's two halves of a finale TMDB lists as one episode, and nothing else", () => {
+		expect(alignTvdb(tvdb('73739'), tmdb)).toEqual(
+			new Map([
+				['4|13', part(4, 13, 1)],
+				['4|14', part(4, 13, 2)],
+				['6|17', part(6, 17, 1)],
+				['6|18', part(6, 17, 2)],
+			])
+		);
+	});
+
+	it('maps TVDB\'s DVD order of season 1, which splits "Exodus (2)" in two', () => {
+		const dvd = alignTvdb(tvdb('73739/dvd'), tmdb);
+		expect([dvd.get('1|24'), dvd.get('1|25')]).toEqual([part(1, 24, 1), part(1, 24, 2)]);
+	});
+
+	it('maps nothing where both lists agree', () => {
+		expect(alignTvdb(tmdb, tmdb).size).toBe(0);
+	});
+});
+
+describe('a part a file names after its episode', () => {
+	const parts = (...names: string[]) =>
+		stackedParts(names.map((name) => fileNumbers('', '', name, false))).map(
+			(numbers) => numbers?.part ?? null
+		);
+
+	// the Discord user's workaround for HiQVE's Lost BluRay, and Plex's own stacking words
+	it('is read beside the file of that episode it is a part of', () => {
+		expect(
+			parts(
+				'Lost.S01E24.1080p.Bluray.x265-HiQVE.mkv',
+				'Lost.S01E24.Part.2.1080p.Bluray.x265-HiQVE.mkv'
+			)
+		).toEqual([null, 2]);
+		expect(parts('Lost - S04E13 - pt1.mkv', 'Lost - S04E13 - pt2.mkv')).toEqual([1, 2]);
+		expect(parts('Lost.S04E13.cd1.mkv', 'Lost.S04E13.disc2.mkv')).toEqual([1, 2]);
+	});
+
+	// rex-fun's library on 2026-11-01: every such name there is an episode's own title
+	it('is no part where no other file is of that episode', () => {
+		expect(
+			parts(
+				'Greys.Anatomy.S05E01.Part1.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv',
+				'Greys.Anatomy.S05E02.Part2.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv'
+			)
+		).toEqual([null, null]);
+		expect(
+			parts(
+				'Twin.Peaks.S03E01.Part.1.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv',
+				'Twin.Peaks.S03E02.Part.2.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv'
+			)
+		).toEqual([null, null]);
+	});
+
+	it('is never a title after the episode', () => {
+		const name =
+			'Friends.S06E24.The.One.with.the.Proposal.Part.1.1080p.BluRay.REMUX.AVC.DD.5.1-NOGRP.mkv';
+		expect(fileNumbers('', '', name, false)).toEqual({ season: 6, episode: 24, end: null });
 	});
 });

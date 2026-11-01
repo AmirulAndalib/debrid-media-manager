@@ -5,13 +5,15 @@ import {
 	cachedSources,
 	placeReleases,
 	type Identify,
-	type PlaceRequest,
+	type PlacedRelease,
 	type PlacementSources,
+	type PlaceRequest,
 } from '@/services/placement';
 import answers from '@/test/fixtures/placement/answers.json';
 import firefly from '@/test/fixtures/placement/firefly-1437.json';
 import imdbSeries from '@/test/fixtures/placement/imdb-series.json';
 import kitchenNightmares from '@/test/fixtures/placement/kitchen-nightmares-tvdb.json';
+import lost from '@/test/fixtures/placement/lost-tvdb-order.json';
 import cases from '@/test/fixtures/placement/releases.json';
 import fun1022 from '@/test/fixtures/placement/rex-fun-2026-10-22.json';
 import fun1023 from '@/test/fixtures/placement/rex-fun-2026-10-23.json';
@@ -92,7 +94,8 @@ const recordedSources = (r: any): PlacementSources => ({
 		r.tvdbSeriesOf?.[id]
 			? (r.tvdbSeriesOf[id].data ?? []).map((row: any) => row.series.id)
 			: null,
-	tvdbEpisodes: async (id) => r.tvdbEpisodes?.[id]?.data.episodes ?? null,
+	tvdbEpisodes: async (id, order) =>
+		r.tvdbEpisodes?.[order ? `${id}/${order}` : id]?.data.episodes ?? null,
 });
 
 describe('a daily show named by its air date', () => {
@@ -170,6 +173,81 @@ describe('a show TMDB lists apart from the TVDB series Plex files it under', () 
 			[2, 3],
 		]);
 	});
+});
+
+describe('a season TVDB lists otherwise than TMDB (Lost, 2026-11-01)', () => {
+	// TMDB's Lost S4 has 13 episodes, its E13 "There's No Place Like Home (2)" 85 minutes; TVDB's
+	// has 14, E13 and E14 its two halves, as release groups number them: ROVERS' `S04E14` came back
+	// unplaced, so rex had no file for the finale's second half
+	const recorded = recordedSources(lost.answers);
+	const { tvdbEpisodes: _, ...withoutTvdb } = recorded;
+	const placed = async (request: object, parts: boolean, from = recorded) =>
+		(
+			await place(
+				[{ ...(request as PlaceRequest), ...(parts ? { parts: true } : {}) }],
+				Infinity,
+				from
+			)
+		).releases[0];
+	const files = (release: PlacedRelease) =>
+		release.files.map((f) => [f.season, f.episode, f.tmdbEpisodeId, f.how, f.part ?? null]);
+
+	it("places TVDB's S04E14 as the second part of TMDB's S4E13 for a caller that reads parts", async () => {
+		expect(files(await placed(lost.requests.rovers, true))).toEqual([
+			[4, 11, 333999, 'tmdb', null],
+			[4, 12, 334004, 'tmdb', null],
+			[4, 13, 334007, 'tmdb', 1],
+			[4, 13, 334007, 'aligned', 2],
+		]);
+	});
+
+	it('answers a caller that does not read parts as before: the second part unplaced', async () => {
+		const answer = await placed(lost.requests.rovers, false);
+		expect(answer).toEqual(await placed(lost.requests.rovers, false, withoutTvdb));
+		expect(files(answer)).toEqual([
+			[4, 11, 333999, 'tmdb', null],
+			[4, 12, 334004, 'tmdb', null],
+			[4, 13, 334007, 'tmdb', null],
+			[null, null, null, null, null],
+		]);
+		expect(answer.files.some((f) => 'part' in f)).toBe(false);
+	});
+
+	// TVDB's aired order lists S1 as TMDB does, "Exodus (2)" one 85-minute E24; its DVD order, which
+	// HiQVE's BluRay numbers by, has E24 and E25 "Exodus (2)" and "(3)"
+	it('reads a season a release numbers past both lists in TVDB DVD order', async () => {
+		expect(files(await placed(lost.requests.hiqve, true))).toEqual([
+			[1, 23, 333944, 'tmdb', null],
+			[1, 24, 333947, 'tmdb', 1],
+			[1, 24, 333947, 'aligned', 2],
+		]);
+		expect(files(await placed(lost.requests.hiqve, false))[2]).toEqual([
+			null,
+			null,
+			null,
+			null,
+			null,
+		]);
+	});
+
+	// the Discord user's workaround: `Lost.S01E25` renamed `Lost.S01E24.Part.2`
+	it('places a part a file names beside the one file of that episode named none', async () => {
+		expect(files(await placed(lost.requests.renamed, true))).toEqual([
+			[1, 23, 333944, 'tmdb', null],
+			[1, 24, 333947, 'tmdb', 1],
+			[1, 24, 333947, 'tmdb', 2],
+		]);
+	});
+
+	// rex-fun's own Lost releases, numbered where TVDB and TMDB agree or as one multi-episode file
+	it.each(['s03', 's04', 's05', 's06'] as const)(
+		'answers %s as before, with parts or not',
+		async (season) => {
+			const before = await placed(lost.requests[season], false, withoutTvdb);
+			expect(await placed(lost.requests[season], true)).toEqual(before);
+			expect(await placed(lost.requests[season], false)).toEqual(before);
+		}
+	);
 });
 
 describe('a pack numbered in another order than TMDB, named by its titles', () => {

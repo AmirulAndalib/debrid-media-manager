@@ -27,7 +27,16 @@ import { FANSUB_SEASON } from '@/utils/tvEpisodes';
 import ptt from 'parse-torrent-title';
 
 export type PlacementRule =
-	'tmdb' | 'anime' | 'imdb' | 'tvdb' | 'tvdbSeries' | 'dub' | 'group' | 'absolute' | 'airdate';
+	| 'tmdb'
+	| 'anime'
+	| 'imdb'
+	| 'tvdb'
+	| 'tvdbSeries'
+	| 'aligned'
+	| 'dub'
+	| 'group'
+	| 'absolute'
+	| 'airdate';
 
 /** A file's numbers as its name (or its folder, or its release) gives them. */
 export interface FileNumbers {
@@ -43,6 +52,8 @@ export interface FileNumbers {
 	fromStart?: true;
 	/** The show's running number, named beside the season and episode (`S11E01 - 286`). */
 	running?: number;
+	/** A part Plex stacks the file as, named right after its episode (`S01E24.Part.2`, `S04E13 - pt1`). */
+	part?: number;
 }
 
 export interface TmdbSeason {
@@ -75,6 +86,13 @@ export interface PlacementShow {
 	packOrder?: (season: number, episode: number) => Promise<[number, number] | null>;
 	/** TMDB's episode for a release's season and episode, by the run TMDB names after the release. */
 	namedRun?: (season: number, episode: number) => Promise<[number, number] | null>;
+	/**
+	 * TMDB's episode for TVDB's season and episode where the two list the show otherwise
+	 * (`alignTvdb`): undefined where they agree or cannot tell, null where TMDB has none.
+	 */
+	aligned?: (season: number, episode: number) => Promise<AlignedEpisode | null | undefined>;
+	/** The caller reads `part`, so a file may be placed as a part of TMDB's episode. */
+	parts?: true;
 }
 
 export interface Placement {
@@ -82,6 +100,8 @@ export interface Placement {
 	episode: number;
 	episodeEnd: number | null;
 	how: PlacementRule;
+	/** The file's part of TMDB's episode, where it holds only one (only for a caller that reads `part`). */
+	part?: number;
 	/** The file's own title named this episode (not part of the API's answer). */
 	titled?: true;
 }
@@ -317,6 +337,36 @@ function titleNumber(release: string, folder: string | null, stem: string): numb
 	return named || topLevel ? number : null;
 }
 
+// Plex's stacking words, as the next word after the episode: `Lost.S01E24.Part.2.1080p`, `Lost -
+// S04E13 - pt1`, `cd1`, `disc2`. Not `dvd`, which scene names use for the disc format (`DVD9`),
+// and never after a title: `Friends.S06E24.The.One.with.the.Proposal.Part.1` is TMDB's episode.
+const PART_TOKEN = /^[\s._-]+(?:pt|part|prt|cd|disc|disk)[\s._-]*([1-9]\d?)(?![\da-z])/i;
+
+function partToken(stem: string): number | null {
+	const token = SCENE_TOKEN.exec(stem);
+	if (!token) return null;
+	const rest = stem.slice(token.index + token[0].length).replace(MORE_EPISODES, '');
+	return positive(PART_TOKEN.exec(rest)?.[1]);
+}
+
+/**
+ * A release's numbers with a part its file names kept only beside another file of the same
+ * episode, as Plex stacks them (`Lost.S01E24` beside `Lost.S01E24.Part.2`): Grey's Anatomy's
+ * `S05E01.Part1` and `S05E02.Part2` are two episodes, Twin Peaks' `S03E05.Part.5` its title.
+ */
+export function stackedParts(numbers: (FileNumbers | null)[]): (FileNumbers | null)[] {
+	return numbers.map((own) => {
+		if (own?.part === undefined) return own;
+		const beside = numbers.some(
+			(other) =>
+				other !== own && other?.season === own.season && other?.episode === own.episode
+		);
+		if (beside) return own;
+		const { part: _, ...rest } = own;
+		return rest;
+	});
+}
+
 /** The one season a release names, unless it names several. */
 function releaseSeason(release: string): number | null {
 	if (SEVERAL_SEASONS.test(release)) return null;
@@ -359,7 +409,10 @@ export function fileNumbers(
 	});
 
 	const scene = sceneNumbers(stem.replace(LEADING_GROUPS, ''));
-	if (scene) return withSeason(scene);
+	if (scene) {
+		const part = partToken(stem.replace(LEADING_GROUPS, ''));
+		return withSeason(part ? { ...scene, part } : scene);
+	}
 	// Suits' `Extras/Season 03/Episode 16 Alternate Opening`
 	if (folder?.split('/').some((part) => EXTRAS_FOLDER.test(part.trim()))) return null;
 
@@ -678,6 +731,45 @@ export async function placeFile(
 	imdb: ImdbLookup | null,
 	byTitle = true
 ): Promise<Placement | null> {
+	const found = await placeCounted(show, anime, release, path, numbers, imdb, byTitle);
+	return found && show.parts ? withPart(show, numbers, found) : found;
+}
+
+/**
+ * The part of TMDB's episode a placed file is: the one its name says (`Lost.S01E24.Part.2`, the
+ * second half of TMDB's "Exodus (2)"), unless TMDB titles the episode so (Twin Peaks' S3E2 "Part
+ * 2"); else the one TVDB's list makes it, where it lands on that episode.
+ */
+async function withPart(
+	show: PlacementShow,
+	numbers: FileNumbers,
+	found: Placement
+): Promise<Placement> {
+	if (numbers.end !== null || found.episodeEnd !== null) return found;
+	if (numbers.part !== undefined) {
+		const name = (await show.episodes(found.season))?.find(
+			(row) => row.episode === found.episode
+		)?.name;
+		return words(name ?? '').join(' ') === `part ${numbers.part}`
+			? found
+			: { ...found, part: numbers.part };
+	}
+	const aligned =
+		numbers.season === null ? undefined : await show.aligned?.(numbers.season, numbers.episode);
+	return aligned?.part && aligned.season === found.season && aligned.episode === found.episode
+		? { ...found, part: aligned.part }
+		: found;
+}
+
+async function placeCounted(
+	show: PlacementShow,
+	anime: AnimeIndex | null,
+	release: string,
+	path: string,
+	numbers: FileNumbers,
+	imdb: ImdbLookup | null,
+	byTitle: boolean
+): Promise<Placement | null> {
 	const found = await placeByRules(show, anime, release, path, numbers, imdb, byTitle);
 	// a number TMDB titles the episode with is its title, not a running count: Earth's Mightiest
 	// Heroes' `S01 E15 - 459` is TMDB's S1E15 "459", Family Guy's `S07E12 - 420` its S7E12 "420"
@@ -781,6 +873,25 @@ async function placeByRules(
 		if (found) return found;
 	}
 	if (season !== null) {
+		// a release numbers as TVDB does, which may list the season otherwise than TMDB: Lost's
+		// S04E14 is the second half of TMDB's S4E13. A part the name says is TMDB's numbering.
+		// ponytail: a multi-episode file keeps its numbers; map both ends when one turns up
+		// and a season numbered by its year is `ofYear`'s, whose releases disagree with TVDB's
+		const aligned =
+			show.aligned && numbers.part === undefined && numbers.end === null && season < 1900
+				? await show.aligned(season, episode)
+				: undefined;
+		// a later part only for a caller that reads `part`: one that does not files it as a copy
+		if (aligned === null || (aligned && (aligned.part ?? 1) > 1 && !show.parts)) return null;
+		if (
+			aligned &&
+			(aligned.season !== season ||
+				aligned.episode !== episode ||
+				aligned.episodeEnd !== null)
+		) {
+			const found = await placed([aligned.season, aligned.episode], 'aligned');
+			if (found) return { ...found, episodeEnd: aligned.episodeEnd };
+		}
 		const named = await placed([season, episode], 'tmdb');
 		if (named) return named;
 		if (season >= 1900) {
@@ -1029,6 +1140,35 @@ export function titleOf(
 }
 
 /**
+ * Whether a release numbers as TVDB does where TVDB's list and TMDB's differ: not where more of its
+ * titled files name TMDB's episode at their own numbers than the one TVDB's numbers lead to
+ * (`Robot Chicken S03E15 Tubba-Bubba's Now Hubba-Hubba` is TMDB's S3E15, TVDB's S3E14).
+ */
+export async function numberedByTvdb(
+	show: PlacementShow,
+	paths: string[],
+	numbers: (FileNumbers | null)[]
+): Promise<boolean> {
+	let [tvdb, tmdb] = [0, 0];
+	const nameAt = async (season: number, episode: number) =>
+		(await show.episodes(season))?.find((row) => row.episode === episode)?.name;
+	for (const [at, own] of numbers.entries()) {
+		if (!own || own.season === null || own.end !== null || !show.aligned) continue;
+		const title = titleOf(paths[at].split('/').pop() ?? paths[at], own);
+		const to = title ? await show.aligned(own.season, own.episode) : undefined;
+		if (!title || to === undefined || (to?.season === own.season && to.episode === own.episode))
+			continue;
+		const [here, there] = [
+			await nameAt(own.season, own.episode),
+			to && (await nameAt(to.season, to.episode)),
+		];
+		if (here && agrees(title, here)) tmdb++;
+		else if (there && agrees(title, there)) tvdb++;
+	}
+	return tvdb >= tmdb;
+}
+
+/**
  * The TMDB episode a file's title names when the episode at its number is titled otherwise:
  * the named season's, else one of any season, specials included. Firefly's pack numbers its
  * files in DVD order (`S01E01.Serenity`, `S01E11.Trash`), TMDB in aired order with three
@@ -1137,7 +1277,8 @@ export async function airDated(show: PlacementShow, path: string): Promise<Place
  * `S06E16.The.One.That.Could.Have.Been.Part.2` is not, and its numbers place it nowhere.
  */
 export function yieldToTitles(placements: (Placement | null)[]): (Placement | null)[] {
-	const key = (p: Placement) => `${p.season}|${p.episode}`;
+	// a part of an episode yields only to a file titled onto that same part
+	const key = (p: Placement) => `${p.season}|${p.episode}|${p.part ?? ''}`;
 	const named = new Set(placements.flatMap((p) => (p?.titled ? [key(p)] : [])));
 	return placements.map((p) => (p && !p.titled && named.has(key(p)) ? null : p));
 }
@@ -1259,4 +1400,255 @@ async function absolute(
 		before += row.episodes;
 	}
 	return null;
+}
+
+/** An episode as TVDB's default order or TMDB's season lists give it, for `alignTvdb`. */
+export interface ListedEpisode {
+	season: number;
+	episode: number;
+	airDate: string | null;
+	name: string;
+	runtime: number | null;
+}
+
+/** TMDB's episode for one of TVDB's: the last of two TMDB episodes it holds, or its part of one. */
+export interface AlignedEpisode {
+	season: number;
+	episode: number;
+	episodeEnd: number | null;
+	part: number | null;
+}
+
+const dayOf = (date: string | null) => {
+	const time = date ? Date.parse(date) : NaN;
+	return Number.isFinite(time) ? Math.round(time / 86_400_000) : null;
+};
+/** Aired within a day of each other: TVDB and TMDB give Lost's season 4 finale a day apart. */
+const near = (a: ListedEpisode, b: ListedEpisode) => {
+	const [x, y] = [dayOf(a.airDate), dayOf(b.airDate)];
+	return x !== null && y !== null && Math.abs(x - y) <= 1;
+};
+/** One episode as long as two together: Lost's 85-minute S4E13 on TMDB is TVDB's 43 + 42. */
+const holdsBoth = (whole: number | null, a: number | null, b: number | null) =>
+	Boolean(whole && a && b) &&
+	Math.abs(whole! - (a! + b!)) <= 0.2 * (a! + b!) &&
+	whole! >= 1.5 * Math.max(a!, b!);
+
+/**
+ * TMDB's episode for each of TVDB's that TMDB numbers otherwise, keyed `season|episode` by
+ * TVDB's numbers: release groups number as TVDB does, and TMDB lists some seasons otherwise
+ * (Lost's season 4 finale is TVDB's E13 and E14, TMDB's one 85-minute E13).
+ *
+ * Both lists' regular episodes are read in their own order. An episode titled as one of the
+ * other's alone, by letters, is that one, where the titles keep both orders: titles outrank air
+ * dates, which TMDB gives Below Deck Mediterranean's season 6 a week after TVDB. Between two such
+ * pairs, as many of each pair in order; otherwise they are read in runs of days a day or less
+ * apart, where as many of each pair in order, two of TVDB's on one of TMDB's as long as both
+ * (beside a titled pair too) are its two parts, and one of TVDB's as long as two of TMDB's spans
+ * them. An episode left over is a special on the other side when one is titled so within a day.
+ * A season TVDB's mostly paired episodes do not cover maps nothing; where it is mapped, an
+ * episode TMDB lacks is null if its number is another's on TMDB. Lists that agree map nothing.
+ */
+export function alignTvdb(tvdb: ListedEpisode[], tmdb: ListedEpisode[]) {
+	const order = (a: ListedEpisode, b: ListedEpisode) =>
+		a.season - b.season || a.episode - b.episode;
+	const [a, b] = [tvdb, tmdb].map((list) => list.filter((row) => row.season > 0).sort(order));
+	// TVDB's index → TMDB's index, and the part or the last TMDB index it holds
+	const pairs = new Map<number, { at: number; part?: number; end?: number }>();
+	const taken = new Set<number>();
+	const pair = (i: number, j: number, more: { part?: number; end?: number } = {}) => {
+		pairs.set(i, { at: j, ...more });
+		taken.add(j);
+		if (more.end !== undefined) taken.add(more.end);
+	};
+	// titles as letters, where one names a single episode of its list
+	const unique = (list: ListedEpisode[]) => {
+		const seen = new Map<string, number>();
+		list.forEach((row, n) => {
+			const name = fold(row.name);
+			if (name.length >= 4 && !GENERIC.test(words(row.name).join(' ')))
+				seen.set(name, seen.has(name) ? -1 : n);
+		});
+		return seen;
+	};
+	const [namedA, namedB] = [unique(a), unique(b)];
+	const titled = [...namedA].flatMap(([name, i]) =>
+		i >= 0 && (namedB.get(name) ?? -1) >= 0 ? [[i, namedB.get(name)!]] : []
+	);
+	titled.sort((x, y) => x[0] - y[0]);
+	// the longest run of them in both orders bounds the stretches left to air dates
+	const tails: number[] = [];
+	const before: number[] = [];
+	titled.forEach(([, j], n) => {
+		let [lo, hi] = [0, tails.length];
+		while (lo < hi) {
+			const mid = (lo + hi) >> 1;
+			if (titled[tails[mid]][1] < j) lo = mid + 1;
+			else hi = mid;
+		}
+		before[n] = lo > 0 ? tails[lo - 1] : -1;
+		tails[lo] = n;
+	});
+	const anchors: number[][] = [];
+	for (let n = tails.at(-1) ?? -1; n >= 0; n = before[n]) anchors.unshift(titled[n]);
+	// a title out of both orders where it is long or aired within two months: TVDB lists the
+	// Berenstain Bears' segments in another order than TMDB, but LEGO Masters' "Finale" of 2020 is
+	// not its 2021 one
+	const chained = new Set(anchors);
+	for (const found of titled) {
+		const [p, q] = [dayOf(a[found[0]].airDate), dayOf(b[found[1]].airDate)];
+		const long = fold(a[found[0]].name).length >= 12;
+		if (chained.has(found) || long || p === null || q === null || Math.abs(p - q) <= 60)
+			pair(found[0], found[1]);
+	}
+	// an episode of two is long for its own season: TMDB gives every LEGO Masters episode 90 minutes
+	const usual = new Map<string, number>();
+	const long = (row: ListedEpisode, side: 0 | 1) => {
+		const at = `${side}|${row.season}`;
+		if (!usual.has(at)) {
+			const times = (side ? b : a)
+				.flatMap((other) =>
+					other.season === row.season && other.runtime ? [other.runtime] : []
+				)
+				.sort((x, y) => x - y);
+			usual.set(at, times[times.length >> 1] ?? Infinity);
+		}
+		return (row.runtime ?? 0) >= 1.5 * usual.get(at)!;
+	};
+	const runs = (is: number[], js: number[]) => {
+		// as many of each: in order, where their air dates do not disagree (TMDB dates My Brilliant
+		// Friend as it aired in the US, TVDB as in Italy, a week sooner)
+		if (is.length === js.length) {
+			is.forEach((i, n) => {
+				const [x, y] = [dayOf(a[i].airDate), dayOf(b[js[n]].airDate)];
+				if (x === null || y === null || Math.abs(x - y) <= 1) pair(i, js[n]);
+			});
+			return;
+		}
+		const day = (row: ListedEpisode) => dayOf(row.airDate);
+		const all = [
+			...is
+				.filter((i) => day(a[i]) !== null)
+				.map((i) => ({ side: 0, n: i, day: day(a[i])! })),
+			...js
+				.filter((j) => day(b[j]) !== null)
+				.map((j) => ({ side: 1, n: j, day: day(b[j])! })),
+		].sort((x, y) => x.day - y.day || x.side - y.side || x.n - y.n);
+		const found: [number, number, { part?: number; end?: number }][] = [];
+		for (let start = 0; start < all.length;) {
+			let end = start + 1;
+			while (end < all.length && all[end].day - all[end - 1].day <= 1) end++;
+			const run = all.slice(start, end);
+			start = end;
+			const t = run.filter((row) => row.side === 0).map((row) => row.n);
+			const m = run.filter((row) => row.side === 1).map((row) => row.n);
+			if (t.length === m.length) t.forEach((i, n) => found.push([i, m[n], {}]));
+			else if (
+				t.length === 2 &&
+				m.length === 1 &&
+				long(b[m[0]], 1) &&
+				holdsBoth(b[m[0]].runtime, a[t[0]].runtime, a[t[1]].runtime)
+			)
+				found.push([t[0], m[0], { part: 1 }], [t[1], m[0], { part: 2 }]);
+			else if (
+				t.length === 1 &&
+				m.length === 2 &&
+				order(b[m[1]], { ...b[m[0]], episode: b[m[0]].episode + 1 }) === 0 &&
+				long(a[t[0]], 0) &&
+				holdsBoth(a[t[0]].runtime, b[m[0]].runtime, b[m[1]].runtime)
+			)
+				found.push([t[0], m[0], { end: m[1] }]);
+		}
+		// air dates in another order than both lists' pair nothing: TVDB dates Monster Rancher's
+		// E11 after its E13
+		const sorted = [...found].sort((x, y) => x[0] - y[0]);
+		if (sorted.every((x, n) => n === 0 || x[1] >= sorted[n - 1][1]))
+			for (const [i, j, more] of found) pair(i, j, more);
+	};
+	const ends = [[-1, -1], ...anchors, [a.length, b.length]];
+	for (let n = 1; n < ends.length; n++) {
+		const [[i0, j0], [i1, j1]] = [ends[n - 1], ends[n]];
+		const span = (from: number, to: number, used: (k: number) => boolean) =>
+			Array.from({ length: to - from - 1 }, (_, k) => from + 1 + k).filter((k) => !used(k));
+		runs(
+			span(i0, i1, (i) => pairs.has(i)),
+			span(j0, j1, (j) => taken.has(j))
+		);
+	}
+	// a titled pair's TMDB episode as long as it and the TVDB episode beside it, aired within a day
+	for (const [i, j] of anchors) {
+		for (const [first, second] of [
+			[i, i + 1],
+			[i - 1, i],
+		]) {
+			const other = first === i ? second : first;
+			if (other < 0 || other >= a.length || pairs.has(other) || pairs.get(i)?.part) continue;
+			if (
+				!near(a[other], b[j]) ||
+				!holdsBoth(b[j].runtime, a[first].runtime, a[second].runtime)
+			)
+				continue;
+			pair(first, j, { part: 1 });
+			pair(second, j, { part: 2 });
+			break;
+		}
+	}
+	const key = (row: { season: number; episode: number }) => `${row.season}|${row.episode}`;
+	const one = (
+		row: ListedEpisode,
+		more: { part?: number; end?: number } = {}
+	): AlignedEpisode => ({
+		season: row.season,
+		episode: row.episode,
+		episodeEnd: more.end === undefined ? null : b[more.end].episode,
+		part: more.part ?? null,
+	});
+	const to = new Map<string, AlignedEpisode>();
+	for (const [i, found] of pairs) to.set(key(a[i]), one(b[found.at], found));
+	// a leftover regular episode the other side lists as a special, titled so within a day
+	const specials = (list: ListedEpisode[]) => {
+		const byName = new Map<string, ListedEpisode[]>();
+		for (const row of list)
+			if (row.season === 0)
+				byName.set(fold(row.name), [...(byName.get(fold(row.name)) ?? []), row]);
+		return (row: ListedEpisode) =>
+			fold(row.name).length >= 3
+				? byName.get(fold(row.name))?.find((other) => near(other, row))
+				: undefined;
+	};
+	const [onTmdb, onTvdb] = [specials(tmdb), specials(tvdb)];
+	a.forEach((row, i) => {
+		const other = !pairs.has(i) && onTmdb(row);
+		if (other) to.set(key(row), one(other));
+	});
+	b.forEach((row, j) => {
+		const other = !taken.has(j) && onTvdb(row);
+		if (other && !to.has(key(other))) to.set(key(other), one(row));
+	});
+	// a season is mapped only where most of TVDB's dated or paired episodes paired
+	const seasons = new Map<number, [number, number]>();
+	for (const row of a) {
+		const paired = to.has(key(row));
+		if (!paired && dayOf(row.airDate) === null) continue;
+		const [count, listed] = seasons.get(row.season) ?? [0, 0];
+		seasons.set(row.season, [count + (paired ? 1 : 0), listed + 1]);
+	}
+	const mapped = (season: number) => {
+		const [count, listed] = seasons.get(season) ?? [0, 0];
+		return season === 0 || count * 4 >= listed * 3;
+	};
+	const out = new Map<string, AlignedEpisode | null>();
+	const targets = new Set<string>();
+	for (const [at, aligned] of to) {
+		if (!mapped(Number(at.split('|')[0]))) continue;
+		targets.add(key(aligned));
+		if (at !== key(aligned) || aligned.part !== null || aligned.episodeEnd !== null)
+			out.set(at, aligned);
+	}
+	// TVDB's episode TMDB lacks, whose number names another TVDB episode's on TMDB: no episode
+	for (const row of a) {
+		if (mapped(row.season) && !to.has(key(row)) && targets.has(key(row)))
+			out.set(key(row), null);
+	}
+	return out;
 }

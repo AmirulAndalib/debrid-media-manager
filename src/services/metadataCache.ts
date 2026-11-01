@@ -438,7 +438,8 @@ export class MetadataCacheService {
 
 	/**
 	 * A TheTVDB v4 GET (`series/80552/episodes/default?page=0`), cached as TMDB's season lists
-	 * are; null without `TVDB_API_KEY`. Placement asks it only of a show TMDB gives no TVDB id.
+	 * are; null without `TVDB_API_KEY`. Placement reads a show's episodes in TVDB's order, which
+	 * releases number by, where TMDB's list may differ.
 	 */
 	async getTvdb(path: string): Promise<any | null> {
 		const apikey = process.env.TVDB_API_KEY;
