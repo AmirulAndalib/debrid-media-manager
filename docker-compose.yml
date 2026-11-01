@@ -2,8 +2,8 @@ version: '3.9'
 services:
   redis:
     image: redis:7-alpine
-    # 512mb leaves room for the music cover cache (music:cover:*, ~66 KB a cover).
-    command: redis-server --appendonly yes --maxmemory 512mb --maxmemory-policy allkeys-lru
+    # 1gb leaves room for the music cover cache (music:cover:*, ~66 KB a cover, ~430 MB for all).
+    command: redis-server --appendonly yes --maxmemory 1gb --maxmemory-policy allkeys-lru
     volumes:
       - redis_data:/data
     deploy:
