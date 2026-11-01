@@ -200,11 +200,11 @@ export default function HomeView({
 				<Tile
 					title={name}
 					subtitle={
-						route.name === 'album'
-							? now.item.album.artist
+						route.name === 'playlist'
+							? 'Playlist'
 							: route.name === 'liked'
 								? `${user.likedIds.size} liked songs`
-								: 'Playlist'
+								: now.item.album.artist
 					}
 					cover={
 						route.name === 'liked'

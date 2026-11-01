@@ -45,6 +45,8 @@ describe('music routes', () => {
 		expect(contextRoute('album:h1')).toEqual({ name: 'album', hash: 'h1' });
 		expect(contextRoute('playlist:p1')).toEqual({ name: 'playlist', id: 'p1' });
 		expect(contextRoute('liked')).toEqual({ name: 'liked' });
+		expect(contextRoute('artist:ar1:popular')).toEqual({ name: 'artist', mbid: 'ar1' });
+		expect(contextRoute('search:a:b')).toEqual({ name: 'search', q: 'a:b' });
 		expect(contextRoute(null)).toBeNull();
 		expect(contextRoute('album:')).toBeNull();
 	});

@@ -138,6 +138,20 @@ describe('NowPlayingPanel', () => {
 		expect(contextName('liked', [], playlists)).toBe('Liked Songs');
 		expect(contextName('playlist:p1', [], playlists)).toBe('Road trip');
 		expect(contextName('album:h1', [item('h1', 1)], playlists)).toBe('First Album');
+		expect(contextName('search:green day', [], playlists)).toBe('Search');
+		const popular = { ...item('h1', 1), album: { ...album('h1', 'A'), artistMbid: 'ar1' } };
+		expect(contextName('artist:ar1:popular', [popular], playlists)).toBe('Test Artist');
 		expect(contextName(null, [], playlists)).toBeNull();
+	});
+
+	// The heading's ellipsis used to swallow the whole button: "Next from ...".
+	it('truncates a long context name rather than hiding it', () => {
+		renderPanel();
+		const rest = screen.getByRole('region', { name: 'Next from First Album' });
+		const link = within(rest).getByRole('button', { name: 'First Album' });
+		expect(link).toHaveClass('truncate');
+		expect(link.parentElement).not.toHaveClass('truncate');
+		fireEvent.click(link);
+		expect(navigate).toHaveBeenCalledWith({ name: 'album', hash: 'h1' });
 	});
 });

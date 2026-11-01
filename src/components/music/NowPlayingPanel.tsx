@@ -36,6 +36,10 @@ export function contextName(
 	if (route?.name === 'album') {
 		return items.find((i) => i.album.hash === route.hash)?.album.album ?? 'Album';
 	}
+	if (route?.name === 'artist') {
+		return items.find((i) => i.album.artistMbid === route.mbid)?.album.artist ?? 'Artist';
+	}
+	if (route?.name === 'search') return 'Search';
 	return null;
 }
 
@@ -281,18 +285,19 @@ export default function NowPlayingPanel({
 			)}
 			{fromContext.length > 0 && (
 				<section aria-label={`Next from ${context ?? 'this list'}`}>
-					<h3 className="mb-1 truncate px-2 font-bold text-white">
-						Next from{' '}
+					{/* A flex row: an ellipsis on the heading hid the whole button, name and all. */}
+					<h3 className="mb-1 flex min-w-0 gap-1 px-2 font-bold text-white">
+						<span className="shrink-0">Next from</span>
 						{contextTo ? (
 							<button
 								type="button"
 								onClick={() => go(contextTo)}
-								className="hover:underline"
+								className="min-w-0 truncate text-left hover:underline"
 							>
 								{context}
 							</button>
 						) : (
-							(context ?? 'this list')
+							<span className="min-w-0 truncate">{context ?? 'this list'}</span>
 						)}
 					</h3>
 					{fromContext.map((q, i) => queueRow(q, player.priorityCount + i))}

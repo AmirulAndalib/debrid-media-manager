@@ -55,12 +55,17 @@ export function musicHref(route: MusicRoute): string {
 	}
 }
 
-/** Where a player context lives: `album:<hash>`, `playlist:<id>` or `liked`. */
+/**
+ * Where a player context lives: `album:<hash>`, `playlist:<id>`, `liked`,
+ * `artist:<mbid>:popular` or `search:<q>`.
+ */
 export function contextRoute(contextId: string | null): MusicRoute | null {
 	if (contextId === 'liked') return { name: 'liked' };
 	const [kind, id] = contextId?.split(/:(.+)/) ?? [];
 	if (kind === 'album' && id) return { name: 'album', hash: id };
 	if (kind === 'playlist' && id) return { name: 'playlist', id };
+	if (kind === 'artist' && id) return { name: 'artist', mbid: id.split(':')[0] };
+	if (kind === 'search' && id) return { name: 'search', q: id };
 	return null;
 }
 
