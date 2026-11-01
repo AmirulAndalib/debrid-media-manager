@@ -5,6 +5,7 @@ import MusicPlayerBar from '@/components/music/MusicPlayerBar';
 import { MusicPlayerProvider, useMusicPlayer } from '@/components/music/player/MusicPlayerProvider';
 import { localStoragePersistence } from '@/components/music/player/persistence';
 import QueuePanel from '@/components/music/QueuePanel';
+import { musicHref, MusicRoute, parseMusicRoute } from '@/components/music/routes';
 import { QueuedTrack } from '@/components/music/types';
 import { trackTitle } from '@/components/music/utils';
 import { useRealDebridAccessToken } from '@/hooks/auth';
@@ -13,9 +14,8 @@ import { UnrestrictTrackResponse } from '@/pages/api/music/unrestrict';
 import { Keyboard, Library, Loader2, Music2, X } from 'lucide-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-const MUSIC_BASE_PATH = '/music';
 const MUSIC_PAGE_SIZE = 48;
 const RECENT_ALBUM_LIMIT = 24;
 const ALBUM_DOWNLOAD_DELAY_MS = 250;
@@ -166,7 +166,7 @@ export default function AlbumsPage() {
 
 	// Redirect if not authenticated
 	if (!isLoading && !accessToken) {
-		router.push(`/realdebrid/login?redirect=${MUSIC_BASE_PATH}`);
+		router.push('/realdebrid/login?redirect=/music');
 		return null;
 	}
 
@@ -204,14 +204,14 @@ function MusicLibrary({
 	> | null>(null);
 
 	// View state
-	const [searchQuery, setSearchQuery] = useState('');
 	const [isQueueOpen, setIsQueueOpen] = useState(false);
 	const [showShortcuts, setShowShortcuts] = useState(false);
 	const [sortBy, setSortBy] = useState<'recent' | 'name' | 'artist' | 'year'>('name');
 
-	// Get selected album from URL path param
-	const slug = router.query.slug as string[] | undefined;
-	const albumHash = slug?.[0];
+	const route = parseMusicRoute(router.query.slug, router.query.q);
+	const albumHash = route.name === 'album' ? route.hash : undefined;
+	const catalogSearch = route.name === 'search' ? route.q : '';
+	const showsGrid = route.name !== 'album';
 	const selectedAlbumSummary = library?.albums.find((a) => a.hash === albumHash) ?? null;
 	const [selectedAlbumDetail, setSelectedAlbumDetail] = useState<MusicAlbum | null>(null);
 	const [selectedAlbumLoading, setSelectedAlbumLoading] = useState(false);
@@ -220,46 +220,64 @@ function MusicLibrary({
 			? selectedAlbumDetail
 			: selectedAlbumSummary;
 
-	// Track previous album to detect album changes
-	const prevAlbumHash = useRef<string | undefined>(undefined);
-
-	// Navigate to album (updates URL)
-	const selectAlbum = (album: MusicAlbum | null) => {
-		if (album) {
-			if (mainRef.current) {
-				savedScrollPosition.current = mainRef.current.scrollTop;
-			}
-			router.push(`${MUSIC_BASE_PATH}/${album.hash}`, undefined, { shallow: true });
-		} else {
-			router.push(MUSIC_BASE_PATH, undefined, { shallow: true });
-		}
-	};
-
-	// Scroll to top when switching to a different album
-	useEffect(() => {
-		if (albumHash && albumHash !== prevAlbumHash.current && mainRef.current) {
-			mainRef.current.scrollTop = 0;
-		}
-		prevAlbumHash.current = albumHash;
-	}, [albumHash]);
-
-	// Restore scroll position when navigating back from album to list
-	useEffect(() => {
-		if (!albumHash && prevAlbumHash.current && mainRef.current) {
-			setTimeout(() => {
-				if (mainRef.current) {
-					mainRef.current.scrollTop = savedScrollPosition.current;
-				}
-			}, 0);
-		}
-	}, [albumHash]);
-
-	// Scroll container ref and saved scroll position
+	// Scroll container ref, and each page's scroll offset for back and forward
 	const mainRef = useRef<HTMLElement | null>(null);
 	const loadMoreRef = useRef<HTMLDivElement | null>(null);
-	const savedScrollPosition = useRef<number>(0);
+	const scrollByPath = useRef(new Map<string, number>());
+	const pushed = useRef(false);
 	const libraryRequestId = useRef<number>(0);
+	const loadedCatalogKey = useRef<string | null>(null);
 	const recentAlbumsRequestId = useRef<number>(0);
+
+	const navigate = useCallback(
+		(to: MusicRoute, replace = false) => {
+			pushed.current = true;
+			void router[replace ? 'replace' : 'push'](musicHref(to), undefined, { shallow: true });
+		},
+		[router]
+	);
+
+	// The old album URL was /music/<hash>.
+	const slugLength = Array.isArray(router.query.slug) ? router.query.slug.length : 0;
+	useEffect(() => {
+		if (slugLength === 1 && albumHash) navigate({ name: 'album', hash: albumHash }, true);
+	}, [albumHash, navigate, slugLength]);
+
+	// A new page starts at the top; back and forward return to where it was left.
+	useEffect(() => {
+		const main = mainRef.current;
+		if (!main) return;
+		const top = pushed.current ? 0 : (scrollByPath.current.get(router.asPath) ?? 0);
+		pushed.current = false;
+		const timeout = setTimeout(() => (main.scrollTop = top), 0);
+		return () => clearTimeout(timeout);
+	}, [router.asPath]);
+
+	// The search box navigates as you type; back and forward bring its text along.
+	const searchInput = useRef<HTMLInputElement | null>(null);
+	const [searchText, setSearchText] = useState(catalogSearch);
+	useEffect(() => {
+		if (route.name === 'search' && document.activeElement !== searchInput.current) {
+			setSearchText(route.q);
+		}
+	}, [route.name, catalogSearch]); // eslint-disable-line react-hooks/exhaustive-deps
+	const searchTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
+	const search = (q: string) => {
+		setSearchText(q);
+		clearTimeout(searchTimeout.current);
+		const replace = route.name === 'search';
+		searchTimeout.current = setTimeout(() => navigate({ name: 'search', q }, replace), 250);
+	};
+	useEffect(() => () => clearTimeout(searchTimeout.current), []);
+	const registerSearchInput = useCallback(
+		(input: HTMLInputElement | null) => {
+			searchInput.current = input;
+			player.registerSearchInput(input);
+		},
+		[player.registerSearchInput] // eslint-disable-line react-hooks/exhaustive-deps
+	);
+
+	const selectAlbum = (album: MusicAlbum) => navigate({ name: 'album', hash: album.hash });
 
 	const handleCoverLoaded = useCallback((album: MusicAlbum, coverUrl: string) => {
 		setLibrary((prev) =>
@@ -298,7 +316,7 @@ function MusicLibrary({
 					limit: String(MUSIC_PAGE_SIZE),
 					sortBy,
 				});
-				const trimmedSearch = searchQuery.trim();
+				const trimmedSearch = catalogSearch.trim();
 				if (trimmedSearch) params.set('search', trimmedSearch);
 
 				const response = await fetch(`/api/music/library?${params.toString()}`);
@@ -328,7 +346,7 @@ function MusicLibrary({
 				}
 			}
 		},
-		[searchQuery, sortBy]
+		[catalogSearch, sortBy]
 	);
 
 	const fetchRecentAlbums = useCallback(async () => {
@@ -352,15 +370,13 @@ function MusicLibrary({
 		}
 	}, []);
 
+	// Kept while another page shows, so coming back keeps the loaded pages and the scroll.
 	useEffect(() => {
-		const timeout = setTimeout(
-			() => {
-				fetchLibraryPage(1, false);
-			},
-			searchQuery.trim() ? 250 : 0
-		);
-		return () => clearTimeout(timeout);
-	}, [fetchLibraryPage, searchQuery]);
+		const key = `${catalogSearch.trim()}\n${sortBy}`;
+		if (!showsGrid || key === loadedCatalogKey.current) return;
+		loadedCatalogKey.current = key;
+		fetchLibraryPage(1, false);
+	}, [catalogSearch, fetchLibraryPage, showsGrid, sortBy]);
 
 	useEffect(() => {
 		fetchRecentAlbums();
@@ -368,7 +384,7 @@ function MusicLibrary({
 
 	useEffect(() => {
 		if (
-			albumHash ||
+			!showsGrid ||
 			!library?.hasMore ||
 			libraryLoading ||
 			libraryLoadingMore ||
@@ -388,7 +404,7 @@ function MusicLibrary({
 		observer.observe(loadMoreRef.current);
 		return () => observer.disconnect();
 	}, [
-		albumHash,
+		showsGrid,
 		fetchLibraryPage,
 		library?.hasMore,
 		library?.nextPage,
@@ -508,6 +524,89 @@ function MusicLibrary({
 	const visibleAlbums = library?.albums ?? [];
 	const sidebarAlbums = useMemo(() => recentAlbums.slice(0, RECENT_ALBUM_LIMIT), [recentAlbums]);
 
+	const spinner = (
+		<div className="flex h-full items-center justify-center">
+			<Loader2 className="h-8 w-8 animate-spin text-green-500" />
+		</div>
+	);
+
+	const grid = libraryLoading ? (
+		spinner
+	) : libraryError ? (
+		<div className="flex h-full items-center justify-center text-red-400">{libraryError}</div>
+	) : (
+		<>
+			<AlbumGrid
+				albums={visibleAlbums}
+				searchQuery={catalogSearch}
+				matchCount={catalogSearch.trim() ? library?.totalAlbums : undefined}
+				onSelect={selectAlbum}
+				onPlay={playAlbum}
+				sortBy={sortBy}
+				onSortChange={setSortBy}
+				nowPlayingAlbumHash={currentTrack?.album.hash ?? null}
+				isPlaying={player.isPlaying}
+				onCoverLoaded={handleCoverLoaded}
+			/>
+			<div
+				ref={loadMoreRef}
+				className="flex min-h-20 items-center justify-center pb-8 text-sm text-gray-400"
+			>
+				{libraryLoadingMore ? (
+					<Loader2 className="h-5 w-5 animate-spin text-green-500" />
+				) : library?.hasMore ? (
+					<span>Loading more albums...</span>
+				) : visibleAlbums.length > 0 ? (
+					<span>End of library</span>
+				) : null}
+			</div>
+		</>
+	);
+
+	let content: ReactNode;
+	switch (route.name) {
+		case 'album':
+			content =
+				selectedAlbum && selectedAlbum.tracks.length > 0 ? (
+					<AlbumDetailView
+						album={selectedAlbum}
+						currentTrack={currentTrack}
+						playerState={player}
+						onPlay={playAlbum}
+						onAddToQueue={(album) => player.addToQueue(albumItems(album))}
+						onPlayNext={(album) => player.playNext(albumItems(album))}
+						onPlayTrackNext={(track, album) => player.playNext([{ track, album }])}
+						onBack={() => navigate({ name: 'browse' })}
+						onDownload={downloadTrack}
+						onDownloadAlbum={downloadAlbum}
+						onCoverLoaded={handleCoverLoaded}
+					/>
+				) : selectedAlbumLoading ? (
+					spinner
+				) : (
+					<div className="flex h-full items-center justify-center text-gray-400">
+						This album is not in the catalog.
+					</div>
+				);
+			break;
+		case 'artist':
+			content = (
+				<div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center text-gray-400">
+					<p className="text-lg font-bold text-white">Artist pages are coming</p>
+					<button
+						type="button"
+						onClick={() => navigate({ name: 'browse' })}
+						className="text-sm text-green-500 hover:underline"
+					>
+						Browse the catalog
+					</button>
+				</div>
+			);
+			break;
+		default:
+			content = grid;
+	}
+
 	return (
 		<>
 			<Head>
@@ -551,18 +650,18 @@ function MusicLibrary({
 					{/* Search */}
 					<div className="relative w-full md:w-96">
 						<input
-							ref={player.registerSearchInput}
+							ref={registerSearchInput}
 							type="text"
 							placeholder="Search artists or albums..."
-							value={searchQuery}
-							onChange={(e) => setSearchQuery(e.target.value)}
+							value={searchText}
+							onChange={(e) => search(e.target.value)}
 							aria-label="Search artists or albums"
 							className="w-full rounded-full border border-white/10 bg-white/5 px-4 py-2 pr-9 text-sm placeholder-gray-400 outline-hidden backdrop-blur-sm transition-all duration-200 focus:border-green-500/50 focus:bg-white/10 focus:ring-1 focus:ring-green-500/30"
 						/>
-						{searchQuery && (
+						{searchText && (
 							<button
 								type="button"
-								onClick={() => setSearchQuery('')}
+								onClick={() => search('')}
 								className="absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-0.5 text-gray-400 transition-colors hover:text-white"
 								aria-label="Clear search"
 								title="Clear search"
@@ -601,7 +700,7 @@ function MusicLibrary({
 						<div className="border-b border-white/5 p-4">
 							<button
 								type="button"
-								onClick={() => selectAlbum(null)}
+								onClick={() => navigate({ name: 'home' })}
 								aria-current={!albumHash ? 'page' : undefined}
 								className={`flex w-full items-center gap-3 rounded-md px-3 py-2 text-left text-sm font-bold transition-colors ${
 									albumHash
@@ -633,65 +732,14 @@ function MusicLibrary({
 					</aside>
 
 					{/* Main content */}
-					<main ref={mainRef} className="flex-1 overflow-y-auto pb-24 md:pb-32">
-						{libraryLoading ? (
-							<div className="flex h-full items-center justify-center">
-								<Loader2 className="h-8 w-8 animate-spin text-green-500" />
-							</div>
-						) : libraryError ? (
-							<div className="flex h-full items-center justify-center text-red-400">
-								{libraryError}
-							</div>
-						) : selectedAlbum && selectedAlbum.tracks.length > 0 ? (
-							<AlbumDetailView
-								album={selectedAlbum}
-								currentTrack={currentTrack}
-								playerState={player}
-								onPlay={playAlbum}
-								onAddToQueue={(album) => player.addToQueue(albumItems(album))}
-								onPlayNext={(album) => player.playNext(albumItems(album))}
-								onPlayTrackNext={(track, album) =>
-									player.playNext([{ track, album }])
-								}
-								onBack={() => selectAlbum(null)}
-								onDownload={downloadTrack}
-								onDownloadAlbum={downloadAlbum}
-								onCoverLoaded={handleCoverLoaded}
-							/>
-						) : albumHash && selectedAlbumLoading ? (
-							<div className="flex h-full items-center justify-center">
-								<Loader2 className="h-8 w-8 animate-spin text-green-500" />
-							</div>
-						) : (
-							<>
-								<AlbumGrid
-									albums={visibleAlbums}
-									searchQuery={searchQuery}
-									matchCount={
-										searchQuery.trim() ? library?.totalAlbums : undefined
-									}
-									onSelect={selectAlbum}
-									onPlay={playAlbum}
-									sortBy={sortBy}
-									onSortChange={setSortBy}
-									nowPlayingAlbumHash={currentTrack?.album.hash ?? null}
-									isPlaying={player.isPlaying}
-									onCoverLoaded={handleCoverLoaded}
-								/>
-								<div
-									ref={loadMoreRef}
-									className="flex min-h-20 items-center justify-center pb-8 text-sm text-gray-400"
-								>
-									{libraryLoadingMore ? (
-										<Loader2 className="h-5 w-5 animate-spin text-green-500" />
-									) : library?.hasMore ? (
-										<span>Loading more albums...</span>
-									) : visibleAlbums.length > 0 ? (
-										<span>End of library</span>
-									) : null}
-								</div>
-							</>
-						)}
+					<main
+						ref={mainRef}
+						onScroll={(e) =>
+							scrollByPath.current.set(router.asPath, e.currentTarget.scrollTop)
+						}
+						className="flex-1 overflow-y-auto pb-24 md:pb-32"
+					>
+						{content}
 					</main>
 				</div>
 

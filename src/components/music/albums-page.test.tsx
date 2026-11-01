@@ -3,8 +3,11 @@ import React from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 const routerMock = {
-	query: {} as Record<string, string[]>,
+	query: {} as Record<string, string | string[]>,
+	asPath: '/music',
 	push: vi.fn(),
+	replace: vi.fn(),
+	back: vi.fn(),
 };
 
 vi.mock('next/router', () => ({ __esModule: true, useRouter: () => routerMock }));
@@ -62,6 +65,8 @@ describe('music page', () => {
 	beforeEach(() => {
 		localStorage.clear();
 		routerMock.query = {};
+		routerMock.push.mockClear();
+		routerMock.replace.mockClear();
 		vi.stubGlobal('fetch', fetchMock);
 		spies.push(
 			vi.spyOn(HTMLMediaElement.prototype, 'play').mockImplementation(function (
@@ -107,15 +112,39 @@ describe('music page', () => {
 	});
 
 	it('keeps the catalog totals in the header while a search narrows the grid', async () => {
+		routerMock.query = { slug: ['search'], q: 'first' };
 		render(<AlbumsPage />);
-		expect(await screen.findAllByText('120 albums · 1500 tracks')).toHaveLength(2);
-
-		fireEvent.change(screen.getByLabelText('Search artists or albums'), {
-			target: { value: 'first' },
-		});
 		expect(await screen.findByText('11 albums match')).toBeInTheDocument();
 		expect(screen.getAllByText('120 albums · 1500 tracks')).toHaveLength(2);
 		expect(screen.queryByText('11 albums · 260 tracks')).toBeNull();
+		expect(fetchMock).toHaveBeenCalledWith(expect.stringContaining('search=first'));
+	});
+
+	it('navigates to the search page as you type, after a pause', async () => {
+		vi.useFakeTimers({ shouldAdvanceTime: true });
+		try {
+			render(<AlbumsPage />);
+			fireEvent.change(screen.getByLabelText('Search artists or albums'), {
+				target: { value: 'daft punk' },
+			});
+			expect(routerMock.push).not.toHaveBeenCalled();
+			await vi.advanceTimersByTimeAsync(250);
+			expect(routerMock.push).toHaveBeenCalledWith('/music/search?q=daft%20punk', undefined, {
+				shallow: true,
+			});
+		} finally {
+			vi.useRealTimers();
+		}
+	});
+
+	it('replaces the old /music/<hash> album URL with /music/album/<hash>', async () => {
+		routerMock.query = { slug: ['h1'] };
+		render(<AlbumsPage />);
+		await waitFor(() =>
+			expect(routerMock.replace).toHaveBeenCalledWith('/music/album/h1', undefined, {
+				shallow: true,
+			})
+		);
 	});
 
 	// The grid lists summaries with no tracks (`summary=1`), as the live API does.
@@ -131,7 +160,7 @@ describe('music page', () => {
 	});
 
 	it('plays an album through the player provider and saves the queue', async () => {
-		routerMock.query = { slug: ['h1'] };
+		routerMock.query = { slug: ['album', 'h1'] };
 		const { container } = render(<AlbumsPage />);
 		fireEvent.click(await screen.findByRole('button', { name: 'Play' }));
 
