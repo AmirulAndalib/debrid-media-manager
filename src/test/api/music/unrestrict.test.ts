@@ -1,4 +1,7 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { AxiosError, AxiosHeaders } from 'axios';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import concurrentErrorInfo from './__fixtures__/rd-info-uncached-concurrent-error.json';
+import downloadingInfo from './__fixtures__/rd-info-uncached-downloading.json';
 
 const rdMocks = vi.hoisted(() => ({
 	addHashAsMagnet: vi.fn(),
@@ -19,9 +22,24 @@ const selectableMocks = vi.hoisted(() => ({
 vi.mock('@/services/realDebrid', () => rdMocks);
 vi.mock('@/utils/clientIp', () => clientIpMocks);
 vi.mock('@/utils/selectable', () => selectableMocks);
-vi.mock('@/utils/prisma', () => ({
-	prisma: { availableMusic: { findUnique: vi.fn(async () => null) } },
+const prismaMocks = vi.hoisted(() => ({
+	availableMusic: {
+		findUnique: vi.fn(async () => null),
+		deleteMany: vi.fn(async () => ({ count: 1 })),
+	},
+	availableMusicFile: { updateMany: vi.fn(async () => ({ count: 1 })) },
 }));
+vi.mock('@/utils/prisma', () => ({ prisma: prismaMocks }));
+
+/** An RD error as axios throws it. */
+const rdError = (status: number, error: string, error_code: number) =>
+	new AxiosError(error, String(status), undefined, undefined, {
+		status,
+		statusText: '',
+		headers: {},
+		config: { headers: new AxiosHeaders() },
+		data: { error, error_code },
+	});
 
 import handler from '@/pages/api/music/unrestrict';
 import { createMockRequest, createMockResponse } from '@/test/utils/api';
@@ -233,28 +251,156 @@ describe('API /api/music/unrestrict', () => {
 		});
 	});
 
-	it('cleans up torrent on error', async () => {
-		vi.spyOn(console, 'error').mockImplementation(() => {});
-		vi.spyOn(console, 'log').mockImplementation(() => {});
-		rdMocks.addHashAsMagnet.mockResolvedValue('torrent-id-err');
-		rdMocks.getTorrentInfo.mockResolvedValue({
-			files: [{ id: 1, selected: false }],
-			status: 'error',
-			links: [],
+	describe('an album RD no longer has cached', () => {
+		const hash = downloadingInfo.hash;
+		beforeEach(() => {
+			vi.spyOn(console, 'error').mockImplementation(() => {});
+			vi.spyOn(console, 'log').mockImplementation(() => {});
+			rdMocks.addHashAsMagnet.mockResolvedValue('torrent-id-err');
+			rdMocks.selectFiles.mockResolvedValue(undefined);
+			rdMocks.deleteTorrent.mockResolvedValue(undefined);
 		});
-		rdMocks.selectFiles.mockResolvedValue(undefined);
-		rdMocks.deleteTorrent.mockResolvedValue(undefined);
+		afterEach(() => vi.useRealTimers());
 
+		const expectDropped = (res: ReturnType<typeof createMockResponse>) => {
+			expect(res.status).toHaveBeenCalledWith(410);
+			expect(res._getData()).toMatchObject({
+				error: expect.stringContaining('no longer has this album cached'),
+				dead: true,
+			});
+			expect(prismaMocks.availableMusic.deleteMany).toHaveBeenCalledWith({ where: { hash } });
+			expect(rdMocks.deleteTorrent).toHaveBeenCalledWith('token123', 'torrent-id-err', false);
+		};
+
+		// Real RD answer: the same uncached album added twice at once, as play + prefetch do.
+		it('drops it when RD turns the torrent to error', async () => {
+			rdMocks.getTorrentInfo.mockResolvedValue(concurrentErrorInfo);
+			const req = createMockRequest({
+				method: 'POST',
+				body: { accessToken: 'token123', hash, fileId: 1 },
+			});
+			const res = createMockResponse();
+
+			await handler(req, res);
+
+			expectDropped(res);
+		});
+
+		// Real RD answer: the same album added once, still downloading from peers.
+		it('drops it when it is still downloading after the wait', async () => {
+			vi.useFakeTimers();
+			rdMocks.getTorrentInfo.mockResolvedValue(downloadingInfo);
+			const req = createMockRequest({
+				method: 'POST',
+				body: { accessToken: 'token123', hash, fileId: 1 },
+			});
+			const res = createMockResponse();
+
+			const done = handler(req, res);
+			await vi.runAllTimersAsync();
+			await done;
+
+			expectDropped(res);
+		});
+
+		it('drops it when RD calls a freshly made link gone', async () => {
+			rdMocks.getTorrentInfo
+				.mockResolvedValueOnce({
+					files: [{ id: 1, selected: false }],
+					status: 'waiting_files_selection',
+					links: [],
+				})
+				.mockResolvedValueOnce({
+					files: [{ id: 1, selected: true }],
+					status: 'downloaded',
+					links: ['https://rd.link/1'],
+				});
+			rdMocks.unrestrictLink.mockRejectedValue(rdError(503, 'unavailable_file', 19));
+			const req = createMockRequest({
+				method: 'POST',
+				body: { accessToken: 'token123', hash, fileId: 1 },
+			});
+			const res = createMockResponse();
+
+			await handler(req, res);
+
+			expectDropped(res);
+		});
+	});
+
+	it.each([
+		[rdError(403, 'permission_denied', 9), 403, 'premium'],
+		[rdError(401, 'bad_token', 8), 401, 'Log in again'],
+		[rdError(429, 'too_many_requests', 34), 429, 'Wait a minute'],
+		// Another play of the same album deleted the torrent this one was reading.
+		[rdError(404, 'unknown_ressource', 7), 502, 'Try again in a while'],
+	])('explains %s to the listener and keeps the album', async (error, status, says) => {
+		vi.spyOn(console, 'error').mockImplementation(() => {});
+		rdMocks.addHashAsMagnet.mockRejectedValue(error);
 		const req = createMockRequest({
 			method: 'POST',
-			body: { accessToken: 'token123', hash: 'bad123', fileId: 1 },
+			body: { accessToken: 'token123', hash: 'abc', fileId: 1 },
 		});
 		const res = createMockResponse();
 
 		await handler(req, res);
 
-		expect(res.status).toHaveBeenCalledWith(500);
-		expect(rdMocks.deleteTorrent).toHaveBeenCalledWith('token123', 'torrent-id-err', false);
+		expect(res.status).toHaveBeenCalledWith(status);
+		expect((res._getData() as { error: string }).error).toContain(says);
+		expect(prismaMocks.availableMusic.deleteMany).not.toHaveBeenCalled();
+	});
+
+	it('replaces stored links RD aged out once the album plays again', async () => {
+		vi.spyOn(console, 'log').mockImplementation(() => {});
+		rdMocks.unrestrictLink
+			.mockRejectedValueOnce(rdError(503, 'hoster_unavailable', 19))
+			.mockResolvedValueOnce({
+				download: 'https://dl/2.flac',
+				filename: '2.flac',
+				filesize: 1,
+			});
+		rdMocks.addHashAsMagnet.mockResolvedValue('torrent-refresh');
+		rdMocks.getTorrentInfo
+			.mockResolvedValueOnce({
+				files: [
+					{ id: 1, selected: false },
+					{ id: 2, selected: false },
+				],
+				status: 'waiting_files_selection',
+				links: [],
+			})
+			.mockResolvedValueOnce({
+				files: [
+					{ id: 1, selected: true },
+					{ id: 2, selected: true },
+				],
+				status: 'downloaded',
+				links: ['https://real-debrid.com/d/NEW1', 'https://real-debrid.com/d/NEW2'],
+			});
+		rdMocks.selectFiles.mockResolvedValue(undefined);
+		rdMocks.deleteTorrent.mockResolvedValue(undefined);
+		const req = createMockRequest({
+			method: 'POST',
+			body: {
+				accessToken: 'token123',
+				hash: 'abc',
+				fileId: 2,
+				link: 'https://real-debrid.com/d/OLD2',
+			},
+		});
+		const res = createMockResponse();
+
+		await handler(req, res);
+
+		expect(res.status).toHaveBeenCalledWith(200);
+		expect(prismaMocks.availableMusicFile.updateMany).toHaveBeenCalledWith({
+			where: { hash: 'abc', file_id: 1 },
+			data: { link: 'https://real-debrid.com/d/NEW1' },
+		});
+		expect(prismaMocks.availableMusicFile.updateMany).toHaveBeenCalledWith({
+			where: { hash: 'abc', file_id: 2 },
+			data: { link: 'https://real-debrid.com/d/NEW2' },
+		});
 	});
 
 	it('handles cleanup failure silently', async () => {
@@ -272,8 +418,9 @@ describe('API /api/music/unrestrict', () => {
 
 		await handler(req, res);
 
-		expect(res.status).toHaveBeenCalledWith(500);
-		expect(res._getData()).toMatchObject({ error: 'Network error' });
+		expect(res.status).toHaveBeenCalledWith(502);
+		expect(res._getData()).toMatchObject({ error: expect.stringContaining('Try again') });
+		expect(prismaMocks.availableMusic.deleteMany).not.toHaveBeenCalled();
 	});
 
 	it('returns correct MIME type for .flac', async () => {
@@ -394,9 +541,9 @@ describe('API /api/music/unrestrict', () => {
 
 		await handler(req, res);
 
-		expect(res.status).toHaveBeenCalledWith(500);
+		expect(res.status).toHaveBeenCalledWith(502);
 		expect(res._getData()).toEqual({
-			error: 'service_unavailable',
+			error: "Real-Debrid couldn't start this track right now. Try again in a while.",
 			errorCode: 35,
 		});
 	});

@@ -101,6 +101,7 @@ export function MusicPlayerProvider({
 	const searchInputRef = useRef<HTMLInputElement | null>(null);
 	const playToken = useRef(0);
 	const pending = useRef(new WeakMap<QueuedTrack, Promise<string | undefined>>());
+	const failureReasons = useRef(new WeakMap<QueuedTrack, string>());
 	const prefetched = useRef(new WeakSet<QueuedTrack>());
 	const heard = useRef({ seconds: 0, at: 0, reported: false });
 
@@ -113,7 +114,10 @@ export function MusicPlayerProvider({
 	const resolveItem = (item: QueuedTrack) => {
 		let url = pending.current.get(item);
 		if (!url) {
-			url = resolveStreamUrl(item.track).catch(() => undefined);
+			url = resolveStreamUrl(item.track).catch((err: unknown) => {
+				if (err instanceof Error) failureReasons.current.set(item, err.message);
+				return undefined;
+			});
 			pending.current.set(item, url);
 		}
 		return url;
@@ -143,13 +147,16 @@ export function MusicPlayerProvider({
 		if (!url) {
 			pending.current.delete(now.item); // a later play of this item tries again
 			console.error(`Failed to load track: ${now.item.track.filename}, skipping...`);
+			const reason = failureReasons.current.get(now.item);
+			// One toast, replaced by each failure, so a run of skips doesn't stack them.
+			if (reason) toast.error(reason, { id: 'music-play-failure' });
 			const skipTo =
 				failures + 1 < MAX_FAILED_IN_A_ROW
 					? advance(queueRef.current, state.repeatMode === 'all' ? 'all' : 'off')
 					: null;
 			if (skipTo) return startPlayback(skipTo, failures + 1);
 			setState((prev) => ({ ...prev, isLoading: false, isPlaying: false }));
-			toast.error("Couldn't play this right now. Try again in a while.");
+			if (!reason) toast.error("Couldn't play this right now. Try again in a while.");
 			return;
 		}
 		if (!now.item.streamUrl) commit(withStreamUrl(queueRef.current, now.item, url));

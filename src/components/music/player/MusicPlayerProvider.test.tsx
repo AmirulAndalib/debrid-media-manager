@@ -216,6 +216,18 @@ describe('MusicPlayerProvider', () => {
 		expect(toastError).toHaveBeenCalledOnce();
 	});
 
+	it("shows the server's reason a track won't play", async () => {
+		const dead = "Real-Debrid no longer has this album cached, so it can't be played.";
+		const resolveStreamUrl = vi.fn(async (track: QueuedTrack['track']) => {
+			if (track.id === 'a') throw new Error(dead);
+			return `https://cdn.example/${track.id}`;
+		});
+		const { audio } = setup({ resolveStreamUrl });
+		await act(async () => player.playContext(items('a', 'b'), 0, 'album:h'));
+		expect(audio.getAttribute('src')).toBe('https://cdn.example/b');
+		expect(toastError).toHaveBeenCalledExactlyOnceWith(dead, { id: 'music-play-failure' });
+	});
+
 	it('reports a play once, after 30 seconds heard', async () => {
 		const onTrackPlayed = vi.fn();
 		const { audio } = setup({ onTrackPlayed });

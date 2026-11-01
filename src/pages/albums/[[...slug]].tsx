@@ -46,6 +46,7 @@ async function unrestrictTrack(
 ): Promise<string | undefined> {
 	if (!accessToken) return undefined;
 
+	// Failures throw with the server's explanation; the player shows it.
 	try {
 		const response = await fetch('/api/music/unrestrict', {
 			method: 'POST',
@@ -67,14 +68,16 @@ async function unrestrictTrack(
 				hash: track.hash,
 				fileId: track.fileId,
 			});
-			throw new Error(errorData.error || 'Failed to unrestrict');
+			throw new Error(
+				errorData.error || "Couldn't play this right now. Try again in a while."
+			);
 		}
 
 		const data: UnrestrictTrackResponse = await response.json();
 		return data.streamUrl;
 	} catch (err) {
 		console.error('Failed to unrestrict track:', err);
-		return undefined;
+		throw err;
 	}
 }
 

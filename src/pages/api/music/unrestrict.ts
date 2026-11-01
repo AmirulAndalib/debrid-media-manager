@@ -6,9 +6,11 @@ import {
 	unrestrictLink,
 } from '@/services/realDebrid';
 import { BLOCKED_MESSAGE, isHashBlocked } from '@/services/takedown/blocklist';
+import { classifyRdPlayError } from '@/utils/castAddonFailure';
 import { getClientIpFromRequest } from '@/utils/clientIp';
 import { prisma } from '@/utils/prisma';
 import { RdAddPausedError, retryRdAddThroughPause } from '@/utils/rdAddPause';
+import { isDeadRdLink } from '@/utils/rdLinkRot';
 import { isVideo } from '@/utils/selectable';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -42,6 +44,50 @@ function getMimeType(filename: string): string {
 	return MIME_TYPES[ext] ?? 'audio/mpeg';
 }
 
+/**
+ * RD does not have the album cached. Measured 2026-11-01 on a test account: an
+ * uncached album added once sits at `downloading` 0%, and added two or three
+ * times at once (the player's play and prefetch) every copy turns `error`.
+ * Cached albums reach `downloaded` within a second either way.
+ */
+class NotCachedError extends Error {}
+const NOT_CACHED_STATUSES = new Set(['error', 'dead', 'virus', 'magnet_error']);
+
+const NOT_CACHED_MESSAGE =
+	"Real-Debrid no longer has this album cached, so it can't be played. It has been taken out of the catalog.";
+
+/** What the listener reads when a track will not start: the status and the reason. */
+function explainFailure(error: unknown): { status: number; error: string } {
+	if (error instanceof NotCachedError) return { status: 410, error: NOT_CACHED_MESSAGE };
+	if (error instanceof RdAddPausedError) return { status: 503, error: error.message };
+	switch (classifyRdPlayError(error)) {
+		case 'credential':
+			return { status: 401, error: 'Your Real-Debrid login has expired. Log in again.' };
+		case 'account':
+			return {
+				status: 403,
+				error: 'Real-Debrid refused your account. Check that your premium is active.',
+			};
+		case 'network':
+			return {
+				status: 403,
+				error: "Real-Debrid won't make links for your network. If you use a VPN or proxy, try without it.",
+			};
+		case 'refused':
+			return { status: 451, error: "Real-Debrid won't serve this album." };
+	}
+	if ((error as any)?.response?.status === 429) {
+		return {
+			status: 429,
+			error: 'Real-Debrid is limiting your account right now. Wait a minute and try again.',
+		};
+	}
+	return {
+		status: 502,
+		error: "Real-Debrid couldn't start this track right now. Try again in a while.",
+	};
+}
+
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
@@ -72,20 +118,24 @@ async function waitForDownloaded(
 	maxAttempts = 15,
 	intervalMs = 1000
 ): Promise<Awaited<ReturnType<typeof getTorrentInfo>>> {
+	let status = '';
 	for (let i = 0; i < maxAttempts; i++) {
 		const info = await getTorrentInfo(accessToken, torrentId, false);
-		if (info.status === 'downloaded' && info.links.length > 0) return info;
-		if (info.status === 'error' || info.status === 'dead' || info.status === 'virus') {
-			throw new Error(`Torrent status: ${info.status}`);
-		}
+		status = info.status;
+		if (status === 'downloaded' && info.links.length > 0) return info;
+		if (NOT_CACHED_STATUSES.has(status)) throw new NotCachedError(`Torrent status: ${status}`);
 		await delay(intervalMs);
 	}
-	throw new Error('Timed out waiting for torrent to be ready');
+	// Still downloading after the wait: RD is fetching it from peers, not serving a cached copy.
+	if (status === 'downloading') throw new NotCachedError('Torrent status: downloading');
+	throw new Error(`Timed out waiting for torrent to be ready (${status})`);
 }
 
 export default async function handler(
 	req: NextApiRequest,
-	res: NextApiResponse<UnrestrictTrackResponse | { error: string; errorCode?: number }>
+	res: NextApiResponse<
+		UnrestrictTrackResponse | { error: string; errorCode?: number; dead?: boolean }
+	>
 ) {
 	if (req.method !== 'POST') {
 		return res.status(405).json({ error: 'Method not allowed' });
@@ -106,6 +156,7 @@ export default async function handler(
 
 	const ipAddress = getClientIpFromRequest(req);
 
+	let storedLinkDead = false;
 	// Fast path: try to unrestrict the stored link directly (avoids full magnet flow)
 	if (link) {
 		try {
@@ -118,6 +169,7 @@ export default async function handler(
 				mimeType: getMimeType(unrestricted.filename),
 			});
 		} catch (fastPathError: unknown) {
+			storedLinkDead = isDeadRdLink(fastPathError);
 			console.log('[Music Unrestrict] Fast path failed, falling back to magnet flow', {
 				hash,
 				fileId,
@@ -166,9 +218,30 @@ export default async function handler(
 			throw new Error('No download link found for this track');
 		}
 
-		const unrestricted = await unrestrictLink(accessToken, link, ipAddress, false);
+		let unrestricted;
+		try {
+			unrestricted = await unrestrictLink(accessToken, link, ipAddress, false);
+		} catch (error) {
+			// A link minted a moment ago that RD calls gone: the content itself is.
+			throw isDeadRdLink(error) ? new NotCachedError(`Unrestrict: ${link}`) : error;
+		}
 
 		await deleteTorrent(accessToken, torrentId, false);
+
+		// RD's /d/ links age out while the album stays cached: keep the fresh
+		// links so the next play takes the fast path. Links pair with the
+		// selected files in order only when RD made one per file.
+		const selected = torrentInfo.files.filter((f) => f.selected);
+		if (storedLinkDead && selected.length === torrentInfo.links.length) {
+			await Promise.all(
+				selected.map((f, i) =>
+					prisma.availableMusicFile.updateMany({
+						where: { hash, file_id: f.id },
+						data: { link: torrentInfo.links[i] },
+					})
+				)
+			).catch((e) => console.error('[Music Unrestrict] Link refresh failed', hash, e));
+		}
 
 		console.log('[Music Unrestrict] Magnet flow succeeded', { hash, fileId });
 
@@ -179,10 +252,7 @@ export default async function handler(
 			mimeType: getMimeType(unrestricted.filename),
 		});
 	} catch (error: unknown) {
-		if (error instanceof RdAddPausedError) {
-			res.setHeader('Retry-After', '120');
-			return res.status(503).json({ error: error.message });
-		}
+		if (error instanceof RdAddPausedError) res.setHeader('Retry-After', '120');
 		if (torrentId) {
 			try {
 				await deleteTorrent(accessToken, torrentId, false);
@@ -204,9 +274,22 @@ export default async function handler(
 			status: (error as any)?.response?.status,
 		});
 
-		return res.status(500).json({
-			error: errorMessage,
-			errorCode,
-		});
+		const dead = error instanceof NotCachedError;
+		if (dead) {
+			// Gone for everyone: out of the catalog, and likes and playlists show
+			// it unavailable. The music spider checks it again when a crawl finds it.
+			await prisma.availableMusic
+				.deleteMany({ where: { hash } })
+				.then(({ count }) =>
+					console.log('[Music Unrestrict] Dropped dead album', { hash, count })
+				)
+				.catch((e) =>
+					console.error('[Music Unrestrict] Failed to drop dead album', hash, e)
+				);
+		}
+		const failure = explainFailure(error);
+		return res
+			.status(failure.status)
+			.json({ error: failure.error, errorCode, ...(dead && { dead }) });
 	}
 }

@@ -1,0 +1,156 @@
+{
+	"added": "2026-11-01T21:34:05.000Z",
+	"bytes": 1160427183,
+	"filename": "Taylor Swift - 2023 - 1989 (Taylor's Version) (Deluxe) (24bit-48kHz)",
+	"files": [
+		{
+			"id": 1,
+			"path": "/01 Welcome To New York (Taylor's Version).flac",
+			"bytes": 52522895,
+			"selected": 1
+		},
+		{
+			"id": 2,
+			"path": "/02 Blank Space (Taylor's Version).flac",
+			"bytes": 57198116,
+			"selected": 1
+		},
+		{
+			"id": 3,
+			"path": "/03 Style (Taylor's Version).flac",
+			"bytes": 55396173,
+			"selected": 1
+		},
+		{
+			"id": 4,
+			"path": "/04 Out Of The Woods (Taylor's Version).flac",
+			"bytes": 56911581,
+			"selected": 1
+		},
+		{
+			"id": 5,
+			"path": "/05 All You Had To Do Was Stay (Taylor's Version).flac",
+			"bytes": 49260382,
+			"selected": 1
+		},
+		{
+			"id": 6,
+			"path": "/06 Shake It Off (Taylor's Version).flac",
+			"bytes": 54118195,
+			"selected": 1
+		},
+		{
+			"id": 7,
+			"path": "/07 I Wish You Would (Taylor's Version).flac",
+			"bytes": 50920487,
+			"selected": 1
+		},
+		{
+			"id": 8,
+			"path": "/08 Bad Blood (Taylor's Version).flac",
+			"bytes": 51324606,
+			"selected": 1
+		},
+		{
+			"id": 9,
+			"path": "/09 Wildest Dreams (Taylor's Version).flac",
+			"bytes": 50731393,
+			"selected": 1
+		},
+		{
+			"id": 10,
+			"path": "/10 How You Get The Girl (Taylor's Version).flac",
+			"bytes": 60903870,
+			"selected": 1
+		},
+		{
+			"id": 11,
+			"path": "/11 This Love (Taylor\u2019s Version).flac",
+			"bytes": 59075431,
+			"selected": 1
+		},
+		{
+			"id": 12,
+			"path": "/12 I Know Places (Taylor's Version).flac",
+			"bytes": 49238575,
+			"selected": 1
+		},
+		{
+			"id": 13,
+			"path": "/13 Clean (Taylor's Version).flac",
+			"bytes": 59473205,
+			"selected": 1
+		},
+		{
+			"id": 14,
+			"path": "/14 Wonderland (Taylor's Version).flac",
+			"bytes": 59313138,
+			"selected": 1
+		},
+		{
+			"id": 15,
+			"path": "/15 You Are In Love (Taylor's Version).flac",
+			"bytes": 58289137,
+			"selected": 1
+		},
+		{
+			"id": 16,
+			"path": "/16 New Romantics (Taylor's Version).flac",
+			"bytes": 56723436,
+			"selected": 1
+		},
+		{
+			"id": 17,
+			"path": "/17 Slut! (Taylor's Version) (From The Vault).flac",
+			"bytes": 40484638,
+			"selected": 1
+		},
+		{
+			"id": 18,
+			"path": "/18 Say Don't Go (Taylor's Version) (From The Vault).flac",
+			"bytes": 63315457,
+			"selected": 1
+		},
+		{
+			"id": 19,
+			"path": "/19 Now That We Don't Talk (Taylor's Version) (From The Vault).flac",
+			"bytes": 33505329,
+			"selected": 1
+		},
+		{
+			"id": 20,
+			"path": "/20 Suburban Legends (Taylor's Version) (From The Vault).flac",
+			"bytes": 40125672,
+			"selected": 1
+		},
+		{
+			"id": 21,
+			"path": "/21 Is It Over Now (Taylor's Version) (From The Vault).flac",
+			"bytes": 53168095,
+			"selected": 1
+		},
+		{
+			"id": 22,
+			"path": "/22 Bad Blood (Taylor's Version) (feat. Kendrick Lama).flac",
+			"bytes": 48427372,
+			"selected": 1
+		},
+		{
+			"id": 23,
+			"path": "/cover.jpg",
+			"bytes": 459012,
+			"selected": 0
+		}
+	],
+	"hash": "f270253c6012dbb644d002acc542373bbe367e18",
+	"host": "real-debrid.com",
+	"id": "FKNNEZ6TODDLS",
+	"links": [],
+	"original_bytes": 1160886195,
+	"original_filename": "Taylor Swift - 2023 - 1989 (Taylor's Version) (Deluxe) (24bit-48kHz)",
+	"progress": 0,
+	"seeders": 0,
+	"speed": 0,
+	"split": 2000,
+	"status": "downloading"
+}
