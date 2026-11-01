@@ -27,7 +27,11 @@ const prismaMocks = vi.hoisted(() => ({
 		findUnique: vi.fn(async () => null),
 		deleteMany: vi.fn(async () => ({ count: 1 })),
 	},
-	availableMusicFile: { updateMany: vi.fn(async () => ({ count: 1 })) },
+	availableMusicFile: {
+		updateMany: vi.fn(async () => ({ count: 1 })),
+		deleteMany: vi.fn(async () => ({ count: 1 })),
+		count: vi.fn(async () => 17),
+	},
 }));
 vi.mock('@/utils/prisma', () => ({ prisma: prismaMocks }));
 
@@ -302,30 +306,89 @@ describe('API /api/music/unrestrict', () => {
 
 			expectDropped(res);
 		});
+	});
 
-		it('drops it when RD calls a freshly made link gone', async () => {
+	describe('a track RD calls gone while the album plays', () => {
+		const playTrack = async () => {
+			vi.spyOn(console, 'error').mockImplementation(() => {});
+			vi.spyOn(console, 'log').mockImplementation(() => {});
+			rdMocks.addHashAsMagnet.mockResolvedValue('torrent-track');
 			rdMocks.getTorrentInfo
 				.mockResolvedValueOnce({
-					files: [{ id: 1, selected: false }],
+					files: [
+						{ id: 1, path: '/01.flac', selected: false },
+						{ id: 2, path: '/02.flac', selected: false },
+					],
 					status: 'waiting_files_selection',
 					links: [],
 				})
 				.mockResolvedValueOnce({
-					files: [{ id: 1, selected: true }],
+					files: [
+						{ id: 1, path: '/01.flac', selected: true },
+						{ id: 2, path: '/02.flac', selected: true },
+					],
 					status: 'downloaded',
-					links: ['https://rd.link/1'],
+					links: ['https://rd.link/1', 'https://rd.link/2'],
 				});
+			rdMocks.selectFiles.mockResolvedValue(undefined);
+			rdMocks.deleteTorrent.mockResolvedValue(undefined);
 			rdMocks.unrestrictLink.mockRejectedValue(rdError(503, 'unavailable_file', 19));
 			const req = createMockRequest({
 				method: 'POST',
-				body: { accessToken: 'token123', hash, fileId: 1 },
+				body: { accessToken: 'token123', hash: 'abc', fileId: 2 },
 			});
 			const res = createMockResponse();
-
 			await handler(req, res);
+			return res;
+		};
 
-			expectDropped(res);
+		it('drops only that track and keeps the album', async () => {
+			const res = await playTrack();
+
+			expect(res.status).toHaveBeenCalledWith(410);
+			expect(res._getData()).toMatchObject({
+				error: expect.stringContaining('The rest of the album still plays'),
+				dead: true,
+			});
+			expect(prismaMocks.availableMusicFile.deleteMany).toHaveBeenCalledWith({
+				where: { hash: 'abc', file_id: 2 },
+			});
+			expect(prismaMocks.availableMusic.deleteMany).not.toHaveBeenCalled();
 		});
+
+		it('drops the album with its last track', async () => {
+			prismaMocks.availableMusicFile.count.mockResolvedValueOnce(0);
+
+			await playTrack();
+
+			expect(prismaMocks.availableMusic.deleteMany).toHaveBeenCalledWith({
+				where: { hash: 'abc' },
+			});
+		});
+	});
+
+	// RD caches by the exact files selected, so ask for the spider's: every .flac and .mp3.
+	it("selects the music spider's files, not the cover", async () => {
+		vi.spyOn(console, 'error').mockImplementation(() => {});
+		vi.spyOn(console, 'log').mockImplementation(() => {});
+		rdMocks.addHashAsMagnet.mockResolvedValue('torrent-sel');
+		rdMocks.getTorrentInfo
+			.mockResolvedValueOnce({ ...downloadingInfo, status: 'waiting_files_selection' })
+			.mockResolvedValue(concurrentErrorInfo);
+		rdMocks.selectFiles.mockResolvedValue(undefined);
+		rdMocks.deleteTorrent.mockResolvedValue(undefined);
+		const req = createMockRequest({
+			method: 'POST',
+			body: { accessToken: 'token123', hash: downloadingInfo.hash, fileId: 1 },
+		});
+
+		await handler(req, createMockResponse());
+
+		const flac = downloadingInfo.files
+			.filter((f) => f.path.endsWith('.flac'))
+			.map((f) => `${f.id}`);
+		expect(flac).toHaveLength(22);
+		expect(rdMocks.selectFiles).toHaveBeenCalledWith('token123', 'torrent-sel', flac, false);
 	});
 
 	it.each([

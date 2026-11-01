@@ -49,16 +49,27 @@ function getMimeType(filename: string): string {
  * uncached album added once sits at `downloading` 0%, and added two or three
  * times at once (the player's play and prefetch) every copy turns `error`.
  * Cached albums reach `downloaded` within a second either way.
+ *
+ * RD caches by the exact files selected: all 18 tracks of a cached album read
+ * `downloaded`, any 17 or a single one `downloading`. So a status speaks for
+ * the whole selection, never for one track, and the selection asked for must be
+ * the music spider's: every .flac and .mp3 (scraps `rd_pipeline.py`).
  */
 class NotCachedError extends Error {}
+/** The album is cached but RD calls this one track's fresh link gone. */
+class TrackGoneError extends Error {}
 const NOT_CACHED_STATUSES = new Set(['error', 'dead', 'virus', 'magnet_error']);
+const isSpiderAudio = (f: { path: string }) => /\.(flac|mp3)$/i.test(f.path);
 
 const NOT_CACHED_MESSAGE =
 	"Real-Debrid no longer has this album cached, so it can't be played. It has been taken out of the catalog.";
+const TRACK_GONE_MESSAGE =
+	"Real-Debrid no longer has this track, so it can't be played. The rest of the album still plays.";
 
 /** What the listener reads when a track will not start: the status and the reason. */
 function explainFailure(error: unknown): { status: number; error: string } {
 	if (error instanceof NotCachedError) return { status: 410, error: NOT_CACHED_MESSAGE };
+	if (error instanceof TrackGoneError) return { status: 410, error: TRACK_GONE_MESSAGE };
 	if (error instanceof RdAddPausedError) return { status: 503, error: error.message };
 	switch (classifyRdPlayError(error)) {
 		case 'credential':
@@ -198,13 +209,17 @@ export default async function handler(
 		// Wait for magnet conversion to complete (files become available)
 		const initialInfo = await waitForFiles(accessToken, torrentId);
 
-		// Select only media files (audio/video), skip junk like .nfo, .txt, .jpg, .cue, .log
-		let mediaFileIds = initialInfo.files.filter(isVideo).map((f) => `${f.id}`);
-		if (mediaFileIds.length === 0) {
-			// Fallback to all files if no recognized media files found
-			mediaFileIds = initialInfo.files.map((f) => `${f.id}`);
-		}
-		await selectFiles(accessToken, torrentId, mediaFileIds, false);
+		// The spider's selection, the one RD has cached; then media files, then everything.
+		const { files } = initialInfo;
+		const spider = files.filter(isSpiderAudio);
+		const media = files.filter(isVideo);
+		const chosen = spider.length ? spider : media.length ? media : files;
+		await selectFiles(
+			accessToken,
+			torrentId,
+			chosen.map((f) => `${f.id}`),
+			false
+		);
 
 		// Wait for torrent to reach "downloaded" status so links are populated
 		const torrentInfo = await waitForDownloaded(accessToken, torrentId);
@@ -222,8 +237,9 @@ export default async function handler(
 		try {
 			unrestricted = await unrestrictLink(accessToken, link, ipAddress, false);
 		} catch (error) {
-			// A link minted a moment ago that RD calls gone: the content itself is.
-			throw isDeadRdLink(error) ? new NotCachedError(`Unrestrict: ${link}`) : error;
+			// A link minted a moment ago that RD calls gone: this track is,
+			// not the album, which RD just served whole.
+			throw isDeadRdLink(error) && fileIdx >= 0 ? new TrackGoneError(link) : error;
 		}
 
 		await deleteTorrent(accessToken, torrentId, false);
@@ -274,18 +290,26 @@ export default async function handler(
 			status: (error as any)?.response?.status,
 		});
 
-		const dead = error instanceof NotCachedError;
+		// Gone for everyone: likes and playlists show it unavailable. An album
+		// goes with its last track, and the music spider checks it again when a
+		// crawl finds it.
+		const dead = error instanceof NotCachedError || error instanceof TrackGoneError;
 		if (dead) {
-			// Gone for everyone: out of the catalog, and likes and playlists show
-			// it unavailable. The music spider checks it again when a crawl finds it.
-			await prisma.availableMusic
-				.deleteMany({ where: { hash } })
-				.then(({ count }) =>
-					console.log('[Music Unrestrict] Dropped dead album', { hash, count })
-				)
-				.catch((e) =>
-					console.error('[Music Unrestrict] Failed to drop dead album', hash, e)
-				);
+			try {
+				if (error instanceof TrackGoneError) {
+					await prisma.availableMusicFile.deleteMany({
+						where: { hash, file_id: fileId },
+					});
+				}
+				const left =
+					error instanceof TrackGoneError
+						? await prisma.availableMusicFile.count({ where: { hash } })
+						: 0;
+				if (left === 0) await prisma.availableMusic.deleteMany({ where: { hash } });
+				console.log('[Music Unrestrict] Dropped dead', { hash, fileId, albumLeft: left });
+			} catch (e) {
+				console.error('[Music Unrestrict] Failed to drop dead music', hash, e);
+			}
 		}
 		const failure = explainFailure(error);
 		return res
