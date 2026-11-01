@@ -233,6 +233,35 @@ describe('IndexPage in guest mode', () => {
 		);
 	});
 
+	// The Jellyfin and Emby plugins show a debrid library, and a guest has no
+	// library cache to clear. The indexers and the wanted list work without one.
+	it('leaves out the sponsor features and footer action that need a debrid account', () => {
+		localStorage.setItem(GUEST_MODE_KEY, 'true');
+
+		const { container } = render(<IndexPage />);
+
+		for (const href of ['/torznab', '/newznab', '/wanted']) {
+			expect(container.querySelector(`a[href="${href}"]`)).not.toBeNull();
+		}
+		expect(container.querySelector('a[href="/jellyfin"]')).toBeNull();
+		expect(container.querySelector('a[href="/emby"]')).toBeNull();
+		expect(screen.queryByRole('button', { name: /Clear library cache/i })).toBeNull();
+	});
+
+	it('keeps them for a signed-in user', () => {
+		currentUserMock.mockReturnValue({
+			...signedOutFixture,
+			rdUser: { username: 'demo' },
+			hasRDAuth: true,
+		});
+
+		const { container } = render(<IndexPage />);
+
+		expect(container.querySelector('a[href="/jellyfin"]')).not.toBeNull();
+		expect(container.querySelector('a[href="/emby"]')).not.toBeNull();
+		expect(screen.getByRole('button', { name: /Clear library cache/i })).toBeInTheDocument();
+	});
+
 	// Six login buttons nobody needs twice took most of the page, so a signed-in
 	// user gets the same fold as a guest, under a label that fits them.
 	it('folds the debrid cards for a signed-in user too', () => {

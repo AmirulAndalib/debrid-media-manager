@@ -41,6 +41,50 @@ describe('SettingsSection', () => {
 		originalRegister = undefined;
 	});
 
+	// A guest has no debrid account, so settings that only act through one are
+	// left out. What still changes a guest's search results stays: the size
+	// limits feed the torrent search's maxSize, and a stored hide-RD-blocked
+	// still filters results.
+	describe('for a guest', () => {
+		const debridOnly = [
+			'dmm-other-streams-limit',
+			'dmm-hide-cast-option',
+			'dmm-player',
+			'dmm-enable-torrentio',
+			'dmm-availability-check-limit',
+			'dmm-include-tracker-stats',
+			'dmm-show-mass-report-buttons',
+			'dmm-default',
+		];
+		const kept = [
+			'dmm-movie-max-size',
+			'dmm-episode-max-size',
+			'dmm-default-torrents-filter',
+			'dmm-only-trusted-torrents',
+			'dmm-hide-rd-blocked-torrents',
+			'dmm-results-tab',
+			'dmm-download-magnets',
+			'dmm-show-calendar-add-buttons-google',
+		];
+
+		it('leaves out settings that only act through a debrid account', () => {
+			localStorage.setItem('dmm:guest', 'true');
+			render(<SettingsSection />);
+
+			for (const id of debridOnly) expect(document.getElementById(id), id).toBeNull();
+			for (const id of kept) expect(document.getElementById(id), id).not.toBeNull();
+			expect(screen.queryByText('Stremio Cast Settings')).toBeNull();
+			expect(screen.queryByText('External Sources')).toBeNull();
+		});
+
+		it('keeps them for everybody else', () => {
+			render(<SettingsSection />);
+
+			for (const id of [...debridOnly, ...kept])
+				expect(document.getElementById(id), id).not.toBeNull();
+		});
+	});
+
 	// The default only makes sense for someone who has nothing but Real-Debrid:
 	// the filter hides releases RD refuses by name, which every other service
 	// serves perfectly well. A Debrid-Link credential is one of those, in either

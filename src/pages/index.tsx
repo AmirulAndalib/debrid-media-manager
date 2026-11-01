@@ -44,8 +44,14 @@ const sponsorLinks = [
 		href: '/jellyfin',
 		label: 'Jellyfin plugins',
 		description: 'Your library in Jellyfin, for sponsors',
+		needsDebrid: true,
 	},
-	{ href: '/emby', label: 'Emby plugins', description: 'Your library in Emby, for sponsors' },
+	{
+		href: '/emby',
+		label: 'Emby plugins',
+		description: 'Your library in Emby, for sponsors',
+		needsDebrid: true,
+	},
 	{
 		href: '/wanted',
 		label: 'Wanted list',
@@ -332,18 +338,21 @@ function IndexPage() {
 									Sponsor features
 								</summary>
 								<div className="grid grid-cols-1 gap-3 p-3 pt-0">
-									{sponsorLinks.map(({ href, label, description }) => (
-										<Link
-											key={href}
-											href={href}
-											className="haptic-sm flex w-full items-center justify-between gap-3 rounded border-2 border-pink-500/40 bg-gray-800/30 px-4 py-2 text-sm font-medium text-gray-100 transition-colors hover:bg-gray-700/50"
-										>
-											<span className="shrink-0">{label}</span>
-											<span className="text-right text-xs text-gray-400">
-												{description}
-											</span>
-										</Link>
-									))}
+									{/* The plugins show a debrid library, which a guest has none of. */}
+									{sponsorLinks
+										.filter((link) => !(isGuest && link.needsDebrid))
+										.map(({ href, label, description }) => (
+											<Link
+												key={href}
+												href={href}
+												className="haptic-sm flex w-full items-center justify-between gap-3 rounded border-2 border-pink-500/40 bg-gray-800/30 px-4 py-2 text-sm font-medium text-gray-100 transition-colors hover:bg-gray-700/50"
+											>
+												<span className="shrink-0">{label}</span>
+												<span className="text-right text-xs text-gray-400">
+													{description}
+												</span>
+											</Link>
+										))}
 								</div>
 							</details>
 						</div>
@@ -386,12 +395,14 @@ function IndexPage() {
 							>
 								↻&nbsp;Refresh
 							</button>
-							<button
-								onClick={() => handleClearCache()}
-								className={maintenanceLinkClasses}
-							>
-								Clear library cache
-							</button>
+							{!isGuest && (
+								<button
+									onClick={() => handleClearCache()}
+									className={maintenanceLinkClasses}
+								>
+									Clear library cache
+								</button>
+							)}
 							{/* One button, whoever is looking at it. Guest mode used
 							    to have its own narrower exit next to this one, and
 							    the pair read as the same action: both landed on

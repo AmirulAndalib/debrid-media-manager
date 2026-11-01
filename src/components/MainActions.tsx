@@ -106,25 +106,25 @@ export function MainActions({
 		iconColor: string;
 	}[];
 
+	// Every action here needs a provider account, so a guest gets none of them:
+	// `withAuth` sends a guest straight back from the library, the albums page
+	// pushes anyone with no Real-Debrid token into /realdebrid/login (the flow
+	// guest mode exists to skip), every action on a hash list adds to a debrid
+	// service, and cast, transfers and status already wait for a provider user.
+	// Returning nothing also keeps an empty block out of the page's gap.
+	if (isGuest) return null;
+
 	return (
 		<div className="flex w-full flex-col gap-3">
-			{/* First row: Library, Hash lists, Music. Two of the three need a
-			    provider account and dead-end without one - the library because
-			    `withAuth` sends a guest straight back from it, and Music because
-			    the albums page pushes anyone with no Real-Debrid token into
-			    /realdebrid/login, which is the exact flow guest mode exists to
-			    skip. Hash lists is the one that works either way, so a guest
-			    gets it full width rather than a row with two holes in it. */}
-			<div className={`grid w-full gap-3 ${isGuest ? 'grid-cols-1' : 'grid-cols-3'}`}>
-				{!isGuest && (
-					<Link
-						href="/library"
-						className="haptic flex items-center justify-center gap-2 rounded border-2 border-cyan-500 bg-cyan-900/30 px-1 py-3 whitespace-nowrap text-cyan-100 transition-colors hover:bg-cyan-800/50 sm:p-3"
-					>
-						<BookOpen className="mr-1 hidden h-4 w-4 text-cyan-400 sm:inline-block" />
-						Library
-					</Link>
-				)}
+			{/* First row: Library, Hash lists, Music. */}
+			<div className="grid w-full grid-cols-3 gap-3">
+				<Link
+					href="/library"
+					className="haptic flex items-center justify-center gap-2 rounded border-2 border-cyan-500 bg-cyan-900/30 px-1 py-3 whitespace-nowrap text-cyan-100 transition-colors hover:bg-cyan-800/50 sm:p-3"
+				>
+					<BookOpen className="mr-1 hidden h-4 w-4 text-cyan-400 sm:inline-block" />
+					Library
+				</Link>
 				<Link
 					href={isLocalDev ? '/hashlists' : 'https://hashlists.debridmediamanager.com'}
 					target={isLocalDev ? undefined : '_blank'}
@@ -133,15 +133,13 @@ export function MainActions({
 					<Rocket className="mr-1 hidden h-4 w-4 text-indigo-400 sm:inline-block" />
 					Hash lists
 				</Link>
-				{!isGuest && (
-					<Link
-						href="/albums"
-						className="haptic flex items-center justify-center gap-2 rounded border-2 border-green-500 bg-green-900/30 px-1 py-3 whitespace-nowrap text-green-100 transition-colors hover:bg-green-800/50 sm:p-3"
-					>
-						<Music2 className="mr-1 hidden h-4 w-4 text-green-400 sm:inline-block" />
-						Music
-					</Link>
-				)}
+				<Link
+					href="/albums"
+					className="haptic flex items-center justify-center gap-2 rounded border-2 border-green-500 bg-green-900/30 px-1 py-3 whitespace-nowrap text-green-100 transition-colors hover:bg-green-800/50 sm:p-3"
+				>
+					<Music2 className="mr-1 hidden h-4 w-4 text-green-400 sm:inline-block" />
+					Music
+				</Link>
 			</div>
 
 			{/* Second row: Cast. One provider keeps its full button; two or more

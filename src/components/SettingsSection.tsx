@@ -10,6 +10,7 @@ import {
 	getLocalStorageString,
 	hideRdBlockedTorrentsDefault,
 } from '../utils/browserStorage';
+import { useGuestMode } from '../utils/guestMode';
 import { RESULTS_TAB_SETTING } from '../utils/resultsTab';
 import {
 	defaultAvailabilityCheckLimit,
@@ -33,6 +34,9 @@ import { SponsorPanel } from './SponsorPanel';
 
 export const SettingsSection = () => {
 	const { isSponsor } = useSponsor();
+	// A guest has no debrid account, so settings that only act through one are
+	// left out; whatever still changes a guest's search results stays.
+	const isGuest = useGuestMode();
 	const [isMagnetHandlerEnabled, setIsMagnetHandlerEnabled] = useState(() =>
 		getLocalStorageBoolean('settings:magnetHandlerEnabled', defaultMagnetHandlerEnabled)
 	);
@@ -531,107 +535,113 @@ export const SettingsSection = () => {
 						</div>
 					</div>
 
-					<div className="rounded border-2 border-purple-500/30 p-4">
-						<div className="mb-2 text-sm font-semibold text-purple-200">
-							Stremio Cast Settings
-						</div>
+					{!isGuest && (
+						<div className="rounded border-2 border-purple-500/30 p-4">
+							<div className="mb-2 text-sm font-semibold text-purple-200">
+								Stremio Cast Settings
+							</div>
 
-						<div className="flex flex-col gap-4">
-							<div className="flex flex-col gap-1">
-								<label className="font-semibold">Other streams limit</label>
-								<select
-									id="dmm-other-streams-limit"
-									className="w-full rounded bg-gray-800 px-2 py-2.5 text-gray-200"
-									value={otherStreamsLimit}
-									onChange={handleOtherStreamsLimitChange}
-								>
-									{otherStreamsLimitChoices(
-										isSponsor,
-										Number(otherStreamsLimit)
-									).map((choice) => (
-										<option
-											key={choice.value}
-											value={String(choice.value)}
-											disabled={choice.sponsorOnly}
-										>
-											{otherStreamsLimitLabel(choice)}
-										</option>
-									))}
-								</select>
-								<p className="mt-1 text-xs text-gray-400">
-									Limits streams from available files, torrents, and other
-									users&apos; casts shown in the Stremio Cast addon
+							<div className="flex flex-col gap-4">
+								<div className="flex flex-col gap-1">
+									<label className="font-semibold">Other streams limit</label>
+									<select
+										id="dmm-other-streams-limit"
+										className="w-full rounded bg-gray-800 px-2 py-2.5 text-gray-200"
+										value={otherStreamsLimit}
+										onChange={handleOtherStreamsLimitChange}
+									>
+										{otherStreamsLimitChoices(
+											isSponsor,
+											Number(otherStreamsLimit)
+										).map((choice) => (
+											<option
+												key={choice.value}
+												value={String(choice.value)}
+												disabled={choice.sponsorOnly}
+											>
+												{otherStreamsLimitLabel(choice)}
+											</option>
+										))}
+									</select>
+									<p className="mt-1 text-xs text-gray-400">
+										Limits streams from available files, torrents, and other
+										users&apos; casts shown in the Stremio Cast addon
+									</p>
+								</div>
+
+								<div className="flex items-center gap-2">
+									<input
+										id="dmm-hide-cast-option"
+										type="checkbox"
+										className="h-5 w-5 rounded border-gray-600 bg-gray-800"
+										checked={hideCastOption}
+										onChange={handleHideCastOptionChange}
+									/>
+									<label htmlFor="dmm-hide-cast-option" className="font-semibold">
+										Hide &quot;Cast a file inside a torrent&quot; option
+									</label>
+								</div>
+								<p className="-mt-2 text-xs text-gray-400">
+									When enabled, the cast option will not appear in Stremio streams
 								</p>
 							</div>
+						</div>
+					)}
 
-							<div className="flex items-center gap-2">
-								<input
-									id="dmm-hide-cast-option"
-									type="checkbox"
-									className="h-5 w-5 rounded border-gray-600 bg-gray-800"
-									checked={hideCastOption}
-									onChange={handleHideCastOptionChange}
-								/>
-								<label htmlFor="dmm-hide-cast-option" className="font-semibold">
-									Hide &quot;Cast a file inside a torrent&quot; option
-								</label>
+					{!isGuest && (
+						<div className="rounded border-2 border-gray-500/30 p-4">
+							<div className="mb-2 text-sm font-semibold text-gray-200">Playback</div>
+
+							<div className="flex flex-col gap-1">
+								<label className="font-semibold">Video player</label>
+								<select
+									id="dmm-player"
+									className="w-full rounded bg-gray-800 px-2 py-2.5 text-gray-200"
+									value={storedPlayer}
+									onChange={handlePlayerChange}
+								>
+									<optgroup label="Web">
+										<option value="web/rd">Real-Debrid Stream</option>
+									</optgroup>
+									<optgroup label="Android">
+										<option value="android/chooser">App chooser</option>
+										<option value="android/org.videolan.vlc">VLC</option>
+										<option value="android/com.mxtech.videoplayer.ad">
+											MX Player
+										</option>
+										<option value="android/com.mxtech.videoplayer.pro">
+											MX Player Pro
+										</option>
+										<option value="android/com.brouken.player">
+											JustPlayer
+										</option>
+									</optgroup>
+									<optgroup label="iOS">
+										<option value="ios2/open-vidhub">VidHub</option>
+										<option value="ios/infuse">Infuse</option>
+										<option value="ios/vlc">VLC</option>
+										<option value="ios/outplayer">Outplayer</option>
+										<option value="ios3/senplayer">SenPlayer</option>
+										<option value="ios3/aether">Aether</option>
+									</optgroup>
+									<optgroup label="MacOS">
+										<option value="mac4/open-vidhub">VidHub</option>
+										<option value="mac/infuse">Infuse</option>
+										<option value="mac2/iina">IINA</option>
+										<option value="mac2/omniplayer">OmniPlayer</option>
+										<option value="mac2/figplayer">Fig Player</option>
+										<option value="mac3/nplayer-mac">nPlayer</option>
+										<option value="mac5/senplayer">SenPlayer</option>
+										<option value="mac5/aether">Aether</option>
+									</optgroup>
+									<optgroup label="Windows">
+										<option value="windows/vlc">VLC</option>
+										<option value="windows/potplayer">PotPlayer</option>
+									</optgroup>
+								</select>
 							</div>
-							<p className="-mt-2 text-xs text-gray-400">
-								When enabled, the cast option will not appear in Stremio streams
-							</p>
 						</div>
-					</div>
-
-					<div className="rounded border-2 border-gray-500/30 p-4">
-						<div className="mb-2 text-sm font-semibold text-gray-200">Playback</div>
-
-						<div className="flex flex-col gap-1">
-							<label className="font-semibold">Video player</label>
-							<select
-								id="dmm-player"
-								className="w-full rounded bg-gray-800 px-2 py-2.5 text-gray-200"
-								value={storedPlayer}
-								onChange={handlePlayerChange}
-							>
-								<optgroup label="Web">
-									<option value="web/rd">Real-Debrid Stream</option>
-								</optgroup>
-								<optgroup label="Android">
-									<option value="android/chooser">App chooser</option>
-									<option value="android/org.videolan.vlc">VLC</option>
-									<option value="android/com.mxtech.videoplayer.ad">
-										MX Player
-									</option>
-									<option value="android/com.mxtech.videoplayer.pro">
-										MX Player Pro
-									</option>
-									<option value="android/com.brouken.player">JustPlayer</option>
-								</optgroup>
-								<optgroup label="iOS">
-									<option value="ios2/open-vidhub">VidHub</option>
-									<option value="ios/infuse">Infuse</option>
-									<option value="ios/vlc">VLC</option>
-									<option value="ios/outplayer">Outplayer</option>
-									<option value="ios3/senplayer">SenPlayer</option>
-									<option value="ios3/aether">Aether</option>
-								</optgroup>
-								<optgroup label="MacOS">
-									<option value="mac4/open-vidhub">VidHub</option>
-									<option value="mac/infuse">Infuse</option>
-									<option value="mac2/iina">IINA</option>
-									<option value="mac2/omniplayer">OmniPlayer</option>
-									<option value="mac2/figplayer">Fig Player</option>
-									<option value="mac3/nplayer-mac">nPlayer</option>
-									<option value="mac5/senplayer">SenPlayer</option>
-									<option value="mac5/aether">Aether</option>
-								</optgroup>
-								<optgroup label="Windows">
-									<option value="windows/vlc">VLC</option>
-									<option value="windows/potplayer">PotPlayer</option>
-								</optgroup>
-							</select>
-						</div>
-					</div>
+					)}
 
 					<div className="rounded border-2 border-gray-500/30 p-4">
 						<div className="mb-2 text-sm font-semibold text-gray-200">
@@ -765,52 +775,54 @@ export const SettingsSection = () => {
 								</p>
 							</div>
 
-							<div className="flex flex-col gap-2 rounded border-2 border-blue-500/30 p-3">
-								<div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 gap-y-2">
-									<div className="text-sm font-semibold text-blue-200">
-										External Sources
+							{!isGuest && (
+								<div className="flex flex-col gap-2 rounded border-2 border-blue-500/30 p-3">
+									<div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 gap-y-2">
+										<div className="text-sm font-semibold text-blue-200">
+											External Sources
+										</div>
+										<div className="text-xs text-gray-400">On</div>
+										<div
+											className="text-xs text-gray-400"
+											title="Through DMM's Tor proxy, which bypasses rate limits"
+										>
+											via Tor
+										</div>
+										{externalSources.map((src) => (
+											<Fragment key={src.id}>
+												<label
+													htmlFor={`dmm-enable-${src.id}`}
+													className="font-semibold"
+												>
+													{src.name}
+												</label>
+												<input
+													id={`dmm-enable-${src.id}`}
+													type="checkbox"
+													aria-label={`Enable ${src.name}`}
+													className="h-5 w-5 justify-self-center rounded border-gray-600 bg-gray-800"
+													checked={src.on}
+													onChange={src.onChange}
+												/>
+												<input
+													id={`dmm-enable-${src.id}-tor`}
+													type="checkbox"
+													aria-label={`Enable ${src.name} (Tor)`}
+													className="h-5 w-5 justify-self-center rounded border-gray-600 bg-gray-800"
+													checked={src.tor}
+													onChange={src.onTorChange}
+												/>
+											</Fragment>
+										))}
 									</div>
-									<div className="text-xs text-gray-400">On</div>
-									<div
-										className="text-xs text-gray-400"
-										title="Through DMM's Tor proxy, which bypasses rate limits"
-									>
-										via Tor
-									</div>
-									{externalSources.map((src) => (
-										<Fragment key={src.id}>
-											<label
-												htmlFor={`dmm-enable-${src.id}`}
-												className="font-semibold"
-											>
-												{src.name}
-											</label>
-											<input
-												id={`dmm-enable-${src.id}`}
-												type="checkbox"
-												aria-label={`Enable ${src.name}`}
-												className="h-5 w-5 justify-self-center rounded border-gray-600 bg-gray-800"
-												checked={src.on}
-												onChange={src.onChange}
-											/>
-											<input
-												id={`dmm-enable-${src.id}-tor`}
-												type="checkbox"
-												aria-label={`Enable ${src.name} (Tor)`}
-												className="h-5 w-5 justify-self-center rounded border-gray-600 bg-gray-800"
-												checked={src.tor}
-												onChange={src.onTorChange}
-											/>
-										</Fragment>
-									))}
-								</div>
 
-								<span className="text-xs text-gray-400">
-									External sources provide additional cached torrents from
-									Real-Debrid. Disable if you want to use only DMM&apos;s own
-									search results. Tor bypasses their rate limits.
-								</span>
-							</div>
+									<span className="text-xs text-gray-400">
+										External sources provide additional cached torrents from
+										Real-Debrid. Disable if you want to use only DMM&apos;s own
+										search results. Tor bypasses their rate limits.
+									</span>
+								</div>
+							)}
 						</div>
 					</div>
 
@@ -833,40 +845,44 @@ export const SettingsSection = () => {
 								</label>
 							</div>
 
-							<div className="flex flex-col gap-1">
-								<label className="font-semibold">Service check limit</label>
-								<input
-									id="dmm-availability-check-limit"
-									type="number"
-									min="0"
-									className="w-full rounded bg-gray-800 px-2 py-2.5 text-gray-200"
-									placeholder="0 for no limit"
-									value={availabilityCheckLimit}
-									onChange={handleAvailabilityCheckLimitChange}
-								/>
-								<span className="text-xs text-gray-400">
-									Maximum torrents to check when using &quot;Check All
-									Services&quot; button (0 = no limit)
-								</span>
-							</div>
+							{!isGuest && (
+								<>
+									<div className="flex flex-col gap-1">
+										<label className="font-semibold">Service check limit</label>
+										<input
+											id="dmm-availability-check-limit"
+											type="number"
+											min="0"
+											className="w-full rounded bg-gray-800 px-2 py-2.5 text-gray-200"
+											placeholder="0 for no limit"
+											value={availabilityCheckLimit}
+											onChange={handleAvailabilityCheckLimitChange}
+										/>
+										<span className="text-xs text-gray-400">
+											Maximum torrents to check when using &quot;Check All
+											Services&quot; button (0 = no limit)
+										</span>
+									</div>
 
-							<div className="flex flex-col gap-1">
-								<div className="flex items-center gap-2">
-									<input
-										id="dmm-include-tracker-stats"
-										type="checkbox"
-										className="h-5 w-5 rounded border-gray-600 bg-gray-800"
-										checked={includeTrackerStats}
-										onChange={handleIncludeTrackerStatsChange}
-									/>
-									<label className="font-semibold">
-										Include tracker stats in service check
-									</label>
-								</div>
-								<span className="text-xs text-gray-400">
-									Adds seeders and leechers; slower.
-								</span>
-							</div>
+									<div className="flex flex-col gap-1">
+										<div className="flex items-center gap-2">
+											<input
+												id="dmm-include-tracker-stats"
+												type="checkbox"
+												className="h-5 w-5 rounded border-gray-600 bg-gray-800"
+												checked={includeTrackerStats}
+												onChange={handleIncludeTrackerStatsChange}
+											/>
+											<label className="font-semibold">
+												Include tracker stats in service check
+											</label>
+										</div>
+										<span className="text-xs text-gray-400">
+											Adds seeders and leechers; slower.
+										</span>
+									</div>
+								</>
+							)}
 						</div>
 					</div>
 
@@ -908,74 +924,80 @@ export const SettingsSection = () => {
 								</span>
 							</div>
 
-							<div className="flex items-center gap-2">
-								<input
-									id="dmm-show-mass-report-buttons"
-									type="checkbox"
-									className="h-5 w-5 rounded border-gray-600 bg-gray-800"
-									checked={showMassReportButtons}
-									onChange={handleMassReportButtonsChange}
-								/>
-								<label className="font-semibold">Show mass report buttons</label>
-							</div>
+							{!isGuest && (
+								<div className="flex items-center gap-2">
+									<input
+										id="dmm-show-mass-report-buttons"
+										type="checkbox"
+										className="h-5 w-5 rounded border-gray-600 bg-gray-800"
+										checked={showMassReportButtons}
+										onChange={handleMassReportButtonsChange}
+									/>
+									<label className="font-semibold">
+										Show mass report buttons
+									</label>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
 
-				<div className="mt-6 flex flex-col gap-2">
-					<button
-						id="dmm-default"
-						className={`haptic-sm w-full rounded border-2 ${
-							isMagnetHandlerEnabled
-								? 'border-green-500 bg-green-900/30 text-green-100 hover:bg-green-800/50'
-								: 'border-blue-500 bg-blue-900/30 text-blue-100 hover:bg-blue-800/50'
-						} px-4 py-2 text-sm transition-colors`}
-						onClick={() => {
-							if (
-								typeof navigator !== 'undefined' &&
-								'registerProtocolHandler' in navigator
-							) {
-								try {
-									navigator.registerProtocolHandler(
-										'magnet',
-										`${(typeof location !== 'undefined' && location.origin) || ''}/library?addMagnet=%s`
-									);
-									if (typeof localStorage !== 'undefined')
-										localStorage.setItem(
-											'settings:magnetHandlerEnabled',
-											'true'
+				{!isGuest && (
+					<div className="mt-6 flex flex-col gap-2">
+						<button
+							id="dmm-default"
+							className={`haptic-sm w-full rounded border-2 ${
+								isMagnetHandlerEnabled
+									? 'border-green-500 bg-green-900/30 text-green-100 hover:bg-green-800/50'
+									: 'border-blue-500 bg-blue-900/30 text-blue-100 hover:bg-blue-800/50'
+							} px-4 py-2 text-sm transition-colors`}
+							onClick={() => {
+								if (
+									typeof navigator !== 'undefined' &&
+									'registerProtocolHandler' in navigator
+								) {
+									try {
+										navigator.registerProtocolHandler(
+											'magnet',
+											`${(typeof location !== 'undefined' && location.origin) || ''}/library?addMagnet=%s`
 										);
-									setIsMagnetHandlerEnabled(true);
-								} catch (error) {
-									console.error('Error registering protocol handler:', error);
+										if (typeof localStorage !== 'undefined')
+											localStorage.setItem(
+												'settings:magnetHandlerEnabled',
+												'true'
+											);
+										setIsMagnetHandlerEnabled(true);
+									} catch (error) {
+										console.error('Error registering protocol handler:', error);
+									}
 								}
-							}
-						}}
-					>
-						{isMagnetHandlerEnabled ? (
-							<>
-								<Check className="mr-1 inline-block h-4 w-4 text-green-400" />
-								DMM is your default magnet handler
-							</>
-						) : (
-							<>
-								<Link2 className="mr-1 inline-block h-4 w-4 text-blue-400" />
-								Make DMM your default magnet handler
-							</>
-						)}
-					</button>
+							}}
+						>
+							{isMagnetHandlerEnabled ? (
+								<>
+									<Check className="mr-1 inline-block h-4 w-4 text-green-400" />
+									DMM is your default magnet handler
+								</>
+							) : (
+								<>
+									<Link2 className="mr-1 inline-block h-4 w-4 text-blue-400" />
+									Make DMM your default magnet handler
+								</>
+							)}
+						</button>
 
-					<div className="flex flex-col gap-2 text-xs text-gray-400">
-						<div>{getBrowserSettingsInfo().text}</div>
-						<input
-							type="text"
-							readOnly
-							className="w-full rounded bg-gray-800 px-2 py-1.5 text-gray-200"
-							value={getBrowserSettingsInfo().url}
-							onClick={(e) => (e.target as HTMLInputElement).select()}
-						/>
+						<div className="flex flex-col gap-2 text-xs text-gray-400">
+							<div>{getBrowserSettingsInfo().text}</div>
+							<input
+								type="text"
+								readOnly
+								className="w-full rounded bg-gray-800 px-2 py-1.5 text-gray-200"
+								value={getBrowserSettingsInfo().url}
+								onClick={(e) => (e.target as HTMLInputElement).select()}
+							/>
+						</div>
 					</div>
-				</div>
+				)}
 			</div>
 		</div>
 	);

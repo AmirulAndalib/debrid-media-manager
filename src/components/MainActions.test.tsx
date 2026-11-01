@@ -58,12 +58,12 @@ describe('MainActions', () => {
 		expect(hashListLink.getAttribute('target')).toBe('_blank');
 	});
 
-	// Two of this row's three destinations dead-end without a provider account:
-	// /library, which `withAuth` sends a guest straight back from, and /albums,
+	// All three of this row's destinations dead-end without a provider account:
+	// /library, which `withAuth` sends a guest straight back from, /albums,
 	// which pushes anyone with no Real-Debrid token into /realdebrid/login - the
-	// exact flow guest mode exists to skip. Only Hash lists survives, so the row
-	// narrows to it rather than keeping two holes.
-	it('leaves out both provider-only destinations for a guest', () => {
+	// exact flow guest mode exists to skip - and the hash lists, whose every
+	// action adds a torrent to a debrid service. A guest gets no row at all.
+	it('leaves out the whole provider-only row for a guest', () => {
 		const { container } = render(
 			<MainActions
 				rdUser={null}
@@ -81,9 +81,8 @@ describe('MainActions', () => {
 		expect(container.querySelector('a[href="/albums"]')).toBeNull();
 		expect(screen.queryByRole('link', { name: /music/i })).toBeNull();
 
-		const hashListLink = screen.getByRole('link', { name: /hash lists/i });
-		expect(hashListLink.parentElement?.className).toContain('grid-cols-1');
-		expect(hashListLink.parentElement?.className).not.toContain('grid-cols-3');
+		expect(screen.queryByRole('link', { name: /hash lists/i })).toBeNull();
+		expect(container.querySelector('.grid-cols-1, .grid-cols-3')).toBeNull();
 	});
 
 	it('keeps both for everybody else', () => {
