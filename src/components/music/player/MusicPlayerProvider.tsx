@@ -9,6 +9,7 @@ import {
 	useRef,
 	useState,
 } from 'react';
+import toast from 'react-hot-toast';
 import { PlayerState, QueuedTrack } from '../types';
 import { trackTitle } from '../utils';
 import { PlayerPersistence } from './persistence';
@@ -148,6 +149,7 @@ export function MusicPlayerProvider({
 					: null;
 			if (skipTo) return startPlayback(skipTo, failures + 1);
 			setState((prev) => ({ ...prev, isLoading: false, isPlaying: false }));
+			toast.error("Couldn't play this right now. Try again in a while.");
 			return;
 		}
 		if (!now.item.streamUrl) commit(withStreamUrl(queueRef.current, now.item, url));

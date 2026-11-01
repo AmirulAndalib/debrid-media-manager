@@ -5,6 +5,9 @@ import { MusicPlayer, MusicPlayerProvider, useMusicPlayer } from './MusicPlayerP
 import { PersistedPlayerState, PlayerPersistence } from './persistence';
 import { emptyQueue, startContext } from './queue';
 
+const toastError = vi.hoisted(() => vi.fn());
+vi.mock('react-hot-toast', () => ({ __esModule: true, default: { error: toastError } }));
+
 const album = {
 	hash: 'h',
 	mbid: 'm',
@@ -89,7 +92,10 @@ describe('MusicPlayerProvider', () => {
 		});
 		spies.push(play, pause);
 	});
-	afterEach(() => spies.splice(0).forEach((spy) => spy.mockRestore()));
+	afterEach(() => {
+		spies.splice(0).forEach((spy) => spy.mockRestore());
+		toastError.mockClear();
+	});
 
 	it('keeps the audio element in the DOM for background playback', () => {
 		const { audio } = setup();
@@ -156,6 +162,17 @@ describe('MusicPlayerProvider', () => {
 		expect(resolvedIds(broken)).toEqual(['1', '2', '3', '4', '5']);
 		expect(player.isPlaying).toBe(false);
 		expect(player.isLoading).toBe(false);
+		// Said once, rather than leaving the play button to look like it is still trying.
+		expect(toastError).toHaveBeenCalledExactlyOnceWith(
+			"Couldn't play this right now. Try again in a while."
+		);
+	});
+
+	it('says so when every track left in the list fails', async () => {
+		setup({ resolveStreamUrl: vi.fn(async () => undefined) });
+		await act(async () => player.playContext(items('1', '2'), 0, 'x'));
+		expect(player.isLoading).toBe(false);
+		expect(toastError).toHaveBeenCalledOnce();
 	});
 
 	it('reports a play once, after 30 seconds heard', async () => {
