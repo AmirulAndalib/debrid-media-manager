@@ -2,11 +2,12 @@ import AlbumDetailView from '@/components/music/AlbumDetailView';
 import AlbumGrid from '@/components/music/AlbumGrid';
 import KeyboardShortcutsModal from '@/components/music/KeyboardShortcutsModal';
 import MusicPlayerBar from '@/components/music/MusicPlayerBar';
+import { MusicPlayerProvider, useMusicPlayer } from '@/components/music/player/MusicPlayerProvider';
+import { localStoragePersistence } from '@/components/music/player/persistence';
 import QueuePanel from '@/components/music/QueuePanel';
-import { PlayerState, QueuedTrack } from '@/components/music/types';
-import { formatTrackTitle, shuffleArray } from '@/components/music/utils';
+import { QueuedTrack } from '@/components/music/types';
+import { formatTrackTitle } from '@/components/music/utils';
 import { useRealDebridAccessToken } from '@/hooks/auth';
-import useLocalStorage from '@/hooks/localStorage';
 import { MusicAlbum, MusicLibraryResponse, MusicTrack } from '@/pages/api/music/library';
 import { UnrestrictTrackResponse } from '@/pages/api/music/unrestrict';
 import { Keyboard, Library, Loader2, Music2, X } from 'lucide-react';
@@ -18,6 +19,47 @@ const MUSIC_BASE_PATH = '/music';
 const MUSIC_PAGE_SIZE = 48;
 const RECENT_ALBUM_LIMIT = 24;
 const ALBUM_DOWNLOAD_DELAY_MS = 250;
+
+async function unrestrictTrack(
+	track: MusicTrack,
+	accessToken: string | null
+): Promise<string | undefined> {
+	if (!accessToken) return undefined;
+
+	try {
+		const response = await fetch('/api/music/unrestrict', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				link: track.link,
+				hash: track.hash,
+				fileId: track.fileId,
+				accessToken,
+			}),
+		});
+
+		if (!response.ok) {
+			const errorData = await response.json().catch(() => ({}));
+			console.error('Unrestrict failed:', {
+				status: response.status,
+				error: errorData.error,
+				errorCode: errorData.errorCode,
+				hash: track.hash,
+				fileId: track.fileId,
+			});
+			throw new Error(errorData.error || 'Failed to unrestrict');
+		}
+
+		const data: UnrestrictTrackResponse = await response.json();
+		return data.streamUrl;
+	} catch (err) {
+		console.error('Failed to unrestrict track:', err);
+		return undefined;
+	}
+}
+
+const albumItems = (album: MusicAlbum): QueuedTrack[] =>
+	album.tracks.map((track) => ({ track, album }));
 
 interface SidebarAlbumButtonProps {
 	album: MusicAlbum;
@@ -109,6 +151,37 @@ function SidebarAlbumButton({
 export default function AlbumsPage() {
 	const router = useRouter();
 	const [accessToken, isLoading] = useRealDebridAccessToken();
+	const resolveStreamUrl = useCallback(
+		(track: MusicTrack) => unrestrictTrack(track, accessToken),
+		[accessToken]
+	);
+
+	// Redirect if not authenticated
+	if (!isLoading && !accessToken) {
+		router.push(`/realdebrid/login?redirect=${MUSIC_BASE_PATH}`);
+		return null;
+	}
+
+	return (
+		<MusicPlayerProvider
+			resolveStreamUrl={resolveStreamUrl}
+			persistence={localStoragePersistence}
+		>
+			<MusicLibrary resolveStreamUrl={resolveStreamUrl} />
+		</MusicPlayerProvider>
+	);
+}
+
+AlbumsPage.disableLibraryProvider = true;
+
+function MusicLibrary({
+	resolveStreamUrl,
+}: {
+	resolveStreamUrl: (track: MusicTrack) => Promise<string | undefined>;
+}) {
+	const router = useRouter();
+	const player = useMusicPlayer();
+	const currentTrack = player.nowPlaying?.item ?? null;
 
 	// Library state
 	const [library, setLibrary] = useState<MusicLibraryResponse | null>(null);
@@ -168,116 +241,12 @@ export default function AlbumsPage() {
 		}
 	}, [albumHash]);
 
-	// Queue and playback state (persisted to localStorage)
-	const [queue, setQueue] = useState<QueuedTrack[]>(() => {
-		if (typeof window === 'undefined') return [];
-		try {
-			const saved = window.localStorage.getItem('music:queue');
-			return saved ? JSON.parse(saved) : [];
-		} catch {
-			return [];
-		}
-	});
-	const [originalQueue, setOriginalQueue] = useState<QueuedTrack[]>(() => {
-		if (typeof window === 'undefined') return [];
-		try {
-			const saved = window.localStorage.getItem('music:originalQueue');
-			return saved ? JSON.parse(saved) : [];
-		} catch {
-			return [];
-		}
-	});
-	const [currentIndex, setCurrentIndex] = useState<number>(() => {
-		if (typeof window === 'undefined') return -1;
-		try {
-			const saved = window.localStorage.getItem('music:currentIndex');
-			return saved !== null ? JSON.parse(saved) : -1;
-		} catch {
-			return -1;
-		}
-	});
-	const [playerState, setPlayerState] = useState<PlayerState>(() => {
-		let repeatMode: 'off' | 'all' | 'one' = 'off';
-		let isShuffled = false;
-		if (typeof window !== 'undefined') {
-			try {
-				const savedRepeat = window.localStorage.getItem('music:repeatMode');
-				if (savedRepeat === 'off' || savedRepeat === 'all' || savedRepeat === 'one') {
-					repeatMode = savedRepeat;
-				}
-				const savedShuffle = window.localStorage.getItem('music:isShuffled');
-				if (savedShuffle === 'true') isShuffled = true;
-			} catch {}
-		}
-		return {
-			isPlaying: false,
-			currentTime: 0,
-			duration: 0,
-			volume: 1,
-			isMuted: false,
-			isLoading: false,
-			repeatMode,
-			isShuffled,
-		};
-	});
-
-	// Persist volume
-	const [savedVolume, setSavedVolume] = useLocalStorage<number>('music:volume', 1);
-
-	// Persist queue state to localStorage (strip streamUrl and album.tracks to save space)
-	useEffect(() => {
-		const stripped = queue.map(({ streamUrl, album, ...rest }) => ({
-			...rest,
-			album: { ...album, tracks: [] },
-		}));
-		try {
-			window.localStorage.setItem('music:queue', JSON.stringify(stripped));
-		} catch {
-			// QuotaExceededError — clear stale queues and retry
-			window.localStorage.removeItem('music:queue');
-			window.localStorage.removeItem('music:originalQueue');
-		}
-	}, [queue]);
-
-	useEffect(() => {
-		const stripped = originalQueue.map(({ streamUrl, album, ...rest }) => ({
-			...rest,
-			album: { ...album, tracks: [] },
-		}));
-		try {
-			window.localStorage.setItem('music:originalQueue', JSON.stringify(stripped));
-		} catch {
-			window.localStorage.removeItem('music:queue');
-			window.localStorage.removeItem('music:originalQueue');
-		}
-	}, [originalQueue]);
-
-	useEffect(() => {
-		window.localStorage.setItem('music:currentIndex', JSON.stringify(currentIndex));
-	}, [currentIndex]);
-
-	// Persist shuffle and repeat state
-	useEffect(() => {
-		window.localStorage.setItem('music:repeatMode', playerState.repeatMode);
-	}, [playerState.repeatMode]);
-
-	useEffect(() => {
-		window.localStorage.setItem('music:isShuffled', String(playerState.isShuffled));
-	}, [playerState.isShuffled]);
-
-	// Audio element ref
-	const audioRef = useRef<HTMLAudioElement | null>(null);
-
 	// Scroll container ref and saved scroll position
 	const mainRef = useRef<HTMLElement | null>(null);
 	const loadMoreRef = useRef<HTMLDivElement | null>(null);
 	const savedScrollPosition = useRef<number>(0);
 	const libraryRequestId = useRef<number>(0);
 	const recentAlbumsRequestId = useRef<number>(0);
-
-	// Current track being played
-	const currentTrack =
-		currentIndex >= 0 && currentIndex < queue.length ? queue[currentIndex] : null;
 
 	const handleCoverLoaded = useCallback((album: MusicAlbum, coverUrl: string) => {
 		setLibrary((prev) =>
@@ -463,441 +432,13 @@ export default function AlbumsPage() {
 		};
 	}, [albumHash]);
 
-	// Handle track ended — defined before audio init so the ref is available
-	const handleTrackEndedRef = useRef<() => void>(() => {});
-	const handleTrackEnded = useCallback(() => {
-		if (playerState.repeatMode === 'one') {
-			if (audioRef.current) {
-				audioRef.current.currentTime = 0;
-				audioRef.current.play();
-			}
-		} else if (currentIndex < queue.length - 1) {
-			playTrackAtIndex(currentIndex + 1);
-		} else if (playerState.repeatMode === 'all' && queue.length > 0) {
-			playTrackAtIndex(0);
-		} else {
-			setPlayerState((prev) => ({ ...prev, isPlaying: false }));
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [currentIndex, queue.length, playerState.repeatMode]);
-	handleTrackEndedRef.current = handleTrackEnded;
-
-	// Attach audio element ref (rendered as <audio> in JSX for mobile background playback)
-	const audioRefCallback = useCallback(
-		(audio: HTMLAudioElement | null) => {
-			if (!audio || audioRef.current === audio) return;
-			audioRef.current = audio;
-			audio.volume = savedVolume ?? 1;
-
-			audio.addEventListener('timeupdate', () => {
-				setPlayerState((prev) => ({ ...prev, currentTime: audio.currentTime }));
-				if ('mediaSession' in navigator && audio.duration && isFinite(audio.duration)) {
-					navigator.mediaSession.setPositionState({
-						duration: audio.duration,
-						playbackRate: audio.playbackRate,
-						position: audio.currentTime,
-					});
-				}
-			});
-
-			audio.addEventListener('durationchange', () => {
-				setPlayerState((prev) => ({ ...prev, duration: audio.duration }));
-			});
-
-			audio.addEventListener('ended', () => {
-				handleTrackEndedRef.current();
-			});
-
-			audio.addEventListener('play', () => {
-				setPlayerState((prev) => ({ ...prev, isPlaying: true }));
-				if ('mediaSession' in navigator) {
-					navigator.mediaSession.playbackState = 'playing';
-				}
-			});
-
-			audio.addEventListener('pause', () => {
-				setPlayerState((prev) => ({ ...prev, isPlaying: false }));
-				if ('mediaSession' in navigator) {
-					navigator.mediaSession.playbackState = 'paused';
-				}
-			});
-
-			audio.addEventListener('waiting', () => {
-				setPlayerState((prev) => ({ ...prev, isLoading: true }));
-			});
-
-			audio.addEventListener('canplay', () => {
-				setPlayerState((prev) => ({ ...prev, isLoading: false }));
-			});
-
-			audio.addEventListener('error', () => {
-				setPlayerState((prev) => ({ ...prev, isLoading: false, isPlaying: false }));
-			});
-		},
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-		[]
-	);
-
-	// MediaSession API — OS-level media controls
-	useEffect(() => {
-		if (!('mediaSession' in navigator) || !currentTrack) return;
-
-		navigator.mediaSession.metadata = new MediaMetadata({
-			title: formatTrackTitle(currentTrack.track.filename),
-			artist: currentTrack.album.artist,
-			album: currentTrack.album.album,
-			...(currentTrack.album.coverUrl
-				? {
-						artwork: [
-							{
-								src: currentTrack.album.coverUrl,
-								sizes: '600x600',
-								type: 'image/jpeg',
-							},
-						],
-					}
-				: {}),
-		});
-	}, [currentTrack]);
-
-	useEffect(() => {
-		if (!('mediaSession' in navigator)) return;
-
-		navigator.mediaSession.setActionHandler('play', () => togglePlay());
-		navigator.mediaSession.setActionHandler('pause', () => togglePlay());
-		navigator.mediaSession.setActionHandler('previoustrack', () => skipPrev());
-		navigator.mediaSession.setActionHandler('nexttrack', () => skipNext());
-		navigator.mediaSession.setActionHandler('seekto', (details) => {
-			if (audioRef.current && details.seekTime != null) {
-				audioRef.current.currentTime = details.seekTime;
-			}
-		});
-
-		return () => {
-			navigator.mediaSession.setActionHandler('play', null);
-			navigator.mediaSession.setActionHandler('pause', null);
-			navigator.mediaSession.setActionHandler('previoustrack', null);
-			navigator.mediaSession.setActionHandler('nexttrack', null);
-			navigator.mediaSession.setActionHandler('seekto', null);
-		};
-	});
-
-	// Unrestrict and play a track
-	const unrestrictAndPlay = async (track: MusicTrack): Promise<string | undefined> => {
-		if (!accessToken) return undefined;
-
-		try {
-			const response = await fetch('/api/music/unrestrict', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					link: track.link,
-					hash: track.hash,
-					fileId: track.fileId,
-					accessToken,
-				}),
-			});
-
-			if (!response.ok) {
-				const errorData = await response.json().catch(() => ({}));
-				console.error('Unrestrict failed:', {
-					status: response.status,
-					error: errorData.error,
-					errorCode: errorData.errorCode,
-					hash: track.hash,
-					fileId: track.fileId,
-				});
-				throw new Error(errorData.error || 'Failed to unrestrict');
-			}
-
-			const data: UnrestrictTrackResponse = await response.json();
-			return data.streamUrl;
-		} catch (err) {
-			console.error('Failed to unrestrict track:', err);
-			return undefined;
-		}
-	};
-
-	// Play a track at a specific queue index
-	// optionally accepts a queueOverride for when the queue state hasn't updated yet
-	const playTrackAtIndex = async (
-		index: number,
-		retryCount = 0,
-		queueOverride?: QueuedTrack[]
-	) => {
-		const activeQueue = queueOverride ?? queue;
-		if (index < 0 || index >= activeQueue.length) return;
-		if (retryCount > 5) {
-			console.error('Too many failed attempts to play tracks');
-			setPlayerState((prev) => ({ ...prev, isLoading: false, isPlaying: false }));
-			return;
-		}
-
-		const queuedTrack = activeQueue[index];
-		setCurrentIndex(index);
-		setPlayerState((prev) => ({ ...prev, isLoading: true }));
-
-		let streamUrl = queuedTrack.streamUrl;
-
-		if (!streamUrl) {
-			streamUrl = await unrestrictAndPlay(queuedTrack.track);
-			if (!streamUrl) {
-				console.error(`Failed to load track: ${queuedTrack.track.filename}, skipping...`);
-				playTrackAtIndex(index + 1, retryCount + 1, activeQueue);
-				return;
-			}
-
-			setQueue((prev) =>
-				prev.map((item, i) => (i === index ? { ...item, streamUrl } : item))
-			);
-		}
-
-		if (audioRef.current) {
-			audioRef.current.src = streamUrl;
-			audioRef.current.play().catch(console.error);
-		}
-	};
-
-	// Play an album
-	const playAlbum = (album: MusicAlbum, startTrackIndex: number = 0) => {
-		const newQueue: QueuedTrack[] = album.tracks.map((track) => ({
-			track,
-			album,
-		}));
-
-		setQueue(newQueue);
-		setOriginalQueue(newQueue);
-		setPlayerState((prev) => ({ ...prev, isShuffled: false }));
-		playTrackAtIndex(startTrackIndex, 0, newQueue);
-	};
-
-	// Add album to queue
-	const addAlbumToQueue = (album: MusicAlbum) => {
-		const newTracks: QueuedTrack[] = album.tracks.map((track) => ({
-			track,
-			album,
-		}));
-
-		setQueue((prev) => [...prev, ...newTracks]);
-		setOriginalQueue((prev) => [...prev, ...newTracks]);
-	};
-
-	// Remove a track from the queue
-	const removeFromQueue = (index: number) => {
-		if (index < 0 || index >= queue.length) return;
-
-		if (queue.length === 1) {
-			// Last track — clear everything
-			clearQueue();
-			return;
-		}
-
-		if (index === currentIndex) {
-			// Removing current track — stop and play next
-			if (audioRef.current) {
-				audioRef.current.pause();
-				audioRef.current.src = '';
-			}
-			setQueue((prev) => prev.filter((_, i) => i !== index));
-			setOriginalQueue((prev) => {
-				const removedTrack = queue[index];
-				return prev.filter((t) => t.track.id !== removedTrack.track.id);
-			});
-			// Play the track that slides into this position (or previous if at end)
-			const nextIndex = index < queue.length - 1 ? index : index - 1;
-			setCurrentIndex(nextIndex);
-			// Defer playback to after state update
-			setTimeout(
-				() =>
-					playTrackAtIndex(
-						nextIndex,
-						0,
-						queue.filter((_, i) => i !== index)
-					),
-				0
-			);
-		} else {
-			setQueue((prev) => prev.filter((_, i) => i !== index));
-			setOriginalQueue((prev) => {
-				const removedTrack = queue[index];
-				return prev.filter((t) => t.track.id !== removedTrack.track.id);
-			});
-			if (index < currentIndex) {
-				setCurrentIndex((prev) => prev - 1);
-			}
-		}
-	};
-
-	// Clear the entire queue
-	const clearQueue = () => {
-		if (audioRef.current) {
-			audioRef.current.pause();
-			audioRef.current.src = '';
-		}
-		setQueue([]);
-		setOriginalQueue([]);
-		setCurrentIndex(-1);
-		setPlayerState((prev) => ({ ...prev, isPlaying: false, isLoading: false }));
-		setIsQueueOpen(false);
-	};
-
-	// Play a track/album next (insert after current track)
-	const playTrackNext = (track: MusicTrack, album: MusicAlbum) => {
-		const newItem: QueuedTrack = { track, album };
-		const insertAt = currentIndex + 1;
-		setQueue((prev) => [...prev.slice(0, insertAt), newItem, ...prev.slice(insertAt)]);
-		setOriginalQueue((prev) => [...prev, newItem]);
-	};
-
-	const playAlbumNext = (album: MusicAlbum) => {
-		const newTracks: QueuedTrack[] = album.tracks.map((track) => ({
-			track,
-			album,
-		}));
-		const insertAt = currentIndex + 1;
-		setQueue((prev) => [...prev.slice(0, insertAt), ...newTracks, ...prev.slice(insertAt)]);
-		setOriginalQueue((prev) => [...prev, ...newTracks]);
-	};
-
-	// Toggle play/pause
-	const togglePlay = () => {
-		if (!audioRef.current) return;
-
-		if (playerState.isPlaying) {
-			audioRef.current.pause();
-		} else if (!audioRef.current.src || audioRef.current.src === window.location.href) {
-			// No audio loaded (e.g. after restore from localStorage) — unrestrict and play
-			if (currentIndex >= 0 && currentIndex < queue.length) {
-				playTrackAtIndex(currentIndex);
-			}
-		} else {
-			audioRef.current.play().catch(console.error);
-		}
-	};
-
-	// Skip to next track
-	const skipNext = () => {
-		if (currentIndex < queue.length - 1) {
-			playTrackAtIndex(currentIndex + 1);
-		} else if (playerState.repeatMode === 'all') {
-			playTrackAtIndex(0);
-		}
-	};
-
-	// Skip to previous track
-	const skipPrev = () => {
-		if (audioRef.current && audioRef.current.currentTime > 3) {
-			audioRef.current.currentTime = 0;
-		} else if (currentIndex > 0) {
-			playTrackAtIndex(currentIndex - 1);
-		}
-	};
-
-	// Toggle shuffle
-	const toggleShuffle = () => {
-		if (playerState.isShuffled) {
-			const currentTrackId = currentTrack?.track.id;
-			const newIndex = originalQueue.findIndex((t) => t.track.id === currentTrackId);
-			setQueue(originalQueue);
-			setCurrentIndex(newIndex >= 0 ? newIndex : 0);
-		} else {
-			const currentTrackItem = currentTrack;
-			const otherTracks = queue.filter((_, i) => i !== currentIndex);
-			const shuffled = shuffleArray(otherTracks);
-			const newQueue = currentTrackItem ? [currentTrackItem, ...shuffled] : shuffled;
-			setQueue(newQueue);
-			setCurrentIndex(0);
-		}
-		setPlayerState((prev) => ({ ...prev, isShuffled: !prev.isShuffled }));
-	};
-
-	// Toggle repeat mode
-	const toggleRepeat = () => {
-		setPlayerState((prev) => ({
-			...prev,
-			repeatMode:
-				prev.repeatMode === 'off' ? 'all' : prev.repeatMode === 'all' ? 'one' : 'off',
-		}));
-	};
-
-	// Seek
-	const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const time = parseFloat(e.target.value);
-		if (audioRef.current) {
-			audioRef.current.currentTime = time;
-		}
-	};
-
-	// Volume
-	const handleVolume = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const volume = parseFloat(e.target.value);
-		if (audioRef.current) {
-			audioRef.current.volume = volume;
-			audioRef.current.muted = false;
-		}
-		setPlayerState((prev) => ({ ...prev, volume, isMuted: false }));
-		setSavedVolume(volume);
-	};
-
-	// Toggle mute
-	const toggleMute = () => {
-		if (audioRef.current) {
-			audioRef.current.muted = !playerState.isMuted;
-		}
-		setPlayerState((prev) => ({ ...prev, isMuted: !prev.isMuted }));
-	};
-
-	// Keyboard shortcuts
+	// UI shortcuts; the player provider handles the playback ones.
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
 			const tag = (e.target as HTMLElement).tagName;
 			if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
 
 			switch (e.key) {
-				case ' ':
-					e.preventDefault();
-					togglePlay();
-					break;
-				case 'ArrowRight':
-					e.preventDefault();
-					skipNext();
-					break;
-				case 'ArrowLeft':
-					e.preventDefault();
-					skipPrev();
-					break;
-				case 'ArrowUp':
-					e.preventDefault();
-					if (audioRef.current) {
-						const newVol = Math.min(1, (audioRef.current.volume ?? 1) + 0.05);
-						audioRef.current.volume = newVol;
-						audioRef.current.muted = false;
-						setPlayerState((prev) => ({ ...prev, volume: newVol, isMuted: false }));
-						setSavedVolume(newVol);
-					}
-					break;
-				case 'ArrowDown':
-					e.preventDefault();
-					if (audioRef.current) {
-						const newVol = Math.max(0, (audioRef.current.volume ?? 1) - 0.05);
-						audioRef.current.volume = newVol;
-						audioRef.current.muted = false;
-						setPlayerState((prev) => ({ ...prev, volume: newVol, isMuted: false }));
-						setSavedVolume(newVol);
-					}
-					break;
-				case 'm':
-				case 'M':
-					toggleMute();
-					break;
-				case 's':
-				case 'S':
-					toggleShuffle();
-					break;
-				case 'r':
-				case 'R':
-					toggleRepeat();
-					break;
 				case 'q':
 				case 'Q':
 					setIsQueueOpen((prev) => !prev);
@@ -917,7 +458,10 @@ export default function AlbumsPage() {
 
 		window.addEventListener('keydown', handleKeyDown);
 		return () => window.removeEventListener('keydown', handleKeyDown);
-	});
+	}, []);
+
+	const playAlbum = (album: MusicAlbum, startIndex: number = 0) =>
+		player.playContext(albumItems(album), startIndex, `album:${album.hash}`);
 
 	// Download a track
 	const triggerBrowserDownload = (streamUrl: string, filename: string) => {
@@ -932,14 +476,14 @@ export default function AlbumsPage() {
 	};
 
 	const downloadTrack = async (track: MusicTrack) => {
-		const streamUrl = await unrestrictAndPlay(track);
+		const streamUrl = await resolveStreamUrl(track);
 		if (!streamUrl) return;
 		triggerBrowserDownload(streamUrl, track.filename);
 	};
 
 	const downloadAlbum = async (album: MusicAlbum) => {
 		for (const track of album.tracks) {
-			const streamUrl = await unrestrictAndPlay(track);
+			const streamUrl = await resolveStreamUrl(track);
 			if (!streamUrl) continue;
 			triggerBrowserDownload(streamUrl, track.filename);
 			await new Promise((resolve) => setTimeout(resolve, ALBUM_DOWNLOAD_DELAY_MS));
@@ -949,17 +493,11 @@ export default function AlbumsPage() {
 	const visibleAlbums = library?.albums ?? [];
 	const sidebarAlbums = useMemo(() => recentAlbums.slice(0, RECENT_ALBUM_LIMIT), [recentAlbums]);
 
-	// Redirect if not authenticated
-	if (!isLoading && !accessToken) {
-		router.push(`/realdebrid/login?redirect=${MUSIC_BASE_PATH}`);
-		return null;
-	}
-
 	return (
 		<>
 			<Head>
 				<title>
-					{currentTrack && playerState.isPlaying
+					{currentTrack && player.isPlaying
 						? `${formatTrackTitle(currentTrack.track.filename)} - ${currentTrack.album.artist} - DMM`
 						: selectedAlbum
 							? `${selectedAlbum.album} - ${selectedAlbum.artist} - DMM`
@@ -998,6 +536,7 @@ export default function AlbumsPage() {
 					{/* Search */}
 					<div className="relative w-full md:w-96">
 						<input
+							ref={player.registerSearchInput}
 							type="text"
 							placeholder="Search artists or albums..."
 							value={searchQuery}
@@ -1089,15 +628,17 @@ export default function AlbumsPage() {
 							<AlbumDetailView
 								album={selectedAlbum}
 								currentTrack={currentTrack}
-								playerState={playerState}
+								playerState={player}
 								onPlay={playAlbum}
-								onAddToQueue={addAlbumToQueue}
-								onPlayNext={playAlbumNext}
-								onPlayTrackNext={playTrackNext}
+								onAddToQueue={(album) => player.addToQueue(albumItems(album))}
+								onPlayNext={(album) => player.playNext(albumItems(album))}
+								onPlayTrackNext={(track, album) =>
+									player.playNext([{ track, album }])
+								}
 								onBack={() => selectAlbum(null)}
 								onDownload={downloadTrack}
 								onDownloadAlbum={downloadAlbum}
-								hasQueue={queue.length > 0}
+								hasQueue={currentTrack !== null}
 								onCoverLoaded={handleCoverLoaded}
 							/>
 						) : albumHash && selectedAlbumLoading ? (
@@ -1114,7 +655,7 @@ export default function AlbumsPage() {
 									sortBy={sortBy}
 									onSortChange={setSortBy}
 									nowPlayingAlbumHash={currentTrack?.album.hash ?? null}
-									isPlaying={playerState.isPlaying}
+									isPlaying={player.isPlaying}
 									onCoverLoaded={handleCoverLoaded}
 								/>
 								<div
@@ -1137,14 +678,17 @@ export default function AlbumsPage() {
 				{/* Queue Panel */}
 				{currentTrack && isQueueOpen && (
 					<QueuePanel
-						queue={queue}
-						currentIndex={currentIndex}
-						isPlaying={playerState.isPlaying}
-						onPlayTrack={(index) => playTrackAtIndex(index)}
+						nowPlaying={currentTrack}
+						upNext={player.upNext}
+						isPlaying={player.isPlaying}
+						onPlayTrack={player.playAt}
 						onClose={() => setIsQueueOpen(false)}
 						onDownload={downloadTrack}
-						onRemoveTrack={removeFromQueue}
-						onClearQueue={clearQueue}
+						onRemoveTrack={player.removeAt}
+						onClearQueue={() => {
+							player.clearQueue();
+							setIsQueueOpen(false);
+						}}
 					/>
 				)}
 
@@ -1152,15 +696,15 @@ export default function AlbumsPage() {
 				{currentTrack && (
 					<MusicPlayerBar
 						currentTrack={currentTrack}
-						playerState={playerState}
-						onTogglePlay={togglePlay}
-						onSkipNext={skipNext}
-						onSkipPrev={skipPrev}
-						onToggleShuffle={toggleShuffle}
-						onToggleRepeat={toggleRepeat}
-						onSeek={handleSeek}
-						onVolumeChange={handleVolume}
-						onToggleMute={toggleMute}
+						playerState={player}
+						onTogglePlay={player.togglePlay}
+						onSkipNext={player.next}
+						onSkipPrev={player.prev}
+						onToggleShuffle={player.toggleShuffle}
+						onToggleRepeat={player.cycleRepeat}
+						onSeek={player.seek}
+						onVolumeChange={player.setVolume}
+						onToggleMute={player.toggleMute}
 						onToggleQueue={() => setIsQueueOpen((prev) => !prev)}
 						isQueueOpen={isQueueOpen}
 					/>
@@ -1168,10 +712,6 @@ export default function AlbumsPage() {
 			</div>
 
 			{showShortcuts && <KeyboardShortcutsModal onClose={() => setShowShortcuts(false)} />}
-			{/* DOM-attached audio element for reliable mobile background playback */}
-			<audio ref={audioRefCallback} playsInline preload="auto" />
 		</>
 	);
 }
-
-AlbumsPage.disableLibraryProvider = true;

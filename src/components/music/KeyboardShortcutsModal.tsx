@@ -6,10 +6,13 @@ const SHORTCUTS = [
 	{ key: '\u2192', description: 'Next track' },
 	{ key: '\u2191', description: 'Volume up' },
 	{ key: '\u2193', description: 'Volume down' },
+	{ key: 'J', description: 'Back 10 seconds' },
+	{ key: 'L', description: 'Forward 10 seconds' },
 	{ key: 'M', description: 'Mute / Unmute' },
 	{ key: 'S', description: 'Toggle shuffle' },
 	{ key: 'R', description: 'Toggle repeat' },
 	{ key: 'Q', description: 'Toggle queue' },
+	{ key: 'Ctrl/\u2318 K', description: 'Search' },
 	{ key: '?', description: 'Show shortcuts' },
 	{ key: 'F1', description: 'Show shortcuts' },
 ];
@@ -35,7 +38,7 @@ export default function KeyboardShortcutsModal({ onClose }: KeyboardShortcutsMod
 					type="button"
 					onClick={onClose}
 					aria-label="Close keyboard shortcuts"
-					className="absolute right-4 top-4 text-gray-400 transition-colors hover:text-white"
+					className="absolute top-4 right-4 text-gray-400 transition-colors hover:text-white"
 				>
 					<X className="h-5 w-5" />
 				</button>

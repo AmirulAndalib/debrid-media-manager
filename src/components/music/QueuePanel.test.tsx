@@ -1,12 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import QueuePanel from './QueuePanel';
-
-// jsdom doesn't implement scrollIntoView
-beforeAll(() => {
-	Element.prototype.scrollIntoView = vi.fn();
-});
 
 const makeTrack = (id: string, filename: string) => ({
 	id,
@@ -40,12 +35,13 @@ const makeQueue = () => {
 	];
 };
 
+const asPanel = ([nowPlaying, ...upNext]: ReturnType<typeof makeQueue>) => ({ nowPlaying, upNext });
+
 describe('QueuePanel', () => {
 	it('renders queue header with track count', () => {
 		render(
 			<QueuePanel
-				queue={makeQueue()}
-				currentIndex={0}
+				{...asPanel(makeQueue())}
 				isPlaying={false}
 				onPlayTrack={vi.fn()}
 				onClose={vi.fn()}
@@ -62,8 +58,7 @@ describe('QueuePanel', () => {
 		const queue = makeQueue().slice(0, 1);
 		render(
 			<QueuePanel
-				queue={queue}
-				currentIndex={0}
+				{...asPanel(queue)}
 				isPlaying={false}
 				onPlayTrack={vi.fn()}
 				onClose={vi.fn()}
@@ -78,8 +73,7 @@ describe('QueuePanel', () => {
 	it('renders all tracks in queue', () => {
 		render(
 			<QueuePanel
-				queue={makeQueue()}
-				currentIndex={0}
+				{...asPanel(makeQueue())}
 				isPlaying={false}
 				onPlayTrack={vi.fn()}
 				onClose={vi.fn()}
@@ -97,8 +91,7 @@ describe('QueuePanel', () => {
 		const onClose = vi.fn();
 		render(
 			<QueuePanel
-				queue={makeQueue()}
-				currentIndex={0}
+				{...asPanel(makeQueue())}
 				isPlaying={false}
 				onPlayTrack={vi.fn()}
 				onClose={onClose}
@@ -114,8 +107,7 @@ describe('QueuePanel', () => {
 	it('has clear queue button', () => {
 		render(
 			<QueuePanel
-				queue={makeQueue()}
-				currentIndex={0}
+				{...asPanel(makeQueue())}
 				isPlaying={false}
 				onPlayTrack={vi.fn()}
 				onClose={vi.fn()}
@@ -131,8 +123,7 @@ describe('QueuePanel', () => {
 		const onClearQueue = vi.fn();
 		render(
 			<QueuePanel
-				queue={makeQueue()}
-				currentIndex={0}
+				{...asPanel(makeQueue())}
 				isPlaying={false}
 				onPlayTrack={vi.fn()}
 				onClose={vi.fn()}
@@ -148,8 +139,7 @@ describe('QueuePanel', () => {
 	it('shows remove button on each track', () => {
 		render(
 			<QueuePanel
-				queue={makeQueue()}
-				currentIndex={0}
+				{...asPanel(makeQueue())}
 				isPlaying={false}
 				onPlayTrack={vi.fn()}
 				onClose={vi.fn()}
@@ -162,12 +152,11 @@ describe('QueuePanel', () => {
 		expect(removeButtons).toHaveLength(3);
 	});
 
-	it('calls onRemoveTrack with correct index', async () => {
+	it('calls onRemoveTrack with the up-next position, -1 for the playing track', async () => {
 		const onRemoveTrack = vi.fn();
 		render(
 			<QueuePanel
-				queue={makeQueue()}
-				currentIndex={0}
+				{...asPanel(makeQueue())}
 				isPlaying={false}
 				onPlayTrack={vi.fn()}
 				onClose={vi.fn()}
@@ -178,6 +167,8 @@ describe('QueuePanel', () => {
 		);
 		const removeButtons = screen.getAllByTitle('Remove from queue');
 		await userEvent.setup().click(removeButtons[1]);
-		expect(onRemoveTrack).toHaveBeenCalledWith(1);
+		expect(onRemoveTrack).toHaveBeenCalledWith(0);
+		await userEvent.setup().click(removeButtons[0]);
+		expect(onRemoveTrack).toHaveBeenLastCalledWith(-1);
 	});
 });

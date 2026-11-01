@@ -25,6 +25,9 @@ describe('KeyboardShortcutsModal', () => {
 		expect(screen.getByText('Toggle shuffle')).toBeInTheDocument();
 		expect(screen.getByText('Toggle repeat')).toBeInTheDocument();
 		expect(screen.getByText('Toggle queue')).toBeInTheDocument();
+		expect(screen.getByText('Back 10 seconds')).toBeInTheDocument();
+		expect(screen.getByText('Forward 10 seconds')).toBeInTheDocument();
+		expect(screen.getByText('Search')).toBeInTheDocument();
 	});
 
 	it('renders keyboard keys for each shortcut', () => {
@@ -36,6 +39,9 @@ describe('KeyboardShortcutsModal', () => {
 		expect(screen.getByText('Q')).toBeInTheDocument();
 		expect(screen.getByText('?')).toBeInTheDocument();
 		expect(screen.getByText('F1')).toBeInTheDocument();
+		expect(screen.getByText('J')).toBeInTheDocument();
+		expect(screen.getByText('L')).toBeInTheDocument();
+		expect(screen.getByText('Ctrl/⌘ K')).toBeInTheDocument();
 	});
 
 	it('renders arrow key symbols', () => {
@@ -75,6 +81,6 @@ describe('KeyboardShortcutsModal', () => {
 	it('renders kbd elements for shortcut keys', () => {
 		const { container } = render(<KeyboardShortcutsModal onClose={mockOnClose} />);
 		const kbdElements = container.querySelectorAll('kbd');
-		expect(kbdElements.length).toBe(11);
+		expect(kbdElements.length).toBe(14);
 	});
 });

@@ -1,23 +1,23 @@
 import { MusicTrack } from '@/pages/api/music/library';
 import { ListMusic, Trash2, X } from 'lucide-react';
-import { useEffect, useRef } from 'react';
 import TrackListItem from './TrackListItem';
 import { QueuedTrack } from './types';
 
 interface QueuePanelProps {
-	queue: QueuedTrack[];
-	currentIndex: number;
+	nowPlaying: QueuedTrack;
+	upNext: QueuedTrack[];
 	isPlaying: boolean;
-	onPlayTrack: (index: number) => void;
+	/** Position in `upNext`; -1 is the track playing now. */
+	onPlayTrack: (position: number) => void;
 	onClose: () => void;
 	onDownload: (track: MusicTrack) => Promise<void>;
-	onRemoveTrack: (index: number) => void;
+	onRemoveTrack: (position: number) => void;
 	onClearQueue: () => void;
 }
 
 export default function QueuePanel({
-	queue,
-	currentIndex,
+	nowPlaying,
+	upNext,
 	isPlaying,
 	onPlayTrack,
 	onClose,
@@ -25,19 +25,11 @@ export default function QueuePanel({
 	onRemoveTrack,
 	onClearQueue,
 }: QueuePanelProps) {
-	const listRef = useRef<HTMLDivElement>(null);
-
-	// Auto-scroll to current track on open
-	useEffect(() => {
-		if (listRef.current && currentIndex >= 0) {
-			const item = listRef.current.children[currentIndex] as HTMLElement | undefined;
-			item?.scrollIntoView({ block: 'center', behavior: 'smooth' });
-		}
-	}, [currentIndex]);
+	const queue = [nowPlaying, ...upNext];
 
 	return (
 		<div
-			className="fixed bottom-[4.5rem] left-0 right-0 z-50 flex flex-col border-t border-white/10 bg-black/95 backdrop-blur-xl md:bottom-24 md:left-auto md:right-4 md:w-96 md:rounded-xl md:border md:bg-black/90 md:shadow-music-2xl"
+			className="fixed right-0 bottom-[4.5rem] left-0 z-50 flex flex-col border-t border-white/10 bg-black/95 backdrop-blur-xl md:right-4 md:bottom-24 md:left-auto md:w-96 md:rounded-xl md:border md:bg-black/90 md:shadow-music-2xl"
 			aria-label="Playback queue"
 		>
 			{/* Header */}
@@ -72,18 +64,18 @@ export default function QueuePanel({
 			</div>
 
 			{/* Track list */}
-			<div ref={listRef} className="max-h-96 overflow-y-auto">
+			<div className="max-h-96 overflow-y-auto">
 				{queue.map((item, index) => (
 					<TrackListItem
 						key={`${item.track.id}-${index}`}
 						track={item.track}
 						index={index}
 						album={item.album}
-						isCurrentTrack={index === currentIndex}
+						isCurrentTrack={index === 0}
 						isPlaying={isPlaying}
-						onPlay={() => onPlayTrack(index)}
+						onPlay={() => onPlayTrack(index - 1)}
 						onDownload={onDownload}
-						onRemove={() => onRemoveTrack(index)}
+						onRemove={() => onRemoveTrack(index - 1)}
 						showRemove
 					/>
 				))}

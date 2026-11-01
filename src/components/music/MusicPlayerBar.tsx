@@ -23,8 +23,8 @@ interface MusicPlayerBarProps {
 	onSkipPrev: () => void;
 	onToggleShuffle: () => void;
 	onToggleRepeat: () => void;
-	onSeek: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	onVolumeChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onSeek: (seconds: number) => void;
+	onVolumeChange: (volume: number) => void;
 	onToggleMute: () => void;
 	onToggleQueue: () => void;
 	isQueueOpen: boolean;
@@ -137,7 +137,7 @@ export default function MusicPlayerBar({
 						min={0}
 						max={playerState.duration || 100}
 						value={playerState.currentTime}
-						onChange={onSeek}
+						onChange={(e) => onSeek(parseFloat(e.target.value))}
 						aria-label="Playback position"
 						className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-gray-600 accent-green-500 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
 					/>
@@ -264,7 +264,7 @@ export default function MusicPlayerBar({
 							min={0}
 							max={playerState.duration || 100}
 							value={playerState.currentTime}
-							onChange={onSeek}
+							onChange={(e) => onSeek(parseFloat(e.target.value))}
 							aria-label="Playback position"
 							className="h-1 flex-1 cursor-pointer appearance-none rounded-full bg-gray-600 accent-green-500 transition-all hover:h-1.5 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:transition-all group-hover:[&::-webkit-slider-thumb]:h-4 group-hover:[&::-webkit-slider-thumb]:w-4"
 						/>
@@ -309,7 +309,7 @@ export default function MusicPlayerBar({
 						max={1}
 						step={0.01}
 						value={playerState.isMuted ? 0 : playerState.volume}
-						onChange={onVolumeChange}
+						onChange={(e) => onVolumeChange(parseFloat(e.target.value))}
 						aria-label="Volume"
 						className="h-1 w-24 cursor-pointer appearance-none rounded-full bg-gray-600 accent-green-500 hover:h-1.5 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
 					/>
