@@ -1,351 +1,400 @@
 import handler from '@/pages/api/music/library';
-import { createMockRequest, createMockResponse, MockResponse } from '@/test/utils/api';
+import { enrichment, MbRelease, MbReleaseGroup } from '@/services/musicBrainz';
+import catalog from '@/test/fixtures/musicbrainz/catalog-2026-11-01.json';
+import release from '@/test/fixtures/musicbrainz/release-08205eae-c9e3-4174-8d69-2a67d742a19c.json';
+import group from '@/test/fixtures/musicbrainz/release-group-4853b957-05f2-457b-ba47-18b2565abc69.json';
+import { createMockRequest, createMockResponse } from '@/test/utils/api';
+import type { Prisma } from '@prisma/client';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 vi.mock('@/utils/prisma', () => ({
 	prisma: {
-		availableMusic: {
-			findMany: vi.fn(),
-			count: vi.fn(),
-		},
-		availableMusicFile: {
-			count: vi.fn(),
-		},
-		musicMetadata: {
-			findMany: vi.fn(),
-		},
+		$queryRaw: vi.fn(),
+		availableMusic: { findMany: vi.fn() },
+		availableMusicFile: { findMany: vi.fn() },
+		musicTrackMetadata: { findMany: vi.fn() },
 	},
 }));
 
+import { setBlocklistForTests } from '@/services/takedown/blocklist';
 import { prisma } from '@/utils/prisma';
 
 const mockedPrisma = vi.mocked(prisma, true);
 
-function makeFile(
-	overrides: Partial<{
-		file_id: number;
-		path: string;
-		bytes: bigint;
-		trackNumber: number | null;
-		link: string;
-	}> = {}
-) {
-	return {
-		file_id: 1,
-		path: '/music/01 - Track.flac',
-		bytes: BigInt(5000000),
-		trackNumber: null,
-		link: 'https://example.com/file',
-		...overrides,
-	};
-}
+const TRE_HASH = '3237449d26653635ed3b3a0afb563b1087d5597b';
+const TRE_MBID = '4853b957-05f2-457b-ba47-18b2565abc69';
+const JUSTICE_HASH = 'f590ebc219813f8765bd397b5c63d1413177287a';
 
-function makeAlbum(
-	overrides: Partial<{
-		hash: string;
-		mbid: string;
-		filename: string;
-		bytes: bigint;
-		ended: Date;
-		files: any[];
-		_count: { files: number };
-	}> = {}
-) {
+function row(overrides: Record<string, unknown> = {}) {
 	return {
 		hash: 'hash1',
 		mbid: 'mbid-1',
 		filename: 'Test Album',
 		bytes: BigInt(50000000),
-		ended: new Date('2024-01-01'),
-		files: [],
-		_count: { files: 0 },
+		fileCount: BigInt(12),
+		artist: 'Test Artist',
+		album: 'Test Album',
+		year: BigInt(2024),
+		coverUrl: null,
+		primaryType: null,
+		genres: null,
+		mbTrackCount: null,
 		...overrides,
 	};
 }
 
-describe('/api/music/library', () => {
-	let res: MockResponse;
+/** The real files of an album in the catalog fixture, as AvailableMusicFile rows. */
+function realFiles(hash: keyof typeof catalog.files) {
+	return catalog.files[hash].map((file) => ({
+		link: `https://example.com/${file.fileId}`,
+		file_id: file.fileId,
+		hash,
+		path: file.path,
+		bytes: BigInt(file.bytes),
+		trackNumber: file.trackNumber,
+	}));
+}
 
+function file(fileId: number, path: string, hash = 'hash1') {
+	return {
+		link: `https://example.com/${fileId}`,
+		file_id: fileId,
+		hash,
+		path,
+		bytes: BigInt(5000000),
+		trackNumber: null,
+	};
+}
+
+/** Answers the page query with `rows`, each carrying `totals`, and the totals query with them. */
+function serve(rows: object[], totals = { totalAlbums: rows.length, totalTracks: 0 }) {
+	const carried = {
+		totalAlbums: BigInt(totals.totalAlbums),
+		totalTracks: BigInt(totals.totalTracks),
+	};
+	mockedPrisma.$queryRaw.mockImplementation((async (query: Prisma.Sql) =>
+		query.sql.includes('COUNT(DISTINCT')
+			? [carried]
+			: rows.map((r) => ({ ...r, ...carried }))) as any);
+}
+
+const queries = () =>
+	mockedPrisma.$queryRaw.mock.calls.map(([query]) => query as unknown as Prisma.Sql);
+const pageQuery = () => queries().find((query) => !query.sql.includes('COUNT(DISTINCT'))!;
+const countQuery = () => queries().find((query) => query.sql.includes('COUNT(DISTINCT'))!;
+
+async function get(query: Record<string, string>) {
+	const res = createMockResponse();
+	await handler(createMockRequest({ method: 'GET', query }), res);
+	return res;
+}
+
+describe('/api/music/library', () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
-		mockedPrisma.availableMusic.count.mockResolvedValue(0);
-		mockedPrisma.availableMusicFile.count.mockResolvedValue(0);
+		setBlocklistForTests(['blockedhash']);
+		serve([]);
+		mockedPrisma.availableMusicFile.findMany.mockResolvedValue([]);
+		mockedPrisma.musicTrackMetadata.findMany.mockResolvedValue([]);
 	});
 
 	it('rejects non-GET methods', async () => {
-		const req = createMockRequest({ method: 'POST' });
-		res = createMockResponse();
-		await handler(req, res);
+		const res = createMockResponse();
+		await handler(createMockRequest({ method: 'POST' }), res);
 		expect(res._getStatusCode()).toBe(405);
 		expect(res._getData()).toEqual({ error: 'Method not allowed' });
 	});
 
-	it('returns empty library when no music', async () => {
-		mockedPrisma.availableMusic.findMany.mockResolvedValue([]);
-		mockedPrisma.musicMetadata.findMany.mockResolvedValue([]);
+	describe('pages', () => {
+		it.each(['recent', 'name', 'artist', 'year'])(
+			'sorts by %s and pages in SQL without reading the whole table',
+			async (sortBy) => {
+				await get({ summary: '1', sortBy, page: '3', limit: '10' });
 
-		const req = createMockRequest({ method: 'GET' });
-		res = createMockResponse();
-		await handler(req, res);
+				expect(mockedPrisma.availableMusic.findMany).not.toHaveBeenCalled();
+				expect(pageQuery().sql).toMatch(/LIMIT \? OFFSET \?$/);
+				expect(pageQuery().values.slice(-2)).toEqual([10, 20]);
+				// One row per release group: the unblocked torrent with the most files.
+				expect(pageQuery().sql).toContain('ROW_NUMBER() OVER w AS rn');
+				expect(pageQuery().sql).toContain(
+					'WINDOW w AS (PARTITION BY m.mbid ORDER BY f.fileCount DESC, m.hash)'
+				);
+				expect(pageQuery().sql).toContain('m.hash NOT IN (?)');
+				expect(pageQuery().values).toContain('blockedhash');
+			}
+		);
 
-		expect(res._getStatusCode()).toBe(200);
-		const data = res._getData() as any;
-		expect(data.albums).toEqual([]);
-		expect(data.totalAlbums).toBe(0);
-		expect(data.totalTracks).toBe(0);
-	});
+		it('takes the totals from the page, and counts on its own only past the end', async () => {
+			serve([row()], { totalAlbums: 5812, totalTracks: 89209 });
+			const data = (await get({ summary: '1', sortBy: 'name' }))._getData() as any;
 
-	it('returns albums with tracks, filtering non-audio files', async () => {
-		const album = makeAlbum({
-			files: [
-				makeFile({ file_id: 1, path: '/music/01 - Song.flac' }),
-				makeFile({ file_id: 2, path: '/music/cover.jpg' }),
-				makeFile({ file_id: 3, path: '/music/info.nfo' }),
-				makeFile({ file_id: 4, path: '/music/02 - Song.mp3' }),
-				makeFile({ file_id: 5, path: '/music/playlist.m3u' }),
-			],
+			expect(data).toMatchObject({ totalAlbums: 5812, totalTracks: 89209, hasMore: true });
+			expect(pageQuery().sql).toContain('COUNT(*) OVER () AS totalAlbums');
+			expect(countQuery()).toBeUndefined();
+
+			vi.clearAllMocks();
+			serve([], { totalAlbums: 5812, totalTracks: 89209 });
+			const past = (await get({ summary: '1', page: '999' }))._getData() as any;
+
+			expect(past).toMatchObject({ albums: [], totalAlbums: 5812, hasMore: false });
+			expect(countQuery().sql).toContain('COUNT(DISTINCT b.mbid)');
 		});
-		mockedPrisma.availableMusic.findMany.mockResolvedValue([album] as any);
-		mockedPrisma.musicMetadata.findMany.mockResolvedValue([
-			{
+
+		it('sorts names without their leading punctuation or article', async () => {
+			await get({ summary: '1', sortBy: 'name' });
+
+			// The pattern is a literal: bound, MySQL recompiles it for every row.
+			expect(pageQuery().sql).toContain(
+				"ORDER BY REGEXP_REPLACE(COALESCE(md.album, b.filename), '(?i)^[^[:alnum:]]*((the|an?)[[:space:]]+)?', '')"
+			);
+		});
+
+		it('searches with the fulltext index, every word a required prefix', async () => {
+			await get({ summary: '1', sortBy: 'name', search: ' Pink Floyd ' });
+
+			expect(pageQuery().sql).toContain(
+				'MATCH(md.artist, md.album) AGAINST (? IN BOOLEAN MODE)'
+			);
+			expect(pageQuery().values).toContain('+Pink* +Floyd*');
+			expect(mockedPrisma.availableMusic.findMany).not.toHaveBeenCalled();
+		});
+
+		it.each([
+			['u2', '%u2%'],
+			['the who', '%the who%'],
+			['5%', '%5\\%%'],
+		])('searches %j with LIKE, which the index cannot answer', async (search, pattern) => {
+			await get({ summary: '1', search });
+
+			expect(pageQuery().sql).toContain('(md.artist LIKE ? OR md.album LIKE ?)');
+			expect(pageQuery().values).toContain(pattern);
+		});
+
+		it('filters by release type', async () => {
+			await get({ summary: '1', type: 'ep' });
+
+			expect(pageQuery().sql).toContain('md.primaryType = ?');
+			expect(pageQuery().values).toContain('EP');
+		});
+
+		it.each(['podcast', 'constructor'])('ignores an unknown type %j', async (type) => {
+			await get({ summary: '1', type });
+
+			expect(pageQuery().sql).not.toContain('primaryType =');
+		});
+
+		it('answers with the page, the totals and MusicBrainz fields', async () => {
+			serve(
+				[
+					row({
+						primaryType: 'Album',
+						genres: ['pop punk', 'rock'],
+						mbTrackCount: 12,
+						year: BigInt(2012),
+					}),
+					row({
+						hash: 'hash2',
+						mbid: 'mbid-2',
+						artist: null,
+						album: null,
+						filename: 'Raw',
+					}),
+				],
+				{ totalAlbums: 5, totalTracks: 60 }
+			);
+
+			const data = (await get({ summary: '1', page: '1', limit: '2' }))._getData() as any;
+
+			expect(data).toMatchObject({
+				totalAlbums: 5,
+				totalTracks: 60,
+				page: 1,
+				limit: 2,
+				hasMore: true,
+				nextPage: 2,
+			});
+			expect(data.albums[0]).toEqual({
+				hash: 'hash1',
 				mbid: 'mbid-1',
 				artist: 'Test Artist',
 				album: 'Test Album',
-				year: 2024,
+				year: 2012,
 				coverUrl: null,
-			},
-		] as any);
+				tracks: [],
+				totalBytes: 50000000,
+				trackCount: 12,
+				primaryType: 'Album',
+				genres: ['pop punk', 'rock'],
+				mbTrackCount: 12,
+				pack: false,
+			});
+			expect(data.albums[1]).toMatchObject({
+				artist: 'Unknown Artist',
+				album: 'Raw',
+				genres: [],
+				pack: false,
+			});
+			// Nothing looked like a pack, so no file was read.
+			expect(mockedPrisma.availableMusicFile.findMany).not.toHaveBeenCalled();
+		});
 
-		const req = createMockRequest({ method: 'GET' });
-		res = createMockResponse();
-		await handler(req, res);
+		it('says there is no next page on the last one', async () => {
+			serve([row()], { totalAlbums: 3, totalTracks: 30 });
 
-		const data = res._getData() as any;
-		expect(data.totalAlbums).toBe(1);
-		expect(data.albums[0].trackCount).toBe(2);
-		const filenames = data.albums[0].tracks.map((t: any) => t.filename);
-		expect(filenames).not.toContain('cover.jpg');
-		expect(filenames).not.toContain('info.nfo');
-		expect(filenames).not.toContain('playlist.m3u');
+			const data = (await get({ summary: '1', page: '2', limit: '2' }))._getData() as any;
+
+			expect(data).toMatchObject({ hasMore: false, nextPage: null });
+		});
+
+		it('flags a box set as a pack, counting only its audio files', async () => {
+			// Metallica's …And Justice for All box set: 147 tracks over eight discs,
+			// filed under a release group whose release has 9.
+			const scans = [
+				...Array.from({ length: 12 }, (_, i) =>
+					file(i + 1, `/${i + 1} - Song.flac`, 'scans')
+				),
+				...Array.from({ length: 14 }, (_, i) => file(i + 20, `/Scans/${i}.jpg`, 'scans')),
+			];
+			serve([
+				row({ hash: JUSTICE_HASH, fileCount: BigInt(147), mbTrackCount: 9 }),
+				row({ hash: 'scans', mbid: 'mbid-2', fileCount: BigInt(26), mbTrackCount: 12 }),
+				row({ hash: 'small', mbid: 'mbid-3', fileCount: BigInt(12), mbTrackCount: 12 }),
+			]);
+			mockedPrisma.availableMusicFile.findMany.mockResolvedValue([
+				...realFiles(JUSTICE_HASH),
+				...scans,
+			] as any);
+
+			const data = (await get({ summary: '1' }))._getData() as any;
+
+			expect(data.albums.map((album: any) => album.pack)).toEqual([true, false, false]);
+			expect(mockedPrisma.availableMusicFile.findMany).toHaveBeenCalledWith({
+				where: { hash: { in: [JUSTICE_HASH, 'scans'] } },
+				select: { hash: true, path: true, file_id: true },
+			});
+		});
 	});
 
-	it('extracts track numbers from filenames with "01 - Track.flac" pattern', async () => {
-		const album = makeAlbum({
-			files: [
-				makeFile({ file_id: 1, path: '/music/02 - Second.flac' }),
-				makeFile({ file_id: 2, path: '/music/01 - First.flac' }),
-			],
+	describe('one album', () => {
+		async function album(files: unknown[], overrides: Record<string, unknown> = {}) {
+			serve([row(overrides)]);
+			mockedPrisma.availableMusicFile.findMany.mockResolvedValue(files as any);
+			const data = (await get({ hash: String(overrides.hash ?? 'hash1') }))._getData() as any;
+			return data;
+		}
+
+		it('reads only that album', async () => {
+			await album([]);
+
+			// Files are counted for that torrent alone, not across the whole table.
+			expect(pageQuery().sql).toMatch(/FROM AvailableMusicFile\s+WHERE hash = \?/);
+			expect(pageQuery().values).toContain('hash1');
+			expect(countQuery()).toBeUndefined();
+			expect(mockedPrisma.availableMusic.findMany).not.toHaveBeenCalled();
 		});
-		mockedPrisma.availableMusic.findMany.mockResolvedValue([album] as any);
-		mockedPrisma.musicMetadata.findMany.mockResolvedValue([]);
 
-		const req = createMockRequest({ method: 'GET' });
-		res = createMockResponse();
-		await handler(req, res);
+		it('returns its audio tracks only, once per file', async () => {
+			const data = await album([
+				file(1, '/music/01 - Song.flac'),
+				file(2, '/music/cover.jpg'),
+				file(3, '/music/info.nfo'),
+				file(4, '/music/02 - Song.mp3'),
+				file(5, '/music/playlist.m3u'),
+				{ ...file(4, '/music/02 - Song.mp3'), link: 'https://example.com/other' },
+			]);
 
-		const data = res._getData() as any;
-		const tracks = data.albums[0].tracks;
-		expect(tracks[0].trackNumber).toBe(1);
-		expect(tracks[0].filename).toBe('01 - First.flac');
-		expect(tracks[1].trackNumber).toBe(2);
-		expect(tracks[1].filename).toBe('02 - Second.flac');
-	});
-
-	it('extracts track numbers from "track01.mp3" pattern', async () => {
-		const album = makeAlbum({
-			files: [makeFile({ file_id: 1, path: '/music/track03.mp3' })],
+			expect(data).toMatchObject({ totalAlbums: 1, totalTracks: 2 });
+			expect(data.page).toBeUndefined();
+			expect(data.albums[0].trackCount).toBe(2);
+			expect(data.albums[0].tracks.map((t: any) => t.filename)).toEqual([
+				'01 - Song.flac',
+				'02 - Song.mp3',
+			]);
 		});
-		mockedPrisma.availableMusic.findMany.mockResolvedValue([album] as any);
-		mockedPrisma.musicMetadata.findMany.mockResolvedValue([]);
 
-		const req = createMockRequest({ method: 'GET' });
-		res = createMockResponse();
-		await handler(req, res);
-
-		const data = res._getData() as any;
-		expect(data.albums[0].tracks[0].trackNumber).toBe(3);
-	});
-
-	it('extracts track numbers from "[01] Track" pattern', async () => {
-		const album = makeAlbum({
-			files: [makeFile({ file_id: 1, path: '/music/[05] Track Five.flac' })],
+		it('returns no album when it has no audio', async () => {
+			const data = await album([file(1, '/music/cover.jpg')]);
+			expect(data).toEqual({ albums: [], totalAlbums: 0, totalTracks: 0 });
 		});
-		mockedPrisma.availableMusic.findMany.mockResolvedValue([album] as any);
-		mockedPrisma.musicMetadata.findMany.mockResolvedValue([]);
 
-		const req = createMockRequest({ method: 'GET' });
-		res = createMockResponse();
-		await handler(req, res);
-
-		const data = res._getData() as any;
-		expect(data.albums[0].tracks[0].trackNumber).toBe(5);
-	});
-
-	it('extracts track numbers from "01) Track" pattern', async () => {
-		const album = makeAlbum({
-			files: [makeFile({ file_id: 1, path: '/music/07) Track Seven.flac' })],
+		it.each([
+			['/music/02 - Second.flac', 2],
+			['/music/track03.mp3', 3],
+			['/music/[05] Track Five.flac', 5],
+			['/music/07) Track Seven.flac', 7],
+		])('reads the track number from %s', async (path, trackNumber) => {
+			const data = await album([file(1, path)]);
+			expect(data.albums[0].tracks[0].trackNumber).toBe(trackNumber);
 		});
-		mockedPrisma.availableMusic.findMany.mockResolvedValue([album] as any);
-		mockedPrisma.musicMetadata.findMany.mockResolvedValue([]);
 
-		const req = createMockRequest({ method: 'GET' });
-		res = createMockResponse();
-		await handler(req, res);
-
-		const data = res._getData() as any;
-		expect(data.albums[0].tracks[0].trackNumber).toBe(7);
-	});
-
-	it('sorts tracks by track number', async () => {
-		const album = makeAlbum({
-			files: [
-				makeFile({ file_id: 1, path: '/music/03 - Third.flac' }),
-				makeFile({ file_id: 2, path: '/music/01 - First.flac' }),
-				makeFile({ file_id: 3, path: '/music/02 - Second.flac' }),
-			],
+		it('orders tracks by track number', async () => {
+			const data = await album([
+				file(1, '/music/03 - Third.flac'),
+				file(2, '/music/01 - First.flac'),
+				file(3, '/music/02 - Second.flac'),
+			]);
+			expect(data.albums[0].tracks.map((t: any) => t.trackNumber)).toEqual([1, 2, 3]);
 		});
-		mockedPrisma.availableMusic.findMany.mockResolvedValue([album] as any);
-		mockedPrisma.musicMetadata.findMany.mockResolvedValue([]);
 
-		const req = createMockRequest({ method: 'GET' });
-		res = createMockResponse();
-		await handler(req, res);
+		it('plays a multi-disc box set disc by disc', async () => {
+			// Served on 2026-11-01 as Disc 3/01, Disc 8/01, Disc 1/01…: every
+			// disc's first track, then every disc's second.
+			const data = await album(realFiles(JUSTICE_HASH), {
+				hash: JUSTICE_HASH,
+				fileCount: BigInt(147),
+				mbTrackCount: 9,
+			});
 
-		const data = res._getData() as any;
-		const trackNumbers = data.albums[0].tracks.map((t: any) => t.trackNumber);
-		expect(trackNumbers).toEqual([1, 2, 3]);
-	});
-
-	it('deduplicates albums by mbid keeping most tracks', async () => {
-		const albumFewer = makeAlbum({
-			hash: 'hash1',
-			mbid: 'mbid-dup',
-			files: [makeFile({ file_id: 1, path: '/music/01 - Track.flac' })],
+			const paths = data.albums[0].tracks.map((t: any) => t.path);
+			expect(paths.slice(0, 3)).toEqual([
+				'/Disc 1/01 Blackened (Remastered).flac',
+				'/Disc 1/02 ...And Justice for All (Remastered).flac',
+				'/Disc 1/03 Eye of the Beholder (Remastered).flac',
+			]);
+			expect(paths[9]).toMatch(/^\/Disc 2\/01 /);
+			expect(paths[146]).toMatch(/^\/Disc 8\//);
+			expect(data.albums[0]).toMatchObject({ trackCount: 147, pack: true });
 		});
-		const albumMore = makeAlbum({
-			hash: 'hash2',
-			mbid: 'mbid-dup',
-			files: [
-				makeFile({ file_id: 1, path: '/music/01 - Track.flac' }),
-				makeFile({ file_id: 2, path: '/music/02 - Track.flac' }),
-				makeFile({ file_id: 3, path: '/music/03 - Track.flac' }),
-			],
+
+		it('titles and times tracks from the MusicBrainz tracklist', async () => {
+			const { tracks } = enrichment(
+				TRE_MBID,
+				group as unknown as MbReleaseGroup,
+				release as unknown as MbRelease
+			);
+			mockedPrisma.musicTrackMetadata.findMany.mockResolvedValue(tracks as any);
+
+			const data = await album(realFiles(TRE_HASH), {
+				hash: TRE_HASH,
+				mbid: TRE_MBID,
+				mbTrackCount: 12,
+			});
+
+			expect(mockedPrisma.musicTrackMetadata.findMany).toHaveBeenCalledWith({
+				where: { mbid: { in: [TRE_MBID] } },
+			});
+			expect(data.albums[0].tracks[0]).toMatchObject({
+				filename: '01.Brutal Love.flac',
+				title: 'Brutal Love',
+				durationMs: 294746,
+			});
+			expect(data.albums[0].tracks.map((t: any) => t.title)).toEqual(
+				tracks.map((t) => t.title)
+			);
+			expect(data.albums[0].pack).toBe(false);
 		});
-		mockedPrisma.availableMusic.findMany.mockResolvedValue([albumFewer, albumMore] as any);
-		mockedPrisma.musicMetadata.findMany.mockResolvedValue([]);
 
-		const req = createMockRequest({ method: 'GET' });
-		res = createMockResponse();
-		await handler(req, res);
-
-		const data = res._getData() as any;
-		expect(data.totalAlbums).toBe(1);
-		expect(data.albums[0].trackCount).toBe(3);
-		expect(data.albums[0].hash).toBe('hash2');
-	});
-
-	it('paginates summary responses without returning track arrays', async () => {
-		mockedPrisma.availableMusic.findMany.mockResolvedValue([
-			makeAlbum({
-				hash: 'hash1',
-				mbid: 'mbid-1',
-				filename: 'First Album',
-				_count: { files: 10 },
-			}),
-			makeAlbum({
-				hash: 'hash2',
-				mbid: 'mbid-2',
-				filename: 'Second Album',
-				_count: { files: 12 },
-			}),
-			makeAlbum({
-				hash: 'hash3',
-				mbid: 'mbid-3',
-				filename: 'Third Album',
-				_count: { files: 8 },
-			}),
-		] as any);
-		mockedPrisma.availableMusic.count.mockResolvedValue(3);
-		mockedPrisma.availableMusicFile.count.mockResolvedValue(30);
-		mockedPrisma.musicMetadata.findMany.mockResolvedValue([]);
-
-		const req = createMockRequest({
-			method: 'GET',
-			query: { summary: '1', page: '1', limit: '2' },
+		it('titles a track from its filename without a tracklist', async () => {
+			const data = await album([file(1, '/music/01 - Song.flac')]);
+			expect(data.albums[0].tracks[0]).toMatchObject({ title: 'Song', durationMs: null });
 		});
-		res = createMockResponse();
-		await handler(req, res);
-
-		const data = res._getData() as any;
-		expect(data.albums).toHaveLength(2);
-		expect(data.albums[0].tracks).toEqual([]);
-		expect(data.totalAlbums).toBe(3);
-		expect(data.totalTracks).toBe(30);
-		expect(data.hasMore).toBe(true);
-		expect(data.nextPage).toBe(2);
-	});
-
-	it('searches summaries across the full library before pagination', async () => {
-		mockedPrisma.availableMusic.findMany.mockResolvedValue([
-			makeAlbum({
-				hash: 'hash1',
-				mbid: 'mbid-1',
-				filename: 'The Wall',
-				_count: { files: 10 },
-			}),
-			makeAlbum({
-				hash: 'hash2',
-				mbid: 'mbid-2',
-				filename: 'OK Computer',
-				_count: { files: 12 },
-			}),
-			makeAlbum({
-				hash: 'hash3',
-				mbid: 'mbid-3',
-				filename: 'Wish You Were Here',
-				_count: { files: 8 },
-			}),
-		] as any);
-		mockedPrisma.musicMetadata.findMany.mockResolvedValue([
-			{ mbid: 'mbid-1', artist: 'Pink Floyd', album: 'The Wall', year: 1979, coverUrl: null },
-			{
-				mbid: 'mbid-2',
-				artist: 'Radiohead',
-				album: 'OK Computer',
-				year: 1997,
-				coverUrl: null,
-			},
-			{
-				mbid: 'mbid-3',
-				artist: 'Pink Floyd',
-				album: 'Wish You Were Here',
-				year: 1975,
-				coverUrl: null,
-			},
-		] as any);
-
-		const req = createMockRequest({
-			method: 'GET',
-			query: { summary: '1', search: 'pink', page: '1', limit: '1' },
-		});
-		res = createMockResponse();
-		await handler(req, res);
-
-		const data = res._getData() as any;
-		expect(data.albums).toHaveLength(1);
-		expect(data.totalAlbums).toBe(2);
-		expect(data.totalTracks).toBe(18);
-		expect(data.hasMore).toBe(true);
-		expect(data.albums[0].artist).toBe('Pink Floyd');
 	});
 
 	it('returns 500 on error', async () => {
 		vi.spyOn(console, 'error').mockImplementation(() => {});
-		mockedPrisma.availableMusic.findMany.mockRejectedValue(new Error('DB error'));
+		mockedPrisma.$queryRaw.mockRejectedValue(new Error('DB error'));
 
-		const req = createMockRequest({ method: 'GET' });
-		res = createMockResponse();
-		await handler(req, res);
+		const res = await get({});
 
 		expect(res._getStatusCode()).toBe(500);
 		expect(res._getData()).toEqual({ error: 'Failed to fetch music library' });

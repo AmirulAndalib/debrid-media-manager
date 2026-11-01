@@ -1,0 +1,1437 @@
+{
+	"_source": "GET https://debridmediamanager.com/api/music/library?summary=1&sortBy=name&limit=12 and ?summary=1&sortBy=recent&limit=48, and ?hash= for the two albums under \"files\", read 2026-11-01. Order is as served. RD links left out.",
+	"albums": [
+		{
+			"hash": "3237449d26653635ed3b3a0afb563b1087d5597b",
+			"mbid": "4853b957-05f2-457b-ba47-18b2565abc69",
+			"artist": "Green Day",
+			"album": "¡Tré!",
+			"year": 2012,
+			"trackCount": 12
+		},
+		{
+			"hash": "ecc0412583c9abc7d8de03d882d8c9648e0fdcca",
+			"mbid": "6a0f0991-7af2-4dec-b623-6672051be668",
+			"artist": "Green Day",
+			"album": "¡Uno!",
+			"year": 2012,
+			"trackCount": 12
+		},
+		{
+			"hash": "f590ebc219813f8765bd397b5c63d1413177287a",
+			"mbid": "67553e23-8dad-3792-b6f2-8fedd5650ff3",
+			"artist": "Metallica",
+			"album": "…And Justice for All",
+			"year": 1988,
+			"trackCount": 147
+		},
+		{
+			"hash": "e92fcbfb5f78e07e2ab881a03762ab2ee2baf06a",
+			"mbid": "bd14f98a-8c45-4a0d-b148-17cbc96740aa",
+			"artist": "Metallica",
+			"album": "…And Justice for All",
+			"year": 1988,
+			"trackCount": 147
+		},
+		{
+			"hash": "563bedf5c8317582da8bf3e7d49e86b83250bc75",
+			"mbid": "3fba4dd1-557a-3a71-9a67-930146939c3e",
+			"artist": "Kyuss",
+			"album": "…And the Circus Leaves Town",
+			"year": 1995,
+			"trackCount": 11
+		},
+		{
+			"hash": "3e2b434cfa268f0367893f56e6a284863457d7b3",
+			"mbid": "1df6c8f7-331d-3219-9eca-1df97816a937",
+			"artist": "Britney Spears",
+			"album": "…Baby One More Time",
+			"year": 1999,
+			"trackCount": 16
+		},
+		{
+			"hash": "b98774dd6a8dca33e0acad3d694cf917d5bd3e4e",
+			"mbid": "822d9247-6059-3716-b1f9-f7b95526f721",
+			"artist": "Phil Collins",
+			"album": "…But Seriously",
+			"year": 1989,
+			"trackCount": 12
+		},
+		{
+			"hash": "08115df30760273642720a9f311788162a4c52b4",
+			"mbid": "ecb68a84-e8dd-301b-979a-d185e3cc87e4",
+			"artist": "Genesis",
+			"album": "…Calling All Stations…",
+			"year": 1997,
+			"trackCount": 11
+		},
+		{
+			"hash": "c0b5a3cc5399c4c403759cbb3424f10a4e8db87e",
+			"mbid": "9bd1ebeb-3f65-3612-b7fd-e9decc75f1b5",
+			"artist": "Phil Collins",
+			"album": "…Hits",
+			"year": 1998,
+			"trackCount": 16
+		},
+		{
+			"hash": "89b15b213a17c531d2dfe593d63c338815076947",
+			"mbid": "8816f05a-80cf-3a4a-85f4-adcf1540e355",
+			"artist": "Say Anything",
+			"album": "…Is a Real Boy",
+			"year": 2006,
+			"trackCount": 20
+		},
+		{
+			"hash": "285c35e182fd5eb05e5f25040c456a2dd9819466",
+			"mbid": "c92f73ee-527f-42ed-a556-fd615941e214",
+			"artist": "Queens of the Stone Age",
+			"album": "…Like Clockwork",
+			"year": 2013,
+			"trackCount": 10
+		},
+		{
+			"hash": "f345d8316847496d8f43c8f9b1e1d737507f30cc",
+			"mbid": "785cb865-c4b7-44ac-bab4-4159db869828",
+			"artist": "Norah Jones",
+			"album": "…Little Broken Hearts",
+			"year": 2012,
+			"trackCount": 31
+		},
+		{
+			"hash": "db7db069905e24fa7302822aae6301b8593a53f5",
+			"mbid": "bb3ec118-57df-4eb9-a8fe-a26a70a7dbe0",
+			"artist": "ROSALÍA",
+			"album": "LUX",
+			"year": 2025,
+			"trackCount": 18
+		},
+		{
+			"hash": "3f22c50a7d158bd80f559db12e9d0a2c853610df",
+			"mbid": "40ef5f61-a3f8-4624-834b-39290ee47ab2",
+			"artist": "Wolf Alice",
+			"album": "The Clearing",
+			"year": 2025,
+			"trackCount": 14
+		},
+		{
+			"hash": "dc925f67cd67936b4a8fbeb17d6decb648fd3479",
+			"mbid": "48e8b712-4f5d-34e0-9492-22f936854662",
+			"artist": "The Monkees",
+			"album": "The Monkees",
+			"year": 1966,
+			"trackCount": 61
+		},
+		{
+			"hash": "6d0db9b92e256809e3cc25980fe5bd74ea13a667",
+			"mbid": "9908fab7-baf6-4438-b82c-298bd2c18d98",
+			"artist": "Foo Fighters",
+			"album": "Sonic Highways",
+			"year": 2014,
+			"trackCount": 8
+		},
+		{
+			"hash": "fcba139425c79818a1a906ac8f382b90048b4030",
+			"mbid": "0dc4835d-b21a-3612-bac6-ab1e782a1396",
+			"artist": "David Bowie",
+			"album": "Diamond Dogs",
+			"year": 2004,
+			"trackCount": 11
+		},
+		{
+			"hash": "bb3216717bee6941d9db686abd798245eb7d8a8a",
+			"mbid": "061a652e-236e-4043-b4e7-c9fb33c2782a",
+			"artist": "Nickelback",
+			"album": "Everything Under the Sun",
+			"year": 2026,
+			"trackCount": 12
+		},
+		{
+			"hash": "4228b872ae540a5b9c110ea0feacda601228a83c",
+			"mbid": "7269afc9-c5d9-3040-99bc-382cae70e215",
+			"artist": "Foreigner",
+			"album": "Head Games",
+			"year": 2007,
+			"trackCount": 41
+		},
+		{
+			"hash": "323a6abdf8c3c509dd7439c372ca904d371db036",
+			"mbid": "b1c57669-8bb9-3897-a8c6-3d2f291116b6",
+			"artist": "Uriah Heep",
+			"album": "Abominog",
+			"year": 2011,
+			"trackCount": 14
+		},
+		{
+			"hash": "46d2eff21fab030603d3e6ccd3c15593280ced7d",
+			"mbid": "111e426a-3b75-4f8f-9292-a7cbe14c3073",
+			"artist": "Skepta",
+			"album": "Ignorance is Bliss",
+			"year": 2019,
+			"trackCount": 13
+		},
+		{
+			"hash": "5711586e1ad1f38d6653f51d94e505def32a74cc",
+			"mbid": "d85b9684-4277-3565-b89b-115c8b4b7fd3",
+			"artist": "The White Stripes",
+			"album": "Elephant",
+			"year": 2003,
+			"trackCount": 14
+		},
+		{
+			"hash": "7f9ba500bfbbd50990dda0d891ee1b0ed103f621",
+			"mbid": "1cbc1a5a-5512-3f8e-997b-d9281b83722b",
+			"artist": "Phil Collins",
+			"album": "Face Value",
+			"year": 1984,
+			"trackCount": 12
+		},
+		{
+			"hash": "cbf1631cee2e8dd0fecbe0b314b79edadb6f16b5",
+			"mbid": "fafde525-db0a-440c-93f7-7345e415f97d",
+			"artist": "Blue October",
+			"album": "Home",
+			"year": 2016,
+			"trackCount": 14
+		},
+		{
+			"hash": "8e6ee78df6472f5948aafc14be15c8f357ebe487",
+			"mbid": "78ea4929-0063-39b2-9cca-b8ad99c9c1a6",
+			"artist": "Roberta Flack",
+			"album": "The Best of Roberta Flack",
+			"year": 1981,
+			"trackCount": 11
+		},
+		{
+			"hash": "3efd3f3cb4c7c76bdd0c5e0dbb93b3760a3a8f5f",
+			"mbid": "859ee35b-2c35-3da1-a95a-3a0c0ed9c8d9",
+			"artist": "Various Artists",
+			"album": "Need For Speed: High Stakes",
+			"year": null,
+			"trackCount": 30
+		},
+		{
+			"hash": "d69deaad135668f12362a45778a2d91928413f8a",
+			"mbid": "7861c3e8-f210-4288-9d25-a0daf7a8ddad",
+			"artist": "Logistics",
+			"album": "End Sequence EP",
+			"year": 2023,
+			"trackCount": 4
+		},
+		{
+			"hash": "3276956103bb2e1b39bb32120f3e16c0ed3bc97a",
+			"mbid": "f9f909ab-f88e-3f77-a9b9-e3590604f12b",
+			"artist": "Miami Sound Machine",
+			"album": "Primitive Love",
+			"year": 1989,
+			"trackCount": 10
+		},
+		{
+			"hash": "ff1ca64f8513f22391d5df777c502e147ab7455b",
+			"mbid": "ee749c63-5699-38e0-b565-7e84414648d9",
+			"artist": "Michael Jackson",
+			"album": "Off the Wall",
+			"year": 1988,
+			"trackCount": 10
+		},
+		{
+			"hash": "b5c8a00a78034308e182af0b4b3d09fe7702de80",
+			"mbid": "50ac60c4-fb35-37f8-a065-222996ea139c",
+			"artist": "Pearl Jam",
+			"album": "Vs.",
+			"year": 1993,
+			"trackCount": 12
+		},
+		{
+			"hash": "c6918ab23ee5e7b1cb7fa94b9bdda82089a6fed0",
+			"mbid": "2717ae60-ecbd-38a8-b8ef-ed1c9f8df908",
+			"artist": "Beach House",
+			"album": "Devotion",
+			"year": 2007,
+			"trackCount": 11
+		},
+		{
+			"hash": "81789f875f031af08795de0e8899dc6f9d1bb6b9",
+			"mbid": "836f349a-0434-3e8b-a0bc-261f77a9f99c",
+			"artist": "Eagles",
+			"album": "Hotel California",
+			"year": 2017,
+			"trackCount": 9
+		},
+		{
+			"hash": "03fd909cf8e390af378812ffff44d2115a704b5a",
+			"mbid": "4e874dd7-fe08-489c-baae-518771b9f720",
+			"artist": "Elvis Presley",
+			"album": "Live Elvis! Elvis! Elvis!",
+			"year": 1995,
+			"trackCount": 12
+		},
+		{
+			"hash": "d380b043afea65b716a0bf8569cfb36f93618672",
+			"mbid": "97b7e291-8714-3e54-ac24-480be535ee8d",
+			"artist": "Jane’s Addiction",
+			"album": "Nothing’s Shocking",
+			"year": 1988,
+			"trackCount": 10
+		},
+		{
+			"hash": "9483eca4e30819dad82f0338142123af698792ac",
+			"mbid": "aa1ff9a6-4f2b-379e-8074-1b4cf8719a0d",
+			"artist": "St. Vincent",
+			"album": "Actor",
+			"year": 2009,
+			"trackCount": 12
+		},
+		{
+			"hash": "60e187ea08d36febc50c78b9d3107ba2ac1402ac",
+			"mbid": "16c1f60b-59fe-46b9-8b87-9b7294606e5b",
+			"artist": "Portugal. The Man",
+			"album": "SHISH",
+			"year": 2025,
+			"trackCount": 10
+		},
+		{
+			"hash": "be0577a69c57f13dca703e567866140b541fbf47",
+			"mbid": "8dbf63d2-2ed2-47d3-9c9f-58082598dd85",
+			"artist": "Metallica",
+			"album": "The Greatest Hits",
+			"year": null,
+			"trackCount": 27
+		},
+		{
+			"hash": "f20307003be0444774e8ac42d191e67a0b71562e",
+			"mbid": "4180845c-8700-3fda-af8f-0b9f3a932009",
+			"artist": "Spice Girls",
+			"album": "Spice",
+			"year": 1996,
+			"trackCount": 22
+		},
+		{
+			"hash": "b8b65475ae427ef0432210a7097b402cdc33763f",
+			"mbid": "ec282fb2-4fc7-3bee-99ab-f11c6b821b55",
+			"artist": "Blue Öyster Cult",
+			"album": "Agents of Fortune",
+			"year": 2015,
+			"trackCount": 10
+		},
+		{
+			"hash": "dda254b5dedd800da66e303028624bd3006e4b5a",
+			"mbid": "86b4651b-a6ea-3ac2-ba99-dcac079938d2",
+			"artist": "Phil Collins",
+			"album": "No Jacket Required",
+			"year": 1985,
+			"trackCount": 10
+		},
+		{
+			"hash": "c75f6b3ce0d420368590d306d82a62a77275c16c",
+			"mbid": "12fa3845-7c62-36e5-a8da-8be137155a72",
+			"artist": "Def Leppard",
+			"album": "Hysteria",
+			"year": 1987,
+			"trackCount": 12
+		},
+		{
+			"hash": "0e4e73ff8f7deb057f9f37265c555c82781b8584",
+			"mbid": "ca99fa63-07e8-386e-a351-ceff3bfb0d53",
+			"artist": "Phoenix",
+			"album": "It’s Never Been Like That",
+			"year": 2006,
+			"trackCount": 10
+		},
+		{
+			"hash": "bf29690bd0fa4660db199fa6e87168b4eaf898bc",
+			"mbid": "ea9bf147-abbd-39df-b927-46fc945a5140",
+			"artist": "Rammstein",
+			"album": "Reise, Reise",
+			"year": 2009,
+			"trackCount": 13
+		},
+		{
+			"hash": "ce0601008a9af7d76c5ed51f12afa1ce75f82d95",
+			"mbid": "2ec0945c-e17e-4814-8a2a-90995a05fe59",
+			"artist": "Nat King Cole",
+			"album": "Just One Of Those Things",
+			"year": 1957,
+			"trackCount": 12
+		},
+		{
+			"hash": "312ff8237de7e9f0e9cc090096c08f41de794610",
+			"mbid": "605d10c5-704a-4cea-b871-caed694d391f",
+			"artist": "The White Stripes",
+			"album": "The White Stripes Greatest Hits",
+			"year": 2020,
+			"trackCount": 26
+		},
+		{
+			"hash": "d9b2d7a0863bea4b9a5560b2cc61c24806829782",
+			"mbid": "1a18354f-ff79-3595-bb12-14a43f93f9e0",
+			"artist": "Rick Springfield",
+			"album": "Tao",
+			"year": 1985,
+			"trackCount": 10
+		},
+		{
+			"hash": "44f7eb5bdedbd74829f012a8bc741c959d65919f",
+			"mbid": "21666540-83c8-4c54-9be1-0363a0848f33",
+			"artist": "Sufjan Stevens",
+			"album": "Carrie & Lowell",
+			"year": 2015,
+			"trackCount": 11
+		},
+		{
+			"hash": "7fc6f4d9d7b365271e6ec631e883d7cecc69222d",
+			"mbid": "72762a1f-095f-3007-9505-2d3d3b13eab2",
+			"artist": "Butthole Surfers",
+			"album": "Humpty Dumpty LSD",
+			"year": 2002,
+			"trackCount": 19
+		},
+		{
+			"hash": "47d6f6c8147087f16fffb86bcab57c8836437cb9",
+			"mbid": "2632db91-170b-492e-9976-ad88bb50e255",
+			"artist": "Katrina and the Waves",
+			"album": "Katrina and the Waves 2",
+			"year": 1984,
+			"trackCount": 15
+		},
+		{
+			"hash": "5385387b62242e1082c59cd158562961c2621691",
+			"mbid": "8ebffd15-06c3-3b88-a761-ec18c5513287",
+			"artist": "The Doors",
+			"album": "The Doors",
+			"year": 1997,
+			"trackCount": 11
+		},
+		{
+			"hash": "532e4d3ba65ac3cf0f6393f919784815333ede81",
+			"mbid": "9584e28b-66a7-3846-8d52-b3008a283539",
+			"artist": "The Who",
+			"album": "Who’s Next",
+			"year": 1973,
+			"trackCount": 16
+		},
+		{
+			"hash": "39dce819ec44dd857b17ca35bddc3f5fd56b8b2f",
+			"mbid": "6f8a076c-2fc5-4e3d-a0d7-f1ab34bd8c76",
+			"artist": "$uicideboy$",
+			"album": "Stop Staring at the Shadows",
+			"year": 2020,
+			"trackCount": 12
+		},
+		{
+			"hash": "0f6c3f98567d2ddbf0c344e93fe00683ee1fe9b7",
+			"mbid": "89f6fe71-14d3-4d1d-9d63-89271fc5aa4c",
+			"artist": "Trippie Redd",
+			"album": "Saint Michael V2",
+			"year": null,
+			"trackCount": 17
+		},
+		{
+			"hash": "31c7fb386d3380d3301c370c8a9a36579e053483",
+			"mbid": "610cf072-d6cb-420d-b1be-d44d25a97e2c",
+			"artist": "BENEE",
+			"album": "Hey u x",
+			"year": 2020,
+			"trackCount": 13
+		},
+		{
+			"hash": "3389ca2cad8034f0da018751a867bf3378b5882a",
+			"mbid": "b0011daf-1d67-4243-9632-bd46f391e971",
+			"artist": "Fitz and the Tantrums",
+			"album": "More Than Just a Dream",
+			"year": 2013,
+			"trackCount": 12
+		},
+		{
+			"hash": "ae1f51e2d0eaf2cedff066af91c727a131d65b48",
+			"mbid": "bbd66e31-ac27-3432-81a7-0d4b4b4c5de5",
+			"artist": "Cream",
+			"album": "Disraeli Gears",
+			"year": 1985,
+			"trackCount": 11
+		},
+		{
+			"hash": "dccfe19db5928b63dc004e10cae7fb6e9e503617",
+			"mbid": "6eac2e57-ee50-36f8-b0c4-c4c847a2c098",
+			"artist": "Amy Winehouse",
+			"album": "Back to Black",
+			"year": 2007,
+			"trackCount": 42
+		},
+		{
+			"hash": "7b3018241b3f5d25291f6ac2b32926dc921e6728",
+			"mbid": "92d8f0c4-8c64-3bee-bee1-812a70e77efa",
+			"artist": "Alice in Chains",
+			"album": "Dirt",
+			"year": 2001,
+			"trackCount": 13
+		},
+		{
+			"hash": "93b443b299589ae12330414e50625861bd077bb1",
+			"mbid": "7b09b423-ec8e-352e-836f-3798064b13d0",
+			"artist": "The Offspring",
+			"album": "Rise and Fall, Rage and Grace",
+			"year": 2008,
+			"trackCount": 14
+		}
+	],
+	"files": {
+		"3237449d26653635ed3b3a0afb563b1087d5597b": [
+			{
+				"fileId": 1,
+				"path": "/01.Brutal Love.flac",
+				"bytes": 37138780,
+				"trackNumber": 1
+			},
+			{
+				"fileId": 2,
+				"path": "/02.Missing You.flac",
+				"bytes": 29616186,
+				"trackNumber": 2
+			},
+			{
+				"fileId": 3,
+				"path": "/03.8th Avenue Serenade.flac",
+				"bytes": 21755567,
+				"trackNumber": 3
+			},
+			{
+				"fileId": 4,
+				"path": "/04.Drama Queen.flac",
+				"bytes": 22751797,
+				"trackNumber": 4
+			},
+			{
+				"fileId": 5,
+				"path": "/05.X-Kid.flac",
+				"bytes": 28542337,
+				"trackNumber": 5
+			},
+			{
+				"fileId": 6,
+				"path": "/06.Sex, Drugs & Violence.flac",
+				"bytes": 28685211,
+				"trackNumber": 6
+			},
+			{
+				"fileId": 7,
+				"path": "/07.A Little Boy Named Train.flac",
+				"bytes": 28962230,
+				"trackNumber": 7
+			},
+			{
+				"fileId": 8,
+				"path": "/08.Amanda.flac",
+				"bytes": 20060248,
+				"trackNumber": 8
+			},
+			{
+				"fileId": 9,
+				"path": "/09.Walk Away.flac",
+				"bytes": 28805019,
+				"trackNumber": 9
+			},
+			{
+				"fileId": 10,
+				"path": "/10.Dirty Rotten Bastards.flac",
+				"bytes": 51680698,
+				"trackNumber": 10
+			},
+			{
+				"fileId": 11,
+				"path": "/11.99 Revolutions.flac",
+				"bytes": 30268353,
+				"trackNumber": 11
+			},
+			{
+				"fileId": 12,
+				"path": "/12.The Forgotten.flac",
+				"bytes": 34337487,
+				"trackNumber": 12
+			}
+		],
+		"f590ebc219813f8765bd397b5c63d1413177287a": [
+			{
+				"fileId": 31,
+				"path": "/Disc 3/01 Blackened (1987 _ From James' Riff Tapes).flac",
+				"bytes": 4932418,
+				"trackNumber": 1
+			},
+			{
+				"fileId": 129,
+				"path": "/Disc 8/01 Blackened (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 15393449,
+				"trackNumber": 1
+			},
+			{
+				"fileId": 1,
+				"path": "/Disc 1/01 Blackened (Remastered).flac",
+				"bytes": 51266603,
+				"trackNumber": 1
+			},
+			{
+				"fileId": 69,
+				"path": "/Disc 5/01 Blackened (Work In Progress Rough Mix).flac",
+				"bytes": 48758817,
+				"trackNumber": 1
+			},
+			{
+				"fileId": 81,
+				"path": "/Disc 6/01 Creeping Death (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 54463684,
+				"trackNumber": 1
+			},
+			{
+				"fileId": 59,
+				"path": "/Disc 4/01 lackened (November 1987 Demo).flac",
+				"bytes": 44795722,
+				"trackNumber": 1
+			},
+			{
+				"fileId": 10,
+				"path": "/Disc 2/01 The Ecstasy of Gold (Metallica Show Intro _ Live_Seattle '89).flac",
+				"bytes": 21011098,
+				"trackNumber": 1
+			},
+			{
+				"fileId": 107,
+				"path": "/Disc 7/01 Welcome Home (Sanitarium) (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 45519180,
+				"trackNumber": 1
+			},
+			{
+				"fileId": 60,
+				"path": "/Disc 4/02 ...And Justice for All (November 1987 Demo).flac",
+				"bytes": 62426070,
+				"trackNumber": 2
+			},
+			{
+				"fileId": 2,
+				"path": "/Disc 1/02 ...And Justice for All (Remastered).flac",
+				"bytes": 75669691,
+				"trackNumber": 2
+			},
+			{
+				"fileId": 70,
+				"path": "/Disc 5/02 ...And Justice for All (Work In Progress Rough Mix).flac",
+				"bytes": 74705971,
+				"trackNumber": 2
+			},
+			{
+				"fileId": 32,
+				"path": "/Disc 3/02 Blackened (1987 _ From James' Riff Tapes 2).flac",
+				"bytes": 17393599,
+				"trackNumber": 2
+			},
+			{
+				"fileId": 11,
+				"path": "/Disc 2/02 Blackened (Live _ Seattle '89).flac",
+				"bytes": 53819370,
+				"trackNumber": 2
+			},
+			{
+				"fileId": 130,
+				"path": "/Disc 8/02 For Whom the Bell Tolls (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 32216874,
+				"trackNumber": 2
+			},
+			{
+				"fileId": 82,
+				"path": "/Disc 6/02 For Whom the Bell Tolls (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 36520703,
+				"trackNumber": 2
+			},
+			{
+				"fileId": 108,
+				"path": "/Disc 7/02 The Four Horsemen (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 37729116,
+				"trackNumber": 2
+			},
+			{
+				"fileId": 12,
+				"path": "/Disc 2/03  For Whom the Bell Tolls (Live _ Seattle '89).flac",
+				"bytes": 44397755,
+				"trackNumber": 3
+			},
+			{
+				"fileId": 33,
+				"path": "/Disc 3/03 ...And Justice for All (1987 _ From James' Riff Tapes).flac",
+				"bytes": 17029620,
+				"trackNumber": 3
+			},
+			{
+				"fileId": 61,
+				"path": "/Disc 4/03 Eye of the Beholder (November 1987 Demo).flac",
+				"bytes": 48263520,
+				"trackNumber": 3
+			},
+			{
+				"fileId": 3,
+				"path": "/Disc 1/03 Eye of the Beholder (Remastered).flac",
+				"bytes": 49962356,
+				"trackNumber": 3
+			},
+			{
+				"fileId": 71,
+				"path": "/Disc 5/03 Eye of the Beholder (Work In Progress Rough Mix).flac",
+				"bytes": 52712108,
+				"trackNumber": 3
+			},
+			{
+				"fileId": 109,
+				"path": "/Disc 7/03 Harvester of Sorrow (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 38165174,
+				"trackNumber": 3
+			},
+			{
+				"fileId": 131,
+				"path": "/Disc 8/03 Welcome Home (Sanitarium) (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 43454403,
+				"trackNumber": 3
+			},
+			{
+				"fileId": 83,
+				"path": "/Disc 6/03 Welcome Home (Sanitarium) (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 54035800,
+				"trackNumber": 3
+			},
+			{
+				"fileId": 34,
+				"path": "/Disc 3/04 ...And Justice for All (1988 _ From James' Riff Tapes).flac",
+				"bytes": 5084567,
+				"trackNumber": 4
+			},
+			{
+				"fileId": 110,
+				"path": "/Disc 7/04 Eye of the Beholder (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 43700616,
+				"trackNumber": 4
+			},
+			{
+				"fileId": 132,
+				"path": "/Disc 8/04 Leper Messiah (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 40353444,
+				"trackNumber": 4
+			},
+			{
+				"fileId": 62,
+				"path": "/Disc 4/04 One (November 1987 Demo).flac",
+				"bytes": 50867356,
+				"trackNumber": 4
+			},
+			{
+				"fileId": 4,
+				"path": "/Disc 1/04 One (Remastered).flac",
+				"bytes": 54011737,
+				"trackNumber": 4
+			},
+			{
+				"fileId": 72,
+				"path": "/Disc 5/04 One (Work In Progress Rough Mix).flac",
+				"bytes": 58440574,
+				"trackNumber": 4
+			},
+			{
+				"fileId": 84,
+				"path": "/Disc 6/04 The Four Horsemen (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 44891430,
+				"trackNumber": 4
+			},
+			{
+				"fileId": 13,
+				"path": "/Disc 2/04 Welcome Home (Sanitarium) (Live _ Seattle '89).flac",
+				"bytes": 54711511,
+				"trackNumber": 4
+			},
+			{
+				"fileId": 111,
+				"path": "/Disc 7/05 Bass Solo (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 41521752,
+				"trackNumber": 5
+			},
+			{
+				"fileId": 35,
+				"path": "/Disc 3/05 Eye of the Beholder (1987 _ From James' Riff Tapes).flac",
+				"bytes": 10777443,
+				"trackNumber": 5
+			},
+			{
+				"fileId": 14,
+				"path": "/Disc 2/05 Harvester of Sorrow (Live _ Seattle '89).flac",
+				"bytes": 49617552,
+				"trackNumber": 5
+			},
+			{
+				"fileId": 133,
+				"path": "/Disc 8/05 Harvester of Sorrow (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 36701942,
+				"trackNumber": 5
+			},
+			{
+				"fileId": 63,
+				"path": "/Disc 4/05 The Frayed Ends of Sanity (November 1987 Demo).flac",
+				"bytes": 57957357,
+				"trackNumber": 5
+			},
+			{
+				"fileId": 5,
+				"path": "/Disc 1/05 The Shortest Straw (Remastered).flac",
+				"bytes": 52035663,
+				"trackNumber": 5
+			},
+			{
+				"fileId": 73,
+				"path": "/Disc 5/05 The Shortest Straw (Work In Progress Rough Mix).flac",
+				"bytes": 53916782,
+				"trackNumber": 5
+			},
+			{
+				"fileId": 85,
+				"path": "/Disc 6/05 Whiplash (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 33956173,
+				"trackNumber": 5
+			},
+			{
+				"fileId": 36,
+				"path": "/Disc 3/06 Eye of the Beholder (1987 _ From James' Riff Tapes 2).flac",
+				"bytes": 4489727,
+				"trackNumber": 6
+			},
+			{
+				"fileId": 64,
+				"path": "/Disc 4/06 Eye of the Beholder (January 1988 Demo).flac",
+				"bytes": 42194028,
+				"trackNumber": 6
+			},
+			{
+				"fileId": 134,
+				"path": "/Disc 8/06 Eye of the Beholder (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 43248696,
+				"trackNumber": 6
+			},
+			{
+				"fileId": 86,
+				"path": "/Disc 6/06 Fade To Black (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 56490764,
+				"trackNumber": 6
+			},
+			{
+				"fileId": 6,
+				"path": "/Disc 1/06 Harvester of Sorrow (Remastered).flac",
+				"bytes": 43083335,
+				"trackNumber": 6
+			},
+			{
+				"fileId": 74,
+				"path": "/Disc 5/06 Harvester of Sorrow (Work In Progress Rough Mix).flac",
+				"bytes": 43707945,
+				"trackNumber": 6
+			},
+			{
+				"fileId": 112,
+				"path": "/Disc 7/06 Master of Puppets (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 54718291,
+				"trackNumber": 6
+			},
+			{
+				"fileId": 15,
+				"path": "/Disc 2/06 The Four Horsemen (Live _ Seattle '89).flac",
+				"bytes": 49253095,
+				"trackNumber": 6
+			},
+			{
+				"fileId": 135,
+				"path": "/Disc 8/07 Bass Solo (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 37131888,
+				"trackNumber": 7
+			},
+			{
+				"fileId": 113,
+				"path": "/Disc 7/07 Damage, Inc. (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 29337402,
+				"trackNumber": 7
+			},
+			{
+				"fileId": 37,
+				"path": "/Disc 3/07 One (1987 _ From James' Riff Tapes).flac",
+				"bytes": 13559902,
+				"trackNumber": 7
+			},
+			{
+				"fileId": 87,
+				"path": "/Disc 6/07 Seek & Destroy (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 55967475,
+				"trackNumber": 7
+			},
+			{
+				"fileId": 7,
+				"path": "/Disc 1/07 The Frayed Ends of Sanity (Remastered).flac",
+				"bytes": 61489941,
+				"trackNumber": 7
+			},
+			{
+				"fileId": 75,
+				"path": "/Disc 5/07 The Frayed Ends of Sanity (Work In Progress Rough Mix).flac",
+				"bytes": 60763150,
+				"trackNumber": 7
+			},
+			{
+				"fileId": 65,
+				"path": "/Disc 4/07 The Shortest Straw (January 1988 Demo).flac",
+				"bytes": 44823022,
+				"trackNumber": 7
+			},
+			{
+				"fileId": 16,
+				"path": "/Disc 2/07 The Thing That Should Not Be (Live _ Seattle '89).flac",
+				"bytes": 57819449,
+				"trackNumber": 7
+			},
+			{
+				"fileId": 17,
+				"path": "/Disc 2/08 Bass Solo (Live _ Seattle '89).flac",
+				"bytes": 53325016,
+				"trackNumber": 8
+			},
+			{
+				"fileId": 66,
+				"path": "/Disc 4/08 Harvester of Sorrow (January 1988 Demo).flac",
+				"bytes": 36906572,
+				"trackNumber": 8
+			},
+			{
+				"fileId": 136,
+				"path": "/Disc 8/08 Master of Puppets (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 52915590,
+				"trackNumber": 8
+			},
+			{
+				"fileId": 88,
+				"path": "/Disc 6/08 Master of Puppets (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 69743498,
+				"trackNumber": 8
+			},
+			{
+				"fileId": 114,
+				"path": "/Disc 7/08 One (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 56609457,
+				"trackNumber": 8
+			},
+			{
+				"fileId": 38,
+				"path": "/Disc 3/08 The Shortest Straw (1986 _ From James' Riff Tapes).flac",
+				"bytes": 11218293,
+				"trackNumber": 8
+			},
+			{
+				"fileId": 76,
+				"path": "/Disc 5/08 To Live is to Die (Acoustic Intro _ Work In Progress Rough Mix).flac",
+				"bytes": 16185127,
+				"trackNumber": 8
+			},
+			{
+				"fileId": 8,
+				"path": "/Disc 1/08 To Live is to Die (Remastered).flac",
+				"bytes": 69145766,
+				"trackNumber": 8
+			},
+			{
+				"fileId": 67,
+				"path": "/Disc 4/09 Dyers Eve (January 1988 Demo).flac",
+				"bytes": 40259744,
+				"trackNumber": 9
+			},
+			{
+				"fileId": 9,
+				"path": "/Disc 1/09 Dyers Eve (Remastered).flac",
+				"bytes": 42794100,
+				"trackNumber": 9
+			},
+			{
+				"fileId": 89,
+				"path": "/Disc 6/09 Encore Jam (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 11720623,
+				"trackNumber": 9
+			},
+			{
+				"fileId": 18,
+				"path": "/Disc 2/09 Master of Puppets (Live _ Seattle '89).flac",
+				"bytes": 70610117,
+				"trackNumber": 9
+			},
+			{
+				"fileId": 137,
+				"path": "/Disc 8/09 One (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 55219449,
+				"trackNumber": 9
+			},
+			{
+				"fileId": 115,
+				"path": "/Disc 7/09 Seek & Destroy (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 49310244,
+				"trackNumber": 9
+			},
+			{
+				"fileId": 39,
+				"path": "/Disc 3/09 The Shortest Straw (1986 _ From James' Riff Tapes 2).flac",
+				"bytes": 5667216,
+				"trackNumber": 9
+			},
+			{
+				"fileId": 77,
+				"path": "/Disc 5/09 To Live is to Die (Work In Progress Rough Mix).flac",
+				"bytes": 65033635,
+				"trackNumber": 9
+			},
+			{
+				"fileId": 90,
+				"path": "/Disc 6/10  Last Caress (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 12423427,
+				"trackNumber": 10
+			},
+			{
+				"fileId": 116,
+				"path": "/Disc 7/10 ...And Justice for All (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 50312441,
+				"trackNumber": 10
+			},
+			{
+				"fileId": 78,
+				"path": "/Disc 5/10 Dyers Eve (Work In Progress Rough Mix).flac",
+				"bytes": 42099977,
+				"trackNumber": 10
+			},
+			{
+				"fileId": 19,
+				"path": "/Disc 2/10 Fade To Black (Live _ Seattle '89).flac",
+				"bytes": 65104707,
+				"trackNumber": 10
+			},
+			{
+				"fileId": 40,
+				"path": "/Disc 3/10 Harvester of Sorrow (1987 _ From James' Riff Tapes).flac",
+				"bytes": 7602627,
+				"trackNumber": 10
+			},
+			{
+				"fileId": 138,
+				"path": "/Disc 8/10 Seek & Destroy (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 51172391,
+				"trackNumber": 10
+			},
+			{
+				"fileId": 68,
+				"path": "/Disc 4/10 To Live is to Die (January 1988 Demo).flac",
+				"bytes": 66068843,
+				"trackNumber": 10
+			},
+			{
+				"fileId": 139,
+				"path": "/Disc 8/11 ...And Justice for All (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 70020305,
+				"trackNumber": 11
+			},
+			{
+				"fileId": 91,
+				"path": "/Disc 6/11 Am I Evil_ (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 30498749,
+				"trackNumber": 11
+			},
+			{
+				"fileId": 79,
+				"path": "/Disc 5/11 Breadfan (Work In Progress Rough Mix).flac",
+				"bytes": 42994821,
+				"trackNumber": 11
+			},
+			{
+				"fileId": 117,
+				"path": "/Disc 7/11 Encore Jam (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 7870336,
+				"trackNumber": 11
+			},
+			{
+				"fileId": 20,
+				"path": "/Disc 2/11 Seek & Destroy (Live _ Seattle '89).flac",
+				"bytes": 71336889,
+				"trackNumber": 11
+			},
+			{
+				"fileId": 41,
+				"path": "/Disc 3/11 The Frayed Ends of Sanity (1987 _ From James' Riff Tapes).flac",
+				"bytes": 11161541,
+				"trackNumber": 11
+			},
+			{
+				"fileId": 21,
+				"path": "/Disc 2/12 ...And Justice for All (Live _ Seattle '89).flac",
+				"bytes": 87278611,
+				"trackNumber": 12
+			},
+			{
+				"fileId": 92,
+				"path": "/Disc 6/12 Battery (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 42539399,
+				"trackNumber": 12
+			},
+			{
+				"fileId": 118,
+				"path": "/Disc 7/12 Creeping Death (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 50965431,
+				"trackNumber": 12
+			},
+			{
+				"fileId": 140,
+				"path": "/Disc 8/12 Encore Jam (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 7077904,
+				"trackNumber": 12
+			},
+			{
+				"fileId": 80,
+				"path": "/Disc 5/12 The Prince (Work In Progress Rough Mix).flac",
+				"bytes": 36876698,
+				"trackNumber": 12
+			},
+			{
+				"fileId": 42,
+				"path": "/Disc 3/12 To Live is to Die (1986 _ From James' Riff Tapes).flac",
+				"bytes": 9401856,
+				"trackNumber": 12
+			},
+			{
+				"fileId": 141,
+				"path": "/Disc 8/13 Creeping Death (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 49803211,
+				"trackNumber": 13
+			},
+			{
+				"fileId": 93,
+				"path": "/Disc 6/13 Encore Jam 2 (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 9596893,
+				"trackNumber": 13
+			},
+			{
+				"fileId": 119,
+				"path": "/Disc 7/13 Fade To Black (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 47520858,
+				"trackNumber": 13
+			},
+			{
+				"fileId": 22,
+				"path": "/Disc 2/13 One (Live _ Seattle '89).flac",
+				"bytes": 74736434,
+				"trackNumber": 13
+			},
+			{
+				"fileId": 43,
+				"path": "/Disc 3/13 To Live is to Die (1988 _ From James' Riff Tapes).flac",
+				"bytes": 5537834,
+				"trackNumber": 13
+			},
+			{
+				"fileId": 23,
+				"path": "/Disc 2/14 Creeping Death (Live _ Seattle '89).flac",
+				"bytes": 62511853,
+				"trackNumber": 14
+			},
+			{
+				"fileId": 44,
+				"path": "/Disc 3/14 Dyers Eve (1986 _ From James' Riff Tapes).flac",
+				"bytes": 7713852,
+				"trackNumber": 14
+			},
+			{
+				"fileId": 142,
+				"path": "/Disc 8/14 Fade To Black (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 47067486,
+				"trackNumber": 14
+			},
+			{
+				"fileId": 120,
+				"path": "/Disc 7/14 Guitar Solo (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 42053914,
+				"trackNumber": 14
+			},
+			{
+				"fileId": 94,
+				"path": "/Disc 6/14 Harvester of Sorrow (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 52634808,
+				"trackNumber": 14
+			},
+			{
+				"fileId": 121,
+				"path": "/Disc 7/15 Battery (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 35194366,
+				"trackNumber": 15
+			},
+			{
+				"fileId": 45,
+				"path": "/Disc 3/15 Dyers Eve (1987 _ From James' Riff Tapes).flac",
+				"bytes": 40544761,
+				"trackNumber": 15
+			},
+			{
+				"fileId": 24,
+				"path": "/Disc 2/15 Guitar Solo (Live _ Seattle '89).flac",
+				"bytes": 48899418,
+				"trackNumber": 15
+			},
+			{
+				"fileId": 143,
+				"path": "/Disc 8/15 Guitar Solo (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 39587003,
+				"trackNumber": 15
+			},
+			{
+				"fileId": 95,
+				"path": "/Disc 6/15 Leper Messiah (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 44455005,
+				"trackNumber": 15
+			},
+			{
+				"fileId": 25,
+				"path": "/Disc 2/16 Battery (Live _ Seattle '89).flac",
+				"bytes": 50967147,
+				"trackNumber": 16
+			},
+			{
+				"fileId": 144,
+				"path": "/Disc 8/16 Battery (Live At Long Beach Arena, Long Beach, CA _ December 7th, 1988).flac",
+				"bytes": 35069585,
+				"trackNumber": 16
+			},
+			{
+				"fileId": 46,
+				"path": "/Disc 3/16 Blackened (October 1987 _ Writing In Progress).flac",
+				"bytes": 25511059,
+				"trackNumber": 16
+			},
+			{
+				"fileId": 96,
+				"path": "/Disc 6/16 Blitzkrieg (Live At The Troubadour, West Hollywood, CA _ May 24th, 1988).flac",
+				"bytes": 43229947,
+				"trackNumber": 16
+			},
+			{
+				"fileId": 122,
+				"path": "/Disc 7/16 Encore Jam 2 (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 24632335,
+				"trackNumber": 16
+			},
+			{
+				"fileId": 26,
+				"path": "/Disc 2/17  Encore Jam (Live _ Seattle '89).flac",
+				"bytes": 23599386,
+				"trackNumber": 17
+			},
+			{
+				"fileId": 47,
+				"path": "/Disc 3/17 ...And Justice for All (October 1987 _ Writing In Progress).flac",
+				"bytes": 8653312,
+				"trackNumber": 17
+			},
+			{
+				"fileId": 97,
+				"path": "/Disc 6/17 Breadfan (Remastered).flac",
+				"bytes": 43283075,
+				"trackNumber": 17
+			},
+			{
+				"fileId": 123,
+				"path": "/Disc 7/17 Last Caress (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 10878844,
+				"trackNumber": 17
+			},
+			{
+				"fileId": 145,
+				"path": "/Disc 8/17 Last Caress (Live At UIC Pavilion, Chicago, IL _ November 17th, 1988).flac",
+				"bytes": 11135124,
+				"trackNumber": 17
+			},
+			{
+				"fileId": 48,
+				"path": "/Disc 3/18 ...And Justice for All (October 1987 _ Writing In Progress 2).flac",
+				"bytes": 12717741,
+				"trackNumber": 18
+			},
+			{
+				"fileId": 124,
+				"path": "/Disc 7/18 Am I Evil_ (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 27220484,
+				"trackNumber": 18
+			},
+			{
+				"fileId": 146,
+				"path": "/Disc 8/18 Am I Evil_ (Live At UIC Pavilion, Chicago, IL _ November 17th, 1988).flac",
+				"bytes": 28112427,
+				"trackNumber": 18
+			},
+			{
+				"fileId": 27,
+				"path": "/Disc 2/18 Last Caress (Live _ Seattle '89).flac",
+				"bytes": 16442704,
+				"trackNumber": 18
+			},
+			{
+				"fileId": 98,
+				"path": "/Disc 6/18 The Prince (Remastered).flac",
+				"bytes": 36325900,
+				"trackNumber": 18
+			},
+			{
+				"fileId": 28,
+				"path": "/Disc 2/19 Am I Evil_ (Live _ Seattle '89).flac",
+				"bytes": 34110831,
+				"trackNumber": 19
+			},
+			{
+				"fileId": 99,
+				"path": "/Disc 6/19 For Whom the Bell Tolls (Live At Reunion Arena, Dallas, TX _ February 5th, 1989).flac",
+				"bytes": 36615442,
+				"trackNumber": 19
+			},
+			{
+				"fileId": 49,
+				"path": "/Disc 3/19 One (October 1987 _ Writing In Progress).flac",
+				"bytes": 10045191,
+				"trackNumber": 19
+			},
+			{
+				"fileId": 125,
+				"path": "/Disc 7/19 Whiplash (Live At Hammersmith Odeon, London, England _ October 10th, 1988).flac",
+				"bytes": 28743506,
+				"trackNumber": 19
+			},
+			{
+				"fileId": 147,
+				"path": "/Disc 8/19 Whiplash (Live At UIC Pavilion, Chicago, IL _ November 17th, 1988).flac",
+				"bytes": 28968003,
+				"trackNumber": 19
+			},
+			{
+				"fileId": 126,
+				"path": "/Disc 7/20 Eye of the Beholder (Radio Edit).flac",
+				"bytes": 45457719,
+				"trackNumber": 20
+			},
+			{
+				"fileId": 50,
+				"path": "/Disc 3/20 The Shortest Straw (October 1987 _ Writing In Progress).flac",
+				"bytes": 6953414,
+				"trackNumber": 20
+			},
+			{
+				"fileId": 100,
+				"path": "/Disc 6/20 Welcome Home (Sanitarium) (Live At Reunion Arena, Dallas, TX _ February 5th, 1989).flac",
+				"bytes": 47453682,
+				"trackNumber": 20
+			},
+			{
+				"fileId": 29,
+				"path": "/Disc 2/20 Whiplash (Live _ Seattle '89).flac",
+				"bytes": 44984065,
+				"trackNumber": 20
+			},
+			{
+				"fileId": 51,
+				"path": "/Disc 3/21 ...And Justice for All (November 1987 _ Writing In Progress).flac",
+				"bytes": 63013116,
+				"trackNumber": 21
+			},
+			{
+				"fileId": 30,
+				"path": "/Disc 2/21 Breadfan (Live _ Seattle '89).flac",
+				"bytes": 38164648,
+				"trackNumber": 21
+			},
+			{
+				"fileId": 127,
+				"path": "/Disc 7/21 One (Radio Edit).flac",
+				"bytes": 37338806,
+				"trackNumber": 21
+			},
+			{
+				"fileId": 101,
+				"path": "/Disc 6/21 Seek & Destroy (Live At Reunion Arena, Dallas, TX _ February 5th, 1989).flac",
+				"bytes": 66074617,
+				"trackNumber": 21
+			},
+			{
+				"fileId": 128,
+				"path": "/Disc 7/22 ...And Justice for All (Radio Edit).flac",
+				"bytes": 46760459,
+				"trackNumber": 22
+			},
+			{
+				"fileId": 102,
+				"path": "/Disc 6/22 Creeping Death (Live At Reunion Arena, Dallas, TX _ February 5th, 1989).flac",
+				"bytes": 61810342,
+				"trackNumber": 22
+			},
+			{
+				"fileId": 52,
+				"path": "/Disc 3/22 The Frayed Ends of Sanity (November 1987 _ Writing In Progress).flac",
+				"bytes": 54828817,
+				"trackNumber": 22
+			},
+			{
+				"fileId": 103,
+				"path": "/Disc 6/23 Harvester of Sorrow (Live At Seattle Coliseum, Seattle, WA _ August 29th, 1989).flac",
+				"bytes": 44404689,
+				"trackNumber": 23
+			},
+			{
+				"fileId": 53,
+				"path": "/Disc 3/23 One (November 1987 _ Writing In Progress).flac",
+				"bytes": 15344961,
+				"trackNumber": 23
+			},
+			{
+				"fileId": 54,
+				"path": "/Disc 3/24 Dyers Eve (November 1987 _ Writing In Progress).flac",
+				"bytes": 39255512,
+				"trackNumber": 24
+			},
+			{
+				"fileId": 104,
+				"path": "/Disc 6/24 One (Live At Seattle Coliseum, Seattle, WA _ August 29th, 1989).flac",
+				"bytes": 50985681,
+				"trackNumber": 24
+			},
+			{
+				"fileId": 105,
+				"path": "/Disc 6/25 Breadfan (Live At Seattle Coliseum, Seattle, WA _ August 30th, 1989).flac",
+				"bytes": 31085334,
+				"trackNumber": 25
+			},
+			{
+				"fileId": 55,
+				"path": "/Disc 3/25 Eye of the Beholder (November 1987 _ Writing In Progress).flac",
+				"bytes": 51480196,
+				"trackNumber": 25
+			},
+			{
+				"fileId": 106,
+				"path": "/Disc 6/26 Last Caress (Live At Seattle Coliseum, Seattle, WA _ August 30th, 1989).flac",
+				"bytes": 12753957,
+				"trackNumber": 26
+			},
+			{
+				"fileId": 56,
+				"path": "/Disc 3/26 To Live is to Die (November 1987 _ Writing In Progress).flac",
+				"bytes": 6836459,
+				"trackNumber": 26
+			},
+			{
+				"fileId": 57,
+				"path": "/Disc 3/27 The Shortest Straw (December 1987 _ Writing In Progress).flac",
+				"bytes": 50620059,
+				"trackNumber": 27
+			},
+			{
+				"fileId": 58,
+				"path": "/Disc 3/28 Harvester of Sorrow (December 1987 _ Writing In Progress).flac",
+				"bytes": 39694816,
+				"trackNumber": 28
+			}
+		]
+	}
+}

@@ -1,29 +1,19 @@
-import { getBlocklist } from '@/services/takedown/blocklist';
-import { prisma } from '@/utils/prisma';
+import {
+	albumSearchSql,
+	countAlbums,
+	MUSIC_ALBUM_TYPES,
+	MUSIC_SORTS,
+	MusicAlbum,
+	MusicAlbumType,
+	MusicSortOption,
+	queryAlbums,
+	withPackFlags,
+	withTracks,
+} from '@/services/musicCatalog';
+import { Prisma } from '@prisma/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export interface MusicTrack {
-	id: string;
-	hash: string;
-	fileId: number;
-	link: string;
-	path: string;
-	bytes: number;
-	trackNumber: number | null;
-	filename: string;
-}
-
-export interface MusicAlbum {
-	hash: string;
-	mbid: string;
-	artist: string;
-	album: string;
-	year: number | null;
-	coverUrl: string | null;
-	tracks: MusicTrack[];
-	totalBytes: number;
-	trackCount: number;
-}
+export type { MusicAlbum, MusicTrack } from '@/services/musicCatalog';
 
 export interface MusicLibraryResponse {
 	albums: MusicAlbum[];
@@ -33,80 +23,6 @@ export interface MusicLibraryResponse {
 	limit?: number;
 	hasMore?: boolean;
 	nextPage?: number | null;
-}
-
-type MusicSortOption = 'recent' | 'name' | 'artist' | 'year';
-
-const audioExtensions = [
-	'.flac',
-	'.mp3',
-	'.m4a',
-	'.aac',
-	'.ogg',
-	'.opus',
-	'.wav',
-	'.wma',
-	'.alac',
-	'.ape',
-	'.wv',
-	'.dsf',
-	'.dff',
-];
-
-const nonAudioExtensions = [
-	'.jpg',
-	'.jpeg',
-	'.png',
-	'.gif',
-	'.txt',
-	'.nfo',
-	'.cue',
-	'.log',
-	'.m3u',
-	'.pdf',
-	'.md5',
-	'.sfv',
-];
-
-// Extract filename from path
-function getFilename(path: string): string {
-	const parts = path.split('/');
-	return parts[parts.length - 1] || path;
-}
-
-// Extract track number from filename
-function extractTrackNumber(filename: string): number | null {
-	// Try various patterns: "01 - Song.flac", "01. Song.flac", "Track 01.flac"
-	const patterns = [
-		/^(\d{1,3})\s*[-_.]\s*/,
-		/^track\s*(\d{1,3})/i,
-		/^\[(\d{1,3})\]/,
-		/^(\d{1,3})\)/,
-	];
-
-	for (const pattern of patterns) {
-		const match = filename.match(pattern);
-		if (match) {
-			return parseInt(match[1], 10);
-		}
-	}
-	return null;
-}
-
-function isAudioPath(path: string): boolean {
-	const lowerPath = path.toLowerCase();
-	const lastDot = lowerPath.lastIndexOf('.');
-
-	// If no extension, include it (might be audio)
-	if (lastDot < 0) return true;
-
-	const ext = lowerPath.slice(lastDot);
-
-	// Exclude known non-audio files
-	if (nonAudioExtensions.includes(ext)) return false;
-
-	// Include known audio files and unknown extensions that are not explicitly excluded
-	return audioExtensions.includes(ext) || !nonAudioExtensions.includes(ext);
 }
 
 function getStringQuery(value: string | string[] | undefined): string | undefined {
@@ -124,20 +40,11 @@ function getSortOption(value: string | string[] | undefined): MusicSortOption {
 	return sortBy === 'name' || sortBy === 'artist' || sortBy === 'year' ? sortBy : 'recent';
 }
 
-function sortAlbums(albums: MusicAlbum[], sortBy: MusicSortOption): MusicAlbum[] {
-	switch (sortBy) {
-		case 'name':
-			return [...albums].sort((a, b) => a.album.localeCompare(b.album));
-		case 'artist':
-			return [...albums].sort((a, b) => a.artist.localeCompare(b.artist));
-		case 'year':
-			return [...albums].sort((a, b) => (b.year ?? 0) - (a.year ?? 0));
-		case 'recent':
-		default:
-			return albums;
-	}
-}
-
+/**
+ * `?hash=` is one album with its tracks. Otherwise a page of albums, one per
+ * release group, searched (`search`), filtered (`type`) and sorted (`sortBy`)
+ * in SQL; `summary=1` leaves the tracks out.
+ */
 export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<MusicLibraryResponse | { error: string }>
@@ -148,239 +55,50 @@ export default async function handler(
 
 	try {
 		const includeTracks = req.query.summary !== '1';
-		const hash = typeof req.query.hash === 'string' ? req.query.hash : undefined;
-		const blocked = [...(await getBlocklist()).hashes];
-		const unblocked = blocked.length > 0 ? { hash: { notIn: blocked } } : undefined;
-		const page = getPositiveInt(req.query.page, 1);
-		const limit = Math.min(getPositiveInt(req.query.limit, 48), 96);
-		const search = getStringQuery(req.query.search)?.trim().toLowerCase() ?? '';
-		const sortBy = getSortOption(req.query.sortBy);
+		const hash = getStringQuery(req.query.hash);
+		const attach = includeTracks ? withTracks : withPackFlags;
 
-		if (!includeTracks && !hash && !search && sortBy === 'recent') {
-			const take = limit * 2;
-			const skip = (page - 1) * limit;
-			const [availableMusic, musicCounts] = await Promise.all([
-				prisma.availableMusic.findMany({
-					where: unblocked,
-					include: {
-						_count: {
-							select: {
-								files: true,
-							},
-						},
-					},
-					orderBy: {
-						ended: 'desc',
-					},
-					skip,
-					take,
-				}),
-				prisma.availableMusic.findMany({
-					where: unblocked,
-					select: {
-						mbid: true,
-						_count: {
-							select: {
-								files: true,
-							},
-						},
-					},
-				}),
-			]);
-			const countByMbid = new Map<string, number>();
-			for (const music of musicCounts) {
-				const fileCount = (music as any)._count?.files ?? 0;
-				const existing = countByMbid.get(music.mbid) ?? 0;
-				if (fileCount > existing) countByMbid.set(music.mbid, fileCount);
-			}
-			const totalAlbums = countByMbid.size;
-			const totalTracks = Array.from(countByMbid.values()).reduce(
-				(sum, count) => sum + count,
-				0
+		if (hash) {
+			const albums = await attach(
+				(await queryAlbums({ hash, order: MUSIC_SORTS.recent, limit: 1 })).albums
 			);
-
-			const mbids = [...new Set(availableMusic.map((m) => m.mbid))];
-			const metadata = await prisma.musicMetadata.findMany({
-				where: {
-					mbid: {
-						in: mbids,
-					},
-				},
-			});
-			const metadataMap = new Map(metadata.map((m) => [m.mbid, m]));
-			const albumsByMbid = new Map<string, MusicAlbum>();
-
-			for (const music of availableMusic) {
-				const meta = metadataMap.get(music.mbid);
-				const album: MusicAlbum = {
-					hash: music.hash,
-					mbid: music.mbid,
-					artist: meta?.artist ?? 'Unknown Artist',
-					album: meta?.album ?? music.filename,
-					year: meta?.year ?? null,
-					coverUrl: meta?.coverUrl ?? null,
-					tracks: [],
-					totalBytes: Number(music.bytes),
-					trackCount: (music as any)._count?.files ?? 0,
-				};
-				const existing = albumsByMbid.get(album.mbid);
-				if (!existing || album.trackCount > existing.trackCount) {
-					albumsByMbid.set(album.mbid, album);
-				}
-			}
-
-			const albums = Array.from(albumsByMbid.values())
-				.filter((album) => album.trackCount > 0)
-				.slice(0, limit);
-			const hasMore = skip + limit < musicCounts.length;
-
 			return res.status(200).json({
 				albums,
-				totalAlbums,
-				totalTracks,
-				page,
-				limit,
-				hasMore,
-				nextPage: hasMore ? page + 1 : null,
+				totalAlbums: albums.length,
+				totalTracks: albums.reduce((sum, album) => sum + album.trackCount, 0),
 			});
 		}
 
-		// Get all available music albums with their files and metadata
-		const availableMusic = await prisma.availableMusic.findMany({
-			where: hash ? { AND: [{ hash }, unblocked ?? {}] } : unblocked,
-			include: includeTracks
-				? {
-						files: {
-							orderBy: {
-								trackNumber: 'asc',
-							},
-						},
-					}
-				: {
-						_count: {
-							select: {
-								files: true,
-							},
-						},
-					},
-			orderBy: {
-				ended: 'desc',
-			},
+		const page = getPositiveInt(req.query.page, 1);
+		const limit = Math.min(getPositiveInt(req.query.limit, 48), 96);
+		const offset = (page - 1) * limit;
+		const search = getStringQuery(req.query.search)?.trim() ?? '';
+		const typeParam = getStringQuery(req.query.type);
+		const type =
+			typeParam && Object.hasOwn(MUSIC_ALBUM_TYPES, typeParam)
+				? MUSIC_ALBUM_TYPES[typeParam as MusicAlbumType]
+				: undefined;
+		const filters: Prisma.Sql[] = [];
+		if (search) filters.push(albumSearchSql(search));
+		if (type) filters.push(Prisma.sql`md.primaryType = ${type}`);
+
+		const { albums, ...pageTotals } = await queryAlbums({
+			filters,
+			order: MUSIC_SORTS[getSortOption(req.query.sortBy)],
+			limit,
+			offset,
 		});
+		const totals = albums.length || !offset ? pageTotals : await countAlbums(filters);
+		const hasMore = offset + limit < totals.totalAlbums;
 
-		// Get all unique MBIDs
-		const mbids = [...new Set(availableMusic.map((m) => m.mbid))];
-
-		// Fetch metadata for all albums
-		const metadata = await prisma.musicMetadata.findMany({
-			where: {
-				mbid: {
-					in: mbids,
-				},
-			},
+		res.status(200).json({
+			albums: await attach(albums),
+			...totals,
+			page,
+			limit,
+			hasMore,
+			nextPage: hasMore ? page + 1 : null,
 		});
-
-		// Create a map for quick lookup
-		const metadataMap = new Map(metadata.map((m) => [m.mbid, m]));
-
-		// Transform to response format
-		const albums: MusicAlbum[] = availableMusic.map((music) => {
-			const meta = metadataMap.get(music.mbid);
-			const files = includeTracks ? ((music as any).files ?? []) : [];
-
-			// Filter only audio files and deduplicate by file_id
-			const audioFiles = includeTracks
-				? files
-						.filter((f: any) => isAudioPath(f.path))
-						.filter(
-							(f: any, i: number, arr: any[]) =>
-								arr.findIndex((x: any) => x.file_id === f.file_id) === i
-						)
-				: [];
-
-			// Sort by track number, then filename
-			const sortedTracks = audioFiles.sort((a: any, b: any) => {
-				const trackA = a.trackNumber ?? extractTrackNumber(getFilename(a.path)) ?? 999;
-				const trackB = b.trackNumber ?? extractTrackNumber(getFilename(b.path)) ?? 999;
-				if (trackA !== trackB) return trackA - trackB;
-				return getFilename(a.path).localeCompare(getFilename(b.path));
-			});
-			const trackCount = includeTracks
-				? sortedTracks.length
-				: ((music as any)._count?.files ?? 0);
-
-			return {
-				hash: music.hash,
-				mbid: music.mbid,
-				artist: meta?.artist ?? 'Unknown Artist',
-				album: meta?.album ?? music.filename,
-				year: meta?.year ?? null,
-				coverUrl: meta?.coverUrl ?? null,
-				tracks: includeTracks
-					? sortedTracks.map((file: any, index: number) => ({
-							id: `${music.hash}-${file.file_id}`,
-							hash: music.hash,
-							fileId: file.file_id,
-							link: file.link,
-							path: file.path,
-							bytes: Number(file.bytes),
-							trackNumber:
-								file.trackNumber ??
-								extractTrackNumber(getFilename(file.path)) ??
-								index + 1,
-							filename: getFilename(file.path),
-						}))
-					: [],
-				totalBytes: Number(music.bytes),
-				trackCount,
-			};
-		});
-
-		// Filter out albums with no audio tracks
-		const albumsWithTracksAll = albums.filter((a) => a.trackCount > 0);
-
-		// Deduplicate by mbid — keep the version with the most tracks (most complete)
-		const albumsByMbid = new Map<string, MusicAlbum>();
-		for (const album of albumsWithTracksAll) {
-			const existing = albumsByMbid.get(album.mbid);
-			if (!existing || album.trackCount > existing.trackCount) {
-				albumsByMbid.set(album.mbid, album);
-			}
-		}
-		let albumsWithTracks = Array.from(albumsByMbid.values());
-
-		if (search) {
-			albumsWithTracks = albumsWithTracks.filter(
-				(album) =>
-					album.artist.toLowerCase().includes(search) ||
-					album.album.toLowerCase().includes(search)
-			);
-		}
-
-		albumsWithTracks = sortAlbums(albumsWithTracks, sortBy);
-		const totalAlbums = albumsWithTracks.length;
-		const totalTracks = albumsWithTracks.reduce((sum, a) => sum + a.trackCount, 0);
-		const shouldPaginate = !includeTracks && !hash;
-		const start = shouldPaginate ? (page - 1) * limit : 0;
-		const end = shouldPaginate ? start + limit : albumsWithTracks.length;
-		const pagedAlbums = albumsWithTracks.slice(start, end);
-		const hasMore = shouldPaginate ? end < albumsWithTracks.length : false;
-
-		const response: MusicLibraryResponse = {
-			albums: pagedAlbums,
-			totalAlbums,
-			totalTracks,
-			...(shouldPaginate
-				? {
-						page,
-						limit,
-						hasMore,
-						nextPage: hasMore ? page + 1 : null,
-					}
-				: {}),
-		};
-
-		res.status(200).json(response);
 	} catch (error) {
 		console.error('Error fetching music library:', error);
 		res.status(500).json({ error: 'Failed to fetch music library' });

@@ -13,20 +13,8 @@ export function formatSize(bytes: number): string {
 	return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
 }
 
-export function removeExtension(filename: string): string {
-	return filename.replace(/\.[^/.]+$/, '');
-}
-
-export function formatTrackTitle(filename: string): string {
-	const title = removeExtension(filename).trim();
-	const formattedTitle = title
-		.replace(/^\s*\[(\d{1,3})\]\s*/, '')
-		.replace(/^\s*\d{1,3}\s*[-_.]\s*/, '')
-		.replace(/^\s*\d{1,3}\)\s*/, '')
-		.replace(/^\s*track\s*\d{1,3}\s*[-_.]?\s*/i, '')
-		.trim();
-	return formattedTitle || title;
-}
+// Shared with the music API, which titles a track the same way when MusicBrainz has none.
+export { formatTrackTitle, removeExtension } from '@/utils/musicTracks';
 
 export const trackTitle = (track: PlayableTrack) => track.title || formatTrackTitle(track.filename);
 
