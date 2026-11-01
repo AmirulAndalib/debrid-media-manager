@@ -47,7 +47,6 @@ const defaultProps = () => ({
 	onBack: vi.fn(),
 	onDownload: vi.fn(),
 	onDownloadAlbum: vi.fn(),
-	hasQueue: false,
 });
 
 describe('AlbumDetailView', () => {
@@ -128,20 +127,16 @@ describe('AlbumDetailView', () => {
 		expect(props.onDownloadAlbum).not.toHaveBeenCalled();
 	});
 
-	it('does not show Play Next button when hasQueue is false', () => {
+	// The button row must not shift when playback starts.
+	it('shows Play Next before anything has played', () => {
 		render(<AlbumDetailView {...defaultProps()} />);
-		expect(screen.queryByText('Play Next')).not.toBeInTheDocument();
-	});
-
-	it('shows Play Next button when hasQueue is true', () => {
-		const props = defaultProps();
-		render(<AlbumDetailView {...props} hasQueue />);
 		expect(screen.getByText('Play Next')).toBeInTheDocument();
+		expect(screen.getAllByTitle('Play next')).toHaveLength(2);
 	});
 
 	it('calls onPlayNext when Play Next clicked', async () => {
 		const props = defaultProps();
-		render(<AlbumDetailView {...props} hasQueue />);
+		render(<AlbumDetailView {...props} />);
 		await userEvent.setup().click(screen.getByText('Play Next'));
 		expect(props.onPlayNext).toHaveBeenCalledWith(props.album);
 	});
@@ -159,17 +154,5 @@ describe('AlbumDetailView', () => {
 		props.album = makeAlbum({ year: null });
 		render(<AlbumDetailView {...props} />);
 		expect(screen.queryByText('2023')).not.toBeInTheDocument();
-	});
-
-	it('shows play next on tracks when hasQueue', () => {
-		const props = defaultProps();
-		render(<AlbumDetailView {...props} hasQueue />);
-		const playNextBtns = screen.getAllByTitle('Play next');
-		expect(playNextBtns).toHaveLength(2);
-	});
-
-	it('does not show play next on tracks when no queue', () => {
-		render(<AlbumDetailView {...defaultProps()} />);
-		expect(screen.queryByTitle('Play next')).not.toBeInTheDocument();
 	});
 });

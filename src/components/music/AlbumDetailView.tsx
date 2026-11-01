@@ -17,7 +17,6 @@ interface AlbumDetailViewProps {
 	onBack: () => void;
 	onDownload: (track: MusicTrack) => Promise<void>;
 	onDownloadAlbum: (album: MusicAlbum) => Promise<void>;
-	hasQueue: boolean;
 	onCoverLoaded?: (album: MusicAlbum, coverUrl: string) => void;
 }
 
@@ -32,7 +31,6 @@ export default function AlbumDetailView({
 	onBack,
 	onDownload,
 	onDownloadAlbum,
-	hasQueue,
 	onCoverLoaded,
 }: AlbumDetailViewProps) {
 	const [coverUrl, setCoverUrl] = useState(album.coverUrl);
@@ -179,16 +177,14 @@ export default function AlbumDetailView({
 								)}
 								Download Album
 							</button>
-							{hasQueue && (
-								<button
-									type="button"
-									onClick={() => onPlayNext(album)}
-									className="flex items-center gap-2 rounded-full border border-gray-600 bg-white/5 px-6 py-3.5 font-bold text-white backdrop-blur-sm transition-all duration-200 hover:border-white/30 hover:bg-white/10 active:scale-95"
-								>
-									<ListEnd className="h-5 w-5" />
-									Play Next
-								</button>
-							)}
+							<button
+								type="button"
+								onClick={() => onPlayNext(album)}
+								className="flex items-center gap-2 rounded-full border border-gray-600 bg-white/5 px-6 py-3.5 font-bold text-white backdrop-blur-sm transition-all duration-200 hover:border-white/30 hover:bg-white/10 active:scale-95"
+							>
+								<ListEnd className="h-5 w-5" />
+								Play Next
+							</button>
 						</div>
 					</div>
 				</div>
@@ -213,7 +209,7 @@ export default function AlbumDetailView({
 								isPlaying={playerState.isPlaying}
 								onPlay={() => onPlay(album, index)}
 								onDownload={onDownload}
-								onPlayNext={hasQueue ? onPlayTrackNext : undefined}
+								onPlayNext={onPlayTrackNext}
 							/>
 						))}
 					</div>

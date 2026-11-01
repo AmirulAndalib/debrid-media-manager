@@ -638,7 +638,6 @@ function MusicLibrary({
 								onBack={() => selectAlbum(null)}
 								onDownload={downloadTrack}
 								onDownloadAlbum={downloadAlbum}
-								hasQueue={currentTrack !== null}
 								onCoverLoaded={handleCoverLoaded}
 							/>
 						) : albumHash && selectedAlbumLoading ? (
