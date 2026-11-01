@@ -2,6 +2,7 @@ import CanaryLinks from '@/components/CanaryLinks';
 import FloatingLibraryIndicator from '@/components/FloatingLibraryIndicator';
 import { ModalProvider } from '@/components/modals/ModalContext';
 import { LibraryCacheProvider } from '@/contexts/LibraryCacheContext';
+import { useBrowserStateSync } from '@/hooks/useBrowserStateSync';
 import { runBackgroundCdnCheck } from '@/lib/observability/torboxCdnProbe';
 import '@/styles/globals.css';
 import { bridgePageCache } from '@/utils/pageCacheBridge';
@@ -18,6 +19,7 @@ type AppWithProvidersProps = AppProps & {
 
 export default function App({ Component, pageProps }: AppWithProvidersProps) {
 	const router = useRouter();
+	useBrowserStateSync();
 
 	useEffect(() => {
 		if (process.env.NODE_ENV !== 'production' || !('serviceWorker' in navigator)) return;

@@ -1,6 +1,7 @@
 import { AllDebridCastService } from './allDebridCast';
 import { AnimeService } from './anime';
 import { AvailabilityService } from './availability';
+import { BrowserStateService } from './browserState';
 import { CastService } from './cast';
 import { ContentRequestService } from './contentRequests';
 import { DebridLinkCastService } from './debridLinkCast';
@@ -36,6 +37,7 @@ export {
 	AllDebridCastService,
 	AnimeService,
 	AvailabilityService,
+	BrowserStateService,
 	CastService,
 	ContentRequestService,
 	DebridLinkCastService,

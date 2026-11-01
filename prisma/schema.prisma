@@ -1155,6 +1155,21 @@ model CastSponsorGrant {
   @@id([service, userId])
 }
 
+/// One browser's synced localStorage behind a verified provider login, so a new
+/// browser that logs in to that provider gets everything else back. `userId` is
+/// the provider's cast user id (`generate*UserId`), `state` the JSON the browser
+/// sent, keys filtered through `isSyncedKey` on the way in.
+model BrowserState {
+  /// `rd`, `tb`, `ad`, `pm`, `oc` or `dl`.
+  service   String   @db.VarChar(4)
+  userId    String
+  /// MEDIUMTEXT: `MAX_STATE_BYTES` is 64 KiB, one byte over TEXT's limit before any UTF-8.
+  state     String   @db.MediumText
+  updatedAt DateTime @updatedAt
+
+  @@id([service, userId])
+}
+
 model DiscordUser {
   id              String   @id @default(cuid()) @db.VarChar(30)
   createdAt       DateTime @default(now())

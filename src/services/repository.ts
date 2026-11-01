@@ -10,6 +10,7 @@ import {
 	AllDebridCastService,
 	AnimeService,
 	AvailabilityService,
+	BrowserStateService,
 	CastService,
 	ContentRequestService,
 	DebridLinkCastService,
@@ -77,6 +78,7 @@ export type RepositoryDependencies = Partial<{
 	sponsorsService: SponsorsService;
 	rexDirectService: RexDirectService;
 	sponsorProviderKeysService: SponsorProviderKeysService;
+	browserStateService: BrowserStateService;
 	wantedItemsService: WantedItemsService;
 	wantedListsService: WantedListsService;
 	streamHealthService: StreamHealthService;
@@ -113,6 +115,7 @@ export class Repository {
 	private sponsorsService: SponsorsService;
 	private rexDirectService: RexDirectService;
 	private sponsorProviderKeysService: SponsorProviderKeysService;
+	private browserStateService: BrowserStateService;
 	private wantedItemsService: WantedItemsService;
 	private wantedListsService: WantedListsService;
 	private streamHealthService: StreamHealthService;
@@ -148,6 +151,7 @@ export class Repository {
 		sponsorsService,
 		rexDirectService,
 		sponsorProviderKeysService,
+		browserStateService,
 		wantedItemsService,
 		wantedListsService,
 		streamHealthService,
@@ -182,6 +186,7 @@ export class Repository {
 		this.sponsorsService = sponsorsService ?? new SponsorsService();
 		this.sponsorProviderKeysService =
 			sponsorProviderKeysService ?? new SponsorProviderKeysService();
+		this.browserStateService = browserStateService ?? new BrowserStateService();
 		this.wantedItemsService = wantedItemsService ?? new WantedItemsService();
 		this.wantedListsService = wantedListsService ?? new WantedListsService();
 		this.rexDirectService = rexDirectService ?? new RexDirectService();
@@ -218,6 +223,7 @@ export class Repository {
 			this.zurgKeysService.disconnect(),
 			this.sponsorsService.disconnect(),
 			this.sponsorProviderKeysService.disconnect(),
+			this.browserStateService.disconnect(),
 			this.wantedItemsService.disconnect(),
 			this.wantedListsService.disconnect(),
 			this.streamHealthService.disconnect(),
@@ -1638,6 +1644,22 @@ export class Repository {
 
 	public removeSponsorProviderKey(shortId: string, service: TorznabLiveService) {
 		return this.sponsorProviderKeysService.removeKey(shortId, service);
+	}
+
+	/**
+	 * Synced browser state behind one provider login. It carries credentials, so
+	 * only `/api/browser-state` reads it, after the provider has verified that login.
+	 */
+	public getBrowserState(service: string, userId: string) {
+		return this.browserStateService.getBrowserState(service, userId);
+	}
+
+	public saveBrowserState(service: string, userId: string, state: string) {
+		return this.browserStateService.saveBrowserState(service, userId, state);
+	}
+
+	public deleteBrowserState(service: string, userId: string) {
+		return this.browserStateService.deleteBrowserState(service, userId);
 	}
 
 	// Wanted list: titles a sponsor's zurg fetches

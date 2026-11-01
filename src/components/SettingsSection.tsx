@@ -31,6 +31,7 @@ import {
 import { updateTorBoxSizeLimits } from '../utils/torboxCastApiClient';
 import { EasynewsAccountPanel } from './EasynewsAccountPanel';
 import { SponsorPanel } from './SponsorPanel';
+import { SyncAcrossDevicesPanel } from './SyncAcrossDevicesPanel';
 
 export const SettingsSection = () => {
 	const { isSponsor } = useSponsor();
@@ -453,6 +454,8 @@ export const SettingsSection = () => {
 				{/* One column on phones; two balanced columns from 1024px, each group kept whole. */}
 				<div className="*:mb-4 *:break-inside-avoid lg:columns-2 lg:gap-4">
 					<SponsorPanel />
+
+					<SyncAcrossDevicesPanel />
 
 					<EasynewsAccountPanel />
 
