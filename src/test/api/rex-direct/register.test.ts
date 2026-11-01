@@ -87,6 +87,17 @@ describe('rex-direct register, open to claimed servers', () => {
 		);
 	});
 
+	it('points the public name at the source IP only when it changed', async () => {
+		db.rexDirectLastIp.mockResolvedValue('198.51.100.1');
+		await call({ 'x-plex-token': 'tok' });
+		expect(upsertRexDirectRecord).toHaveBeenCalledTimes(1);
+		expect(upsertRexDirectRecord).toHaveBeenCalledWith(
+			'h1.rex-direct.debridmediamanager.com',
+			'203.0.113.7'
+		);
+		expect(db.rexDirectRecordIp).toHaveBeenCalledWith(MACHINE, '203.0.113.7');
+	});
+
 	it('starts no second order while one is running', async () => {
 		db.rexDirectStartIssuing.mockResolvedValue(false);
 		const res = await call({ 'x-plex-token': 'tok' });

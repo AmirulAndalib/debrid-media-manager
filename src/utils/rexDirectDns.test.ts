@@ -35,11 +35,12 @@ describe('rexDirectDns', () => {
 				return json({ success: true, result: { id: 'new' } });
 			})
 		);
-		const name = await upsertRexDirectRecord('hh', '9.9.9.9');
-		expect(name).toBe('hh.rex-direct.debridmediamanager.com');
+		await upsertRexDirectRecord('lan.hh.rex-direct.debridmediamanager.com', '9.9.9.9');
+		expect(calls[0].url).toContain('name=lan.hh.rex-direct.debridmediamanager.com');
 		const post = calls.find((c) => c.method === 'POST');
 		expect(post?.body).toMatchObject({
 			type: 'A',
+			name: 'lan.hh.rex-direct.debridmediamanager.com',
 			content: '9.9.9.9',
 			proxied: false,
 			ttl: 120,
@@ -62,7 +63,7 @@ describe('rexDirectDns', () => {
 				return json({ success: true, result: { id: 'rec1' } });
 			})
 		);
-		await upsertRexDirectRecord('hh', '2.2.2.2');
+		await upsertRexDirectRecord('hh.rex-direct.debridmediamanager.com', '2.2.2.2');
 		const put = calls.find((c) => c.method === 'PUT');
 		expect(put?.url).toContain('/dns_records/rec1');
 		expect(put?.body).toMatchObject({ content: '2.2.2.2' });
@@ -77,7 +78,7 @@ describe('rexDirectDns', () => {
 				return json({ success: true, result: [{ id: 'rec1', content: '3.3.3.3' }] });
 			})
 		);
-		await upsertRexDirectRecord('hh', '3.3.3.3');
+		await upsertRexDirectRecord('hh.rex-direct.debridmediamanager.com', '3.3.3.3');
 		expect(methods).toEqual(['GET']); // no PUT/POST
 	});
 
@@ -86,12 +87,16 @@ describe('rexDirectDns', () => {
 			'fetch',
 			vi.fn(async () => json({ success: false, errors: [{ code: 1004 }] }))
 		);
-		await expect(upsertRexDirectRecord('hh', '4.4.4.4')).rejects.toThrow(/Cloudflare/);
+		await expect(
+			upsertRexDirectRecord('hh.rex-direct.debridmediamanager.com', '4.4.4.4')
+		).rejects.toThrow(/Cloudflare/);
 	});
 
 	it('throws when the token is not configured', async () => {
 		delete process.env.REXDIRECT_CF_TOKEN;
-		await expect(upsertRexDirectRecord('hh', '4.4.4.4')).rejects.toThrow(/REXDIRECT_CF_TOKEN/);
+		await expect(
+			upsertRexDirectRecord('hh.rex-direct.debridmediamanager.com', '4.4.4.4')
+		).rejects.toThrow(/REXDIRECT_CF_TOKEN/);
 	});
 });
 

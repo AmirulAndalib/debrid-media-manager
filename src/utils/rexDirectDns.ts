@@ -46,13 +46,12 @@ async function cf(path: string, init: RequestInit, token: string): Promise<any> 
 }
 
 /**
- * Ensure `<hash>.rex-direct…` is a DNS-only A record for `ip`. Returns the
- * hostname. Grey-cloud (not proxied) on purpose: proxying Plex streaming through
- * Cloudflare violates their free TOS, and TLS terminates at the server.
+ * Ensure `name` (a server's `<hash>.rex-direct…`) is a DNS-only A record for `ip`.
+ * Grey-cloud (not proxied) on purpose: proxying Plex streaming through Cloudflare
+ * violates their free TOS, and TLS terminates at the server.
  */
-export async function upsertRexDirectRecord(hash: string, ip: string): Promise<string> {
-	const { token, zone, base } = config();
-	const name = `${hash}.${base}`;
+export async function upsertRexDirectRecord(name: string, ip: string): Promise<void> {
+	const { token, zone } = config();
 	const list = await cf(
 		`/zones/${zone}/dns_records?type=A&name=${encodeURIComponent(name)}`,
 		{ method: 'GET' },
@@ -71,7 +70,6 @@ export async function upsertRexDirectRecord(hash: string, ip: string): Promise<s
 	} else {
 		await cf(`/zones/${zone}/dns_records`, { method: 'POST', body: payload }, token);
 	}
-	return name;
 }
 
 /**

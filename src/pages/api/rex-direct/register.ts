@@ -96,7 +96,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	// few minutes per server) must not hammer the Cloudflare API.
 	const last = await db.rexDirectLastIp(machineIdentifier);
 	if (last !== ip) {
-		await upsertRexDirectRecord(hash, ip);
+		await upsertRexDirectRecord(hostname, ip);
 		await db.rexDirectRecordIp(machineIdentifier, ip);
 	}
 
