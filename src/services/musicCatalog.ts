@@ -94,6 +94,14 @@ export function albumSearchSql(query: string): Prisma.Sql {
 		: Prisma.sql`(md.artist LIKE ${like(query)} OR md.album LIKE ${like(query)})`;
 }
 
+/** Matches `t` (MusicTrackMetadata) on title. */
+export function trackSearchSql(query: string): Prisma.Sql {
+	const keyword = fulltextKeyword(query);
+	return keyword
+		? Prisma.sql`MATCH(t.title) AGAINST (${keyword} IN BOOLEAN MODE)`
+		: Prisma.sql`t.title LIKE ${like(query)}`;
+}
+
 /**
  * `best`: one row per release group in the catalog, the unblocked torrent with
  * the most files (`rn` = 1), with its file count and when the group last got a
@@ -202,6 +210,45 @@ export async function countAlbums(
 		totalAlbums: Number(row?.totalAlbums ?? 0),
 		totalTracks: Number(row?.totalTracks ?? 0),
 	};
+}
+
+export type MusicArtistHit = {
+	mbid: string;
+	name: string;
+	albumCount: number;
+	coverUrl: string | null;
+};
+
+/**
+ * The artists of the albums `search` (an `albumSearchSql`) matches, each with
+ * every album of theirs in the catalog counted, best match first.
+ */
+export async function searchArtists(search: Prisma.Sql, limit: number): Promise<MusicArtistHit[]> {
+	// The matching artists first, so MATCH runs once against the index rather
+	// than per row of a semijoin (1.6 s against 0.2 s on 5,800 albums).
+	const rows = await prisma.$queryRaw<
+		{ mbid: string; name: string; albumCount: bigint; coverUrl: string | null }[]
+	>(Prisma.sql`${await bestCte()}, hits AS (
+			SELECT md.artistMbid, MAX(${search}) AS relevance
+			FROM MusicMetadata md
+			WHERE ${search} AND md.artistMbid IS NOT NULL
+			GROUP BY md.artistMbid
+		)
+		SELECT h.artistMbid AS mbid, COALESCE(ma.name, MAX(md.artist)) AS name,
+			COUNT(*) AS albumCount, MAX(md.coverUrl) AS coverUrl
+		FROM hits h
+		JOIN MusicMetadata md ON md.artistMbid = h.artistMbid
+		JOIN best b ON b.mbid = md.mbid AND b.rn = 1
+		LEFT JOIN MusicArtist ma ON ma.mbid = h.artistMbid
+		GROUP BY h.artistMbid, h.relevance, ma.name
+		ORDER BY h.relevance DESC, albumCount DESC, h.artistMbid
+		LIMIT ${limit}`);
+	return rows.map((row) => ({
+		mbid: row.mbid,
+		name: row.name,
+		albumCount: Number(row.albumCount),
+		coverUrl: row.coverUrl,
+	}));
 }
 
 /**
