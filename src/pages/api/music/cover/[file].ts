@@ -65,7 +65,10 @@ async function cacheCover(key: string, cover: Cover) {
 	}
 }
 
-/** Follows redirects by hand so that every hop, not only the last, is on the allowlist. */
+/**
+ * Follows redirects by hand so that every hop, not only the last, is on the
+ * allowlist. Null when there is no image; throws on a 5xx or the timeout.
+ */
 async function fetchCover(url: string): Promise<Cover | null> {
 	const signal = AbortSignal.timeout(TIMEOUT_MS);
 	for (let hop = 0; hop <= MAX_REDIRECTS; hop++) {
@@ -81,6 +84,10 @@ async function fetchCover(url: string): Promise<Cover | null> {
 			await response.body?.cancel();
 			url = new URL(location, target).href;
 			continue;
+		}
+		if (response.status >= 500) {
+			await response.body?.cancel();
+			throw new Error(`HTTP ${response.status} from ${target.hostname}`);
 		}
 		const type = response.headers.get('content-type') ?? 'image/jpeg';
 		if (!response.ok || !type.startsWith('image/')) {
@@ -109,7 +116,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	}
 
 	const notFound = () => {
-		res.setHeader('Cache-Control', 'public, max-age=300');
+		// Short, so that a passing archive.org failure clears within a minute.
+		res.setHeader('Cache-Control', 'public, max-age=60');
 		return res.status(404).json({ error: 'No cover' });
 	};
 	try {
@@ -121,7 +129,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 				select: { coverUrl: true },
 			});
 			if (!meta?.coverUrl) return notFound();
-			cover = await fetchCover(meta.coverUrl);
+			// archive.org failed 4 of 40 fetches with a 5xx on 2026-11-01, so it gets a second try.
+			const url = meta.coverUrl;
+			cover = await fetchCover(url).catch(() => fetchCover(url));
 			if (!cover) return notFound();
 			if (cover.body.length <= CACHE_MAX_BYTES) await cacheCover(key, cover);
 		}

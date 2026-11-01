@@ -131,7 +131,7 @@ describe('/api/music/cover/[file]', () => {
 		const res = await get(`${MBID}.jpg`);
 
 		expect(res._getStatusCode()).toBe(404);
-		expect(res._getHeaders()['Cache-Control']).toBe('public, max-age=300');
+		expect(res._getHeaders()['Cache-Control']).toBe('public, max-age=60');
 		expect(fetchedUrls()).toEqual([CAA]);
 		expect(redis.set).not.toHaveBeenCalled();
 	});
@@ -154,11 +154,11 @@ describe('/api/music/cover/[file]', () => {
 		expect(fetchedUrls()).toEqual([itunes]);
 	});
 
-	it('answers 404, cached five minutes, when there is no cover or no image', async () => {
+	it('answers 404, cached a minute, when there is no cover or no image', async () => {
 		mockedPrisma.musicMetadata.findUnique.mockResolvedValueOnce(null);
 		const none = await get(`${MBID}.jpg`);
 		expect(none._getStatusCode()).toBe(404);
-		expect(none._getHeaders()['Cache-Control']).toBe('public, max-age=300');
+		expect(none._getHeaders()['Cache-Control']).toBe('public, max-age=60');
 		expect(fetch).not.toHaveBeenCalled();
 
 		vi.mocked(fetch).mockResolvedValueOnce(
@@ -166,24 +166,56 @@ describe('/api/music/cover/[file]', () => {
 		);
 		expect((await get(`${MBID}.jpg`))._getStatusCode()).toBe(404);
 
-		vi.mocked(fetch).mockResolvedValueOnce(new Response('gone', { status: 503 }));
+		// A 4xx is an answer, not a failure: no second try.
+		vi.mocked(fetch)
+			.mockClear()
+			.mockResolvedValueOnce(new Response('gone', { status: 404 }));
 		expect((await get(`${MBID}.jpg`))._getStatusCode()).toBe(404);
+		expect(fetch).toHaveBeenCalledTimes(1);
 		expect(redis.set).not.toHaveBeenCalled();
 	});
 
-	it('gives up on the archive after 10 seconds', async () => {
+	it('tries the archive a second time after a 5xx', async () => {
+		vi.mocked(fetch)
+			.mockResolvedValueOnce(redirect(307, DOWNLOAD))
+			.mockResolvedValueOnce(new Response('busy', { status: 503 }))
+			.mockResolvedValueOnce(redirect(307, DOWNLOAD))
+			.mockResolvedValueOnce(image());
+
+		const res = await get(`${MBID}.jpg`);
+
+		expect(res._getStatusCode()).toBe(200);
+		expect(res._getData()).toEqual(JPEG);
+		expect(fetchedUrls()).toEqual([CAA, DOWNLOAD, CAA, DOWNLOAD]);
+	});
+
+	it('answers 404 for a minute after two 5xx in a row', async () => {
+		const error = vi.spyOn(console, 'error').mockImplementation(() => {});
+		vi.mocked(fetch).mockImplementation(async () => new Response('busy', { status: 500 }));
+
+		const res = await get(`${MBID}.jpg`);
+
+		expect(res._getStatusCode()).toBe(404);
+		expect(res._getHeaders()['Cache-Control']).toBe('public, max-age=60');
+		expect(fetch).toHaveBeenCalledTimes(2);
+		expect(redis.set).not.toHaveBeenCalled();
+		error.mockRestore();
+	});
+
+	it('gives up on the archive after two tries of 10 seconds each', async () => {
 		const timeout = vi.spyOn(AbortSignal, 'timeout');
 		vi.mocked(fetch).mockImplementation(async (_url, init) => {
-			expect(init?.signal).toBe(timeout.mock.results[0].value);
+			expect(init?.signal).toBe(timeout.mock.results.at(-1)!.value);
 			throw new DOMException('The operation was aborted due to timeout', 'TimeoutError');
 		});
 		const error = vi.spyOn(console, 'error').mockImplementation(() => {});
 
 		const res = await get(`${MBID}.jpg`);
 
-		expect(timeout).toHaveBeenCalledWith(10_000);
+		expect(timeout.mock.calls).toEqual([[10_000], [10_000]]);
+		expect(fetch).toHaveBeenCalledTimes(2);
 		expect(res._getStatusCode()).toBe(404);
-		expect(res._getHeaders()['Cache-Control']).toBe('public, max-age=300');
+		expect(res._getHeaders()['Cache-Control']).toBe('public, max-age=60');
 		error.mockRestore();
 		timeout.mockRestore();
 	});
