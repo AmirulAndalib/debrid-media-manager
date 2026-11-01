@@ -1,3 +1,4 @@
+import { repository as db } from '@/services/repository';
 import { generateAllDebridUserId } from '@/utils/allDebridCastApiHelpers';
 import { SYNC_SERVICES, type SyncIdentity, type SyncService } from '@/utils/browserStateKeys';
 import { generateUserId } from '@/utils/castApiHelpers';
@@ -22,12 +23,20 @@ async function rdUserId(credentials: RdCastCredentials): Promise<string> {
 	return generateUserId(token);
 }
 
+/** A sponsor key stands for its sponsorship; the gatekeeper `shortId` outlives a key reset. */
+async function sponsorShortId(apiKey: string): Promise<string> {
+	const lookup = await db.getSponsorByDmmApiKey(apiKey);
+	if (!lookup?.isSponsor) throw new Error('not an active sponsorship');
+	return lookup.shortId;
+}
+
 const USER_ID: Record<Exclude<SyncService, 'rd'>, (apiKey: string) => Promise<string>> = {
 	tb: generateTorBoxUserId,
 	ad: generateAllDebridUserId,
 	pm: generatePremiumizeUserId,
 	oc: generateOffcloudUserId,
 	dl: generateDebridLinkUserId,
+	dmm: sponsorShortId,
 };
 
 /**

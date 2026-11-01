@@ -63,6 +63,9 @@ export function syncIdentities(): SyncIdentity[] {
 		['pm', ['pm:accessToken', 'pm:apiKey']],
 		['oc', ['oc:apiKey']],
 		['dl', ['dl:accessToken', 'dl:apiKey']],
+		// Last: a provider login is the identity when there is one; the sponsor key
+		// stands on its own only for a sponsor with no debrid login (NZB-only zurg).
+		['dmm', ['dmm:apiKey']],
 	];
 	for (const [service, keys] of others) {
 		const apiKey = keys.map(readCredential).find(Boolean);

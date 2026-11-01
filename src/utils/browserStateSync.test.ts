@@ -109,6 +109,13 @@ describe('syncIdentities', () => {
 		expect(syncIdentities().at(-1)).toEqual({ service: 'dl', apiKey: 'dl-oauth' });
 	});
 
+	it('takes the DMM API key as a login of its own, after any provider', () => {
+		localStorage.setItem('dmm:apiKey', JSON.stringify('k'.repeat(64)));
+		expect(syncIdentities()).toEqual([{ service: 'dmm', apiKey: 'k'.repeat(64) }]);
+		localStorage.setItem('tb:apiKey', '"tb-key"');
+		expect(syncIdentities().map((i) => i.service)).toEqual(['tb', 'dmm']);
+	});
+
 	it('ignores a value that is not JSON', () => {
 		localStorage.setItem('tb:apiKey', '{broken');
 		expect(syncIdentities()).toEqual([]);

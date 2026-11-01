@@ -135,6 +135,23 @@ describe('withAuth', () => {
 		expect(mockPush).not.toHaveBeenCalledWith('/start');
 	});
 
+	// gatekeeper's handoff lands on /settings with nothing stored yet; the page has
+	// to render so the sponsor panel can take the key, or the fragment is lost.
+	it('keeps the page for a key handed over in the fragment, with nothing stored', async () => {
+		mockUseRealDebridAccessToken.mockReturnValue([null, false, false]);
+		mockUseAllDebridApiKey.mockReturnValue(null);
+		mockRouter.pathname = '/settings';
+		window.history.replaceState(null, '', `/settings#apikey=${'a'.repeat(64)}`);
+
+		const TestComponent = () => <div data-testid="test-component">Test Content</div>;
+		const WrappedComponent = withAuth(TestComponent);
+		render(<WrappedComponent />);
+
+		expect(await screen.findByTestId('test-component')).toBeInTheDocument();
+		expect(mockPush).not.toHaveBeenCalled();
+		window.history.replaceState(null, '', '/');
+	});
+
 	it('redirects to start route when not authenticated', async () => {
 		mockUseRealDebridAccessToken.mockReturnValue([null, false, false]);
 		mockUseAllDebridApiKey.mockReturnValue(null);

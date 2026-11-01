@@ -1,5 +1,7 @@
 import { SPONSOR_TOKEN_KEY, useSponsor } from '@/hooks/useSponsor';
 import { GATEKEEPER_URL } from '@/utils/gatekeeper';
+import { enableGuestMode } from '@/utils/guestMode';
+import { takeSponsorHandoffKey } from '@/utils/sponsorHandoff';
 import { Heart, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { FC, FormEvent, useEffect, useState } from 'react';
@@ -96,6 +98,22 @@ export const SponsorPanel: FC = () => {
 		} catch {
 			// Storage blocked: the list just starts closed.
 		}
+	}, []);
+
+	// Arrived from gatekeeper's "Open DMM with this key": link it here, so a new
+	// browser never has to find and paste the key. Guest mode keeps the site open
+	// for a sponsor with no debrid login at all (an NZB-only zurg user).
+	useEffect(() => {
+		const key = takeSponsorHandoffKey();
+		if (!key) return;
+		enableGuestMode();
+		setBusy(true);
+		void link(key).then(({ ok, error: why }) => {
+			setBusy(false);
+			if (ok) toast.success('Sponsorship linked');
+			else setError(why ?? 'Could not verify that key');
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const submit = async (event: FormEvent) => {

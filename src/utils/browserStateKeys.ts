@@ -43,7 +43,8 @@ export const SYNC_ENABLED_KEY = 'settings:syncAcrossDevices';
 /** Upper bound on a serialized state blob; the real ones are a few KB. */
 export const MAX_STATE_BYTES = 64 * 1024;
 
-export const SYNC_SERVICES = ['rd', 'tb', 'ad', 'pm', 'oc', 'dl'] as const;
+/** The debrid providers, and `dmm` for the sponsor key: an NZB-only sponsor has no other login. */
+export const SYNC_SERVICES = ['rd', 'tb', 'ad', 'pm', 'oc', 'dl', 'dmm'] as const;
 export type SyncService = (typeof SYNC_SERVICES)[number];
 
 export function isSyncedKey(key: string): boolean {
@@ -57,10 +58,10 @@ export function isSyncedKey(key: string): boolean {
 export type BrowserState = Record<string, string>;
 
 /**
- * One provider login, as the server verifies it: Real-Debrid is either the
- * device-code triple or a pasted key; every other provider is one bearer
- * credential (for Premiumize and Debrid-Link the OAuth token when there is
- * one, else the pasted key, matching `usePremiumizeCredential`).
+ * One login, as the server verifies it: Real-Debrid is either the device-code
+ * triple or a pasted key; every other provider is one bearer credential (for
+ * Premiumize and Debrid-Link the OAuth token when there is one, else the pasted
+ * key, matching `usePremiumizeCredential`); `dmm` is the gatekeeper API key.
  */
 export type SyncIdentity =
 	| { service: 'rd'; clientId: string; clientSecret: string; refreshToken: string }

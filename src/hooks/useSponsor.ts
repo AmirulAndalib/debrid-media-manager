@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import useLocalStorage from './localStorage';
 
 export const SPONSOR_TOKEN_KEY = 'dmm:sponsorToken';
@@ -171,6 +171,16 @@ export function useSponsor(): SponsorState {
 		},
 		[setToken, setStoredApiKey]
 	);
+
+	// A stored key with no token: the token lapsed while this browser sat closed,
+	// or the key arrived by cross-device restore. The key is what mints a token,
+	// so use it rather than show the key and wait for a click on Verify.
+	const relinked = useRef<string | null>(null);
+	useEffect(() => {
+		if (!storedApiKey || token || relinked.current === storedApiKey) return;
+		relinked.current = storedApiKey;
+		void link(storedApiKey);
+	}, [storedApiKey, token, link]);
 
 	const disconnect = useCallback(() => {
 		setToken(null);

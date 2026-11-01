@@ -67,10 +67,10 @@ export const SyncAcrossDevicesPanel = () => {
 				<p className="mt-2 text-xs text-yellow-300">Connect a debrid service first</p>
 			)}
 			<p className="mt-2 text-xs text-gray-400">
-				Log in to any one of your debrid services on a new browser and DMM brings back the
-				rest: your other logins, your sponsorship, your settings. Anyone who can log in to
-				one of those accounts gets all of them, so leave this off on a shared debrid
-				account.
+				Log in to any one of your debrid services on a new browser, or verify your DMM API
+				key there, and DMM brings back the rest: your other logins, your sponsorship, your
+				settings. Anyone who can log in to one of those accounts gets all of them, so leave
+				this off on a shared debrid account.
 			</p>
 		</div>
 	);

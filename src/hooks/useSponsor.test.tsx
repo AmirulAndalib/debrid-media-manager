@@ -123,6 +123,39 @@ describe('useSponsor', () => {
 		await waitFor(() => expect(result.current.isSponsor).toBe(false));
 		expect(window.localStorage.getItem(SPONSOR_API_KEY_KEY)).toBeNull();
 	});
+
+	// A key without a token: the token lapsed while the browser sat closed, or the
+	// key came back by cross-device restore. Either way the key mints a new one.
+	it('re-links by itself from a stored key when there is no token', async () => {
+		(fetch as unknown as ReturnType<typeof vi.fn>).mockResolvedValue({
+			json: async () => ({ isSponsor: true, token: makeToken(ACTIVE), expiresIn: 604800 }),
+		});
+		window.localStorage.setItem(SPONSOR_API_KEY_KEY, JSON.stringify('k'.repeat(64)));
+
+		const { result, rerender } = renderHook(() => useSponsor());
+		await waitFor(() => expect(result.current.isSponsor).toBe(true));
+		expect(fetch).toHaveBeenCalledTimes(1);
+		expect(fetch).toHaveBeenCalledWith(
+			'/api/sponsor/link',
+			expect.objectContaining({ body: JSON.stringify({ apiKey: 'k'.repeat(64) }) })
+		);
+		rerender();
+		expect(fetch).toHaveBeenCalledTimes(1);
+	});
+
+	it('does not keep asking when the stored key is refused', async () => {
+		(fetch as unknown as ReturnType<typeof vi.fn>).mockResolvedValue({
+			json: async () => ({ isSponsor: false, error: 'Invalid API key' }),
+		});
+		window.localStorage.setItem(SPONSOR_API_KEY_KEY, JSON.stringify('k'.repeat(64)));
+
+		const { result, rerender } = renderHook(() => useSponsor());
+		await waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
+		rerender();
+		await waitFor(() => expect(result.current.apiKey).toBe('k'.repeat(64)));
+		expect(result.current.isSponsor).toBe(false);
+		expect(fetch).toHaveBeenCalledTimes(1);
+	});
 });
 
 describe('useSponsor.link', () => {

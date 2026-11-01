@@ -18,6 +18,7 @@ import { useRouter } from 'next/router';
 import { ComponentType, useEffect, useState } from 'react';
 import { disableGuestMode, useGuestMode } from './guestMode';
 import { supportsLookbehind } from './lookbehind';
+import { hasSponsorHandoff } from './sponsorHandoff';
 
 const START_ROUTE = '/start';
 const LOGIN_ROUTE = '/login';
@@ -77,6 +78,9 @@ export const withAuth = <P extends object>(
 		});
 
 		const isGuest = useGuestMode();
+		// gatekeeper's "Open DMM with this key" lands on /settings with nothing stored
+		// yet. Read once, before the sponsor panel scrubs the fragment on mount.
+		const [handoff] = useState(() => hasSponsorHandoff());
 
 		// Check for refresh credentials
 		const [hasRefreshCredentials] = useState(() => {
@@ -118,6 +122,7 @@ export const withAuth = <P extends object>(
 			if (
 				!hasCredential &&
 				!isGuest &&
+				!handoff &&
 				router.pathname !== START_ROUTE &&
 				!router.pathname.endsWith(LOGIN_ROUTE) &&
 				!rdLoading &&
@@ -139,6 +144,7 @@ export const withAuth = <P extends object>(
 			rdLoading,
 			rdIsRefreshing,
 			hasCredential,
+			handoff,
 			hasRefreshCredentials,
 			isGuest,
 			adKey,

@@ -1,3 +1,4 @@
+import { repository } from '@/services/repository';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { verifyIdentity } from './browserStateIdentity';
 
@@ -22,6 +23,7 @@ vi.mock('@/utils/allDebridCastApiHelpers', () => ({ generateAllDebridUserId: moc
 vi.mock('@/utils/premiumizeCastApiHelpers', () => ({ generatePremiumizeUserId: mocks.pm }));
 vi.mock('@/utils/offcloudCastApiHelpers', () => ({ generateOffcloudUserId: mocks.oc }));
 vi.mock('@/utils/debridLinkCastApiHelpers', () => ({ generateDebridLinkUserId: mocks.dl }));
+vi.mock('@/services/repository');
 
 const SECRET = 'secret-' + 's'.repeat(24);
 const TRIPLE = { service: 'rd', clientId: 'CID123', clientSecret: SECRET, refreshToken: 'RT' };
@@ -32,6 +34,25 @@ beforeEach(() => {
 });
 
 describe('verifyIdentity', () => {
+	// An NZB-only sponsor has no debrid login; the sponsor key is the one thing they can prove.
+	it('takes a DMM API key as its sponsorship, while that sponsorship is active', async () => {
+		const key = 'k'.repeat(64);
+		vi.mocked(repository.getSponsorByDmmApiKey).mockResolvedValue({
+			isSponsor: true,
+			shortId: '4GKO',
+		} as never);
+		await expect(verifyIdentity({ service: 'dmm', apiKey: key })).resolves.toBe('4GKO');
+		expect(repository.getSponsorByDmmApiKey).toHaveBeenCalledWith(key);
+
+		vi.mocked(repository.getSponsorByDmmApiKey).mockResolvedValue({
+			isSponsor: false,
+			shortId: '4GKO',
+		} as never);
+		await expect(verifyIdentity({ service: 'dmm', apiKey: key })).resolves.toBeNull();
+		vi.mocked(repository.getSponsorByDmmApiKey).mockResolvedValue(null);
+		await expect(verifyIdentity({ service: 'dmm', apiKey: key })).resolves.toBeNull();
+	});
+
 	it('mints a Real-Debrid token from the triple and derives the cast user id', async () => {
 		mocks.castAccessToken.mockResolvedValue('ACCESS');
 		mocks.generateUserId.mockResolvedValue('rdUser000001');

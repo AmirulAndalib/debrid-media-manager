@@ -113,6 +113,27 @@ describe('SponsorPanel', () => {
 		expect(submit).toBeEnabled();
 	});
 
+	// gatekeeper's "Open DMM with this key" lands here with the key in the fragment.
+	it('links a key handed over in the URL fragment by itself, and scrubs it', async () => {
+		(fetch as unknown as ReturnType<typeof vi.fn>).mockResolvedValue({
+			json: async () => ({ isSponsor: true, token: makeToken(ACTIVE), expiresIn: 604800 }),
+		});
+		window.history.replaceState(null, '', `/settings#apikey=${'b'.repeat(64)}`);
+		render(<SponsorPanel />);
+
+		expect(
+			await screen.findByText('Verified via GitHub Sponsors · Patreon')
+		).toBeInTheDocument();
+		expect(fetch).toHaveBeenCalledWith(
+			'/api/sponsor/link',
+			expect.objectContaining({ body: JSON.stringify({ apiKey: 'b'.repeat(64) }) })
+		);
+		expect(window.location.hash).toBe('');
+		expect(window.localStorage.getItem('dmm:guest')).toBe('true');
+		expect(toastMock.success).toHaveBeenCalledWith('Sponsorship linked');
+		window.history.replaceState(null, '', '/');
+	});
+
 	it('verifies a good key and switches to the badge', async () => {
 		(fetch as unknown as ReturnType<typeof vi.fn>).mockResolvedValue({
 			json: async () => ({ isSponsor: true, token: makeToken(ACTIVE), expiresIn: 604800 }),
