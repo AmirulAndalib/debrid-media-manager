@@ -1,7 +1,7 @@
 import type { MusicAlbum } from '@/pages/api/music/library';
 import type { MusicRecentAlbumsResponse } from '@/pages/api/music/me/history';
-import { Disc3, Heart, ListMusic, Pause, Play } from 'lucide-react';
-import { MouseEvent, ReactNode, useEffect, useState } from 'react';
+import { ChevronLeft, ChevronRight, Disc3, Heart, ListMusic, Pause, Play } from 'lucide-react';
+import { MouseEvent, ReactNode, useEffect, useRef, useState } from 'react';
 import AlbumCard from './AlbumCard';
 import { contextName } from './NowPlayingPanel';
 import { useMusicPlayer } from './player/MusicPlayerProvider';
@@ -34,6 +34,13 @@ function Shelf({
 	onShowAll?: () => void;
 	children: ReactNode;
 }) {
+	const row = useRef<HTMLDivElement>(null);
+	// A mouse wheel scrolls the page, not the shelf: desktops get arrows on hover.
+	const scroll = (direction: number) =>
+		row.current?.scrollBy({
+			left: direction * row.current.clientWidth * 0.8,
+			behavior: 'smooth',
+		});
 	return (
 		<section className="mb-8" aria-label={title}>
 			<div className="mb-3 flex items-end justify-between gap-4">
@@ -50,8 +57,30 @@ function Shelf({
 					</button>
 				)}
 			</div>
-			<div className="-mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-2 sm:gap-4">
-				{children}
+			<div className="group/shelf relative">
+				<div
+					ref={row}
+					className="-mx-1 flex snap-x [scrollbar-width:none] gap-3 overflow-x-auto px-1 pb-2 sm:gap-4 [&::-webkit-scrollbar]:hidden"
+				>
+					{children}
+				</div>
+				{[-1, 1].map((direction) => (
+					<button
+						key={direction}
+						type="button"
+						onClick={() => scroll(direction)}
+						aria-label={`Scroll ${title} ${direction < 0 ? 'back' : 'forward'}`}
+						className={`absolute top-1/3 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/70 text-white opacity-0 shadow-lg transition-opacity group-hover/shelf:opacity-100 hover:bg-black focus-visible:opacity-100 md:flex ${
+							direction < 0 ? 'left-1' : 'right-1'
+						}`}
+					>
+						{direction < 0 ? (
+							<ChevronLeft className="h-5 w-5" />
+						) : (
+							<ChevronRight className="h-5 w-5" />
+						)}
+					</button>
+				))}
 			</div>
 		</section>
 	);

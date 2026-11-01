@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import HomeView, { greeting } from './HomeView';
 import type { MusicPlayer } from './player/MusicPlayerProvider';
@@ -84,6 +84,25 @@ describe('HomeView', () => {
 		expect(greeting(13)).toBe('Good afternoon');
 		expect(greeting(21)).toBe('Good evening');
 		expect(greeting(2)).toBe('Good evening');
+	});
+
+	// The browser pass saw a scrollbar under every shelf, on desktops and phones.
+	it('scrolls a shelf without a scrollbar, by arrows on a desktop', () => {
+		const scrollBy = vi.fn();
+		HTMLElement.prototype.scrollBy = scrollBy;
+		renderHome();
+		const shelf = screen.getByRole('region', { name: 'New in the catalog' });
+		const row = within(shelf).getByRole('button', { name: /^Open New Album/ }).parentElement!
+			.parentElement!;
+		expect(row).toHaveClass('overflow-x-auto', '[scrollbar-width:none]');
+		fireEvent.click(
+			within(shelf).getByRole('button', { name: 'Scroll New in the catalog forward' })
+		);
+		expect(scrollBy).toHaveBeenCalledWith({ left: expect.any(Number), behavior: 'smooth' });
+		expect(within(shelf).getByRole('button', { name: /back$/ })).toHaveClass(
+			'hidden',
+			'md:flex'
+		);
 	});
 
 	it('hides empty shelves and points a first-time user at Browse', () => {
