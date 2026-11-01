@@ -4,6 +4,7 @@ import { ScrapeSearchResult, flattenAndRemoveDuplicates } from '@/services/media
 import { getMetadataCache } from '@/services/metadataCache';
 import { RATE_LIMIT_CONFIGS, withIpRateLimit } from '@/services/rateLimit/withRateLimit';
 import { repository as db } from '@/services/repository';
+import { releaseFields } from '@/utils/releaseFields';
 import { NextApiHandler } from 'next';
 import UserAgent from 'user-agents';
 import { validateDmmApiKeyHeader } from './auth';
@@ -55,7 +56,8 @@ async function searchTorrentsForKey(
 	processed = filterByQuality(processed, quality);
 	processed.sort((a, b) => b.fileSize - a.fileSize);
 
-	return processed.slice(0, limit);
+	const isTv = key.startsWith('tv:');
+	return processed.slice(0, limit).map((t) => ({ ...t, parsed: releaseFields(t.title, isTv) }));
 }
 
 async function getSeasonCount(imdbId: string): Promise<number> {
