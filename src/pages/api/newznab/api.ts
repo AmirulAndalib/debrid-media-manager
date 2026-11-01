@@ -9,7 +9,7 @@ import { isSearchType, runSearch } from '@/services/newznab/search';
 import { getStoredNzb, putStoredNzb } from '@/services/newznab/store';
 import { getUpstreamLimiter } from '@/services/newznab/upstreamLimiter';
 import { capsXml, newznabErrorXml, searchRssXml } from '@/services/newznab/xml';
-import { fetchNzbFrom } from '@/services/nzb2rd';
+import { fetchNzbFrom, nativeReleaseId } from '@/services/nzb2rd';
 import { getClientIp } from '@/services/rateLimit/middlewareRateLimiter';
 import { checkRateLimitFor, RATE_LIMIT_CONFIGS } from '@/services/rateLimit/withRateLimit';
 import { isNzbBlocked } from '@/services/takedown/blocklist';
@@ -124,6 +124,8 @@ async function handleGrab(req: NextApiRequest, res: NextApiResponse) {
 	// Forged, truncated, or minted under a rotated secret. All of them are "no
 	// such item" to the client; which one it was is not its business.
 	if (!release) return sendError(res, 200, 300, 'No such item');
+	// Tokens an *arr already holds may carry NZBgeek's old `geekseek.php?guid=<id>`.
+	release.nativeId = nativeReleaseId(release.nativeId);
 
 	// The store is where a re-grab of the same release costs nothing: an NZB is
 	// immutable once posted, so only the first fetch spends an upstream call.

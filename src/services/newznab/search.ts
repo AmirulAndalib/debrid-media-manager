@@ -18,7 +18,13 @@
 //     so an indexer over budget is skipped for this query rather than asked.
 
 import { CachedUsenetResult } from '@/services/database/newznabApiCache';
-import { dedupeResults, fanOut, Indexer, type UsenetResult } from '@/services/nzb2rd';
+import {
+	dedupeResults,
+	fanOut,
+	Indexer,
+	nativeReleaseId,
+	type UsenetResult,
+} from '@/services/nzb2rd';
 import { repository as db } from '@/services/repository';
 import { withoutBlockedReleases } from '@/services/takedown/blocklist';
 import type { NextApiRequest } from 'next';
@@ -208,7 +214,8 @@ function toRssItem(result: CachedUsenetResult, apiKey: string): NewznabRssItem |
 	if (split <= 0) return null;
 
 	const prefix = result.id.slice(0, split);
-	const nativeId = result.id.slice(split + 1);
+	// Old cached NZBgeek rows hold `geekseek.php?guid=<id>`; mint the token a fresh answer gets.
+	const nativeId = nativeReleaseId(result.id.slice(split + 1));
 	if (!nativeId) return null;
 
 	const token = encryptReleaseId(prefix, nativeId);

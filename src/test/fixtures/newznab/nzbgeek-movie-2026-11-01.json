@@ -1,0 +1,165 @@
+{
+	"@attributes": {
+		"version": "1.0"
+	},
+	"channel": {
+		"title": "api.nzbgeek.info",
+		"description": "NZBgeek API",
+		"link": "http://api.nzbgeek.info/",
+		"language": "en-gb",
+		"webMaster": "info@nzbgeek.info (NZBgeek)",
+		"category": {},
+		"image": {
+			"url": "https://api.nzbgeek.info/covers/nzbgeek.png",
+			"title": "api.nzbgeek.info",
+			"link": "http://api.nzbgeek.info/",
+			"description": "NZBgeek"
+		},
+		"response": {
+			"@attributes": {
+				"offset": "0",
+				"total": "19"
+			}
+		},
+		"item": [
+			{
+				"title": "Practical.Magic.2.2026.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264-ASTRiD",
+				"guid": "https://nzbgeek.info/geekseek.php?guid=d665f62cde919a53dc86cfc5d4803986",
+				"link": "https://api.nzbgeek.info/api?t=get&id=d665f62cde919a53dc86cfc5d4803986&apikey=__KEY__",
+				"comments": "https://nzbgeek.info/geekseek.php?guid=d665f62cde919a53dc86cfc5d4803986",
+				"pubDate": "Wed, 28 Oct 2026 09:43:38 +0000",
+				"category": "Movies > HD",
+				"description": "Practical.Magic.2.2026.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264-ASTRiD",
+				"enclosure": {
+					"@attributes": {
+						"url": "http://api.nzbgeek.info/api?t=get&id=d665f62cde919a53dc86cfc5d4803986&apikey=__KEY__",
+						"length": "8950912000",
+						"type": "application/x-nzb"
+					}
+				},
+				"attr": [
+					{
+						"@attributes": {
+							"name": "category",
+							"value": "2000"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "category",
+							"value": "2040"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "size",
+							"value": "8950912000"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "guid",
+							"value": "d665f62cde919a53dc86cfc5d4803986"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "imdbtitle",
+							"value": "Practical Magic 2"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "imdb",
+							"value": "32588798"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "imdbtagline",
+							"value": "Everything youve witched for"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "imdbplot",
+							"value": "A multi generational family of witches, cursed to be loveless for centuries, attempts to break the spell by confronting dark secrets and sacrificing for each other"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "genre",
+							"value": "Comedy, Drama, Fantasy"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "imdbyear",
+							"value": "2026"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "imdbdirector",
+							"value": "Susanne Bier"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "imdbactors",
+							"value": "Sandra Bullock, Dianne Wiest, Stockard Channing"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "coverurl",
+							"value": "https://api.nzbgeek.info/covers/movies/32588798-cover.jpg"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "runtime",
+							"value": "110 min"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "grabs",
+							"value": "3854"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "comments",
+							"value": "0"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "password",
+							"value": "0"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "usenetdate",
+							"value": "Wed, 28 Oct 2026 09:42:39 +0000"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "thumbsup",
+							"value": "0"
+						}
+					},
+					{
+						"@attributes": {
+							"name": "thumbsdown",
+							"value": "0"
+						}
+					}
+				]
+			}
+		]
+	}
+}

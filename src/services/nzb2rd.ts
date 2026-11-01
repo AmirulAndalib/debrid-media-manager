@@ -223,9 +223,16 @@ function enclosureLength(enclosure: unknown): string | undefined {
  * The guid arrives as a details URL (`https://…/details/<id>`); `t=get` wants
  * only the last segment. Some indexers already send the bare id, so the split
  * has to be tolerant of both.
+ *
+ * NZBgeek's is `https://nzbgeek.info/geekseek.php?guid=<id>`, and its `t=get`
+ * answers `300 No such file` to anything but the bare id. Until 2026-11-01 the
+ * split kept `geekseek.php?guid=<id>`, and cached answers and tokens already
+ * handed out still carry that, so a grab runs its id back through here too.
  */
-function guidToId(guid: unknown): string {
+export function nativeReleaseId(guid: unknown): string {
 	const raw = typeof guid === 'string' ? guid : ((guid as { text?: string } | null)?.text ?? '');
+	const query = raw.match(/[?&]guid=([^&#]+)/);
+	if (query) return query[1];
 	return raw.split('/').filter(Boolean).pop() ?? '';
 }
 
@@ -251,7 +258,7 @@ export function parseNewznabItem(item: unknown): UsenetResult | null {
 	if (!entry) return null;
 
 	const title = typeof entry.title === 'string' ? entry.title.trim() : '';
-	const id = guidToId(entry.guid);
+	const id = nativeReleaseId(entry.guid);
 	if (!title || !id) return null;
 
 	const attrs = asArray(entry['newznab:attr'] ?? entry.attr);
@@ -542,7 +549,7 @@ export async function fetchNzbFrom(indexer: Indexer, nativeId: string): Promise<
 	const response = await fetch(`${indexer.url}?${params}`, {
 		signal: AbortSignal.timeout(30000),
 	});
-	if (!response.ok) throw new Error(`NZB download returned ${response.status}`);
+	if (!response.ok) throw new Error(`${indexer.name} NZB download returned ${response.status}`);
 	const body = await response.text();
 	const failed = newznabError(body);
 	if (failed) throw new Error(`${indexer.name} refused the NZB: ${failed}`);

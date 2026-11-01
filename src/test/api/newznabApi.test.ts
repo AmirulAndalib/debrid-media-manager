@@ -12,6 +12,7 @@ import { RATE_LIMIT_CONFIGS } from '@/services/rateLimit/middlewareRateLimiter';
 import { repository } from '@/services/repository';
 import { setBlocklistForTests } from '@/services/takedown/blocklist';
 import drunkenslugMovie from '@/test/fixtures/newznab-fresh/drunkenslug-movie-2026-10-31.json';
+import nzbgeekMovie from '@/test/fixtures/newznab/nzbgeek-movie-2026-11-01.json';
 import { createMockRequest, createMockResponse, MockResponse } from '@/test/utils/api';
 import { sanitizeNzb } from '@/utils/nzbSanitize';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -759,6 +760,62 @@ describe('GET /api/newznab/api grab', () => {
 	});
 });
 
+// NZBgeek's guid is `https://nzbgeek.info/geekseek.php?guid=<id>`, and its t=get
+// answers `300 No such file` to anything but the bare id. Ids were cut at the
+// last `/` until 2026-11-01, so a week of cached answers and every token an *arr
+// was handed hold `geekseek.php?guid=<id>`. Driven by an answer captured on dmm-01.
+describe('GET /api/newznab/api NZBgeek guids', () => {
+	const NATIVE = 'd665f62cde919a53dc86cfc5d4803986';
+	const OLD_ID = `geekseek.php?guid=${NATIVE}`;
+	const TITLE = 'Practical.Magic.2.2026.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264-ASTRiD';
+
+	beforeEach(() => {
+		setIndexers([{ prefix: 'ng', name: 'First Upstream', url: FIRST_HOST, apiKey: FIRST_KEY }]);
+		fetchMock.mockImplementation(async (input: unknown) =>
+			String(input).includes('t=get') ? textResponse(nzbBody) : jsonResponse(nzbgeekMovie)
+		);
+	});
+
+	const feedGuid = (res: MockResponse) =>
+		body(res).match(/<guid isPermaLink="false">([^<]+)<\/guid>/)?.[1] ?? '';
+	const grabbedId = () =>
+		new URL(
+			fetchedUrls().find((url) => url.includes('t=get')) ?? 'http://none/'
+		).searchParams.get('id');
+
+	it('grabs a fresh answer by the bare id', async () => {
+		const feed = await run({ t: 'search', q: 'practical magic 2', apikey: SPONSOR_KEY });
+		expect(itemTitles(feed)).toEqual([TITLE]);
+
+		const res = await run({ t: 'get', id: feedGuid(feed), apikey: SPONSOR_KEY });
+
+		expect(grabbedId()).toBe(NATIVE);
+		expect(mockPutStored).toHaveBeenCalledWith('ng', NATIVE, body(res));
+	});
+
+	it('serves an answer cached with the old id under the token a fresh one gets', async () => {
+		mockRepo.getCachedNewznabApiSearch = vi.fn(async () => ({
+			results: [{ id: `ng:${OLD_ID}`, title: TITLE, size: 8950912000 }],
+			updatedAt: new Date(),
+			isFresh: true,
+		}));
+
+		const feed = await run({ t: 'search', q: 'practical magic 2', apikey: SPONSOR_KEY });
+		expect(feedGuid(feed)).toBe(encryptReleaseId('ng', NATIVE));
+
+		await run({ t: 'get', id: feedGuid(feed), apikey: SPONSOR_KEY });
+		expect(grabbedId()).toBe(NATIVE);
+	});
+
+	it('grabs a token minted from the old id, as an *arr already holds', async () => {
+		await run({ t: 'get', id: encryptReleaseId('ng', OLD_ID), apikey: SPONSOR_KEY });
+
+		expect(mockGetStored).toHaveBeenCalledWith('ng', NATIVE);
+		expect(grabbedId()).toBe(NATIVE);
+		expect(mockPutStored).toHaveBeenCalledWith('ng', NATIVE, expect.any(String));
+	});
+});
+
 describe('GET /api/newznab/api pre-auth IP reject', () => {
 	// The outer guard used to be `withIpRateLimit`, whose 429 carries a JSON
 	// body — which an *arr logs as a broken indexer rather than backing off.
@@ -960,12 +1017,10 @@ describe('sweepFreshPosts', () => {
 	});
 
 	it('starts the watch afresh after a break of over an hour', async () => {
-		mockRepo.newznabSweptAt = vi
-			.fn()
-			.mockResolvedValue({
-				at: new Date(now - 3 * 60 * MIN),
-				since: new Date(now - 9 * 60 * MIN),
-			});
+		mockRepo.newznabSweptAt = vi.fn().mockResolvedValue({
+			at: new Date(now - 3 * 60 * MIN),
+			since: new Date(now - 9 * 60 * MIN),
+		});
 
 		await sweepFreshPosts(now);
 

@@ -1,3 +1,4 @@
+import nzbgeekMovie from '@/test/fixtures/newznab/nzbgeek-movie-2026-11-01.json';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
 	buildPackQueries,
@@ -152,6 +153,23 @@ describe('parseNewznabItem', () => {
 	});
 });
 
+describe('parseNewznabItem on the NZBgeek shape', () => {
+	// `t=get&id=geekseek.php?guid=<id>` answers `300 No such file`; the bare id
+	// returns the NZB (measured on dmm-01, 2026-11-01).
+	it('takes the id from the guid query, not the last path segment', () => {
+		expect(parseNewznabResponse(nzbgeekMovie)[0].id).toBe('d665f62cde919a53dc86cfc5d4803986');
+	});
+
+	it('reads an id already stored in the old form the same way', () => {
+		expect(
+			parseNewznabItem({
+				title: 'A',
+				guid: 'geekseek.php?guid=d665f62cde919a53dc86cfc5d4803986',
+			})?.id
+		).toBe('d665f62cde919a53dc86cfc5d4803986');
+	});
+});
+
 describe('parseNewznabResponse', () => {
 	const one = { title: 'A', guid: 'a', 'newznab:attr': [{ _name: 'size', _value: '10' }] };
 
@@ -226,6 +244,21 @@ describe('fetchNzb', () => {
 	it('throws when the download fails', async () => {
 		vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, status: 404 }));
 		await expect(fetchNzb('abc123')).rejects.toThrow('404');
+	});
+});
+
+describe('fetchNzbFrom', () => {
+	it('names the indexer when the download answers a bad status', async () => {
+		vi.stubGlobal('fetch', vi.fn().mockResolvedValue({ ok: false, status: 300 }));
+		const indexer = {
+			prefix: 'ng',
+			name: 'Some Indexer',
+			url: 'https://x.test/api',
+			apiKey: 'k',
+		};
+		await expect(fetchNzbFrom(indexer, 'abc')).rejects.toThrow(
+			'Some Indexer NZB download returned 300'
+		);
 	});
 });
 
