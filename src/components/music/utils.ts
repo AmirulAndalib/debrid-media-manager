@@ -1,7 +1,6 @@
 import type { MusicAlbum } from '@/pages/api/music/library';
-import { formatTrackTitle, removeExtension } from '@/utils/musicTracks';
-import type { MusicAlbumSummary } from '@/utils/musicRows';
 import type { MusicAlbumSummary, MusicTrackRow } from '@/utils/musicRows';
+import { formatTrackTitle, removeExtension } from '@/utils/musicTracks';
 import type { DragEvent } from 'react';
 import { PlayableTrack, QueuedTrack } from './types';
 
