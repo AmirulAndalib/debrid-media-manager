@@ -1405,3 +1405,75 @@ model WikidataProperty {
 
   @@map("wikidata_properties")
 }
+
+/// Per-user music state behind /api/music/me. `userId` is `generateUserId`'s
+/// HMAC of the Real-Debrid username, the same id the Cast tables use.
+model MusicSavedAlbum {
+  userId    String   @db.VarChar(16)
+  mbid      String   @db.VarChar(36)
+  createdAt DateTime @default(now())
+
+  @@id([userId, mbid])
+  @@index([userId, createdAt])
+}
+
+model MusicFollowedArtist {
+  userId     String   @db.VarChar(16)
+  artistMbid String   @db.VarChar(36)
+  createdAt  DateTime @default(now())
+
+  @@id([userId, artistMbid])
+}
+
+model MusicLike {
+  userId    String   @db.VarChar(16)
+  hash      String   @db.VarChar(40)
+  fileId    Int
+  mbid      String   @db.VarChar(36)
+  createdAt DateTime @default(now())
+
+  @@id([userId, hash, fileId])
+  @@index([userId, createdAt])
+}
+
+model MusicPlaylist {
+  id          String   @id @default(cuid())
+  userId      String   @db.VarChar(16)
+  name        String   @db.VarChar(200)
+  description String?  @db.VarChar(1000)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId, updatedAt])
+}
+
+/// A track may appear twice. `position` orders the list and may have gaps.
+model MusicPlaylistTrack {
+  id         String   @id @default(cuid())
+  playlistId String
+  position   Int
+  hash       String   @db.VarChar(40)
+  fileId     Int
+  mbid       String   @db.VarChar(36)
+  addedAt    DateTime @default(now())
+
+  @@index([playlistId, position])
+}
+
+model MusicPlayHistory {
+  id       BigInt   @id @default(autoincrement())
+  userId   String   @db.VarChar(16)
+  hash     String   @db.VarChar(40)
+  fileId   Int
+  mbid     String   @db.VarChar(36)
+  playedAt DateTime @default(now())
+
+  @@index([userId, playedAt])
+  @@index([mbid, playedAt])
+}
+
+model MusicPlayerState {
+  userId    String   @id @db.VarChar(16)
+  state     Json
+  updatedAt DateTime @updatedAt
+}
