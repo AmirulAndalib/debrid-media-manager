@@ -35,6 +35,8 @@ const {
 	sponsorAvailability,
 	sponsorMediaInfo,
 	sponsorPlace,
+	sponsorWanted,
+	animeEntries,
 	takedown,
 	stream,
 } = RATE_LIMIT_CONFIGS;
@@ -257,6 +259,288 @@ export const openApiDocument = {
 						description: 'Over 5,000 items; split the notice',
 						content: json(ref('Error')),
 					},
+				},
+			},
+		},
+		'/api/search/title': {
+			get: {
+				tags: ['Open'],
+				security: [],
+				operationId: 'searchTitles',
+				summary: 'Find a title by name',
+				description:
+					"Movies and shows from IMDb's title list whose name matches `keyword`, best match first. A year at the end of the keyword (`matrix 1999`) narrows it. Use the `imdbid` with the sponsor endpoints or Torznab.",
+				parameters: [
+					{
+						name: 'keyword',
+						in: 'query',
+						required: true,
+						schema: { type: 'string' },
+						example: 'the matrix 1999',
+					},
+				],
+				responses: {
+					'200': ok(
+						'Matches',
+						{
+							type: 'object',
+							properties: {
+								results: {
+									type: 'array',
+									items: {
+										type: 'object',
+										properties: {
+											imdbid: { type: 'string' },
+											type: { enum: ['movie', 'show'] },
+											title: { type: 'string' },
+											year: { type: ['integer', 'null'] },
+											score: {
+												type: 'number',
+												description:
+													'How well the name matches, 100 at best',
+											},
+											score_average: {
+												type: ['number', 'null'],
+												description: 'IMDb rating',
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							results: [
+								{
+									imdbid: 'tt0133093',
+									type: 'movie',
+									title: 'The Matrix',
+									year: 1999,
+									score: 100,
+									score_average: 8.7,
+								},
+							],
+						}
+					),
+					'400': {
+						description:
+							'No `keyword`; answers `{"status": "error", "errorMessage": "..."}`',
+					},
+				},
+			},
+		},
+		'/api/browse/top': {
+			get: {
+				tags: ['Open'],
+				security: [],
+				operationId: 'browseTop',
+				summary: 'Popular lists',
+				description:
+					"Four of MDBList's top lists (streaming services' top titles, critics' picks), a different four every five minutes, up to 16 titles each. Keys are list names; values are `movie:tt…` or `show:tt…`.",
+				responses: {
+					'200': ok(
+						'List name to its titles',
+						{
+							type: 'object',
+							additionalProperties: {
+								type: 'array',
+								items: { type: 'string', pattern: '^(movie|show):tt\\d+$' },
+							},
+						},
+						{
+							'Netflix Shows': ['show:tt0903747'],
+							'Amazon Prime Movies': ['movie:tt0133093'],
+						}
+					),
+				},
+			},
+		},
+		'/api/browse/recent': {
+			get: {
+				tags: ['Open'],
+				security: [],
+				operationId: 'browseRecent',
+				summary: 'Titles with new releases',
+				description:
+					'The titles whose releases DMM most recently refreshed, newest first, as `movie:tt…` or `tv:tt…`.',
+				responses: {
+					'200': ok(
+						'Titles, newest first',
+						{
+							type: 'array',
+							items: { type: 'string', pattern: '^(movie|tv):tt\\d+$' },
+						},
+						['movie:tt0133093', 'tv:tt0903747']
+					),
+				},
+			},
+		},
+		'/api/calendar': {
+			get: {
+				tags: ['Open'],
+				security: [],
+				operationId: 'calendar',
+				summary: 'Episodes airing',
+				description:
+					"Episodes airing each day from `start`, from Trakt's calendar, plus TMDB's airing-today and on-the-air shows. Each range is cached for an hour.",
+				parameters: [
+					{
+						name: 'start',
+						in: 'query',
+						description: 'First day, `YYYY-MM-DD`; today (UTC) when absent',
+						schema: { type: 'string', format: 'date' },
+					},
+					{
+						name: 'days',
+						in: 'query',
+						schema: { type: 'integer', minimum: 1, maximum: 31, default: 7 },
+					},
+				],
+				responses: {
+					'200': ok('Days and their episodes', {
+						type: 'object',
+						properties: {
+							range: {
+								type: 'object',
+								properties: {
+									start: { type: 'string' },
+									days: { type: 'integer' },
+								},
+							},
+							days: {
+								type: 'array',
+								items: {
+									type: 'object',
+									properties: {
+										date: { type: 'string', format: 'date' },
+										items: {
+											type: 'array',
+											items: {
+												type: 'object',
+												properties: {
+													title: { type: 'string' },
+													season: { type: 'integer' },
+													episode: { type: 'integer' },
+													firstAired: {
+														type: 'string',
+														format: 'date-time',
+													},
+													isPremiere: { type: 'boolean' },
+													ids: {
+														type: 'object',
+														description:
+															'`imdb`, `tmdb`, `tvdb`, `trakt` where known',
+													},
+													network: { type: ['string', 'null'] },
+													country: { type: ['string', 'null'] },
+												},
+											},
+										},
+									},
+								},
+							},
+							tmdb: {
+								type: 'object',
+								description:
+									"TMDB's `airingToday` and `onTheAir` lists, in TMDB's shape",
+							},
+						},
+					}),
+				},
+			},
+		},
+		'/api/related/{mediaType}': {
+			get: {
+				tags: ['Open'],
+				security: [],
+				operationId: 'relatedTitles',
+				summary: 'Related titles',
+				description: "Titles like this one, from Trakt's related list, cached per title.",
+				parameters: [
+					{
+						name: 'mediaType',
+						in: 'path',
+						required: true,
+						schema: { enum: ['movie', 'show'] },
+					},
+					{
+						name: 'imdbId',
+						in: 'query',
+						required: true,
+						schema: { type: 'string', pattern: '^tt\\d+$' },
+						example: 'tt0903747',
+					},
+				],
+				responses: {
+					'200': ok(
+						'Related titles',
+						{
+							type: 'object',
+							properties: {
+								source: { type: 'string' },
+								results: {
+									type: 'array',
+									items: {
+										type: 'object',
+										properties: {
+											title: { type: 'string' },
+											year: { type: ['integer', 'null'] },
+											ids: {
+												type: 'object',
+												description:
+													'`imdb`, `tmdb`, `tvdb`, `trakt`, `slug` where known',
+											},
+										},
+									},
+								},
+							},
+						},
+						{
+							source: 'trakt',
+							results: [
+								{
+									title: 'Narcos',
+									year: 2015,
+									ids: { imdb: 'tt2707408', tmdb: 63351 },
+								},
+							],
+						}
+					),
+					'400': {
+						description:
+							'A `mediaType` other than `movie` or `show`, or no `imdbId`; answers `{"message": "..."}`',
+					},
+				},
+			},
+		},
+		'/api/anime/recent': {
+			get: {
+				tags: ['Open'],
+				security: [],
+				operationId: 'recentAnime',
+				summary: 'Anime with new releases',
+				description: `The 48 anime that most recently got a release, newest first, with their AniDB, Kitsu and MyAnimeList ids.\n\n**Limit:** ${per(animeEntries, 'requests')}.`,
+				responses: {
+					'200': ok('Anime, newest first', {
+						type: 'object',
+						properties: {
+							results: {
+								type: 'array',
+								items: {
+									type: 'object',
+									properties: {
+										anidb_id: { type: 'integer' },
+										kitsu_id: { type: ['integer', 'null'] },
+										mal_id: { type: ['integer', 'null'] },
+										imdb_id: { type: ['string', 'null'] },
+										title: { type: 'string' },
+										type: { type: 'string' },
+										poster_url: { type: ['string', 'null'] },
+									},
+								},
+							},
+						},
+					}),
+					...errors('429'),
 				},
 			},
 		},
@@ -650,12 +934,164 @@ export const openApiDocument = {
 				},
 			},
 		},
+		'/api/sponsor/wanted': {
+			get: {
+				tags: ['Sponsors'],
+				operationId: 'wantedList',
+				summary: 'Your wanted list',
+				description: `The titles you added to your wanted list on DMM, for a tool that fetches them. A film leaves the list once it is acknowledged as fetched; a show stays so new episodes are fetched.\n\n\`seasons\` lists, per season wanted, the episodes aired so far as TMDB numbers them, with \`airing: true\` while more are to come. \`released\` is a film's first home release day (never a cinema date). \`titles\` is every title TMDB knows a film by. \`upgrade\` is on a fetched film whose fetcher asked for a better copy. Fields TMDB does not know are absent.\n\n**Limit:** ${per(sponsorWanted, 'calls')} per key, shared with acknowledging.`,
+				externalDocs: {
+					url: `${REPO}/sponsor-api.md#wanted-list`,
+					description: 'Wanted list',
+				},
+				security: sponsorKey,
+				parameters: [
+					{
+						name: 'bands',
+						in: 'query',
+						description:
+							'For a fetcher that keeps a copy at several resolutions: `720p`, `1080p`, `2160p`, comma-separated. A film then stays until every band holds a copy, and carries `bands` in place of `upgrade`.',
+						schema: { type: 'string' },
+						example: '1080p,2160p',
+					},
+				],
+				responses: {
+					'200': ok(
+						'Wanted titles',
+						{
+							type: 'object',
+							properties: {
+								items: {
+									type: 'array',
+									items: {
+										type: 'object',
+										required: ['id', 'kind', 'title', 'imdb'],
+										properties: {
+											id: { type: 'string' },
+											kind: { enum: ['movie', 'show'] },
+											title: { type: 'string' },
+											imdb: { type: 'string' },
+											year: { type: 'integer' },
+											tmdb: { type: 'integer' },
+											tvdb: { type: 'integer' },
+											titles: { type: 'array', items: { type: 'string' } },
+											released: { type: 'string', format: 'date' },
+											runtime: { type: 'integer', description: 'Minutes' },
+											seasons: {
+												type: 'array',
+												items: {
+													type: 'object',
+													properties: {
+														season: { type: 'integer' },
+														episodes: {
+															type: 'array',
+															items: { type: 'integer' },
+														},
+														airing: { type: 'boolean' },
+														aired: { type: 'string', format: 'date' },
+													},
+												},
+											},
+											upgrade: {
+												type: 'object',
+												properties: {
+													grab: { type: 'string' },
+													resolution: { type: 'string' },
+													to: { type: 'string' },
+												},
+											},
+											bands: { type: 'object' },
+										},
+									},
+								},
+							},
+						},
+						{
+							items: [
+								{
+									id: '0b7c2f8e-…',
+									kind: 'movie',
+									title: 'The Matrix',
+									imdb: 'tt0133093',
+									year: 1999,
+									tmdb: 603,
+									titles: ['The Matrix', 'Matrix'],
+									released: '1999-09-21',
+									runtime: 136,
+								},
+								{
+									id: '5d1e…',
+									kind: 'show',
+									title: '3rd Rock from the Sun',
+									imdb: 'tt0115082',
+									year: 1996,
+									tmdb: 155,
+									seasons: [{ season: 1, episodes: [1, 2, 3] }],
+								},
+							],
+						}
+					),
+					...errors('400', '401', '429'),
+				},
+			},
+		},
+		'/api/sponsor/wanted/complete': {
+			post: {
+				tags: ['Sponsors'],
+				operationId: 'wantedComplete',
+				summary: 'Acknowledge a fetched title',
+				description: `Says a wanted title was fetched. Only \`id\` is required. Without \`upgrade_to\` a film leaves the list; with it the film stays, carrying \`upgrade\`, until an acknowledgement without one. Each acknowledgement replaces the last one's fields, so repeating one is harmless. \`band\` records the copy against that resolution only, for a fetcher that asked for \`?bands=\`.\n\n**Limit:** ${per(sponsorWanted, 'calls')} per key, shared with the list.`,
+				externalDocs: {
+					url: `${REPO}/sponsor-api.md#wanted-list`,
+					description: 'Wanted list',
+				},
+				security: sponsorKey,
+				requestBody: body(
+					{
+						type: 'object',
+						required: ['id'],
+						properties: {
+							id: { type: 'string' },
+							release: { type: 'string', maxLength: 512 },
+							grab: {
+								type: 'string',
+								maxLength: 64,
+								description: "The fetcher's id of it: an info hash or NZB id",
+							},
+							resolution: { enum: ['', '480p', '720p', '1080p', '2160p'] },
+							upgrade_to: {
+								enum: ['720p', '1080p', '2160p'],
+								description: 'Needs `resolution`',
+							},
+							band: { enum: ['720p', '1080p', '2160p'] },
+							torrent: { type: 'boolean' },
+						},
+					},
+					{
+						id: '0b7c2f8e-…',
+						grab: HASH,
+						release: 'The.Matrix.1999.1080p.BluRay.x264-GRP',
+						resolution: '1080p',
+						torrent: true,
+						upgrade_to: '2160p',
+					}
+				),
+				responses: {
+					'200': ok('Recorded', { type: 'object', properties: { ok: { const: true } } }),
+					'404': {
+						description: 'The item is no longer on the list',
+						content: json(ref('Error'), { error: 'Not on this wanted list' }),
+					},
+					...errors('400', '401', '429'),
+				},
+			},
+		},
 		'/api/zurg/search-torrents': {
 			post: {
 				tags: ['Sponsors'],
 				operationId: 'searchCachedReleases',
 				summary: 'Cached releases for a title',
-				description: `Real-Debrid-cached releases for an IMDb id, biggest first. A show answers per season.\n\n**Limit:** ${per(zurg, 'calls')}, shared with the other /api/zurg endpoints.`,
+				description: `Real-Debrid-cached releases for an IMDb id, biggest first. A show answers per season. Each release carries \`parsed\`: resolution, source, codecs, HDR, group and episode numbers read from its name.\n\n**Limit:** ${per(zurg, 'calls')}, shared with the other /api/zurg endpoints.`,
 				security: sponsorKey,
 				requestBody: body(
 					{
@@ -1076,6 +1512,46 @@ export const openApiDocument = {
 					title: { type: 'string' },
 					fileSize: { type: 'number', description: 'MB' },
 					hash: { $ref: '#/components/schemas/InfoHash' },
+					parsed: ref('ReleaseFields'),
+				},
+			},
+			ReleaseFields: {
+				type: 'object',
+				description:
+					"What the release's name says, read from the name alone. `null` where the name does not say. Languages are left out: a name rarely states them.",
+				properties: {
+					resolution: { type: ['string', 'null'], examples: ['2160p', '1080p', '720p'] },
+					source: {
+						type: ['string', 'null'],
+						examples: ['bluray', 'webdl', 'webrip', 'tv', 'dvd'],
+					},
+					remux: { type: 'boolean' },
+					videoCodec: { type: ['string', 'null'], examples: ['x265', 'x264', 'h265'] },
+					hdr: { enum: ['DV', 'HDR', null], description: 'Dolby Vision wins over HDR' },
+					audioCodec: {
+						type: ['string', 'null'],
+						examples: ['Dolby TrueHD', 'Dolby Digital Plus', 'DTS-HD MA'],
+					},
+					audioChannels: { type: ['string', 'null'], examples: ['7.1', '5.1', '2.0'] },
+					group: { type: ['string', 'null'] },
+					proper: { type: 'boolean', description: 'PROPER or REPACK' },
+					seasons: { type: 'array', items: { type: 'integer' } },
+					episodes: { type: 'array', items: { type: 'integer' } },
+					complete: { type: 'boolean', description: 'A whole season or several' },
+				},
+				example: {
+					resolution: '2160p',
+					source: 'bluray',
+					remux: true,
+					videoCodec: 'x265',
+					hdr: 'HDR',
+					audioCodec: 'Dolby TrueHD',
+					audioChannels: '7.1',
+					group: 'FGT',
+					proper: false,
+					seasons: [],
+					episodes: [],
+					complete: false,
 				},
 			},
 		},

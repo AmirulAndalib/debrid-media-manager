@@ -1,3 +1,4 @@
+import { releaseFields } from '@/utils/releaseFields';
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { describe, expect, it } from 'vitest';
@@ -31,7 +32,7 @@ function routeExists(path: string): boolean {
 		if (rest.length === 0) return existsSync(`${dir}.ts`) || existsSync(join(dir, 'index.ts'));
 		const [head, ...tail] = rest;
 		if (head.startsWith('{')) {
-			return ['[id]', '[userid]', '[...route]', '[[...path]]'].some((name) =>
+			return ['[id]', '[userid]', '[mediaType]', '[...route]', '[[...path]]'].some((name) =>
 				name.includes('...')
 					? existsSync(join(dir, `${name}.ts`))
 					: walk(join(dir, name), tail)
@@ -82,6 +83,20 @@ describe('/api-docs OpenAPI document', () => {
 		expect(byPath('/api/metadata/{id}').description).toMatch(/300 calls per minute per key/);
 		expect(byPath('/api/takedown').description).toMatch(/20 notices per hour/);
 		expect(byPath('/api/plugins/manifest.json').description).toMatch(/5 requests per second/);
+		expect(byPath('/api/sponsor/wanted').description).toMatch(/30 calls per minute per key/);
+		expect(byPath('/api/sponsor/wanted/complete').description).toMatch(
+			/30 calls per minute per key/
+		);
+		expect(byPath('/api/anime/recent').description).toMatch(/60 requests per minute/);
+	});
+
+	it('describes what search-torrents reads from each release name', () => {
+		const release = openApiDocument.components.schemas.Release as {
+			properties: Record<string, unknown>;
+		};
+		expect(release.properties.parsed).toEqual({ $ref: '#/components/schemas/ReleaseFields' });
+		const fields = openApiDocument.components.schemas.ReleaseFields.properties;
+		expect(Object.keys(fields).sort()).toEqual(Object.keys(releaseFields('x', false)).sort());
 	});
 
 	it('tells SABnzbd users the allowance and where a sponsor key goes', () => {
