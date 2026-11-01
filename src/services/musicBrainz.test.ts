@@ -27,6 +27,7 @@ import {
 	hasCaaCover,
 	LidarrAlbum,
 	lidarrCoverRelease,
+	lidarrCoverUrl,
 	MbRelease,
 	MbReleaseGroup,
 	MUSICBRAINZ_USER_AGENT,
@@ -477,6 +478,13 @@ describe("Lidarr's albums", () => {
 		expect(lidarrCoverRelease(monkeesAlbum as unknown as LidarrAlbum)).toBe(
 			'9f4bad72-4b43-45c4-9de8-11066ecc7efd'
 		);
+	});
+
+	it('lidarrCoverUrl is the album front cover in Lidarr image cache, the first source to mirror', () => {
+		expect(lidarrCoverUrl(monkeesAlbum as unknown as LidarrAlbum)).toMatch(
+			/^https:\/\/images\.lidarr\.audio\/cache\/https:\/\/coverartarchive\.org\/release\//
+		);
+		expect(lidarrCoverUrl({ images: [] } as unknown as LidarrAlbum)).toBeNull();
 	});
 
 	it("pool every other release's titles under disc 0, once each, none of the chosen release's", () => {

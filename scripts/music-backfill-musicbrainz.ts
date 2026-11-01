@@ -40,6 +40,7 @@ import {
 	hasCaaCover,
 	LidarrAlbum,
 	lidarrCoverRelease,
+	lidarrCoverUrl,
 	MbRelease,
 	MbReleaseGroup,
 	namesFiles,
@@ -76,10 +77,12 @@ async function albumCover(
 	mbid: string,
 	stored: string | null | undefined,
 	groupArt: string | null,
-	releaseArt: string | null
+	releaseArt: string | null,
+	lidarrArt: string | null = null
 ): Promise<{ coverUrl: string; coverSource: string } | null> {
 	if (stored === 'b2') return null;
-	for (const source of mirroring ? [groupArt, releaseArt] : []) {
+	// Lidarr's image cache answers in ~0.2 s; the archive takes seconds and fails one time in ten.
+	for (const source of mirroring ? [lidarrArt, groupArt, releaseArt] : []) {
 		const mirrored = source && (await mirrorAlbumArt(mbid, source));
 		if (mirrored) return { coverUrl: mirrored, coverSource: 'b2' };
 	}
@@ -108,7 +111,14 @@ async function mirrorCovers(prisma: PrismaClient) {
 		const releaseArt = row.coverUrl?.startsWith('https://coverartarchive.org/release/')
 			? row.coverUrl
 			: null;
-		const cover = await albumCover(row.mbid, 'caa', caaCoverUrl(row.mbid), releaseArt);
+		const lidarrAlbum = await fetchLidarrAlbum(row.mbid).catch(() => null);
+		const cover = await albumCover(
+			row.mbid,
+			'caa',
+			caaCoverUrl(row.mbid),
+			releaseArt,
+			lidarrAlbum ? lidarrCoverUrl(lidarrAlbum) : null
+		);
 		if (cover) {
 			await prisma.musicMetadata.update({ where: { mbid: row.mbid }, data: cover });
 			copied++;
@@ -258,7 +268,8 @@ async function main() {
 					mbid,
 					existing?.coverSource,
 					foundByName ? null : caaCoverUrl(mbid),
-					coverRelease ? caaReleaseCover(coverRelease) : null
+					coverRelease ? caaReleaseCover(coverRelease) : null,
+					album ? lidarrCoverUrl(album) : null
 				);
 				const { artist, album: title, ...fields } = metadata;
 				const data = {

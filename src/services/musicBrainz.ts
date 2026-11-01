@@ -296,6 +296,10 @@ export function fromLidarr(album: LidarrAlbum): { group: MbReleaseGroup; release
 	};
 }
 
+/** The URL of a Lidarr album's front cover in Lidarr's image cache: the same art the Cover Art Archive serves, answered in a fraction of the time. */
+export const lidarrCoverUrl = (album: LidarrAlbum): string | null =>
+	album.images?.find((image) => image.CoverType === 'Cover')?.Url ?? null;
+
 /** The release id of a Lidarr album's front cover, from its cached Cover Art Archive image. */
 export const lidarrCoverRelease = (album: LidarrAlbum): string | null =>
 	album.images
