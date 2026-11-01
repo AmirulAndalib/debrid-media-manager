@@ -1,0 +1,136 @@
+{
+	"_source": "GET https://debridmediamanager.com/api/music/library?hash=0380fe617494cfc4a0b969639ad8a277ab366478, read 2026-11-01: Chopin, Les Nocturnes, filed under release group 8b53ab6b-21df-491a-8023-2c8d93976c9d, which MusicBrainz and Lidarr both answered 404 for that day; its 21 audio files in the order served, as AvailableMusicFile rows (RD links left out). trackNumber is null: every file names its own.",
+	"album": "Les Nocturnes",
+	"artist": "Chopin",
+	"artistMbid": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+	"files": [
+		{
+			"file_id": 22,
+			"path": "/01 - Nocturne op 48 à Mademoiselle Laude Duperré N 1.flac",
+			"bytes": 98751151,
+			"trackNumber": null
+		},
+		{
+			"file_id": 16,
+			"path": "/02 - Nocturne op 48 à Mademoiselle Laude Duperré N 2.flac",
+			"bytes": 104624299,
+			"trackNumber": null
+		},
+		{
+			"file_id": 15,
+			"path": "/03 - Nocturne op 15 à Monsieur F Hiller N 1.flac",
+			"bytes": 70010833,
+			"trackNumber": null
+		},
+		{
+			"file_id": 14,
+			"path": "/04 - Nocturne op 15 à Monsieur F Hiller N 2.flac",
+			"bytes": 52851873,
+			"trackNumber": null
+		},
+		{
+			"file_id": 13,
+			"path": "/05 - Nocturne op 15 à Monsieur F Hiller N 3.flac",
+			"bytes": 74800589,
+			"trackNumber": null
+		},
+		{
+			"file_id": 17,
+			"path": "/06 - Nocturne op 27 à la comtesse d Appony N 1.flac",
+			"bytes": 82578358,
+			"trackNumber": null
+		},
+		{
+			"file_id": 18,
+			"path": "/07 - Nocturne op 27 à la comtesse d Appony N 2.flac",
+			"bytes": 97922264,
+			"trackNumber": null
+		},
+		{
+			"file_id": 21,
+			"path": "/08 - Nocturne op 20 en ut dièse mineur.flac",
+			"bytes": 64623404,
+			"trackNumber": null
+		},
+		{
+			"file_id": 20,
+			"path": "/09 - Nocturne op 32 à la baronne de Billing N 1.flac",
+			"bytes": 77070310,
+			"trackNumber": null
+		},
+		{
+			"file_id": 19,
+			"path": "/10 - Nocturne op 32 à la baronne de Billing N 2.flac",
+			"bytes": 93250558,
+			"trackNumber": null
+		},
+		{
+			"file_id": 12,
+			"path": "/11 - Nocturne op 55 à Mademoiselle J W Stirling N 1.flac",
+			"bytes": 75148795,
+			"trackNumber": null
+		},
+		{
+			"file_id": 11,
+			"path": "/12 - Nocturne op 55 à Mademoiselle J W Stirling N 2.flac",
+			"bytes": 80035219,
+			"trackNumber": null
+		},
+		{
+			"file_id": 4,
+			"path": "/13 - Nocturne op 37 N 1.flac",
+			"bytes": 90436287,
+			"trackNumber": null
+		},
+		{
+			"file_id": 3,
+			"path": "/14 - Nocturne op 37 N 2.flac",
+			"bytes": 86481101,
+			"trackNumber": null
+		},
+		{
+			"file_id": 2,
+			"path": "/15 - Nocturne op 9 à Madame Camille Pleyel N 1.flac",
+			"bytes": 100386427,
+			"trackNumber": null
+		},
+		{
+			"file_id": 1,
+			"path": "/16 - Nocturne op 9 à Madame Camille Pleyel N 2.flac",
+			"bytes": 67401835,
+			"trackNumber": null
+		},
+		{
+			"file_id": 5,
+			"path": "/17 - Nocturne op 9 à Madame Camille Pleyel N 3.flac",
+			"bytes": 106177028,
+			"trackNumber": null
+		},
+		{
+			"file_id": 6,
+			"path": "/18 - Nocturne op posthume N 19 op 72 n 1 en mi mineur.flac",
+			"bytes": 73361235,
+			"trackNumber": null
+		},
+		{
+			"file_id": 10,
+			"path": "/19 - Nocturne op posthume en do mineur.flac",
+			"bytes": 44994701,
+			"trackNumber": null
+		},
+		{
+			"file_id": 9,
+			"path": "/20 - Nocturne op 62 à Mademoiselle R de Könneritz N 1.flac",
+			"bytes": 120167430,
+			"trackNumber": null
+		},
+		{
+			"file_id": 8,
+			"path": "/21 - Nocturne op 62 à Mademoiselle R de Könneritz N 2.flac",
+			"bytes": 94594459,
+			"trackNumber": null
+		}
+	],
+	"hash": "0380fe617494cfc4a0b969639ad8a277ab366478",
+	"mbid": "8b53ab6b-21df-491a-8023-2c8d93976c9d"
+}

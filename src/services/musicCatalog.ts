@@ -18,7 +18,7 @@ export interface MusicTrack {
 	link: string;
 	path: string;
 	bytes: number;
-	/** The MusicBrainz position when matched, else the number in the file's name, else its place on its disc. */
+	/** The MusicBrainz position when matched on the file's disc, else the number in the file's name, else its place on its disc. */
 	trackNumber: number | null;
 	/** For downloads only: never shown. */
 	filename: string;
@@ -324,10 +324,11 @@ export function albumTracks(
 		const match = matches[i];
 		track.title = match?.title ?? null;
 		track.durationMs = match?.lengthMs ?? null;
-		if (match) {
+		// Disc 0 is a pool of titles, not a place on a disc; a track on another
+		// disc than the file names (a release laid out otherwise) numbers that disc.
+		if (match && match.disc > 0 && (track.disc ?? match.disc) === match.disc) {
 			track.trackNumber = match.position;
-			// The file's own disc decides where it sits, should its title match another's.
-			track.disc ??= match.disc;
+			track.disc = match.disc;
 		}
 	});
 	return tracks;

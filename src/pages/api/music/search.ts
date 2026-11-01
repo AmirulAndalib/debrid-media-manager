@@ -47,10 +47,11 @@ export default async function handler(
 				limit,
 			}).then(({ albums }) => withPackFlags(albums)),
 			searchArtists(albumSearch, limit),
+			// Disc 0 holds titles of other releases, not the album's own tracklist.
 			prisma.$queryRaw<{ mbid: string; title: string; lengthMs: number | null }[]>(
 				Prisma.sql`SELECT t.mbid, t.title, t.lengthMs
 				FROM MusicTrackMetadata t
-				WHERE ${trackSearch}
+				WHERE t.disc > 0 AND ${trackSearch}
 				ORDER BY ${trackSearch} DESC, t.mbid, t.disc, t.position
 				LIMIT ${limit}`
 			),

@@ -1,4 +1,12 @@
-import { enrichment, MbRelease, MbReleaseGroup } from '@/services/musicBrainz';
+import {
+	enrichment,
+	fromLidarr,
+	LidarrAlbum,
+	MbRelease,
+	MbReleaseGroup,
+	titlePool,
+} from '@/services/musicBrainz';
+import monkeesAlbum from '@/test/fixtures/lidarr/album-48e8b712-4f5d-34e0-9492-22f936854662.json';
 import monkees from '@/test/fixtures/music/library-dc925f67cd67936b4a8fbeb17d6decb648fd3479.json';
 import catalog from '@/test/fixtures/musicbrainz/catalog-2026-11-01.json';
 import release from '@/test/fixtures/musicbrainz/release-08205eae-c9e3-4174-8d69-2a67d742a19c.json';
@@ -81,6 +89,62 @@ describe('matchTrackMetadata', () => {
 		// Two files claiming one disc and number: neither is trusted.
 		const twice = [files[0], { ...files[1], disc: 1 }, files[2], files[3]];
 		expect(titles(matchTrackMetadata(twice, twoDiscs))).toEqual([null, null, 'Song', null]);
+	});
+
+	describe("The Monkees' 4-disc set against Lidarr's tracklists of the group", () => {
+		// 12, 16, 18 and 15 files: stereo mixes, mono mixes, TV versions, backing tracks.
+		const files = monkees.files.map((file) => {
+			const { disc, track } = trackPosition(file.path, file.trackNumber);
+			return { disc, trackNumber: track, filename: getFilename(file.path) };
+		});
+		const lidarr = fromLidarr(monkeesAlbum as unknown as LidarrAlbum);
+		const tracksOf = (id: string) =>
+			enrichment(
+				monkees.mbid,
+				lidarr.group,
+				lidarr.releases.find((r) => r.id === id)!
+			).tracks;
+		// 2014 super deluxe edition: 36 + 31 + 33 tracks, another layout than the files'.
+		const superDeluxe = tracksOf('0e371fce-6068-4979-a312-3cd5251da630');
+		const at = (name: string) => files.findIndex((file) => file.filename.startsWith(name));
+
+		it("does not number a disc by a release laid out otherwise, but by the files' names", () => {
+			const matched = titles(matchTrackMetadata(files, superDeluxe));
+			expect(matched[at('01_01')]).toBe('(Theme From) The Monkees (stereo mix)');
+			expect(matched[at('02_01')]).toBe('(Theme From) The Monkees (mono mix)');
+			expect(matched[at('03_01')]).toBe('Monkees NBC Promo Spot');
+			// Disc 2's 14th track is a backing track of another song altogether.
+			expect(superDeluxe.find((t) => t.disc === 2 && t.position === 14)?.title).toBe(
+				'I Won’t Be the Same Without Her (stereo backing track – take 6)'
+			);
+			expect(matched[at('02_14')]).toBeNull(); // I Wanna Be Free (Demo - Take Twelve)
+			expect(matched[at('03_11')]).toBeNull(); // All the King's Horses (Alternate Vocal Take)
+		});
+
+		it('titles no file that two differently named tracks fit equally', () => {
+			// "Version Two - Backing Track Take Six" is as far from "(version 2) … take 6"
+			// as from "(version 3) … take 3".
+			expect(titles(matchTrackMetadata(files, superDeluxe))[at('04_08')]).toBeNull();
+		});
+
+		it('titles what the 12-track album leaves from the other releases, by the same name only', () => {
+			const album = tracksOf('0c6324c1-5968-4675-84bc-8f20b44cabc4');
+			const pool = titlePool(monkees.mbid, lidarr.group, lidarr.releases, album);
+			const matches = matchTrackMetadata(files, [...album, ...pool]);
+
+			// Disc 1 is the album, by disc and position, as before.
+			expect(titles(matches.slice(0, 12))).toEqual(album.map((t) => t.title));
+			expect(titles(matches.slice(12, 16))).toEqual([
+				'(Theme From) The Monkees (mono mix)',
+				'Saturday’s Child (mono mix)',
+				'I Wanna Be Free (mono mix)',
+				'Tomorrow’s Gonna Be Another Day (mono mix)',
+			]);
+			expect(matches[12]).toMatchObject({ disc: 0, recordingMbid: expect.any(String) });
+			// "(Rehearsal)" is close to the pool's "(rehearsal) (mono)", not the same.
+			expect(matches[at('02_13')]).toBeNull();
+			expect(titles(matches).filter(Boolean)).toHaveLength(36);
+		});
 	});
 
 	it('leaves every file unmatched without a tracklist', () => {

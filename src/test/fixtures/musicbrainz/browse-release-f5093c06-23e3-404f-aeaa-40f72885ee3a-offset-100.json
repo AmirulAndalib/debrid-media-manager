@@ -1,0 +1,791 @@
+{
+	"_source": "GET https://musicbrainz.org/ws/2/release?release-group=f5093c06-23e3-404f-aeaa-40f72885ee3a&inc=media&limit=100&offset=100&fmt=json, read 2026-11-01: Pink Floyd, The Dark Side of the Moon, 152 releases. Trimmed to the fields DMM reads (release: id, title, status, date, media position/format/track-count), keys MusicBrainz left out still left out; order and counts as served.",
+	"release-count": 152,
+	"release-offset": 100,
+	"releases": [
+		{
+			"id": "106137ce-3f25-40b4-a9c9-f62db194bf23",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2025-09-09",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "1ce759f7-641e-409a-994d-5d3531127435",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2016-01-08",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "1ef3dff6-8c99-454f-8ade-abdc52301233",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2016",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "25f12df1-e0d3-4ce0-a64f-da1cbd1c0cbb",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2025-03-28",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "2b68361f-1d27-4794-be44-333a8a5d7650",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2025-09-09",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "2f481f2f-e24a-4b36-8076-4564030f59b5",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2021-10-19",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "37dba27d-895a-4d74-9679-d39f7c816f4b",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2016-11-04",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "3df425d2-b33e-424c-acd3-d949ea09e2c8",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2016-11-04",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "3faa328a-95d8-4b7e-b152-860084c79708",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2025-09-09",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "426c9989-5d2d-4ca2-893c-080a0ae45555",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2017-11-01",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "5349fc39-88bd-4008-bb07-073653eff455",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2021-10-19",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "5b0103ff-6191-4234-8e23-75a37bbfc93d",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2016",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "5de24d48-5364-438c-9762-c0f8e30f545e",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "61673353-7ad8-4cda-a9a1-6b2b1e7a5570",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2021-10-19",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "62da9215-d867-42ab-809f-9eaf1ed1fd1b",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "6b62f790-7876-4c34-bdc3-75852794d43e",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2021-07-23",
+			"media": [
+				{
+					"position": 1,
+					"format": "Hybrid SACD (CD layer)",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "Hybrid SACD (SACD layer, 2 channels)",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "Hybrid SACD (SACD layer, multichannel)",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "70fc98ac-02a1-4ec5-8092-93fb3a6ae958",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2023-03-24",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "74a781e4-26d5-4b38-97f2-bb0f67475ecd",
+			"title": "The Dark Side of the Moon: The High Resolution Remasters",
+			"status": "Bootleg",
+			"date": "2018",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 17
+				},
+				{
+					"position": 2,
+					"format": "CD",
+					"track-count": 16
+				},
+				{
+					"position": 3,
+					"format": "CD",
+					"track-count": 12
+				},
+				{
+					"position": 4,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "74f5fb70-201c-4f0b-ba60-df275983fd4f",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2023-03-24",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "800d1984-783e-4af4-8efa-7c0f8218e1b7",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2023",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "82e70b1b-5165-4d04-9951-959b707bdb39",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2016",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "86dedf29-be03-4d8d-98aa-67389f5447c2",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2013",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "Digital Media",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "Digital Media",
+					"track-count": 3
+				},
+				{
+					"position": 4,
+					"format": "Digital Media",
+					"track-count": 1
+				}
+			]
+		},
+		{
+			"id": "8e862461-88a1-4c54-baf4-8bfcfaf79beb",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "8e96b8e6-02c3-4876-84ab-39d190b3e6f3",
+			"title": "The Dark Side of the Moon: The High Resolution Remasters",
+			"status": "Bootleg",
+			"date": "2018",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 17
+				},
+				{
+					"position": 2,
+					"format": "CD",
+					"track-count": 16
+				},
+				{
+					"position": 3,
+					"format": "CD",
+					"track-count": 12
+				},
+				{
+					"position": 4,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "9ad63cc8-f56e-426d-9eec-6b8f606b879d",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "9cb98907-c8d6-4c76-8456-63cfa2ef74fd",
+			"title": "The Dark Side of the Moon",
+			"status": "Bootleg",
+			"date": "2015",
+			"media": [
+				{
+					"position": 1,
+					"format": "Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "9d8d13b7-a763-43b2-9501-a89da5e5fc74",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2025-09-09",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "9e9ce82a-2aa9-4c6d-a68f-9e3d14cac5b2",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2023-10-13",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "9f50fdfb-529b-4d3f-b26a-c26ec0bb1b48",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2014",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "a3037fe0-a03d-46cd-9f01-26fa752d250f",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2023-04-19",
+			"media": [
+				{
+					"position": 1,
+					"format": "Hybrid SACD (CD layer)",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "Hybrid SACD (SACD layer, 2 channels)",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "Hybrid SACD (SACD layer, multichannel)",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "a832919b-8629-4e27-ac79-9a95d66c61ba",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2025-09-09",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "ac496d60-9b3a-497c-b650-1810f0b730bf",
+			"title": "Dark Side of the Moon",
+			"status": "Bootleg",
+			"date": "",
+			"media": [
+				{
+					"position": 1,
+					"format": "Cassette",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "b3ace569-c2ce-4327-84ff-5920bd115bcf",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2023-03-24",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "b43cc743-04c3-45c1-87b3-ea1b1c447f8b",
+			"title": "Dark Side of the Moon",
+			"status": "Bootleg",
+			"date": "2019-11-27",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "b9bf4be0-d0af-46b2-9514-cecb420d947b",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "bdd366fd-67be-4dfe-a7fb-00a216eaa3ed",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2016",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "be701edc-c9c7-484a-9ed2-aeef051c19be",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2016",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "bec5e145-5edb-4920-b356-104df3124932",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2017-11-01",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "c05dc459-a27d-4416-a98a-4bad433dfdb9",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2016-11-04",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "c6bdbc64-8c42-4d76-9df3-81386ad0ecc5",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2023-10-13",
+			"media": [
+				{
+					"position": 1,
+					"format": "Blu-ray",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "c7530927-8de6-40a8-95c4-b36e860abe41",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2014-01-29",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "cb086766-1fec-42e5-bcf6-92c1cb6f563f",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "ccaaca29-fa61-44f4-ada6-746cd0974333",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2023-10-13",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "d237fb97-488e-4547-ab41-92dfbc7d5052",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2023-03-21",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "CD",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				},
+				{
+					"position": 4,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				},
+				{
+					"position": 5,
+					"format": "Blu-ray",
+					"track-count": 10
+				},
+				{
+					"position": 6,
+					"format": "Blu-ray",
+					"track-count": 10
+				},
+				{
+					"position": 7,
+					"format": "DVD-Video",
+					"track-count": 10
+				},
+				{
+					"position": 8,
+					"format": "7\" Vinyl",
+					"track-count": 2
+				},
+				{
+					"position": 9,
+					"format": "7\" Vinyl",
+					"track-count": 2
+				}
+			]
+		},
+		{
+			"id": "d9a96708-cd3f-4355-8a5a-982efdd88c15",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "e7a21643-d41b-48db-bc83-c296016de66c",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2023-10-13",
+			"media": [
+				{
+					"position": 1,
+					"format": "Blu-ray",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "e98127ae-da76-49bc-bd67-3f000af53395",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2025-09-09",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "eb8cf4db-003f-49d4-8dbd-fbaa41da8d3d",
+			"title": "Dark Side of the Moon",
+			"status": "Bootleg",
+			"media": [
+				{
+					"position": 1,
+					"format": "DVD-Audio",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "f589a4ab-fc97-4f2b-8cb3-a277309afce7",
+			"title": "The Dark Side of the Moon",
+			"status": null,
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "fbfa4b74-d21a-44f6-9b48-438867680c63",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2023-10-13",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "fd437132-37db-4fd1-9d0c-3a627ed96a4b",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2016",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "fda25ebc-2934-4936-9617-4b09230b5035",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2023-10-13",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		}
+	]
+}

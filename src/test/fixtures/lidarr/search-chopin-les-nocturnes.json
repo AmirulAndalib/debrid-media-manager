@@ -1,0 +1,2328 @@
+{
+	"_source": "GET https://api.lidarr.audio/api/v0.4/search?type=album&query=Chopin%20Les%20Nocturnes, read 2026-11-01, the catalog's artist and album for release group 8b53ab6b-21df-491a-8023-2c8d93976c9d, which both MusicBrainz and Lidarr's album/8b53ab6b-21df-491a-8023-2c8d93976c9d answered 404 that day ({\"error\":\"Couldn't find album 8b53ab6b-21df-491a-8023-2c8d93976c9d\"}). The answer is an array, kept in order under \"albums\"; each album trimmed to the fields DMM reads, as in album-48e8b712-4f5d-34e0-9492-22f936854662.json.",
+	"albums": [
+		{
+			"id": "618a6e0e-fc14-41d5-92d4-b8592b29883f",
+			"title": "Les nocturnes",
+			"type": "Album",
+			"secondarytypes": [],
+			"releasedate": "2002-01-01",
+			"artistid": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+			"genres": ["Nocturne", "Classical"],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/7f33b396-5ac5-4a0b-b577-46331a315538/10972475046-1200.jpg"
+				},
+				{
+					"CoverType": "Disc",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/a5f1ab3e-b3c5-406b-b908-ceef6c268dd4/41336888786-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd",
+					"artistname": "Aldo Ciccolini",
+					"sortname": "Ciccolini, Aldo",
+					"artistaliases": []
+				},
+				{
+					"id": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+					"artistname": "Fryderyk Chopin",
+					"sortname": "Chopin, Fryderyk",
+					"artistaliases": [
+						"Frédéric Chopin",
+						"Frederiks Šopēns",
+						"Fryderyk Chopin",
+						"フレデリック・ショパン",
+						"쇼팽",
+						"Frédéric Chopin",
+						"Frédéric Chopin",
+						"Фредерик Шопен",
+						"Frédéric Chopin (1810-1849)",
+						"Шопен",
+						"Fredrik Chopin",
+						"Frederic Chopin",
+						"Frederic Chopion",
+						"Frederic Franciszek Chopin",
+						"Fredric Chopin",
+						"F. Chopin",
+						"Frèdèric Chopin",
+						"Chopin",
+						"F. Chopain",
+						"Frederik Chopin",
+						"Fr d ric Chopin",
+						"Frederyk Chopin",
+						"Frederick Chopin",
+						"Chopin, Frederic",
+						"Fryderyk Szopen",
+						"프레데리크 쇼팽",
+						"Фридерик Шопен",
+						"Ф. Шопен",
+						"Шопен"
+					]
+				}
+			],
+			"Releases": [
+				{
+					"Id": "7f33b396-5ac5-4a0b-b577-46331a315538",
+					"Title": "Les nocturnes",
+					"Status": "Official",
+					"ReleaseDate": "2002-01-01",
+					"Media": [
+						{
+							"Format": "CD",
+							"Position": 1
+						},
+						{
+							"Format": "CD",
+							"Position": 2
+						}
+					],
+					"TrackCount": 21,
+					"Tracks": [
+						{
+							"TrackName": "Nocturne no. 1",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 368920,
+							"RecordingId": "87ded5bb-f57c-4bcb-9e39-6aa07489bd67",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 2",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 293653,
+							"RecordingId": "2e01b6f1-1aff-424d-8c19-82f986863030",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 3",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": 359986,
+							"RecordingId": "f2a64ad7-5fcf-4fe2-bf51-1b0affefe3c1",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 4",
+							"TrackPosition": 4,
+							"MediumNumber": 1,
+							"DurationMs": 275066,
+							"RecordingId": "9d6f21df-5158-4bde-8a03-3fc685b08693",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 5",
+							"TrackPosition": 5,
+							"MediumNumber": 1,
+							"DurationMs": 226093,
+							"RecordingId": "7887f8b9-5e8e-4796-83a2-605348721530",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 6",
+							"TrackPosition": 6,
+							"MediumNumber": 1,
+							"DurationMs": 291493,
+							"RecordingId": "1ea6e408-1708-407e-a0fb-3271669407c0",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 7",
+							"TrackPosition": 7,
+							"MediumNumber": 1,
+							"DurationMs": 304866,
+							"RecordingId": "d577ed8c-fa64-4981-8824-ce6cd149987d",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 8",
+							"TrackPosition": 8,
+							"MediumNumber": 1,
+							"DurationMs": 394666,
+							"RecordingId": "b4bf2569-d7fa-405e-852d-cf4bbaa3d33c",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 9",
+							"TrackPosition": 9,
+							"MediumNumber": 1,
+							"DurationMs": 302000,
+							"RecordingId": "dbc68131-087c-4c52-be51-a53ad6de9040",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 10",
+							"TrackPosition": 10,
+							"MediumNumber": 1,
+							"DurationMs": 320080,
+							"RecordingId": "198670a9-a4d4-410a-8f71-19f58227ef55",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 11",
+							"TrackPosition": 1,
+							"MediumNumber": 2,
+							"DurationMs": 419013,
+							"RecordingId": "5dc25d73-8ef5-46c8-bb14-a156fcacb5d8",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 12",
+							"TrackPosition": 2,
+							"MediumNumber": 2,
+							"DurationMs": 420626,
+							"RecordingId": "be867559-5342-469a-94c7-f9c1fd6f1829",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 13",
+							"TrackPosition": 3,
+							"MediumNumber": 2,
+							"DurationMs": 402293,
+							"RecordingId": "e1b249bd-97fa-4737-a038-ba76160273c1",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 14",
+							"TrackPosition": 4,
+							"MediumNumber": 2,
+							"DurationMs": 402573,
+							"RecordingId": "cd8bc1a3-4680-45af-98ec-dea9fe978c16",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 15",
+							"TrackPosition": 5,
+							"MediumNumber": 2,
+							"DurationMs": 311266,
+							"RecordingId": "a303efb5-f477-4096-89a1-3725329344fd",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 16",
+							"TrackPosition": 6,
+							"MediumNumber": 2,
+							"DurationMs": 284306,
+							"RecordingId": "4ee453d4-97f8-424b-8243-a8bd87cfa516",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 17",
+							"TrackPosition": 7,
+							"MediumNumber": 2,
+							"DurationMs": 407213,
+							"RecordingId": "4c20a1a5-1954-40b3-a649-b3d7bcc4ecbe",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 18",
+							"TrackPosition": 8,
+							"MediumNumber": 2,
+							"DurationMs": 355160,
+							"RecordingId": "8d123ac2-9b2c-4196-b1e7-d5b933ca4e3b",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 19",
+							"TrackPosition": 9,
+							"MediumNumber": 2,
+							"DurationMs": 264626,
+							"RecordingId": "e0816f2a-f89a-4345-9701-d050e517b6a9",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 20",
+							"TrackPosition": 10,
+							"MediumNumber": 2,
+							"DurationMs": 253000,
+							"RecordingId": "846a43a6-5c36-49d8-b303-bdc69a4171ba",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						},
+						{
+							"TrackName": "Nocturne no. 21",
+							"TrackPosition": 11,
+							"MediumNumber": 2,
+							"DurationMs": 187866,
+							"RecordingId": "7bced04e-25ba-400c-b511-1fb0e543dd15",
+							"ArtistId": "f546711c-dda9-41cc-8bb8-6f7e7ddd71bd"
+						}
+					]
+				},
+				{
+					"Id": "a5f1ab3e-b3c5-406b-b908-ceef6c268dd4",
+					"Title": "Les nocturnes",
+					"Status": "Official",
+					"ReleaseDate": "2003-01-01",
+					"Media": [
+						{
+							"Format": "CD",
+							"Position": 1
+						},
+						{
+							"Format": "CD",
+							"Position": 2
+						}
+					],
+					"TrackCount": 21,
+					"Tracks": [
+						{
+							"TrackName": "Nocturne Nᵒ 1 en si bémol mineur, op. 9 Nᵒ 1 : Larghetto",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 369000,
+							"RecordingId": "87ded5bb-f57c-4bcb-9e39-6aa07489bd67",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 2 en mi bémol majeur, op. 9 Nᵒ 2 : Andante",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 294000,
+							"RecordingId": "2e01b6f1-1aff-424d-8c19-82f986863030",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 3 en si majeur, op. 9 Nᵒ 3 : Allegretto",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": 360000,
+							"RecordingId": "f2a64ad7-5fcf-4fe2-bf51-1b0affefe3c1",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 4 en fa majeur, op. 15 Nᵒ 1 : Andante cantabile",
+							"TrackPosition": 4,
+							"MediumNumber": 1,
+							"DurationMs": 275000,
+							"RecordingId": "9d6f21df-5158-4bde-8a03-3fc685b08693",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 5 en fa dièse majeur, op. 15 Nᵒ 2 : Larghetto",
+							"TrackPosition": 5,
+							"MediumNumber": 1,
+							"DurationMs": 226000,
+							"RecordingId": "7887f8b9-5e8e-4796-83a2-605348721530",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 6 en sol mineur, op. 15 Nᵒ 3 : Lento",
+							"TrackPosition": 6,
+							"MediumNumber": 1,
+							"DurationMs": 291000,
+							"RecordingId": "1ea6e408-1708-407e-a0fb-3271669407c0",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 7 en ut dièse mineur, op. 27 Nᵒ 1 : Larghetto",
+							"TrackPosition": 7,
+							"MediumNumber": 1,
+							"DurationMs": 305000,
+							"RecordingId": "d577ed8c-fa64-4981-8824-ce6cd149987d",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 8 en ré bémol majeur, op. 27 Nᵒ 2 : Lento sostenuto",
+							"TrackPosition": 8,
+							"MediumNumber": 1,
+							"DurationMs": 395000,
+							"RecordingId": "b4bf2569-d7fa-405e-852d-cf4bbaa3d33c",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 9 en si majeur, op. 32 Nᵒ 1 : Andante sostenuto",
+							"TrackPosition": 9,
+							"MediumNumber": 1,
+							"DurationMs": 302000,
+							"RecordingId": "dbc68131-087c-4c52-be51-a53ad6de9040",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 10 en la bémol majeur, op. 32 Nᵒ 2 : Lento",
+							"TrackPosition": 10,
+							"MediumNumber": 1,
+							"DurationMs": 320000,
+							"RecordingId": "198670a9-a4d4-410a-8f71-19f58227ef55",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 11 en sol mineur, op. 37 Nᵒ 1 : Andante sostenuto",
+							"TrackPosition": 1,
+							"MediumNumber": 2,
+							"DurationMs": 419000,
+							"RecordingId": "5dc25d73-8ef5-46c8-bb14-a156fcacb5d8",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 12 en sol majeur, op. 37 Nᵒ 2 : Andantino",
+							"TrackPosition": 2,
+							"MediumNumber": 2,
+							"DurationMs": 421000,
+							"RecordingId": "be867559-5342-469a-94c7-f9c1fd6f1829",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 13 en ut mineur, op. 48 Nᵒ 1 : Lento",
+							"TrackPosition": 3,
+							"MediumNumber": 2,
+							"DurationMs": 402000,
+							"RecordingId": "e1b249bd-97fa-4737-a038-ba76160273c1",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 14 en fa dièse mineur, op. 48 Nᵒ 2 : Andantino",
+							"TrackPosition": 4,
+							"MediumNumber": 2,
+							"DurationMs": 403000,
+							"RecordingId": "cd8bc1a3-4680-45af-98ec-dea9fe978c16",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 15 en fa mineur, op. 55 Nᵒ 1 : Andante",
+							"TrackPosition": 5,
+							"MediumNumber": 2,
+							"DurationMs": 311000,
+							"RecordingId": "a303efb5-f477-4096-89a1-3725329344fd",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 16 en mi bémol majeur, op. 55 Nᵒ 2 : Lento sostenuto",
+							"TrackPosition": 6,
+							"MediumNumber": 2,
+							"DurationMs": 284000,
+							"RecordingId": "4ee453d4-97f8-424b-8243-a8bd87cfa516",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 17 en si majeur, op. 62 Nᵒ 1 : Andante",
+							"TrackPosition": 7,
+							"MediumNumber": 2,
+							"DurationMs": 407000,
+							"RecordingId": "4c20a1a5-1954-40b3-a649-b3d7bcc4ecbe",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 18 en mi majeur, op. 62 Nᵒ 2 : Lento",
+							"TrackPosition": 8,
+							"MediumNumber": 2,
+							"DurationMs": 355000,
+							"RecordingId": "8d123ac2-9b2c-4196-b1e7-d5b933ca4e3b",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 19 en mi mineur, op. posth. 72 Nᵒ 1 : Andante",
+							"TrackPosition": 9,
+							"MediumNumber": 2,
+							"DurationMs": 265000,
+							"RecordingId": "e0816f2a-f89a-4345-9701-d050e517b6a9",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 20 en ut dièse mineur, op. posth. : Lento con gran espressione",
+							"TrackPosition": 10,
+							"MediumNumber": 2,
+							"DurationMs": 253000,
+							"RecordingId": "846a43a6-5c36-49d8-b303-bdc69a4171ba",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Nᵒ 21 en ut mineur, op. posth.",
+							"TrackPosition": 11,
+							"MediumNumber": 2,
+							"DurationMs": 188000,
+							"RecordingId": "7bced04e-25ba-400c-b511-1fb0e543dd15",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "c2ac3314-9fc7-47fa-a8f0-136ed3ff9415",
+			"title": "Les Nocturnes Secrets (Premier Volume)",
+			"type": "Album",
+			"secondarytypes": [],
+			"releasedate": "2024-03-29",
+			"artistid": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+			"genres": [],
+			"images": [],
+			"artists": [
+				{
+					"id": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+					"artistname": "Fryderyk Chopin",
+					"sortname": "Chopin, Fryderyk",
+					"artistaliases": [
+						"Frédéric Chopin",
+						"Frederiks Šopēns",
+						"Fryderyk Chopin",
+						"フレデリック・ショパン",
+						"쇼팽",
+						"Frédéric Chopin",
+						"Frédéric Chopin",
+						"Фредерик Шопен",
+						"Frédéric Chopin (1810-1849)",
+						"Шопен",
+						"Fredrik Chopin",
+						"Frederic Chopin",
+						"Frederic Chopion",
+						"Frederic Franciszek Chopin",
+						"Fredric Chopin",
+						"F. Chopin",
+						"Frèdèric Chopin",
+						"Chopin",
+						"F. Chopain",
+						"Frederik Chopin",
+						"Fr d ric Chopin",
+						"Frederyk Chopin",
+						"Frederick Chopin",
+						"Chopin, Frederic",
+						"Fryderyk Szopen",
+						"프레데리크 쇼팽",
+						"Фридерик Шопен",
+						"Ф. Шопен",
+						"Шопен"
+					]
+				}
+			],
+			"Releases": [
+				{
+					"Id": "405146fd-96c3-460a-99b2-c9f0eb2bd019",
+					"Title": "Les Nocturnes Secrets (Premier Volume)",
+					"Status": "Official",
+					"ReleaseDate": "2024-03-29",
+					"Media": [
+						{
+							"Format": "CD",
+							"Position": 1
+						}
+					],
+					"TrackCount": 17,
+					"Tracks": [
+						{
+							"TrackName": "Nocturne Opus 72 nº 1",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 206000,
+							"RecordingId": "f14b2b19-3cf2-4f76-b92a-11d3476b0833",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Lento con gran espressione (version antérieure) WN37",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 222000,
+							"RecordingId": "beec542c-e71f-47ab-809f-6a8577c6707c",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus Posthume (WN37)",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": 225000,
+							"RecordingId": "490c3810-f67b-4cb8-9d3c-89fa1c0d3ff7",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 9 nº1",
+							"TrackPosition": 4,
+							"MediumNumber": 1,
+							"DurationMs": 316000,
+							"RecordingId": "5148f1fc-e6bf-4bb4-be8b-671b8a66bbb4",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 9 nº1 (Partitions de W. Von Lenz)",
+							"TrackPosition": 5,
+							"MediumNumber": 1,
+							"DurationMs": 326000,
+							"RecordingId": "4a72060a-658a-4126-bf60-ed98b0177640",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 9 nº2",
+							"TrackPosition": 6,
+							"MediumNumber": 1,
+							"DurationMs": 288000,
+							"RecordingId": "d6389106-d10d-44d7-b937-aa30700cb5ab",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 9 nº2 (Partitions de W. Von Lenz)",
+							"TrackPosition": 7,
+							"MediumNumber": 1,
+							"DurationMs": 283000,
+							"RecordingId": "83025c4e-bc43-4269-b47b-9369b8999010",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 9 nº3",
+							"TrackPosition": 8,
+							"MediumNumber": 1,
+							"DurationMs": 374000,
+							"RecordingId": "8e989559-bccd-47ef-adfd-4cc82e0d141c",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 15 nº1",
+							"TrackPosition": 9,
+							"MediumNumber": 1,
+							"DurationMs": 272000,
+							"RecordingId": "16a996b5-193f-4b26-b329-efbce09407ef",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 15 nº2",
+							"TrackPosition": 10,
+							"MediumNumber": 1,
+							"DurationMs": 213000,
+							"RecordingId": "51c79af5-38d4-4c47-b183-15810c08b1e6",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 15 nº2 (Partition de L. Jędrzejewicz)",
+							"TrackPosition": 11,
+							"MediumNumber": 1,
+							"DurationMs": 231000,
+							"RecordingId": "0e8e8c06-8f62-42ef-8afa-c2e32411da05",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 15 nº3",
+							"TrackPosition": 12,
+							"MediumNumber": 1,
+							"DurationMs": 280000,
+							"RecordingId": "787cb5ad-0046-4261-8ce0-f7a9374a3540",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 9 nº2 (Partition de J. Stirling)",
+							"TrackPosition": 13,
+							"MediumNumber": 1,
+							"DurationMs": 273000,
+							"RecordingId": "12c39d6f-a998-452a-9a33-35da0187aa16",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 9 nº2 (Partition de C. Dubois)",
+							"TrackPosition": 14,
+							"MediumNumber": 1,
+							"DurationMs": 286000,
+							"RecordingId": "c6b3220c-a347-4311-95bc-8406cba2bb10",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 9 nº2 (Partition d'A. Franchomme)",
+							"TrackPosition": 15,
+							"MediumNumber": 1,
+							"DurationMs": 279000,
+							"RecordingId": "b7a28977-ad13-4d84-a937-047c222d4785",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 9 nº2 (Élève non identifié)",
+							"TrackPosition": 16,
+							"MediumNumber": 1,
+							"DurationMs": 286000,
+							"RecordingId": "c5a1709d-66f6-43ff-836f-083b561548e2",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne Opus 9 nº2 (Partition de K. Mikuli)",
+							"TrackPosition": 17,
+							"MediumNumber": 1,
+							"DurationMs": 289000,
+							"RecordingId": "08fa57d7-d44a-45a8-83af-a7fe9c733e7c",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "98461c07-a04d-4ca8-8d43-bb0bb8d7d4a4",
+			"title": "Les Nocturnes Secrets (Deuxième Volume)",
+			"type": "Album",
+			"secondarytypes": [],
+			"releasedate": "2025-03-28",
+			"artistid": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+			"genres": [],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/3f3f271c-ec43-4ee3-b90b-067fda794653/41676535059-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+					"artistname": "Fryderyk Chopin",
+					"sortname": "Chopin, Fryderyk",
+					"artistaliases": [
+						"Frédéric Chopin",
+						"Frederiks Šopēns",
+						"Fryderyk Chopin",
+						"フレデリック・ショパン",
+						"쇼팽",
+						"Frédéric Chopin",
+						"Frédéric Chopin",
+						"Фредерик Шопен",
+						"Frédéric Chopin (1810-1849)",
+						"Шопен",
+						"Fredrik Chopin",
+						"Frederic Chopin",
+						"Frederic Chopion",
+						"Frederic Franciszek Chopin",
+						"Fredric Chopin",
+						"F. Chopin",
+						"Frèdèric Chopin",
+						"Chopin",
+						"F. Chopain",
+						"Frederik Chopin",
+						"Fr d ric Chopin",
+						"Frederyk Chopin",
+						"Frederick Chopin",
+						"Chopin, Frederic",
+						"Fryderyk Szopen",
+						"프레데리크 쇼팽",
+						"Фридерик Шопен",
+						"Ф. Шопен",
+						"Шопен"
+					]
+				}
+			],
+			"Releases": [
+				{
+					"Id": "3f3f271c-ec43-4ee3-b90b-067fda794653",
+					"Title": "Les Nocturnes Secrets (Deuxième Volume)",
+					"Status": "Official",
+					"ReleaseDate": "2025-03-28",
+					"Media": [
+						{
+							"Format": "CD",
+							"Position": 1
+						}
+					],
+					"TrackCount": 9,
+					"Tracks": [
+						{
+							"TrackName": "Nocturne en Si Majeur | Opus 32 nº1",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 291000,
+							"RecordingId": "d52c8727-440f-424d-8e6b-b73973f7a042",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en La bémol Majeur | Opus 32 nº2",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 318000,
+							"RecordingId": "e83e11a8-a48b-4774-9114-c60def452cc7",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en ut mineur | WN62",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": 171000,
+							"RecordingId": "9abc82d2-5b38-4578-9dbe-eee5a9f86d3a",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en Mi bémol Majeur | Opus 9 nº2 \"10 Mai 1834\"",
+							"TrackPosition": 4,
+							"MediumNumber": 1,
+							"DurationMs": 298000,
+							"RecordingId": "ff15d21f-4284-4a35-b4b6-2924fe65d917",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en Mi bémol Majeur | Opus 9 nº2 (version publiée par Wilhelm von Lenz)",
+							"TrackPosition": 5,
+							"MediumNumber": 1,
+							"DurationMs": 285000,
+							"RecordingId": "845c1862-23be-4467-885f-7e900dbef1d8",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en Mi bémol Majeur | Opus 9 nº2 (partition de Ludwika Jedrzejewicz)",
+							"TrackPosition": 6,
+							"MediumNumber": 1,
+							"DurationMs": 284000,
+							"RecordingId": "b0e6834b-cf5a-4174-96bd-6e3cb9f6a93e",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en Mi bémol Majeur | Opus 9 nº2 (partition de Zofia Rosengardt)",
+							"TrackPosition": 7,
+							"MediumNumber": 1,
+							"DurationMs": 274000,
+							"RecordingId": "a1e2e97d-1540-484a-ad32-115ae3c3f18c",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en Mi bémol Majeur | Opus 9 nº2 (partition d'un élève de Chopin non identifié - Bibliothèque Nationale de Pologne PL-Wbfc: 1662/n)",
+							"TrackPosition": 8,
+							"MediumNumber": 1,
+							"DurationMs": 276000,
+							"RecordingId": "240d31c6-6c40-4ae4-a8aa-4b0796dc946a",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en Mi bémol Majeur | Opus 0 nº2 (version publiée par Hermann Scholtz)",
+							"TrackPosition": 9,
+							"MediumNumber": 1,
+							"DurationMs": 275000,
+							"RecordingId": "c803e8d6-51d2-4979-8889-5e52b6322807",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "3eae3b25-00e4-4668-ae20-986d3dbeb315",
+			"title": "Les 21 Nocturnes",
+			"type": "Album",
+			"secondarytypes": [],
+			"releasedate": "2004-01-01",
+			"artistid": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+			"genres": [],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/ba40ed40-dbfe-4a55-b491-f32a1ece4b19/29769861215-1200.jpg"
+				},
+				{
+					"CoverType": "Disc",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/78bcd0f0-a81b-4bc8-bd08-9585cf0033ae/39168892313-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+					"artistname": "Fryderyk Chopin",
+					"sortname": "Chopin, Fryderyk",
+					"artistaliases": [
+						"Frédéric Chopin",
+						"Frederiks Šopēns",
+						"Fryderyk Chopin",
+						"フレデリック・ショパン",
+						"쇼팽",
+						"Frédéric Chopin",
+						"Frédéric Chopin",
+						"Фредерик Шопен",
+						"Frédéric Chopin (1810-1849)",
+						"Шопен",
+						"Fredrik Chopin",
+						"Frederic Chopin",
+						"Frederic Chopion",
+						"Frederic Franciszek Chopin",
+						"Fredric Chopin",
+						"F. Chopin",
+						"Frèdèric Chopin",
+						"Chopin",
+						"F. Chopain",
+						"Frederik Chopin",
+						"Fr d ric Chopin",
+						"Frederyk Chopin",
+						"Frederick Chopin",
+						"Chopin, Frederic",
+						"Fryderyk Szopen",
+						"프레데리크 쇼팽",
+						"Фридерик Шопен",
+						"Ф. Шопен",
+						"Шопен"
+					]
+				},
+				{
+					"id": "563bd20a-60fc-409e-98d2-d47da8fe653c",
+					"artistname": "Pascal Amoyel",
+					"sortname": "Amoyel, Pascal",
+					"artistaliases": []
+				}
+			],
+			"Releases": [
+				{
+					"Id": "78bcd0f0-a81b-4bc8-bd08-9585cf0033ae",
+					"Title": "Les 21 Nocturnes",
+					"Status": "Official",
+					"ReleaseDate": "2010-01-01",
+					"Media": [
+						{
+							"Format": "CD",
+							"Position": 1
+						},
+						{
+							"Format": "CD",
+							"Position": 2
+						}
+					],
+					"TrackCount": 22,
+					"Tracks": [
+						{
+							"TrackName": "Berceuse en ré bémol majeur, op. 57",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 314240,
+							"RecordingId": "65c61989-01d9-4f0e-ada1-53d46af21915",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en si bémol mineur, op. 9 no. 1",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 362960,
+							"RecordingId": "dc4d1346-2388-418e-baf4-6bced9cc3ad4",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en mi bémol majeur, op. 9 no. 2",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": 273920,
+							"RecordingId": "88b6f7b5-1ca5-4965-800e-139681f1eb9c",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en si majeur, op. 9 no. 3",
+							"TrackPosition": 4,
+							"MediumNumber": 1,
+							"DurationMs": 390133,
+							"RecordingId": "762edfd1-08da-41eb-aafd-b960ba1d852d",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en fa majeur, op. 15 no. 1",
+							"TrackPosition": 5,
+							"MediumNumber": 1,
+							"DurationMs": 266520,
+							"RecordingId": "e01258cd-60ec-487c-9c06-95fb1b0ac6b5",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en fa dièse majeur, op. 15 no. 2",
+							"TrackPosition": 6,
+							"MediumNumber": 1,
+							"DurationMs": 229373,
+							"RecordingId": "ba9690b7-c7d0-4c2d-862d-8fef8bc2c3c9",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en sol mineur, op. 15 no. 3",
+							"TrackPosition": 7,
+							"MediumNumber": 1,
+							"DurationMs": 294560,
+							"RecordingId": "0402a9fe-8d5c-4ec7-bb3b-0384738550bf",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en ut dièse mineur, op. 27 no. 1",
+							"TrackPosition": 8,
+							"MediumNumber": 1,
+							"DurationMs": 353720,
+							"RecordingId": "6121bc44-7c5b-4c81-8986-2ed8addb8a13",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en ré bémol majeur, op. 27 no. 2",
+							"TrackPosition": 9,
+							"MediumNumber": 1,
+							"DurationMs": 376040,
+							"RecordingId": "e2a67458-43c0-4482-84aa-374641ce58e0",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en si majeur, op. 32 no. 1",
+							"TrackPosition": 10,
+							"MediumNumber": 1,
+							"DurationMs": 300973,
+							"RecordingId": "71b89dfb-eab9-43b1-bf06-6c90e40b26d3",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en la bémol majeur, op. 32 no. 2",
+							"TrackPosition": 11,
+							"MediumNumber": 1,
+							"DurationMs": 303640,
+							"RecordingId": "54bc0e35-8f7c-4a18-aaef-788bcba0c7a7",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en ut dièse mineur, op. posthume : Lento con gran espressione",
+							"TrackPosition": 1,
+							"MediumNumber": 2,
+							"DurationMs": 276693,
+							"RecordingId": "34f4ea97-a98c-4dad-a742-6c9127e50137",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en sol mineur, op. 37 no. 1",
+							"TrackPosition": 2,
+							"MediumNumber": 2,
+							"DurationMs": 403560,
+							"RecordingId": "39ef7667-5da6-4880-b645-e5829994882d",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en sol majeur, op. 37 no. 2",
+							"TrackPosition": 3,
+							"MediumNumber": 2,
+							"DurationMs": 364733,
+							"RecordingId": "fbc90bb6-6485-4846-a974-70b1b99008a4",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en ut mineur, op. 48 no. 1",
+							"TrackPosition": 4,
+							"MediumNumber": 2,
+							"DurationMs": 400106,
+							"RecordingId": "c3422421-c9d3-4748-8138-ea24747c965e",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en fa dièse mineur, op. 48 no. 2",
+							"TrackPosition": 5,
+							"MediumNumber": 2,
+							"DurationMs": 423000,
+							"RecordingId": "d827039e-626a-4f2b-835c-7af9fb2d4189",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en fa mineur, op. 55 no. 1",
+							"TrackPosition": 6,
+							"MediumNumber": 2,
+							"DurationMs": 343066,
+							"RecordingId": "06ef44a6-a92a-490f-b11b-8ae90efed9df",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en mi bémol majeur, op. 55 no. 2",
+							"TrackPosition": 7,
+							"MediumNumber": 2,
+							"DurationMs": 349400,
+							"RecordingId": "b858aa85-2e67-4bf7-bc23-80474eb73269",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en si majeur, op. 62 no. 1",
+							"TrackPosition": 8,
+							"MediumNumber": 2,
+							"DurationMs": 454080,
+							"RecordingId": "dbe79aca-8605-437c-9b89-052d07f63fff",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en mi majeur, op. 62 no. 2",
+							"TrackPosition": 9,
+							"MediumNumber": 2,
+							"DurationMs": 368293,
+							"RecordingId": "cec1692f-e48f-4e61-8bcb-9bf76a867bf3",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en mi mineur, op. posthume",
+							"TrackPosition": 10,
+							"MediumNumber": 2,
+							"DurationMs": 298573,
+							"RecordingId": "6e6b93ef-be18-483f-87b6-03068a3845a2",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Nocturne en ut mineur, op. posthume",
+							"TrackPosition": 11,
+							"MediumNumber": 2,
+							"DurationMs": 174186,
+							"RecordingId": "1bb3ce3a-2162-4a88-af47-55b7f2a2fd22",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						}
+					]
+				},
+				{
+					"Id": "ba40ed40-dbfe-4a55-b491-f32a1ece4b19",
+					"Title": "The Complete Nocturnes",
+					"Status": "Official",
+					"ReleaseDate": "2004-01-01",
+					"Media": [
+						{
+							"Format": "CD",
+							"Position": 1
+						}
+					],
+					"TrackCount": 22,
+					"Tracks": [
+						{
+							"TrackName": "Berceuse in D-Flat Major Op. 57",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "65c61989-01d9-4f0e-ada1-53d46af21915",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in B-Flat Minor Op. 9-1",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "dc4d1346-2388-418e-baf4-6bced9cc3ad4",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in E-Flat Major Op. 9-2",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "88b6f7b5-1ca5-4965-800e-139681f1eb9c",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in B Major Op. 9-3",
+							"TrackPosition": 4,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "762edfd1-08da-41eb-aafd-b960ba1d852d",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in F Major Op. 15-1",
+							"TrackPosition": 5,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "e01258cd-60ec-487c-9c06-95fb1b0ac6b5",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in F-Sharp Major Op. 15-2",
+							"TrackPosition": 6,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "ba9690b7-c7d0-4c2d-862d-8fef8bc2c3c9",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in G Minor Op. 15-3",
+							"TrackPosition": 7,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "0402a9fe-8d5c-4ec7-bb3b-0384738550bf",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in C-Sharp Minor Op. 27-1",
+							"TrackPosition": 8,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "6121bc44-7c5b-4c81-8986-2ed8addb8a13",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in D-Flat Major Op. 27-2",
+							"TrackPosition": 9,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "e2a67458-43c0-4482-84aa-374641ce58e0",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in B Major Op. 32-1",
+							"TrackPosition": 10,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "71b89dfb-eab9-43b1-bf06-6c90e40b26d3",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in A-Flat Major Op. 32-2",
+							"TrackPosition": 11,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "54bc0e35-8f7c-4a18-aaef-788bcba0c7a7",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in C-Sharp Minor Op. post.",
+							"TrackPosition": 12,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "34f4ea97-a98c-4dad-a742-6c9127e50137",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in G Minor Op. 37-1",
+							"TrackPosition": 13,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "39ef7667-5da6-4880-b645-e5829994882d",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in G Major Op. 37-2",
+							"TrackPosition": 14,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "fbc90bb6-6485-4846-a974-70b1b99008a4",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in C Minor Op. 48-1",
+							"TrackPosition": 15,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "c3422421-c9d3-4748-8138-ea24747c965e",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in F-Sharp Minor Op. 48-2",
+							"TrackPosition": 16,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "d827039e-626a-4f2b-835c-7af9fb2d4189",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in F Minor, Op. 55-1",
+							"TrackPosition": 17,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "06ef44a6-a92a-490f-b11b-8ae90efed9df",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in E-Flat Major Op. 55-2",
+							"TrackPosition": 18,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "b858aa85-2e67-4bf7-bc23-80474eb73269",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in B Major Op. 62-1",
+							"TrackPosition": 19,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "dbe79aca-8605-437c-9b89-052d07f63fff",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in E Major Op. 62-2",
+							"TrackPosition": 20,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "cec1692f-e48f-4e61-8bcb-9bf76a867bf3",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in E Minor Op. post.",
+							"TrackPosition": 21,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "6e6b93ef-be18-483f-87b6-03068a3845a2",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						},
+						{
+							"TrackName": "Nocturne in C Minor Op. post.",
+							"TrackPosition": 22,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "1bb3ce3a-2162-4a88-af47-55b7f2a2fd22",
+							"ArtistId": "563bd20a-60fc-409e-98d2-d47da8fe653c"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "d75cc1ad-16a3-48d5-940e-259906f4ae4e",
+			"title": "Chopin: Les Sylphides / Delibes: Sylvia Suite / Coppelia Suite / Tchaikovsky: Nutcracker Suite",
+			"type": "Album",
+			"secondarytypes": [],
+			"releasedate": "1991-01-01",
+			"artistid": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+			"genres": ["Classical"],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/be0e1b24-71a4-4f79-b9dd-cfbe7b1c9b97/10590635196-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+					"artistname": "Fryderyk Chopin",
+					"sortname": "Chopin, Fryderyk",
+					"artistaliases": [
+						"Frédéric Chopin",
+						"Frederiks Šopēns",
+						"Fryderyk Chopin",
+						"フレデリック・ショパン",
+						"쇼팽",
+						"Frédéric Chopin",
+						"Frédéric Chopin",
+						"Фредерик Шопен",
+						"Frédéric Chopin (1810-1849)",
+						"Шопен",
+						"Fredrik Chopin",
+						"Frederic Chopin",
+						"Frederic Chopion",
+						"Frederic Franciszek Chopin",
+						"Fredric Chopin",
+						"F. Chopin",
+						"Frèdèric Chopin",
+						"Chopin",
+						"F. Chopain",
+						"Frederik Chopin",
+						"Fr d ric Chopin",
+						"Frederyk Chopin",
+						"Frederick Chopin",
+						"Chopin, Frederic",
+						"Fryderyk Szopen",
+						"프레데리크 쇼팽",
+						"Фридерик Шопен",
+						"Ф. Шопен",
+						"Шопен"
+					]
+				},
+				{
+					"id": "a56056f7-4e47-4209-abdc-171331ff1089",
+					"artistname": "Léo Delibes",
+					"sortname": "Delibes, Léo",
+					"artistaliases": [
+						"Delibes, L?o",
+						"Leo Delibes",
+						"l. delibes",
+						"Léo Debiles",
+						"ドリーブ",
+						"Clement Delibes",
+						"Delibes",
+						"レオ・ドリーブ"
+					]
+				},
+				{
+					"id": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9",
+					"artistname": "Пётр Ильич Чайковский",
+					"sortname": "Tchaikovsky, Pyotr Ilyich",
+					"artistaliases": [
+						"Pjotr Tšaikovski",
+						"표트르 일리치 차이콥스키",
+						"Pjotr Tsjajkovskij",
+						"Pjotr Iljitsj Tsjaíkovskíj",
+						"Piotr Czajkowski",
+						"Pjotr Iljitsch Tschaikowski",
+						"بيتر إليتش تشايكوفسكي",
+						"Pjotr Iljitj Tjajkovskij",
+						"Pjotr Tsjaikofski",
+						"Pyotr İlyiç Çaykovski",
+						"Pjotr Tjajkovskij",
+						"彼得·伊里奇·柴可夫斯基",
+						"Pjotr Tšaikovski",
+						"Pjotr Tsjajkovskij",
+						"Piotr Iljič Čajkovskij",
+						"チャイコフスキー",
+						"Pyotr Ilyich Tchaikovsky",
+						"Pjotr Iljitsj Tsjaikovski",
+						"Петро Ілліч Чайковський",
+						"Пётр Чайковский",
+						"Piotr Ilyich Tchaikovski",
+						"Pēteris Čaikovskis",
+						"Pëtr Il’ič Čajkovskij",
+						"Pjotr Iljics Csajkovszkij",
+						"Pjotrs Čaikovskis",
+						"Peter Tschaikovsky",
+						"Piotr Iljitsch Tschaikowski",
+						"彼得·伊里奇·柴科夫斯基",
+						"Tchaikovsky Pyotr Ilyich",
+						"Peter Ilyich Tchaikovsky",
+						"Peter Iljitsch Tschaikowsky",
+						"Peter Tschaikowsky",
+						"Peter Ilich Tchaikovsky",
+						"Peter I. Tschaikowsky",
+						"Piotr Ilitch Tchaïkovski",
+						"Pyotr Tchaikovsky",
+						"Tchaikovsky",
+						"Piotr Ilyich Tchaikovsky",
+						"Peter Tchaikovsky",
+						"Pyotr Il'yich Tchaikovsky",
+						"ピョートル・チャイコフスキー"
+					]
+				}
+			],
+			"Releases": [
+				{
+					"Id": "be0e1b24-71a4-4f79-b9dd-cfbe7b1c9b97",
+					"Title": "Chopin: Les Sylphides / Delibes: Sylvia Suite / Coppelia Suite / Tchaikovsky: Nutcracker Suite",
+					"Status": "Official",
+					"ReleaseDate": "1991-01-01",
+					"Media": [
+						{
+							"Format": "CD",
+							"Position": 1
+						}
+					],
+					"TrackCount": 11,
+					"Tracks": [
+						{
+							"TrackName": "Les Sylphides",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 1534133,
+							"RecordingId": "30fe6edd-8ccc-4b30-9b73-429e05ba5fea",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Sylvia, ou La Nymphe de Diane (Ballet Suite)",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 731026,
+							"RecordingId": "926021de-67dc-4230-b9cf-984a57d35ff1",
+							"ArtistId": "a56056f7-4e47-4209-abdc-171331ff1089"
+						},
+						{
+							"TrackName": "Coppélia, ou La Fille aux Yeux d'émail (Ballet Suite)",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": 862933,
+							"RecordingId": "f55ceb39-ab8b-44b0-9a45-cf6cced4d03b",
+							"ArtistId": "a56056f7-4e47-4209-abdc-171331ff1089"
+						},
+						{
+							"TrackName": "The Nutcracker. op. 71a (Ballet Suite): I. Ouverture Miniature. Allegro giusto",
+							"TrackPosition": 4,
+							"MediumNumber": 1,
+							"DurationMs": 215066,
+							"RecordingId": "82a34f25-c302-454d-908b-f3f33a11b440",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						},
+						{
+							"TrackName": "The Nutcracker. op. 71a (Ballet Suite): IIa. Marche. Tempo di marcia viva",
+							"TrackPosition": 5,
+							"MediumNumber": 1,
+							"DurationMs": 133040,
+							"RecordingId": "40de5bc7-20ec-4187-9445-cf5b5baadb4e",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						},
+						{
+							"TrackName": "The Nutcracker. op. 71a (Ballet Suite): IIb. Danse de la Fee Dragee. Andante non troppo",
+							"TrackPosition": 6,
+							"MediumNumber": 1,
+							"DurationMs": 127026,
+							"RecordingId": "baecc3df-730a-4c7e-ae5e-58cad8fbc835",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						},
+						{
+							"TrackName": "The Nutcracker. op. 71a (Ballet Suite): IIc. Danse Russe Trepak. Tempo di Trepak, molto vivace",
+							"TrackPosition": 7,
+							"MediumNumber": 1,
+							"DurationMs": 71600,
+							"RecordingId": "700106f0-0e68-48b4-b559-42c0d1e0c991",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						},
+						{
+							"TrackName": "The Nutcracker. op. 71a (Ballet Suite): IId. Danse Arabe. Allegretto",
+							"TrackPosition": 8,
+							"MediumNumber": 1,
+							"DurationMs": 216266,
+							"RecordingId": "70732613-f469-4e36-a460-6a07e6aafb42",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						},
+						{
+							"TrackName": "The Nutcracker. op. 71a (Ballet Suite): IIe. Danse Chinoise. Allegro moderato",
+							"TrackPosition": 9,
+							"MediumNumber": 1,
+							"DurationMs": 75866,
+							"RecordingId": "7f877f65-9f2a-4130-a1e7-23ee2ea4592c",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						},
+						{
+							"TrackName": "The Nutcracker. op. 71a (Ballet Suite): IIf. Danse des Mirlitons. Moderato assai",
+							"TrackPosition": 10,
+							"MediumNumber": 1,
+							"DurationMs": 150573,
+							"RecordingId": "fc068bcb-f735-4991-9de3-1efdcb3c1743",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						},
+						{
+							"TrackName": "The Nutcracker. op. 71a (Ballet Suite): III. Valse des Fleurs. Tempo di Valse",
+							"TrackPosition": 11,
+							"MediumNumber": 1,
+							"DurationMs": 412600,
+							"RecordingId": "3d6d2fed-a3e5-4cb3-8991-947c7ebba187",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "9384ab81-6899-4dd7-a291-8b11bce0158b",
+			"title": "Chopin: Les Sylphides / Tchaikovsky: The Sleeping Beauty",
+			"type": "Album",
+			"secondarytypes": [],
+			"releasedate": "0001-01-01",
+			"artistid": "acfa74c8-af58-4327-bbd7-53b81d00d7c2",
+			"genres": [],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/6d453fd9-2644-49eb-ab72-d2b40e66e02f/16273637202-1200.jpg"
+				},
+				{
+					"CoverType": "Disc",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/6d453fd9-2644-49eb-ab72-d2b40e66e02f/16273641316-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+					"artistname": "Fryderyk Chopin",
+					"sortname": "Chopin, Fryderyk",
+					"artistaliases": [
+						"Frédéric Chopin",
+						"Frederiks Šopēns",
+						"Fryderyk Chopin",
+						"フレデリック・ショパン",
+						"쇼팽",
+						"Frédéric Chopin",
+						"Frédéric Chopin",
+						"Фредерик Шопен",
+						"Frédéric Chopin (1810-1849)",
+						"Шопен",
+						"Fredrik Chopin",
+						"Frederic Chopin",
+						"Frederic Chopion",
+						"Frederic Franciszek Chopin",
+						"Fredric Chopin",
+						"F. Chopin",
+						"Frèdèric Chopin",
+						"Chopin",
+						"F. Chopain",
+						"Frederik Chopin",
+						"Fr d ric Chopin",
+						"Frederyk Chopin",
+						"Frederick Chopin",
+						"Chopin, Frederic",
+						"Fryderyk Szopen",
+						"프레데리크 쇼팽",
+						"Фридерик Шопен",
+						"Ф. Шопен",
+						"Шопен"
+					]
+				},
+				{
+					"id": "acfa74c8-af58-4327-bbd7-53b81d00d7c2",
+					"artistname": "Orchestre de la Société des Concerts du Conservatoire",
+					"sortname": "Orchestre de la Société des Concerts du Conservatoire",
+					"artistaliases": [
+						"The Paris Conservatoire Orchestra",
+						"Orquesta del Conservatorio de Paris",
+						"Orchestre de la Société des Concerts Symphonique de Paris",
+						"Paris Conservatory Orchestra",
+						"Orchestre du Conservatoire de Paris",
+						"PCO",
+						"Orchestre De La Societe Des Concerts Du Conservatoiree",
+						"Orchestre du Conservatoire"
+					]
+				},
+				{
+					"id": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9",
+					"artistname": "Пётр Ильич Чайковский",
+					"sortname": "Tchaikovsky, Pyotr Ilyich",
+					"artistaliases": [
+						"Pjotr Tšaikovski",
+						"표트르 일리치 차이콥스키",
+						"Pjotr Tsjajkovskij",
+						"Pjotr Iljitsj Tsjaíkovskíj",
+						"Piotr Czajkowski",
+						"Pjotr Iljitsch Tschaikowski",
+						"بيتر إليتش تشايكوفسكي",
+						"Pjotr Iljitj Tjajkovskij",
+						"Pjotr Tsjaikofski",
+						"Pyotr İlyiç Çaykovski",
+						"Pjotr Tjajkovskij",
+						"彼得·伊里奇·柴可夫斯基",
+						"Pjotr Tšaikovski",
+						"Pjotr Tsjajkovskij",
+						"Piotr Iljič Čajkovskij",
+						"チャイコフスキー",
+						"Pyotr Ilyich Tchaikovsky",
+						"Pjotr Iljitsj Tsjaikovski",
+						"Петро Ілліч Чайковський",
+						"Пётр Чайковский",
+						"Piotr Ilyich Tchaikovski",
+						"Pēteris Čaikovskis",
+						"Pëtr Il’ič Čajkovskij",
+						"Pjotr Iljics Csajkovszkij",
+						"Pjotrs Čaikovskis",
+						"Peter Tschaikovsky",
+						"Piotr Iljitsch Tschaikowski",
+						"彼得·伊里奇·柴科夫斯基",
+						"Tchaikovsky Pyotr Ilyich",
+						"Peter Ilyich Tchaikovsky",
+						"Peter Iljitsch Tschaikowsky",
+						"Peter Tschaikowsky",
+						"Peter Ilich Tchaikovsky",
+						"Peter I. Tschaikowsky",
+						"Piotr Ilitch Tchaïkovski",
+						"Pyotr Tchaikovsky",
+						"Tchaikovsky",
+						"Piotr Ilyich Tchaikovsky",
+						"Peter Tchaikovsky",
+						"Pyotr Il'yich Tchaikovsky",
+						"ピョートル・チャイコフスキー"
+					]
+				}
+			],
+			"Releases": [
+				{
+					"Id": "6d453fd9-2644-49eb-ab72-d2b40e66e02f",
+					"Title": "Chopin: Les Sylphides / Tchaikovsky: The Sleeping Beauty",
+					"Status": "Official",
+					"ReleaseDate": null,
+					"Media": [
+						{
+							"Format": "12\" Vinyl",
+							"Position": 1
+						}
+					],
+					"TrackCount": 12,
+					"Tracks": [
+						{
+							"TrackName": "Les Sylphides: II. Nocturne Op. 32 No. 2",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 280000,
+							"RecordingId": "a6d51832-6978-4dd1-ba9b-5f13602834f3",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: III. Waltz in G-flat major, Op. 70, No. 1",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 112000,
+							"RecordingId": "667d241b-8a11-44d0-83bb-2f151b5f12de",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: IV. Mazurka in D major, Op. 33, No. 2",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": 154000,
+							"RecordingId": "a96255be-6e2a-42e1-8a10-9808c273aad5",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: V. Mazurka in C major, Op. 67, No. 3",
+							"TrackPosition": 4,
+							"MediumNumber": 1,
+							"DurationMs": 109000,
+							"RecordingId": "a0bc25c3-d110-4f1f-a5a5-fe9892ae32dd",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: VI. Prelude in A major, Op. 28, No. 7",
+							"TrackPosition": 5,
+							"MediumNumber": 1,
+							"DurationMs": 151000,
+							"RecordingId": "ad72a824-6af7-4fc3-b119-73a12af15860",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: VII. Waltz in C-sharp minor, Op. 64, No. 2",
+							"TrackPosition": 6,
+							"MediumNumber": 1,
+							"DurationMs": 227000,
+							"RecordingId": "7ae0995d-ca22-4062-82ea-a5cce85fad6f",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: VIII. Grande valse brillante in E-flat major, Op. 18.",
+							"TrackPosition": 7,
+							"MediumNumber": 1,
+							"DurationMs": 371000,
+							"RecordingId": "dea22a58-8654-4925-b6b1-33d3464a6aa7",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Sleeping Beauty, Ballet Suite: I. Act I: Finale (Lilac Fairy)",
+							"TrackPosition": 8,
+							"MediumNumber": 1,
+							"DurationMs": 257000,
+							"RecordingId": "f9bf3975-99e5-4a0c-8d20-0fa7f3ab2622",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						},
+						{
+							"TrackName": "Sleeping Beauty, Ballet Suite: II. Act I: Pas d'action",
+							"TrackPosition": 9,
+							"MediumNumber": 1,
+							"DurationMs": 305000,
+							"RecordingId": "328933da-4d3c-4da7-9040-22e10bdb4d28",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						},
+						{
+							"TrackName": "Sleeping Beauty, Ballet Suite: III. Act III: Pas de caractère (Puss in Boots, White Cat)",
+							"TrackPosition": 10,
+							"MediumNumber": 1,
+							"DurationMs": 105000,
+							"RecordingId": "77d60d00-f83a-427a-9ebd-dc96ab11a6cc",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						},
+						{
+							"TrackName": "Sleeping Beauty, Ballet Suite: IV. Act II. Panorama",
+							"TrackPosition": 11,
+							"MediumNumber": 1,
+							"DurationMs": 130000,
+							"RecordingId": "cc3772c6-dd87-4ff8-95fc-5c465a896483",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						},
+						{
+							"TrackName": "Sleeping Beauty, Ballet Suite: V. Act III: Valse",
+							"TrackPosition": 12,
+							"MediumNumber": 1,
+							"DurationMs": 276000,
+							"RecordingId": "5d2c9a3f-a10a-470e-bd9e-9bd9a819b9a0",
+							"ArtistId": "9ddd7abc-9e1b-471d-8031-583bc6bc8be9"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "5ce3807f-81ba-4cca-aaf6-04a929dd4e5d",
+			"title": "Chopin - Les Brillantes",
+			"type": "Album",
+			"secondarytypes": [],
+			"releasedate": "2010-01-01",
+			"artistid": "e7e96e8d-47fc-4054-b3e3-fa7614d88633",
+			"genres": ["Jazz"],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/12a56e8d-17b4-4d05-99e1-caf9ae91c464/24900143974-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "e7e96e8d-47fc-4054-b3e3-fa7614d88633",
+					"artistname": "Andrzej Jagodziński Trio",
+					"sortname": "Andrzej Jagodziński Trio",
+					"artistaliases": []
+				}
+			],
+			"Releases": [
+				{
+					"Id": "12a56e8d-17b4-4d05-99e1-caf9ae91c464",
+					"Title": "Chopin - Les Brillantes",
+					"Status": "Official",
+					"ReleaseDate": "2010-01-01",
+					"Media": [
+						{
+							"Format": "CD",
+							"Position": 1
+						},
+						{
+							"Format": "CD",
+							"Position": 2
+						}
+					],
+					"TrackCount": 14,
+					"Tracks": [
+						{
+							"TrackName": "Prelude in E Minor Op. 28 Nr 4",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 582000,
+							"RecordingId": "58915f02-17b8-4533-b936-8dbd47548083",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Nocturne in E Flat Major Op. 9 Nr 2",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 519000,
+							"RecordingId": "79627985-8e75-4253-a050-1232571b3a68",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Etude in B Minor Op. 25 Nr 10",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": 575000,
+							"RecordingId": "5946a12e-5bee-4123-bcfc-4751ae3bdb60",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Mazurka in F Minor Op. 68 Nr 4",
+							"TrackPosition": 4,
+							"MediumNumber": 1,
+							"DurationMs": 316000,
+							"RecordingId": "0a05b3cf-8587-4988-babd-e803fb321d4b",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Prelude in C Minor Op. 28 Nr 20",
+							"TrackPosition": 5,
+							"MediumNumber": 1,
+							"DurationMs": 446000,
+							"RecordingId": "8c9c16f5-5d3c-47c0-829f-beac6b7d4830",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Nocturne in B Major Op. 9 Nr 3",
+							"TrackPosition": 6,
+							"MediumNumber": 1,
+							"DurationMs": 327000,
+							"RecordingId": "f66e25b9-cfbc-41f7-8289-659322227c06",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Polonaise in C Sharp Minor Op. 26 Nr 1",
+							"TrackPosition": 1,
+							"MediumNumber": 2,
+							"DurationMs": 508000,
+							"RecordingId": "74308021-628f-4abb-8f42-b48bfab65abc",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Polonaise in C Minor Op. 40 Nr 2",
+							"TrackPosition": 2,
+							"MediumNumber": 2,
+							"DurationMs": 476000,
+							"RecordingId": "fb94fcd3-f13c-46d9-9efa-7981cfd9d233",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Nocturne in F Sharp Minor Op. 48 Nr 2",
+							"TrackPosition": 3,
+							"MediumNumber": 2,
+							"DurationMs": 440000,
+							"RecordingId": "cee9c618-9144-490c-91df-5f193cbe1e5e",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Polonaise-Fantasia in a Flat Major Op. 61",
+							"TrackPosition": 4,
+							"MediumNumber": 2,
+							"DurationMs": 608000,
+							"RecordingId": "fdb4918a-5d52-4225-9974-e31e938f10c3",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Prelude in B Minor Op. 28 Nr 6",
+							"TrackPosition": 5,
+							"MediumNumber": 2,
+							"DurationMs": 385000,
+							"RecordingId": "68a32e47-1942-4f62-887c-b5fb7fd7a4e8",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Etude in a Minor Op. 10 Nr 2",
+							"TrackPosition": 6,
+							"MediumNumber": 2,
+							"DurationMs": 256000,
+							"RecordingId": "b6cf1e14-f1d7-428c-a6d5-0dbd940c4531",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Mazurka in G Minor Op. 67 Nr 2",
+							"TrackPosition": 7,
+							"MediumNumber": 2,
+							"DurationMs": 263000,
+							"RecordingId": "b2248249-1f77-4788-8230-35c0ce1c5333",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						},
+						{
+							"TrackName": "Waltz in D Flat Major Op. 64 Nr 1",
+							"TrackPosition": 8,
+							"MediumNumber": 2,
+							"DurationMs": 175000,
+							"RecordingId": "d3e210a4-7cdf-4626-ba53-239bb61c6aaf",
+							"ArtistId": "e7e96e8d-47fc-4054-b3e3-fa7614d88633"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "7eb05152-3a01-470b-b11a-223960de15f0",
+			"title": "Chopin: Les sylphides / Strauss: Graduation Ball / Ponchielli: Dance of the Hours",
+			"type": "Album",
+			"secondarytypes": ["Compilation"],
+			"releasedate": "2026-02-20",
+			"artistid": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+			"genres": [],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/dd953bb4-1852-4b34-b402-f86e11dc00f4/44893548518-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "d8c01b12-f5bc-4365-848f-878c445cefe8",
+					"artistname": "Amilcare Ponchielli",
+					"sortname": "Ponchielli, Amilcare",
+					"artistaliases": [
+						"Ponchieli",
+						"Amilcare Ponchielle",
+						"Ponchelli",
+						"A. Ponchieli",
+						"ポンキエッリ",
+						"Amilcare Ponichielli",
+						"A. Ponichelli",
+						"Amilcare Poncielli",
+						"Ponchielli"
+					]
+				},
+				{
+					"id": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+					"artistname": "Fryderyk Chopin",
+					"sortname": "Chopin, Fryderyk",
+					"artistaliases": [
+						"Frédéric Chopin",
+						"Frederiks Šopēns",
+						"Fryderyk Chopin",
+						"フレデリック・ショパン",
+						"쇼팽",
+						"Frédéric Chopin",
+						"Frédéric Chopin",
+						"Фредерик Шопен",
+						"Frédéric Chopin (1810-1849)",
+						"Шопен",
+						"Fredrik Chopin",
+						"Frederic Chopin",
+						"Frederic Chopion",
+						"Frederic Franciszek Chopin",
+						"Fredric Chopin",
+						"F. Chopin",
+						"Frèdèric Chopin",
+						"Chopin",
+						"F. Chopain",
+						"Frederik Chopin",
+						"Fr d ric Chopin",
+						"Frederyk Chopin",
+						"Frederick Chopin",
+						"Chopin, Frederic",
+						"Fryderyk Szopen",
+						"프레데리크 쇼팽",
+						"Фридерик Шопен",
+						"Ф. Шопен",
+						"Шопен"
+					]
+				},
+				{
+					"id": "8255db36-4902-4cf6-8612-0f2b4288bc9a",
+					"artistname": "Johann Strauss",
+					"sortname": "Strauss, Johann",
+					"artistaliases": [
+						"Johans Štrauss",
+						"Johann Strauß",
+						"J.シュトラウスII",
+						"스트라우스",
+						"Johann Strauss (Sohn)",
+						"J.シュトラウス II",
+						"Johann Strauß Jr.",
+						"J.Štrauss",
+						"Johann Strauss, Jr.",
+						"Johann Strauss the Younger",
+						"Johann Sebastian Strauss",
+						"Johann Strauss II",
+						"Johann Strauss (Son)",
+						"Johann Strauss (fils)",
+						"Иоганн Штраус (сын)",
+						"Johann Strauss (II)",
+						"ヨハン・シュトラウス",
+						"ヨハン・シュトラウス2世",
+						"Strauss"
+					]
+				}
+			],
+			"Releases": [
+				{
+					"Id": "dd953bb4-1852-4b34-b402-f86e11dc00f4",
+					"Title": "Chopin: Les sylphides / Strauss: Graduation Ball / Ponchielli: Dance of the Hours",
+					"Status": "Official",
+					"ReleaseDate": "2026-02-20",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 22,
+					"Tracks": [
+						{
+							"TrackName": "Les Sylphides: Prelude in A major, op. 28 no. 7 (Orch. Jacob)",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 117120,
+							"RecordingId": "ce46119b-af06-43c6-ae10-e3e49e290b86",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: Nocturne in A‐flat major, op. 32 no. 2 (Orch. Jacob)",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 390120,
+							"RecordingId": "e1eaebc9-12fa-4409-86a4-69cdeebd2efc",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: Waltz in G‐flat major, op. 70 no. 1 (Orch. Jacob)",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": 137440,
+							"RecordingId": "07d0cfa3-3dce-486c-b406-61bae776eb2d",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: Mazurka in D major, op. 33 no. 2 (Orch. Jacob)",
+							"TrackPosition": 4,
+							"MediumNumber": 1,
+							"DurationMs": 167346,
+							"RecordingId": "8dea6ebb-3e6a-49da-bbe9-b7644469eb3d",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: Mazurka in C major, op. 67 no. 3 (Orch. Jacob)",
+							"TrackPosition": 5,
+							"MediumNumber": 1,
+							"DurationMs": 125000,
+							"RecordingId": "7c456dad-1196-442c-b725-2284c8260f1e",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: Prelude in A major, op. 28 no. 7 (Reprise) [Orch. Jacob]",
+							"TrackPosition": 6,
+							"MediumNumber": 1,
+							"DurationMs": 181400,
+							"RecordingId": "0b6904fd-68bf-4e72-8eef-40218d1162a9",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: Waltz in C‐sharp minor, op. 64 no. 2 (Orch. Jacob)",
+							"TrackPosition": 7,
+							"MediumNumber": 1,
+							"DurationMs": 268480,
+							"RecordingId": "360fed70-feea-4866-b627-14c0a90570a8",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: Grande valse brillante in E‐flat major, op. 18 (Orch. Jacob)",
+							"TrackPosition": 8,
+							"MediumNumber": 1,
+							"DurationMs": 332253,
+							"RecordingId": "6014114c-73fb-4ac3-8b6e-abfb6ff896d9",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "La Gioconda, op. 9, Act 3: Dance of the Hours",
+							"TrackPosition": 9,
+							"MediumNumber": 1,
+							"DurationMs": 586053,
+							"RecordingId": "90f3c90b-754d-4565-b8ef-e4e168911291",
+							"ArtistId": "d8c01b12-f5bc-4365-848f-878c445cefe8"
+						},
+						{
+							"TrackName": "Graduation Ball: I. Introduction",
+							"TrackPosition": 10,
+							"MediumNumber": 1,
+							"DurationMs": 38746,
+							"RecordingId": "5b93279a-757f-4a07-93c5-07bf6f5bce1e",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						},
+						{
+							"TrackName": "Graduation Ball: II. Waltz of the Girls",
+							"TrackPosition": 11,
+							"MediumNumber": 1,
+							"DurationMs": 284746,
+							"RecordingId": "a4ca6675-a2b8-41ac-a45e-788b5e79c682",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						},
+						{
+							"TrackName": "Graduation Ball: III. Arrival of the Cadets",
+							"TrackPosition": 12,
+							"MediumNumber": 1,
+							"DurationMs": 108893,
+							"RecordingId": "dd1167fd-009f-4bd1-b3cf-d9a0303d87e0",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						},
+						{
+							"TrackName": "Graduation Ball: IV. Announcement of the Show",
+							"TrackPosition": 13,
+							"MediumNumber": 1,
+							"DurationMs": 128399,
+							"RecordingId": "34dd5ef7-46eb-4df5-bc0e-997d840ede61",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						},
+						{
+							"TrackName": "Graduation Ball: V. Quick March - Drummer’s Dance",
+							"TrackPosition": 14,
+							"MediumNumber": 1,
+							"DurationMs": 138440,
+							"RecordingId": "10f4dc7f-35d6-466e-b78b-f15e70d172b0",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						},
+						{
+							"TrackName": "Graduation Ball: VI. Romantic pas de deux",
+							"TrackPosition": 15,
+							"MediumNumber": 1,
+							"DurationMs": 221080,
+							"RecordingId": "fc6cc94d-3d18-4bdb-a399-8cd08c4a441d",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						},
+						{
+							"TrackName": "Graduation Ball: VII. Quick Waltz",
+							"TrackPosition": 16,
+							"MediumNumber": 1,
+							"DurationMs": 117920,
+							"RecordingId": "4934392c-84b8-4874-892f-d42135f4cef6",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						},
+						{
+							"TrackName": "Graduation Ball: VIII. Perpetuum mobile",
+							"TrackPosition": 17,
+							"MediumNumber": 1,
+							"DurationMs": 182360,
+							"RecordingId": "44a97c8d-ece2-4166-a902-eec70dea9139",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						},
+						{
+							"TrackName": "Graduation Ball: IX. Mazurka",
+							"TrackPosition": 18,
+							"MediumNumber": 1,
+							"DurationMs": 104240,
+							"RecordingId": "13d7096a-b60a-4025-81b1-509a6ecd58a8",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						},
+						{
+							"TrackName": "Graduation Ball: X. Grand galop",
+							"TrackPosition": 19,
+							"MediumNumber": 1,
+							"DurationMs": 270453,
+							"RecordingId": "84449cb2-8d64-4b63-ab05-d44ca63801d1",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						},
+						{
+							"TrackName": "Perpetuum mobile, op. 257",
+							"TrackPosition": 20,
+							"MediumNumber": 1,
+							"DurationMs": 222386,
+							"RecordingId": "bcb856b0-9df4-466d-b2e5-648ff2b6bbcc",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						},
+						{
+							"TrackName": "Unter Donner und Blitz, op. 324",
+							"TrackPosition": 21,
+							"MediumNumber": 1,
+							"DurationMs": 190480,
+							"RecordingId": "e9d4dffd-7466-445f-aef0-749519b73fb7",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						},
+						{
+							"TrackName": "Tritsch‐Tratsch‐Polka, op. 214",
+							"TrackPosition": 22,
+							"MediumNumber": 1,
+							"DurationMs": 159786,
+							"RecordingId": "7436dc44-e707-4a48-9495-6fd621112302",
+							"ArtistId": "8255db36-4902-4cf6-8612-0f2b4288bc9a"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "a266fea2-1838-4c29-91cd-265d8684e055",
+			"title": "Delibes: Coppelia-Ballettsuite / Chopin: Les Sylphides",
+			"type": "Album",
+			"secondarytypes": [],
+			"releasedate": "1990-05-25",
+			"artistid": "a56056f7-4e47-4209-abdc-171331ff1089",
+			"genres": [],
+			"images": [],
+			"artists": [
+				{
+					"id": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7",
+					"artistname": "Fryderyk Chopin",
+					"sortname": "Chopin, Fryderyk",
+					"artistaliases": [
+						"Frédéric Chopin",
+						"Frederiks Šopēns",
+						"Fryderyk Chopin",
+						"フレデリック・ショパン",
+						"쇼팽",
+						"Frédéric Chopin",
+						"Frédéric Chopin",
+						"Фредерик Шопен",
+						"Frédéric Chopin (1810-1849)",
+						"Шопен",
+						"Fredrik Chopin",
+						"Frederic Chopin",
+						"Frederic Chopion",
+						"Frederic Franciszek Chopin",
+						"Fredric Chopin",
+						"F. Chopin",
+						"Frèdèric Chopin",
+						"Chopin",
+						"F. Chopain",
+						"Frederik Chopin",
+						"Fr d ric Chopin",
+						"Frederyk Chopin",
+						"Frederick Chopin",
+						"Chopin, Frederic",
+						"Fryderyk Szopen",
+						"프레데리크 쇼팽",
+						"Фридерик Шопен",
+						"Ф. Шопен",
+						"Шопен"
+					]
+				},
+				{
+					"id": "a56056f7-4e47-4209-abdc-171331ff1089",
+					"artistname": "Léo Delibes",
+					"sortname": "Delibes, Léo",
+					"artistaliases": [
+						"Delibes, L?o",
+						"Leo Delibes",
+						"l. delibes",
+						"Léo Debiles",
+						"ドリーブ",
+						"Clement Delibes",
+						"Delibes",
+						"レオ・ドリーブ"
+					]
+				}
+			],
+			"Releases": [
+				{
+					"Id": "8a9780c5-c74b-431c-a40d-07b2d32b93a3",
+					"Title": "Delibes: Coppelia-Ballettsuite / Chopin: Les Sylphides",
+					"Status": "Official",
+					"ReleaseDate": "1990-05-25",
+					"Media": [
+						{
+							"Format": "CD",
+							"Position": 1
+						}
+					],
+					"TrackCount": 14,
+					"Tracks": [
+						{
+							"TrackName": "Coppélia: 1. Prélude et Mazurka",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 402000,
+							"RecordingId": "87aff811-61c2-4403-9b77-465ab469ae13",
+							"ArtistId": "a56056f7-4e47-4209-abdc-171331ff1089"
+						},
+						{
+							"TrackName": "Coppélia: 2. Scène et Valse de Swanhilde",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 220000,
+							"RecordingId": "a7c1faa7-cb74-48d3-9ead-fe5187a665a3",
+							"ArtistId": "a56056f7-4e47-4209-abdc-171331ff1089"
+						},
+						{
+							"TrackName": "Coppélia: 3. Czárdás",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": 259000,
+							"RecordingId": "719a2043-6bee-4a27-bc60-9ac0cc692cdf",
+							"ArtistId": "a56056f7-4e47-4209-abdc-171331ff1089"
+						},
+						{
+							"TrackName": "Coppélia: 4. Scène et Valse de la Poupée",
+							"TrackPosition": 4,
+							"MediumNumber": 1,
+							"DurationMs": 257000,
+							"RecordingId": "87ba9818-fac0-4147-bff9-ca0757a6f1fa",
+							"ArtistId": "a56056f7-4e47-4209-abdc-171331ff1089"
+						},
+						{
+							"TrackName": "Coppélia: 5. Ballade",
+							"TrackPosition": 5,
+							"MediumNumber": 1,
+							"DurationMs": 167000,
+							"RecordingId": "02c6b28f-49f9-4796-a6e6-294b28e2a79f",
+							"ArtistId": "a56056f7-4e47-4209-abdc-171331ff1089"
+						},
+						{
+							"TrackName": "Coppélia: 6. Variation sur un thème slave",
+							"TrackPosition": 6,
+							"MediumNumber": 1,
+							"DurationMs": 399000,
+							"RecordingId": "26469c12-ad3f-4ab2-9446-e31f6ccd174b",
+							"ArtistId": "a56056f7-4e47-4209-abdc-171331ff1089"
+						},
+						{
+							"TrackName": "Les Sylphides: 1. Prélude",
+							"TrackPosition": 7,
+							"MediumNumber": 1,
+							"DurationMs": 86000,
+							"RecordingId": "dbda92d7-047a-4d2d-bdef-05c7005baff7",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: 2. Nocturne",
+							"TrackPosition": 8,
+							"MediumNumber": 1,
+							"DurationMs": 357000,
+							"RecordingId": "449e0b29-b9f7-42b8-92ca-4bb4bb996312",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: 3. Valse",
+							"TrackPosition": 9,
+							"MediumNumber": 1,
+							"DurationMs": 136000,
+							"RecordingId": "756cc3fb-a1d2-4c7a-8bc6-dbf4f9eb1ed8",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: 4. Mazurka",
+							"TrackPosition": 10,
+							"MediumNumber": 1,
+							"DurationMs": 192000,
+							"RecordingId": "1a09b083-d124-4f06-bf76-fc127e3c6d7f",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: 5. Mazurka",
+							"TrackPosition": 11,
+							"MediumNumber": 1,
+							"DurationMs": 118000,
+							"RecordingId": "a30431e1-f015-4732-a043-68e06154e05f",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: 6. Prélude",
+							"TrackPosition": 12,
+							"MediumNumber": 1,
+							"DurationMs": 126000,
+							"RecordingId": "4c84170e-b529-4ff9-a748-1794f653d5a5",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: 7. Valse",
+							"TrackPosition": 13,
+							"MediumNumber": 1,
+							"DurationMs": 269000,
+							"RecordingId": "8c192179-a377-4bb9-b62f-0c183138a51c",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						},
+						{
+							"TrackName": "Les Sylphides: 8. Valse",
+							"TrackPosition": 14,
+							"MediumNumber": 1,
+							"DurationMs": 361000,
+							"RecordingId": "b7c09e16-e629-4ac8-a88d-d89ac9f4d260",
+							"ArtistId": "09ff1fe8-d61c-4b98-bb82-18487c74d7b7"
+						}
+					]
+				}
+			]
+		}
+	]
+}

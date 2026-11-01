@@ -1,0 +1,770 @@
+{
+	"_source": "GET https://api.lidarr.audio/api/v0.4/search?type=album&query=Bebe%20Rexha%20The%20Lost%20Songs, read 2026-11-01. The answer is an array, kept in order under \"albums\"; each album trimmed to the fields DMM reads, as in album-48e8b712-4f5d-34e0-9492-22f936854662.json.",
+	"albums": [
+		{
+			"id": "16bf2afc-c40b-4ca1-a021-d27ac9eb7b6c",
+			"title": "The Lost Songs",
+			"type": "Other",
+			"secondarytypes": ["Demo"],
+			"releasedate": "2020-01-04",
+			"artistid": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+			"genres": [],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/bf4e0bb5-31ef-4f70-bf35-22f625ebf993/26493610552-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+					"artistname": "Bebe Rexha",
+					"sortname": "Rexha, Bebe",
+					"artistaliases": []
+				}
+			],
+			"Releases": [
+				{
+					"Id": "bf4e0bb5-31ef-4f70-bf35-22f625ebf993",
+					"Title": "The Lost Songs",
+					"Status": "Bootleg",
+					"ReleaseDate": "2020-01-04",
+					"Media": [
+						{
+							"Format": "Data CD",
+							"Position": 1
+						}
+					],
+					"TrackCount": 17,
+					"Tracks": [
+						{
+							"TrackName": "Mama",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 148000,
+							"RecordingId": "85d3513f-d577-4b30-bdd4-4d00242ca6cf",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Don't Grow Up",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 217000,
+							"RecordingId": "dd4f0364-e294-43a2-8d85-3b2255c9d049",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Hard And Steady",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": 231000,
+							"RecordingId": "2936b4f8-6c3a-4d33-a48a-40849f388df6",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Kiss Me (Die Tonight)",
+							"TrackPosition": 4,
+							"MediumNumber": 1,
+							"DurationMs": 220000,
+							"RecordingId": "64f75076-9cc0-408a-9768-48c20514c627",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Rome Is Burning",
+							"TrackPosition": 5,
+							"MediumNumber": 1,
+							"DurationMs": 226000,
+							"RecordingId": "e799ad93-105e-46ab-b3fb-c362ed0d8dab",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Your're A Bitch",
+							"TrackPosition": 6,
+							"MediumNumber": 1,
+							"DurationMs": 202000,
+							"RecordingId": "d83ad71f-bf48-4648-a233-c63d738b4762",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "My Money",
+							"TrackPosition": 7,
+							"MediumNumber": 1,
+							"DurationMs": 150000,
+							"RecordingId": "573586b2-ba12-4179-b9e3-af2faddfa5ab",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Comeback Kids",
+							"TrackPosition": 8,
+							"MediumNumber": 1,
+							"DurationMs": 213000,
+							"RecordingId": "8bfc9c1c-27dc-451e-a87a-ce916d1f2d8c",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Dead Man Walking",
+							"TrackPosition": 9,
+							"MediumNumber": 1,
+							"DurationMs": 240000,
+							"RecordingId": "7018691d-c353-401c-8103-d1a57cdb18f8",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Ride Till You Die",
+							"TrackPosition": 10,
+							"MediumNumber": 1,
+							"DurationMs": 248000,
+							"RecordingId": "6aabac47-0d63-4b0e-86bc-fe00e133a1c7",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Guaranteed For Life",
+							"TrackPosition": 11,
+							"MediumNumber": 1,
+							"DurationMs": 172000,
+							"RecordingId": "30fb5a5c-3967-463c-8e83-0ba6b3b98e7d",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Don't Know",
+							"TrackPosition": 12,
+							"MediumNumber": 1,
+							"DurationMs": 218000,
+							"RecordingId": "86dac5e6-76e7-4d81-a6d0-56b6d113a4fc",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Worst Way",
+							"TrackPosition": 13,
+							"MediumNumber": 1,
+							"DurationMs": 185000,
+							"RecordingId": "90865248-870d-4f74-aec1-7099673d058b",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Mistake Like You",
+							"TrackPosition": 14,
+							"MediumNumber": 1,
+							"DurationMs": 168000,
+							"RecordingId": "1af55a1a-e853-4934-a0ed-97383eb26895",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "I Don't Need Anything",
+							"TrackPosition": 15,
+							"MediumNumber": 1,
+							"DurationMs": 207000,
+							"RecordingId": "a26d8ce0-c314-4418-b868-de1086ee2464",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Fell In Love With A Stranger",
+							"TrackPosition": 16,
+							"MediumNumber": 1,
+							"DurationMs": 197000,
+							"RecordingId": "4f028045-fe07-4bfe-b0c3-b6269d247e81",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "Champagne",
+							"TrackPosition": 17,
+							"MediumNumber": 1,
+							"DurationMs": 284000,
+							"RecordingId": "e36d5ffa-2d8a-43fc-9a77-9fd0dec20549",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "6da766e4-7e0c-4ffc-bd61-77bf70acb491",
+			"title": "Home",
+			"type": "Single",
+			"secondarytypes": [],
+			"releasedate": "2017-11-16",
+			"artistid": "f6af669a-56ea-448a-a044-de76181ada33",
+			"genres": ["Hip Hop"],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/45b9b52f-ad5d-4b95-87a0-2e4cae282809/45848046346-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "f6af669a-56ea-448a-a044-de76181ada33",
+					"artistname": "mgk",
+					"sortname": "mgk",
+					"artistaliases": ["Machine Gun Kelly", "Colson Baker", "MGK", "mgk"]
+				}
+			],
+			"Releases": [
+				{
+					"Id": "45b9b52f-ad5d-4b95-87a0-2e4cae282809",
+					"Title": "Home",
+					"Status": "Official",
+					"ReleaseDate": "2017-11-18",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "Home",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 202000,
+							"RecordingId": "2e51b62a-8220-4252-901e-e16f3a0ad5c3",
+							"ArtistId": "f6af669a-56ea-448a-a044-de76181ada33"
+						}
+					]
+				},
+				{
+					"Id": "06037af8-eabb-4a0e-b4e3-065dcab9498e",
+					"Title": "Home",
+					"Status": "Official",
+					"ReleaseDate": "2017-11-16",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "Home",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 202000,
+							"RecordingId": "2e51b62a-8220-4252-901e-e16f3a0ad5c3",
+							"ArtistId": "f6af669a-56ea-448a-a044-de76181ada33"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "5c20f54b-6d96-4a41-a7e7-f6e74bfa7e78",
+			"title": "Live Without You (Bebe Rexha X Don Diablo X The Chainsmokers)",
+			"type": "Single",
+			"secondarytypes": [],
+			"releasedate": "2019-06-25",
+			"artistid": "0c408cbd-a84b-4bd5-9a5e-f6b8fa788f6f",
+			"genres": [],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/24c2d0d0-0cfb-488d-8ba0-23937363d2ee/42710239440-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "0c408cbd-a84b-4bd5-9a5e-f6b8fa788f6f",
+					"artistname": "Trademark",
+					"sortname": "Trademark",
+					"artistaliases": ["DJ Trademark"]
+				}
+			],
+			"Releases": [
+				{
+					"Id": "24c2d0d0-0cfb-488d-8ba0-23937363d2ee",
+					"Title": "Live Without You (Bebe Rexha X Don Diablo X The Chainsmokers)",
+					"Status": "Official",
+					"ReleaseDate": "2019-06-25",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "Live Without You (Bebe Rexha X Don Diablo X The Chainsmokers)",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 179507,
+							"RecordingId": "89222bed-cd0c-4b18-81f4-bff21997ab04",
+							"ArtistId": "0c408cbd-a84b-4bd5-9a5e-f6b8fa788f6f"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "e9a5ec84-e364-44fa-8889-1aa961dd0c3f",
+			"title": "The Last Show in California (Bebe Rexha vs. Queen vs. Eagles vs. Nelly)",
+			"type": "Single",
+			"secondarytypes": [],
+			"releasedate": "2019-03-10",
+			"artistid": "f9a2b0e6-b913-48ba-8cf4-389ab143a7f1",
+			"genres": [],
+			"images": [],
+			"artists": [
+				{
+					"id": "f9a2b0e6-b913-48ba-8cf4-389ab143a7f1",
+					"artistname": "Chester W.",
+					"sortname": "Chester W.",
+					"artistaliases": []
+				}
+			],
+			"Releases": [
+				{
+					"Id": "4e0f6d83-d803-456d-ae39-14d5377b40c7",
+					"Title": "The Last Show in California (Bebe Rexha vs. Queen vs. Eagles vs. Nelly)",
+					"Status": "Official",
+					"ReleaseDate": "2019-03-10",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "The Last Show in California (Bebe Rexha vs. Queen vs. Eagles vs. Nelly)",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": null,
+							"RecordingId": "ca0c0c97-13ac-42a5-829b-cecfaad9f0b1",
+							"ArtistId": "f9a2b0e6-b913-48ba-8cf4-389ab143a7f1"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "fc09f234-36f4-42d1-877a-0626c0024c46",
+			"title": "I’m the Drama",
+			"type": "Single",
+			"secondarytypes": [],
+			"releasedate": "2024-06-28",
+			"artistid": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+			"genres": [],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/dcddfdc1-41cc-40e6-a9fc-609513292cd9/39263390650-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+					"artistname": "Bebe Rexha",
+					"sortname": "Rexha, Bebe",
+					"artistaliases": []
+				}
+			],
+			"Releases": [
+				{
+					"Id": "dcddfdc1-41cc-40e6-a9fc-609513292cd9",
+					"Title": "I’m the Drama",
+					"Status": "Official",
+					"ReleaseDate": "2024-06-28",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "I’m the Drama",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 156255,
+							"RecordingId": "8b2505f1-e7eb-469a-bc46-f0ec427c2ee7",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "383fdbea-acf6-4128-ac0e-8f9af3cdd3d4",
+			"title": "It's On (The Official Song of the FIFA Club World Cup Saudi Arabia 2023™)",
+			"type": "Single",
+			"secondarytypes": [],
+			"releasedate": "2023-12-18",
+			"artistid": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+			"genres": [],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/ac867e55-bbea-42c8-a6b3-e328961fb73e/37717617771-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+					"artistname": "Bebe Rexha",
+					"sortname": "Rexha, Bebe",
+					"artistaliases": []
+				}
+			],
+			"Releases": [
+				{
+					"Id": "ac867e55-bbea-42c8-a6b3-e328961fb73e",
+					"Title": "It's On (The Official Song of the FIFA Club World Cup Saudi Arabia 2023™)",
+					"Status": "Official",
+					"ReleaseDate": "2023-12-18",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "It's On (The Official Song of the FIFA Club World Cup Saudi Arabia 2023™)",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 174434,
+							"RecordingId": "83f6ed4c-23b7-474a-954b-369b551bcdc6",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "831c9ad3-e1b0-470e-b93f-94a1a1055117",
+			"title": "The Way I Are (Dance with Somebody)",
+			"type": "Single",
+			"secondarytypes": [],
+			"releasedate": "2017-05-19",
+			"artistid": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+			"genres": ["Contemporary R&B", "Pop"],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/77c1ccd5-3eaa-414c-9abf-1da0e7f72191/16759862320-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+					"artistname": "Bebe Rexha",
+					"sortname": "Rexha, Bebe",
+					"artistaliases": []
+				}
+			],
+			"Releases": [
+				{
+					"Id": "bdc40169-c0be-49df-a858-508547d2ca16",
+					"Title": "The Way I Are (Dance with Somebody) (DallasK remix)",
+					"Status": "Official",
+					"ReleaseDate": "2017-07-28",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "The Way I Are (Dance with Somebody) (DallasK remix)",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 182626,
+							"RecordingId": "ee50d84e-3c46-4489-b09b-7d7d4959dbc1",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						}
+					]
+				},
+				{
+					"Id": "77c1ccd5-3eaa-414c-9abf-1da0e7f72191",
+					"Title": "The Way I Are (Dance with Somebody)",
+					"Status": "Official",
+					"ReleaseDate": "2017-05-19",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "The Way I Are (Dance with Somebody)",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 188000,
+							"RecordingId": "dfe4be7e-37b3-4c9f-a383-c82ef74e74a4",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						}
+					]
+				},
+				{
+					"Id": "a8501ffc-2b2e-48a2-8c77-9752075a2247",
+					"Title": "The Way I Are (Dance with Somebody)",
+					"Status": "Official",
+					"ReleaseDate": "2017-07-14",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "The Way I Are (Dance with Somebody)",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 183826,
+							"RecordingId": "a0ca43ed-7283-4604-b96b-9764ac7548c1",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						}
+					]
+				},
+				{
+					"Id": "8d6e32a2-45ac-4cf1-b0bf-cd7df7b866f4",
+					"Title": "The Way I Are (Dance With Somebody) (DallasK remix)",
+					"Status": "Official",
+					"ReleaseDate": "2017-07-28",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "The Way I Are (Dance with Somebody) (DallasK remix)",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 182626,
+							"RecordingId": "ee50d84e-3c46-4489-b09b-7d7d4959dbc1",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "0c939bc9-df97-418f-8c70-0122ceb429ad",
+			"title": "You Can’t Stop the Girl",
+			"type": "Single",
+			"secondarytypes": [],
+			"releasedate": "2019-09-20",
+			"artistid": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+			"genres": [],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/8ccd9cbd-4f88-489c-9eea-a9cabe656674/24474144485-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+					"artistname": "Bebe Rexha",
+					"sortname": "Rexha, Bebe",
+					"artistaliases": []
+				}
+			],
+			"Releases": [
+				{
+					"Id": "8ccd9cbd-4f88-489c-9eea-a9cabe656674",
+					"Title": "You Can’t Stop the Girl",
+					"Status": "Official",
+					"ReleaseDate": "2019-09-20",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "You Can’t Stop the Girl",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 158000,
+							"RecordingId": "d8989abc-50a7-43e9-b96d-4026a64c7201",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "1db5fc73-6ab0-415d-a0a6-ca14685b1912",
+			"title": "I'm Good (Blue) / One in a Million (Live at the 2023 Billboard Music Awards)",
+			"type": "Single",
+			"secondarytypes": ["Live"],
+			"releasedate": "2023-11-20",
+			"artistid": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+			"genres": [],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/58330281-25b5-4f15-8482-9bf909a5d299/44599140950-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+					"artistname": "Bebe Rexha",
+					"sortname": "Rexha, Bebe",
+					"artistaliases": []
+				}
+			],
+			"Releases": [
+				{
+					"Id": "58330281-25b5-4f15-8482-9bf909a5d299",
+					"Title": "I'm Good (Blue) / One in a Million (Live at the 2023 Billboard Music Awards)",
+					"Status": "Bootleg",
+					"ReleaseDate": "2023-11-20",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 2,
+					"Tracks": [
+						{
+							"TrackName": "I'm Good (Blue) (2023 Billboard Music Awards)",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 157000,
+							"RecordingId": "1816158e-3624-407c-896f-a301493aed9b",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "One In a Million (2023 Billboard Music Awards)",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 154000,
+							"RecordingId": "bed886f4-ec60-4729-92e2-8d279f39442b",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						}
+					]
+				}
+			]
+		},
+		{
+			"id": "2d875010-afaa-4f76-8989-af7cbd2cf0be",
+			"title": "No Broken Hearts",
+			"type": "Single",
+			"secondarytypes": [],
+			"releasedate": "2016-03-16",
+			"artistid": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+			"genres": ["Pop"],
+			"images": [
+				{
+					"CoverType": "Cover",
+					"Url": "https://images.lidarr.audio/cache/https://coverartarchive.org/release/c68abc54-3779-48d6-bc41-d2cf9d0eb7ff/15188651436-1200.jpg"
+				}
+			],
+			"artists": [
+				{
+					"id": "db8fad3a-e131-47a1-8782-c2ee93708cdd",
+					"artistname": "Bebe Rexha",
+					"sortname": "Rexha, Bebe",
+					"artistaliases": []
+				}
+			],
+			"Releases": [
+				{
+					"Id": "96987b42-c399-471a-8895-ae5954eb7aa5",
+					"Title": "No Broken Hearts: The Remixes",
+					"Status": "Official",
+					"ReleaseDate": "2016-06-17",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 3,
+					"Tracks": [
+						{
+							"TrackName": "No Broken Hearts (Ruby Rose remix)",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 312373,
+							"RecordingId": "60117032-db46-4c51-9461-f79ce2e76b88",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "No Broken Hearts (Jordan XL remix)",
+							"TrackPosition": 2,
+							"MediumNumber": 1,
+							"DurationMs": 273707,
+							"RecordingId": "3d89b13a-a73f-4184-88cd-3402870c4b0d",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						},
+						{
+							"TrackName": "No Broken Hearts (Elephante remix)",
+							"TrackPosition": 3,
+							"MediumNumber": 1,
+							"DurationMs": 205453,
+							"RecordingId": "46f8f1ee-c3d8-40d4-a3fe-a475811a9f52",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						}
+					]
+				},
+				{
+					"Id": "c68abc54-3779-48d6-bc41-d2cf9d0eb7ff",
+					"Title": "No Broken Hearts",
+					"Status": "Official",
+					"ReleaseDate": "2016-03-16",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "No Broken Hearts",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 240000,
+							"RecordingId": "d37cf4c0-635b-47d0-a5e3-089480aba58a",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						}
+					]
+				},
+				{
+					"Id": "b2ba5832-68ac-493a-be5a-ce1ffcbd37cb",
+					"Title": "No Broken Hearts",
+					"Status": "Official",
+					"ReleaseDate": "2016-03-16",
+					"Media": [
+						{
+							"Format": "Digital Media",
+							"Position": 1
+						}
+					],
+					"TrackCount": 1,
+					"Tracks": [
+						{
+							"TrackName": "No Broken Hearts",
+							"TrackPosition": 1,
+							"MediumNumber": 1,
+							"DurationMs": 239991,
+							"RecordingId": "d37cf4c0-635b-47d0-a5e3-089480aba58a",
+							"ArtistId": "db8fad3a-e131-47a1-8782-c2ee93708cdd"
+						}
+					]
+				}
+			]
+		}
+	]
+}

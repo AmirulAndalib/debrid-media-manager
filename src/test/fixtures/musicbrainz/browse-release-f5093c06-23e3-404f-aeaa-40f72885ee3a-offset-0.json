@@ -1,0 +1,1461 @@
+{
+	"_source": "GET https://musicbrainz.org/ws/2/release?release-group=f5093c06-23e3-404f-aeaa-40f72885ee3a&inc=media&limit=100&offset=0&fmt=json, read 2026-11-01: Pink Floyd, The Dark Side of the Moon, 152 releases. Trimmed to the fields DMM reads (release: id, title, status, date, media position/format/track-count), keys MusicBrainz left out still left out; order and counts as served.",
+	"release-count": 152,
+	"release-offset": 0,
+	"releases": [
+		{
+			"id": "01aa589c-a7cb-45bd-89a3-c2cb8ddab0a9",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1978-06-05",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "03683c48-eb9e-47a8-bcdf-d5e5bae93de3",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1979-06",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "0373a8a1-843e-4a4b-8919-fca2de16986a",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1994",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "0cae1eb4-b159-4d03-8719-1f5bb40bcd2f",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2003-03-31",
+			"media": [
+				{
+					"position": 1,
+					"format": "Hybrid SACD (CD layer)",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "Hybrid SACD (SACD layer, 2 channels)",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "Hybrid SACD (SACD layer, multichannel)",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "10600476-3b48-4709-a91d-3fdf6d2455e6",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1988",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "106ec6c3-1a30-336f-9572-65cc0e47109d",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1984-08",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "1295cd4c-bcee-33ac-8b1b-48c98c04718e",
+			"title": "狂気",
+			"status": "Official",
+			"date": "2001-06-16",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "12fb801c-5903-4a99-a10c-7af599fe3986",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2011-09-26",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "CD",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "DVD-Video",
+					"track-count": 30
+				},
+				{
+					"position": 4,
+					"format": "DVD-Video",
+					"track-count": 28
+				},
+				{
+					"position": 5,
+					"format": "Blu-ray",
+					"track-count": 58
+				},
+				{
+					"position": 6,
+					"format": "CD",
+					"track-count": 16
+				}
+			]
+		},
+		{
+			"id": "144883ae-fabb-45e3-acd1-c43107f661d2",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1994",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "1a2a37a4-2ee5-3aa8-b1bf-4976dbb8007c",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2003-03-31",
+			"media": [
+				{
+					"position": 1,
+					"format": "Hybrid SACD (CD layer)",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "Hybrid SACD (SACD layer, 2 channels)",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "Hybrid SACD (SACD layer, multichannel)",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "1c04f98c-6c5e-4e4f-ab40-4ea5a3f09c86",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2011-09-26",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "1c3ea255-3cc5-4861-9864-81e3bceb4443",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "Cassette",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "1dd9f622-b1f7-41c4-ae20-74fd46bd1b24",
+			"title": "Dark Side of the Moon",
+			"status": "Official",
+			"date": "1994",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "24824319-9bb8-3d1e-a2c5-b8b864dafd1b",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "25fbfbb4-b1ee-4448-aadf-ae3bc2e2dd27",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1994",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "2755bfc1-9438-4ae8-8a49-3f820dbca482",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1993-03-08",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "29e1c397-5030-4d89-ae02-95b849d8d596",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1974-12-20",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "2b53df77-f0ea-4597-994b-a79861af8796",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2011-09-26",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 20
+				}
+			]
+		},
+		{
+			"id": "3081d6e7-bb1c-3d90-ad1f-4e939582e3c0",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2003-03-29",
+			"media": [
+				{
+					"position": 1,
+					"format": "Hybrid SACD (CD layer)",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "Hybrid SACD (SACD layer, 2 channels)",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "Hybrid SACD (SACD layer, multichannel)",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "31e77643-b595-4c26-a967-ee4f34ed44b9",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2003",
+			"media": [
+				{
+					"position": 1,
+					"format": "Hybrid SACD (CD layer)",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "Hybrid SACD (SACD layer, 2 channels)",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "Hybrid SACD (SACD layer, multichannel)",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "33078c7e-cc8d-4084-b5b3-09ab5b0e0a74",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1987",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "330e4267-eaf9-4d68-8938-146bd427ed0e",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "8-Track Cartridge",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "35bd2c37-d3d2-34b8-bdf5-5afa0693e4b9",
+			"title": "狂気",
+			"status": "Official",
+			"date": "1993-04-28",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "3e5ae0f7-f7e2-493b-b1a8-3cf595c06a1d",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1983",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "3f15055a-8fcd-435c-b434-19b6caa1e1d6",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2013",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "3fde611f-de09-46c9-8233-731b3e2ed76f",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "4534f168-c25e-4d84-9da6-4fb26a261640",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "4f9afe70-3c77-4ad7-a52e-d0e07dc1efcf",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1993",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "4fef4027-2245-47f9-b102-950f58306d56",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1977",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "556e8d5d-6cbc-3292-ba42-3d8408c5977c",
+			"title": "狂気",
+			"status": "Official",
+			"date": "1996-03-27",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "57a2c82e-d8ea-4733-a5c4-13c114e3a894",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1983",
+			"media": [
+				{
+					"position": 1,
+					"format": "Cassette",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "586ff28d-c0fc-4a50-ba18-d7152680417d",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2013",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "58fd6184-9753-3843-8cee-b79507583298",
+			"title": "狂気",
+			"status": "Official",
+			"date": "1993-03-31",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "5937d458-d92c-4bab-bb4e-17ea1efa8a28",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2011-09-27",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "5eeac1d5-febe-4b81-a98d-ad7577c6562c",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2011-09-26",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "Digital Media",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "Digital Media",
+					"track-count": 3
+				},
+				{
+					"position": 4,
+					"format": "Digital Media",
+					"track-count": 1
+				}
+			]
+		},
+		{
+			"id": "61288af4-6fdb-42be-b94e-7e7b90258951",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1978",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "6151d934-4eb2-3b51-8868-c18440b9864d",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1981",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "61f09e6c-b63d-433d-a928-11faeb283081",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1991-07-22",
+			"media": [
+				{
+					"position": 1,
+					"format": "Cassette",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "63632ed1-964b-47bb-a365-fdef550864d5",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2011-09-28",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "65d67b87-f13a-4f1f-9efa-6d80975921a6",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "Cassette",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "68e536bc-a621-3d82-b3ba-b6923617a168",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1994-07-25",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "68edcb7b-02d9-3781-9a29-ff59554521f4",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2006-09-06",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "6ef6e6cd-ad36-4c2f-816d-121bfb2f6774",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2011-09-26",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "6f69054c-cde6-446b-9c0e-fbbefd1197b2",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "77084e55-c1db-4805-9998-6a03d688e8e2",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1988",
+			"media": [
+				{
+					"position": 1,
+					"format": "Cassette",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "7cf17389-df89-4605-baee-818bb816ba04",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1993",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "7d48e73f-b054-4d50-a3fe-e2beaecfdd4f",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2011-09-26",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "7f6d3088-837d-495e-905f-be5c70ac2d82",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1983-05-21",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "86a0a552-74ec-4a5e-ab8f-bfd9a73af726",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2011-11-27",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "8d17f5db-b9d0-4e35-9a06-9e1bffebc5be",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1986",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "8ede3645-4d20-4ca6-a4e3-4e9179115968",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "93314fd5-5f6e-422b-9ee5-d8daa9945657",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1994",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "956fbc58-362d-43b8-b880-3779e0508559",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1977",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "96a7097a-1600-405a-a22e-5c02a720fb49",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2011-09-27",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "CD",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "DVD",
+					"track-count": 50
+				},
+				{
+					"position": 4,
+					"format": "DVD",
+					"track-count": 28
+				},
+				{
+					"position": 5,
+					"format": "Blu-ray",
+					"track-count": 79
+				},
+				{
+					"position": 6,
+					"format": "CD",
+					"track-count": 16
+				}
+			]
+		},
+		{
+			"id": "96f28a60-32ec-4df2-8c71-b9210220783a",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1974",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "9a4df5ff-faa2-4e62-8542-dc7684e62bf2",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2003",
+			"media": [
+				{
+					"position": 1,
+					"format": "Hybrid SACD (CD layer)",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "Hybrid SACD (SACD layer, 2 channels)",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "Hybrid SACD (SACD layer, multichannel)",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "9cf0c97d-0cd4-4538-ac8a-4a5fd87ab218",
+			"title": "The Dark Side of the Moon",
+			"status": "Bootleg",
+			"date": "2000",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 13
+				}
+			]
+		},
+		{
+			"id": "9d5bba27-d014-4bae-a4c1-dba0532ec51a",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2011-09-28",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "9f5b28e3-2e51-4926-abcc-4039e92fe38c",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1986",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "a0f8ed51-882c-451c-8dbc-31f0daf276f7",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1988",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "a1170afd-e95f-3975-ad26-e04c70d6a42b",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1993",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "a2b62291-2981-4409-b024-44d5be206346",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2011",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "a302011c-2b1d-4e55-9ba1-a59646fb1f0b",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1993",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "a773d9ee-9930-4bf8-8e79-51a755396e25",
+			"title": "Dark Side of the Moon",
+			"status": "Official",
+			"date": "2010",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "aaf8e5cb-bd5d-33f9-ac7b-f8e4402070ab",
+			"title": "狂気",
+			"status": "Official",
+			"date": "2000-08-30",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "b02a0c0a-3027-4f26-ba2d-3905f228a0d5",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "b437bbe8-8d04-43f7-83a0-8325cc77071a",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1997-02-14",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "b84ee12a-09ef-421b-82de-0441a926375b",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973-03-24",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "b8ee4313-2915-40f1-913d-ac0315b4ba3d",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973-12",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "badcfda9-2ca8-32e5-a68b-c9a3cf807502",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1993",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "be455c19-7ee4-4c66-b9c0-044ff6ded837",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2007",
+			"media": [
+				{
+					"position": 1,
+					"format": "Hybrid SACD (CD layer)",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "Hybrid SACD (SACD layer, 2 channels)",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "Hybrid SACD (SACD layer, multichannel)",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "be839a57-416d-4a7d-ae07-afcae215371f",
+			"title": "The Dark Side of the Moon (AudioPhil edition)",
+			"status": "Bootleg",
+			"date": "2011-08-17",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "bf774f1d-1379-4ed4-81f2-c28d99fac037",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2007",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "c0f74d5a-7534-414d-8b90-0ebe6c5da19e",
+			"title": "The Dark Side of the Moon",
+			"status": "Bootleg",
+			"date": "1998",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 14
+				},
+				{
+					"position": 2,
+					"format": "CD",
+					"track-count": 14
+				}
+			]
+		},
+		{
+			"id": "c712a2bc-1e57-46c1-9432-8b9a33dc4159",
+			"title": "Dark Side of the Moon",
+			"status": "Official",
+			"date": "1994-07-25",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "c7bb40b0-ec9e-36bd-a35e-8495243e288b",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2003",
+			"media": [
+				{
+					"position": 1,
+					"format": "Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "c8050a51-9716-40b0-924e-82843164d81c",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1988-12-21",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "cbaebadf-ba04-4bf8-a9b7-4c90caebd05f",
+			"title": "The Dark Side of the Moon",
+			"status": "Bootleg",
+			"date": "2003",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 13
+				}
+			]
+		},
+		{
+			"id": "d060c05f-1b72-458d-9147-90047550e31a",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1993",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "d36ec77b-13b3-4fdf-bdc4-235a07cd7e6f",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1993",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "d48328c9-8dd2-49ee-afd3-77b569f66205",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "d5088e04-945d-3332-b752-26a40c7e7754",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1986",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "d78ce42f-3a88-39fb-80d2-2d22bea0d358",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2006-03-08",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "d800f372-9673-4edf-8046-8baf79134257",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1988",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "d82cb4cf-929d-4b18-af5b-77d9478b606c",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2011-09-28",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "CD",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "df8fe008-36fa-332d-bca2-8b1c745c09ad",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2003-03-25",
+			"media": [
+				{
+					"position": 1,
+					"format": "Hybrid SACD (CD layer)",
+					"track-count": 10
+				},
+				{
+					"position": 2,
+					"format": "Hybrid SACD (SACD layer, 2 channels)",
+					"track-count": 10
+				},
+				{
+					"position": 3,
+					"format": "Hybrid SACD (SACD layer, multichannel)",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "dfd839f7-4741-36cf-af82-a1a1e797714e",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1986-05",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "e1464abb-80ee-402f-9c49-aed3f73003f0",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1984",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "e2958fed-eb3d-43e4-a824-65ba7995b80f",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "e541eddf-7c4f-4b7c-a7cd-557f7b19f27a",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "2013",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "e54fa99c-e11f-44f7-a834-a497b63a71a5",
+			"title": "The Dark Side of the Moon",
+			"status": "Withdrawn",
+			"date": "2003",
+			"media": [
+				{
+					"position": 1,
+					"format": "Digital Media",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "e9216a3b-ee97-3464-88e3-887796c2c29b",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1985",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "e92282b9-8963-4362-87b3-bbc990d40360",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1993",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "e9e63904-9ada-47ee-93df-7b25a97774b9",
+			"title": "Dark Side of the Moon",
+			"status": "Official",
+			"date": "1994",
+			"media": []
+		},
+		{
+			"id": "ed20c227-4e15-45dd-899f-b417670880ec",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1993",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "ee8122c5-237c-4b43-bc18-6e71b0fe3266",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1994",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "ef6aff99-9a42-4dd6-b2db-c0e51bddb52c",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "fc07d51d-8b86-30d4-b70f-452fe7dcb13c",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1994-07-25",
+			"media": [
+				{
+					"position": 1,
+					"format": "CD",
+					"track-count": 9
+				}
+			]
+		},
+		{
+			"id": "fc941a7d-eb66-4f5d-aa14-01857f997168",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		},
+		{
+			"id": "fd7d8f8e-c894-4088-a7b4-4a66057f41ee",
+			"title": "The Dark Side of the Moon",
+			"status": "Official",
+			"date": "1973",
+			"media": [
+				{
+					"position": 1,
+					"format": "12\" Vinyl",
+					"track-count": 10
+				}
+			]
+		}
+	]
+}

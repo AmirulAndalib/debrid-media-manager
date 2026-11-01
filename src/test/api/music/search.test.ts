@@ -152,6 +152,8 @@ describe('/api/music/search', () => {
 		expect(sql.some((s) => s.includes('MATCH(t.title) AGAINST (? IN BOOLEAN MODE)'))).toBe(
 			true
 		);
+		// Disc 0 holds other releases' titles, not the album's tracklist.
+		expect(sql.some((s) => s.includes('WHERE t.disc > 0 AND MATCH(t.title)'))).toBe(true);
 		expect(queries().every((query) => !query.values.includes('brutal love'))).toBe(true);
 		expect(queries().some((query) => query.values.includes('+brutal* +love*'))).toBe(true);
 	});

@@ -110,21 +110,45 @@ export function formatTrackTitle(filename: string): string {
 export type TrackMetadata = { disc: number; position: number; title: string };
 
 const TITLE_SIMILARITY = 0.8;
-const normalizeTitle = (title: string) => title.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '');
+// Disc 0 holds the titles of the group's other releases, so a file the chosen
+// release leaves untitled takes one of them only when the names agree outright.
+const POOL_SIMILARITY = 1;
+export const normalizeTitle = (title: string) =>
+	title.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '');
+const similarity = (filename: string, title: string) => {
+	const a = normalizeTitle(formatTrackTitle(filename));
+	const b = normalizeTitle(title);
+	return 1 - distance(a, b) / Math.max(a.length, b.length, 1);
+};
 
-function similarTitle<T extends TrackMetadata>(filename: string, tracks: T[]): T | null {
-	const title = normalizeTitle(formatTrackTitle(filename));
+/**
+ * The track whose title is most like the file's name, at least `threshold`
+ * alike, else null; null too when two differently named tracks fit it equally
+ * ("Take Three" is as far from "take 3" as from "take 6").
+ */
+export function similarTitle<T extends TrackMetadata>(
+	filename: string,
+	tracks: T[],
+	threshold = TITLE_SIMILARITY
+): T | null {
 	let best: T | null = null;
-	let bestScore = TITLE_SIMILARITY;
+	let bestScore = threshold;
+	let tied = false;
 	for (const track of tracks) {
-		const other = normalizeTitle(track.title);
-		const score = 1 - distance(title, other) / Math.max(title.length, other.length, 1);
-		if (score >= bestScore) {
+		const score = similarity(filename, track.title);
+		if (score > bestScore || (score === bestScore && !best)) {
 			best = track;
 			bestScore = score;
+			tied = false;
+		} else if (
+			score === bestScore &&
+			best &&
+			normalizeTitle(track.title) !== normalizeTitle(best.title)
+		) {
+			tied = true;
 		}
 	}
-	return best;
+	return tied ? null : best;
 }
 
 /**
@@ -132,9 +156,23 @@ function similarTitle<T extends TrackMetadata>(filename: string, tracks: T[]): T
  * be album order), or null. Same count: by position. Otherwise by disc and
  * track number, but only when that cannot be ambiguous (the file names its
  * disc or the release has one, and no two files share both: a box set repeats
- * them album after album), then by title.
+ * them album after album, and most of a disc's names do not fit other tracks
+ * better: a release laid out otherwise), unless another track's title fits
+ * the file's name better; then by title. A file still untitled may take a disc-0 title (see
+ * POOL_SIMILARITY), which is never a place on a disc.
  */
 export function matchTrackMetadata<T extends TrackMetadata>(
+	files: { disc?: number | null; trackNumber: number | null; filename: string }[],
+	tracks: T[]
+): (T | null)[] {
+	const pool = tracks.filter((track) => track.disc === 0);
+	return matchRelease(
+		files,
+		tracks.filter((track) => track.disc > 0)
+	).map((match, i) => match ?? similarTitle(files[i].filename, pool, POOL_SIMILARITY));
+}
+
+function matchRelease<T extends TrackMetadata>(
 	files: { disc?: number | null; trackNumber: number | null; filename: string }[],
 	tracks: T[]
 ): (T | null)[] {
@@ -148,10 +186,25 @@ export function matchTrackMetadata<T extends TrackMetadata>(
 		return disc === null || file.trackNumber === null ? null : `${disc}-${file.trackNumber}`;
 	});
 	const byNumber = new Set(keys).size === keys.length;
-	return files.map(
-		(file, i) =>
-			(byNumber
-				? ordered.find((track) => `${track.disc}-${track.position}` === keys[i])
-				: null) ?? similarTitle(file.filename, ordered)
+	const numbered = keys.map((key) =>
+		byNumber ? ordered.find((track) => `${track.disc}-${track.position}` === key) : undefined
 	);
+	const titled = files.map((file) => similarTitle(file.filename, ordered));
+	// A disc laid out otherwise than the release's: most of its files' names fit
+	// other tracks than their numbers give, so its numbers are not trusted.
+	const contradicted = new Map<number | null | undefined, number>();
+	files.forEach((file, i) => {
+		if (!numbered[i]) return;
+		const vote = titled[i] && titled[i] !== numbered[i] ? 1 : -1;
+		contradicted.set(file.disc, (contradicted.get(file.disc) ?? 0) + vote);
+	});
+	return files.map((file, i) => {
+		const number = (contradicted.get(file.disc) ?? 0) > 0 ? undefined : numbered[i];
+		const title = titled[i];
+		return title &&
+			(!number ||
+				similarity(file.filename, title.title) > similarity(file.filename, number.title))
+			? title
+			: (number ?? null);
+	});
 }

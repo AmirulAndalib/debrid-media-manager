@@ -1,5 +1,14 @@
 import handler from '@/pages/api/music/library';
-import { enrichment, MbRelease, MbReleaseGroup } from '@/services/musicBrainz';
+import {
+	enrichment,
+	fromLidarr,
+	LidarrAlbum,
+	MbRelease,
+	MbReleaseGroup,
+	pickRelease,
+	titlePool,
+} from '@/services/musicBrainz';
+import monkeesAlbum from '@/test/fixtures/lidarr/album-48e8b712-4f5d-34e0-9492-22f936854662.json';
 import monkees from '@/test/fixtures/music/library-dc925f67cd67936b4a8fbeb17d6decb648fd3479.json';
 import catalog from '@/test/fixtures/musicbrainz/catalog-2026-11-01.json';
 import release from '@/test/fixtures/musicbrainz/release-08205eae-c9e3-4174-8d69-2a67d742a19c.json';
@@ -7,6 +16,7 @@ import monkeesRelease from '@/test/fixtures/musicbrainz/release-0c6324c1-5968-46
 import group from '@/test/fixtures/musicbrainz/release-group-4853b957-05f2-457b-ba47-18b2565abc69.json';
 import monkeesGroup from '@/test/fixtures/musicbrainz/release-group-48e8b712-4f5d-34e0-9492-22f936854662.json';
 import { createMockRequest, createMockResponse } from '@/test/utils/api';
+import { discTrackCounts, getFilename } from '@/utils/musicTracks';
 import type { Prisma } from '@prisma/client';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -463,6 +473,66 @@ describe('/api/music/library', () => {
 				});
 				expect(tracks.slice(12).map((t: any) => t.title)).toEqual(Array(49).fill(null));
 				expect(tracks.map((t: any) => [t.disc, t.trackNumber])).toEqual(discs);
+			});
+
+			it("titles every disc from Lidarr's releases of the group once enriched from them", async () => {
+				// What the backfill stores from Lidarr's answer: the release it picks,
+				// and every other title of the group's releases under disc 0.
+				const { group: rg, releases } = fromLidarr(monkeesAlbum as unknown as LidarrAlbum);
+				const paths = monkees.files.map((f) => f.path);
+				const picked = pickRelease(
+					rg,
+					discTrackCounts(paths),
+					paths.map(getFilename),
+					releases
+				);
+				const { metadata, tracks: chosen } = enrichment(
+					monkees.mbid,
+					rg,
+					releases.find((r) => r.id === picked?.id)!
+				);
+				const tracklist = [...chosen, ...titlePool(monkees.mbid, rg, releases, chosen)];
+				mockedPrisma.musicTrackMetadata.findMany.mockResolvedValue(tracklist as any);
+
+				const served = (
+					await album(files, {
+						hash: monkees.hash,
+						mbid: monkees.mbid,
+						fileCount: BigInt(61),
+						mbTrackCount: metadata.mbTrackCount,
+					})
+				).albums[0];
+				const { tracks } = served;
+
+				expect(picked).toMatchObject({ rule: 'titles' });
+				expect(tracks.slice(12, 15).map((t: any) => t.title)).toEqual([
+					'(Theme From) The Monkees (mono mix)',
+					'Saturday’s Child (mono mix)',
+					'I Wanna Be Free (mono mix)',
+				]);
+				expect(tracks.find((t: any) => t.path.includes('03_02'))?.title).toBe(
+					'(Theme From) The Monkees (TV version)'
+				);
+				expect(tracks.find((t: any) => t.path.includes('04_10'))?.title).toBe(
+					'Jokes (mono backing track)'
+				);
+				expect(tracks.filter((t: any) => t.title)).toHaveLength(47);
+				// On the files' own discs, never on disc 0; a title found on another disc
+				// of the release leaves the file its own number.
+				expect(tracks.map((t: any) => t.disc)).toEqual(discs.map(([disc]) => disc));
+				expect(
+					['02_01', '02_13', '03_01', '04_10'].map((name) => {
+						const track = tracks.find((t: any) => t.path.includes(name));
+						return [track.disc, track.trackNumber];
+					})
+				).toEqual([
+					[2, 1],
+					[2, 13],
+					[3, 1],
+					[4, 10],
+				]);
+				// 61 files of a 100-track release: not a pack.
+				expect(served).toMatchObject({ mbTrackCount: 100, pack: false });
 			});
 		});
 	});

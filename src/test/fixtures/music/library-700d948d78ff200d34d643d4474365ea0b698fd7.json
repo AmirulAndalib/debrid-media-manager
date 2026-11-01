@@ -1,0 +1,111 @@
+{
+	"_source": "GET https://debridmediamanager.com/api/music/library?hash=700d948d78ff200d34d643d4474365ea0b698fd7, read 2026-11-01: Led Zeppelin II as a 2-disc deluxe torrent (Disc 1: 9 files, Disc 2: 8), enriched then with the 9-track album, its 17 audio files in the order served, as AvailableMusicFile rows (RD links left out). trackNumber is null: the API serves the matched position, not the stored number, and every file names its own.",
+	"album": "Led Zeppelin II",
+	"artist": "Led Zeppelin",
+	"files": [
+		{
+			"file_id": 8,
+			"path": "/Disc 1/01. Whole Lotta Love.flac",
+			"bytes": 133203047,
+			"trackNumber": null
+		},
+		{
+			"file_id": 2,
+			"path": "/Disc 1/02. What Is and What Should Never Be.flac",
+			"bytes": 109643588,
+			"trackNumber": null
+		},
+		{
+			"file_id": 5,
+			"path": "/Disc 1/03. The Lemon Song.flac",
+			"bytes": 158030522,
+			"trackNumber": null
+		},
+		{
+			"file_id": 3,
+			"path": "/Disc 1/04. Thank You.flac",
+			"bytes": 113428462,
+			"trackNumber": null
+		},
+		{
+			"file_id": 7,
+			"path": "/Disc 1/05. Heartbreaker.flac",
+			"bytes": 102741513,
+			"trackNumber": null
+		},
+		{
+			"file_id": 10,
+			"path": "/Disc 1/06. Living Loving Maid (She's Just a Woman).flac",
+			"bytes": 65928980,
+			"trackNumber": null
+		},
+		{
+			"file_id": 6,
+			"path": "/Disc 1/07. Ramble On.flac",
+			"bytes": 105418322,
+			"trackNumber": null
+		},
+		{
+			"file_id": 9,
+			"path": "/Disc 1/08. Moby Dick.flac",
+			"bytes": 99210297,
+			"trackNumber": null
+		},
+		{
+			"file_id": 4,
+			"path": "/Disc 1/09. Bring It on Home.flac",
+			"bytes": 99750983,
+			"trackNumber": null
+		},
+		{
+			"file_id": 18,
+			"path": "/Disc 2/01. Whole Lotta Love.flac",
+			"bytes": 128328651,
+			"trackNumber": null
+		},
+		{
+			"file_id": 15,
+			"path": "/Disc 2/02. What Is and What Should Never Be.flac",
+			"bytes": 104427528,
+			"trackNumber": null
+		},
+		{
+			"file_id": 16,
+			"path": "/Disc 2/03. Thank You.flac",
+			"bytes": 90789338,
+			"trackNumber": null
+		},
+		{
+			"file_id": 13,
+			"path": "/Disc 2/04. Heartbreaker.flac",
+			"bytes": 95710159,
+			"trackNumber": null
+		},
+		{
+			"file_id": 17,
+			"path": "/Disc 2/05. Living Loving Maid (She's Just a Woman).flac",
+			"bytes": 69043910,
+			"trackNumber": null
+		},
+		{
+			"file_id": 12,
+			"path": "/Disc 2/06. Ramble On.flac",
+			"bytes": 99610193,
+			"trackNumber": null
+		},
+		{
+			"file_id": 14,
+			"path": "/Disc 2/07. Moby Dick.flac",
+			"bytes": 35535542,
+			"trackNumber": null
+		},
+		{
+			"file_id": 11,
+			"path": "/Disc 2/08. La La.flac",
+			"bytes": 93748382,
+			"trackNumber": null
+		}
+	],
+	"hash": "700d948d78ff200d34d643d4474365ea0b698fd7",
+	"mbid": "33b4653d-006e-3cc1-8afb-386b15a6cd6e"
+}

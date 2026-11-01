@@ -1,0 +1,111 @@
+{
+	"_source": "GET https://debridmediamanager.com/api/music/library?hash=1f254b553c732b3ed3d76144f438835283728777, read 2026-11-01: Bebe Rexha, The Lost Songs, its 17 audio files in the order served, as AvailableMusicFile rows (RD links left out). trackNumber is null: the API serves the matched position, not the stored number, and every file names its own.",
+	"album": "The Lost Songs",
+	"artist": "Bebe Rexha",
+	"files": [
+		{
+			"file_id": 1,
+			"path": "/01 Mama.mp3",
+			"bytes": 5989937,
+			"trackNumber": null
+		},
+		{
+			"file_id": 2,
+			"path": "/02 Don't Grow Up.mp3",
+			"bytes": 8754746,
+			"trackNumber": null
+		},
+		{
+			"file_id": 3,
+			"path": "/03 Hard And Steady.mp3",
+			"bytes": 9282422,
+			"trackNumber": null
+		},
+		{
+			"file_id": 4,
+			"path": "/04 Kiss Me (Die Tonight).mp3",
+			"bytes": 8851931,
+			"trackNumber": null
+		},
+		{
+			"file_id": 5,
+			"path": "/05 Rome Is Burning.mp3",
+			"bytes": 9101672,
+			"trackNumber": null
+		},
+		{
+			"file_id": 6,
+			"path": "/06 You're A Bitch.mp3",
+			"bytes": 8135123,
+			"trackNumber": null
+		},
+		{
+			"file_id": 7,
+			"path": "/07 My Money.mp3",
+			"bytes": 6044276,
+			"trackNumber": null
+		},
+		{
+			"file_id": 8,
+			"path": "/08 Comeback Kids.mp3",
+			"bytes": 8564575,
+			"trackNumber": null
+		},
+		{
+			"file_id": 9,
+			"path": "/09 Dead Man Walking.mp3",
+			"bytes": 9672170,
+			"trackNumber": null
+		},
+		{
+			"file_id": 10,
+			"path": "/10 Ride Till You Die.mp3",
+			"bytes": 9976236,
+			"trackNumber": null
+		},
+		{
+			"file_id": 11,
+			"path": "/11 Guaranteed For Life.mp3",
+			"bytes": 6926181,
+			"trackNumber": null
+		},
+		{
+			"file_id": 12,
+			"path": "/12 Dont Know.mp3",
+			"bytes": 8764147,
+			"trackNumber": null
+		},
+		{
+			"file_id": 13,
+			"path": "/13 Worst Way.mp3",
+			"bytes": 7440261,
+			"trackNumber": null
+		},
+		{
+			"file_id": 14,
+			"path": "/14 Mistake Like You.mp3",
+			"bytes": 6758994,
+			"trackNumber": null
+		},
+		{
+			"file_id": 15,
+			"path": "/15 I Don't Need Anything.mp3",
+			"bytes": 8325301,
+			"trackNumber": null
+		},
+		{
+			"file_id": 16,
+			"path": "/16 Fell In Love With A Stranger.mp3",
+			"bytes": 7920933,
+			"trackNumber": null
+		},
+		{
+			"file_id": 17,
+			"path": "/17 Champagne.mp3",
+			"bytes": 11403559,
+			"trackNumber": null
+		}
+	],
+	"hash": "1f254b553c732b3ed3d76144f438835283728777",
+	"mbid": "16bf2afc-c40b-4ca1-a021-d27ac9eb7b6c"
+}
