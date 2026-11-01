@@ -11,7 +11,8 @@ interface TrackListItemProps {
 	isCurrentTrack: boolean;
 	isPlaying: boolean;
 	onPlay: () => void;
-	onDownload: (track: MusicTrack) => Promise<void>;
+	/** A download button on the row; without it the row's menu holds the download. */
+	onDownload?: (track: MusicTrack) => Promise<void>;
 	onRemove?: () => void;
 	showRemove?: boolean;
 	removeLabel?: string;
@@ -20,6 +21,10 @@ interface TrackListItemProps {
 	onMenu?: (e: MouseEvent) => void;
 	isLiked?: boolean;
 	onToggleLike?: () => void;
+	/** The album's artist under the title: an album's own page leaves it out. */
+	showArtist?: boolean;
+	/** The # column: the track's own number unless the list ranks it. */
+	number?: number;
 }
 
 export default function TrackListItem({
@@ -37,6 +42,8 @@ export default function TrackListItem({
 	onMenu,
 	isLiked = false,
 	onToggleLike,
+	showArtist = true,
+	number,
 }: TrackListItemProps) {
 	const [isDownloading, setIsDownloading] = useState(false);
 
@@ -45,7 +52,7 @@ export default function TrackListItem({
 
 	const handleDownload = async (e: React.MouseEvent) => {
 		e.stopPropagation();
-		if (isDownloading) return;
+		if (isDownloading || !onDownload) return;
 		setIsDownloading(true);
 		try {
 			await onDownload(track);
@@ -84,7 +91,7 @@ export default function TrackListItem({
 						<span
 							className={`block font-mono text-gray-500 group-hover:hidden ${isCurrentTrack ? 'text-green-500' : ''}`}
 						>
-							{track.trackNumber ?? index + 1}
+							{number ?? track.trackNumber ?? index + 1}
 						</span>
 						<Play className="hidden h-4 w-4 group-hover:block" fill="currentColor" />
 					</>
@@ -97,12 +104,14 @@ export default function TrackListItem({
 				>
 					{trackTitle(track)}
 				</span>
-				<span className="truncate text-xs text-gray-500 group-hover:text-gray-400">
-					{album.artist}
-				</span>
+				{showArtist && (
+					<span className="truncate text-xs text-gray-500 group-hover:text-gray-400">
+						{album.artist}
+					</span>
+				)}
 			</div>
 
-			<span className="font-mono text-sm text-gray-500 group-hover:text-gray-400">
+			<span className="w-16 text-right font-mono text-sm text-gray-500 group-hover:text-gray-400">
 				{track.durationMs != null
 					? formatDuration(track.durationMs / 1000)
 					: formatSize(track.bytes)}
@@ -136,21 +145,23 @@ export default function TrackListItem({
 						<Heart className="h-4 w-4" fill={isLiked ? 'currentColor' : 'none'} />
 					</span>
 				)}
-				<span
-					onClick={handleDownload}
-					className={`${wideOnly} items-center justify-center rounded-full p-1.5 transition-all duration-200 ${
-						isDownloading
-							? 'text-green-500'
-							: 'text-gray-500 hover:bg-white/10 hover:text-white'
-					}`}
-					title="Download"
-				>
-					{isDownloading ? (
-						<Loader2 className="h-4 w-4 animate-spin" />
-					) : (
-						<Download className="h-4 w-4" />
-					)}
-				</span>
+				{onDownload && (
+					<span
+						onClick={handleDownload}
+						className={`${wideOnly} items-center justify-center rounded-full p-1.5 transition-all duration-200 ${
+							isDownloading
+								? 'text-green-500'
+								: 'text-gray-500 hover:bg-white/10 hover:text-white'
+						}`}
+						title="Download"
+					>
+						{isDownloading ? (
+							<Loader2 className="h-4 w-4 animate-spin" />
+						) : (
+							<Download className="h-4 w-4" />
+						)}
+					</span>
+				)}
 				{showRemove && onRemove && (
 					<span
 						onClick={(e) => {

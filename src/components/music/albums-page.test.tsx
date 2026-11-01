@@ -245,7 +245,7 @@ describe('music page', () => {
 	it('records a play in the history after 30 seconds heard', async () => {
 		routerMock.query = { slug: ['album', 'h1'] };
 		const { container } = render(<AlbumsPage />);
-		fireEvent.click(await screen.findByRole('button', { name: 'Play' }));
+		fireEvent.click(await screen.findByRole('button', { name: 'Play First Album' }));
 		const audio = container.querySelector('audio')!;
 		await waitFor(() => expect(audio).toHaveAttribute('src', 'https://cdn.example/1'));
 		for (let t = 1; t <= 30; t++) {
@@ -508,7 +508,7 @@ describe('music page', () => {
 	it('plays an album through the player provider and saves the queue', async () => {
 		routerMock.query = { slug: ['album', 'h1'] };
 		const { container } = render(<AlbumsPage />);
-		fireEvent.click(await screen.findByRole('button', { name: 'Play' }));
+		fireEvent.click(await screen.findByRole('button', { name: 'Play First Album' }));
 
 		await waitFor(() =>
 			expect(container.querySelector('audio')).toHaveAttribute('src', 'https://cdn.example/1')

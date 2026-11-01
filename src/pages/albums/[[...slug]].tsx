@@ -635,22 +635,9 @@ function MusicLibrary({
 				selectedAlbum && selectedAlbum.tracks.length > 0 ? (
 					<AlbumDetailView
 						album={selectedAlbum}
-						currentTrack={currentTrack}
-						playerState={player}
-						onPlay={playAlbum}
-						onAddToQueue={(album) => player.addToQueue(albumItems(album))}
-						onPlayNext={(album) => player.playNext(albumItems(album))}
-						onPlayTrackNext={(track, album) => player.playNext([{ track, album }])}
-						onBack={() => navigate({ name: 'browse' })}
-						onDownload={downloadTrack}
-						onDownloadAlbum={downloadAlbum}
+						navigate={navigate}
+						onDownloadAlbum={setAlbumToDownload}
 						onCoverLoaded={handleCoverLoaded}
-						isSaved={user.isSaved(selectedAlbum.mbid)}
-						onToggleSave={() =>
-							user.isSaved(selectedAlbum.mbid)
-								? user.unsaveAlbum(selectedAlbum.mbid)
-								: user.saveAlbum(selectedAlbum.mbid, selectedAlbum)
-						}
 						onMenu={(e) => openAlbumMenu(e, selectedAlbum)}
 						onTrackMenu={(e, track) =>
 							openTrackMenu(e, { track, album: selectedAlbum })
