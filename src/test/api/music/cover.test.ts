@@ -132,7 +132,7 @@ describe('/api/music/cover', () => {
 
 		expect(mockedPrisma.musicMetadata.update).toHaveBeenCalledWith({
 			where: { mbid: 'abc-123' },
-			data: { coverUrl: 'https://itunes.com/art600x600.jpg' },
+			data: { coverUrl: 'https://itunes.com/art600x600.jpg', coverSource: 'itunes' },
 		});
 	});
 
@@ -192,6 +192,93 @@ describe('/api/music/cover', () => {
 		expect(res._getData()).toEqual({
 			coverUrl: 'https://itunes.com/fallback600x600.jpg',
 			source: 'itunes',
+		});
+	});
+
+	describe('Cover Art Archive', () => {
+		// Radiohead, Hail to the Thief, whose stored iTunes cover was an
+		// inauguration seal on 2026-11-01; the archive has its art.
+		const MBID = '5c14fd50-a2f1-3672-9537-b0dad91bea2f';
+		const CAA = `https://coverartarchive.org/release-group/${MBID}/front-500`;
+		const body = { mbid: MBID, artist: 'Radiohead', album: 'Hail to the Thief' };
+		const fetchMock = () => global.fetch as ReturnType<typeof vi.fn>;
+		const post = async () => {
+			const res = createMockResponse();
+			await handler(createMockRequest({ method: 'POST', body }), res);
+			return res;
+		};
+
+		it('takes the release group art over iTunes', async () => {
+			mockedPrisma.musicMetadata.findUnique.mockResolvedValue(null);
+			fetchMock().mockResolvedValue(new Response(null, { status: 307 }));
+
+			const res = await post();
+
+			expect(res._getData()).toEqual({ coverUrl: CAA, source: 'caa' });
+			expect(fetchMock()).toHaveBeenCalledTimes(1);
+			expect(fetchMock().mock.calls[0][0]).toBe(CAA);
+			expect(fetchMock().mock.calls[0][1]).toMatchObject({
+				method: 'HEAD',
+				redirect: 'manual',
+			});
+			expect(mockedPrisma.musicMetadata.update).toHaveBeenCalledWith({
+				where: { mbid: MBID },
+				data: { coverUrl: CAA, coverSource: 'caa' },
+			});
+		});
+
+		it('replaces a stored iTunes guess once the archive has art', async () => {
+			mockedPrisma.musicMetadata.findUnique.mockResolvedValue({
+				coverUrl:
+					'https://is1-ssl.mzstatic.com/image/thumb/Music/v4/4f/16/92/4f16923d-65a2-cc8c-1b49-8acb391f8a4d/0848129046826.jpg/600x600bb.jpg',
+				coverSource: null,
+			} as any);
+			fetchMock().mockResolvedValue(new Response(null, { status: 307 }));
+
+			expect((await post())._getData()).toEqual({ coverUrl: CAA, source: 'caa' });
+		});
+
+		it('keeps a stored iTunes cover while the archive has none', async () => {
+			mockedPrisma.musicMetadata.findUnique.mockResolvedValue({
+				coverUrl: 'https://is1-ssl.mzstatic.com/cover.jpg',
+				coverSource: 'itunes',
+			} as any);
+			fetchMock().mockResolvedValue(new Response(null, { status: 404 }));
+
+			expect((await post())._getData()).toEqual({
+				coverUrl: 'https://is1-ssl.mzstatic.com/cover.jpg',
+				source: 'cached',
+			});
+			expect(fetchMock()).toHaveBeenCalledTimes(1);
+			expect(mockedPrisma.musicMetadata.update).not.toHaveBeenCalled();
+		});
+
+		it('asks iTunes when the archive has no art', async () => {
+			mockedPrisma.musicMetadata.findUnique.mockResolvedValue(null);
+			fetchMock()
+				.mockResolvedValueOnce(new Response(null, { status: 404 }))
+				.mockResolvedValueOnce({
+					ok: true,
+					json: vi.fn().mockResolvedValue({
+						resultCount: 1,
+						results: [{ artworkUrl100: 'https://itunes.com/art100x100.jpg' }],
+					}),
+				});
+
+			expect((await post())._getData()).toEqual({
+				coverUrl: 'https://itunes.com/art600x600.jpg',
+				source: 'itunes',
+			});
+		});
+
+		it('does not ask again once the cover comes from the archive', async () => {
+			mockedPrisma.musicMetadata.findUnique.mockResolvedValue({
+				coverUrl: CAA,
+				coverSource: 'caa',
+			} as any);
+
+			expect((await post())._getData()).toEqual({ coverUrl: CAA, source: 'cached' });
+			expect(fetchMock()).not.toHaveBeenCalled();
 		});
 	});
 

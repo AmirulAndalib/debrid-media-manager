@@ -1,3 +1,4 @@
+import { caaCoverUrl, hasCaaCover } from '@/services/musicBrainz';
 import { prisma } from '@/utils/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -97,24 +98,37 @@ export default async function handler(
 	}
 
 	try {
-		// Check if we already have a cover URL stored
 		const existing = await prisma.musicMetadata.findUnique({
 			where: { mbid },
-			select: { coverUrl: true },
+			select: { coverUrl: true, coverSource: true },
 		});
+
+		if (existing?.coverUrl && existing.coverSource === 'caa') {
+			return res.status(200).json({ coverUrl: existing.coverUrl, source: 'cached' });
+		}
+
+		// The Cover Art Archive files art under this very release group, so it
+		// replaces a stored iTunes guess, which comes from a text search and is
+		// sometimes another album's.
+		if (await hasCaaCover(mbid)) {
+			const coverUrl = caaCoverUrl(mbid);
+			await prisma.musicMetadata.update({
+				where: { mbid },
+				data: { coverUrl, coverSource: 'caa' },
+			});
+			return res.status(200).json({ coverUrl, source: 'caa' });
+		}
 
 		if (existing?.coverUrl) {
 			return res.status(200).json({ coverUrl: existing.coverUrl, source: 'cached' });
 		}
 
-		// Search iTunes for the cover
 		const coverUrl = await searchItunesCover(artist, album);
 
 		if (coverUrl) {
-			// Store the cover URL in the database
 			await prisma.musicMetadata.update({
 				where: { mbid },
-				data: { coverUrl },
+				data: { coverUrl, coverSource: 'itunes' },
 			});
 
 			return res.status(200).json({ coverUrl, source: 'itunes' });
