@@ -245,8 +245,11 @@ function MusicLibrary({
 	const loadedCatalogKey = useRef<string | null>(null);
 	const recentAlbumsRequestId = useRef<number>(0);
 
+	const searchTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
 	const navigate = useCallback(
 		(to: MusicRoute, replace = false) => {
+			// A search typed just before must not pull the page back to its results.
+			clearTimeout(searchTimeout.current);
 			pushed.current = true;
 			void router[replace ? 'replace' : 'push'](musicHref(to), undefined, { shallow: true });
 		},
@@ -271,13 +274,12 @@ function MusicLibrary({
 
 	// The search box navigates as you type; back and forward bring its text along.
 	const searchInput = useRef<HTMLInputElement | null>(null);
-	const [searchText, setSearchText] = useState(catalogSearch);
+	const [searchText, setSearchText] = useState(route.name === 'search' ? route.q : '');
 	useEffect(() => {
 		if (route.name === 'search' && document.activeElement !== searchInput.current) {
 			setSearchText(route.q);
 		}
 	}, [route.name, catalogSearch]); // eslint-disable-line react-hooks/exhaustive-deps
-	const searchTimeout = useRef<ReturnType<typeof setTimeout>>(undefined);
 	const search = (q: string) => {
 		setSearchText(q);
 		clearTimeout(searchTimeout.current);

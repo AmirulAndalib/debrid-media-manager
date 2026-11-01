@@ -318,6 +318,37 @@ describe('music page', () => {
 		}
 	});
 
+	it('drops a pending search when another page opens first', async () => {
+		vi.useFakeTimers({ shouldAdvanceTime: true });
+		try {
+			routerMock.query = { slug: ['browse'] };
+			render(<AlbumsPage />);
+			const card = await screen.findByRole('button', {
+				name: 'Open First Album by Test Artist',
+			});
+			fireEvent.change(screen.getByLabelText('Search artists or albums'), {
+				target: { value: 'first' },
+			});
+			fireEvent.click(card);
+			await vi.advanceTimersByTimeAsync(250);
+			expect(routerMock.push.mock.calls.map(([url]) => url)).toEqual(['/music/album/h1']);
+		} finally {
+			vi.useRealTimers();
+		}
+	});
+
+	it('leaves the search box empty on an artist page', async () => {
+		me.library = {
+			albums: [],
+			artists: [{ artistMbid: 'ar1', name: 'Test Artist', followedAt: '' }],
+			playlists: [],
+		};
+		routerMock.query = { slug: ['artist', 'ar1'] };
+		render(<AlbumsPage />);
+		await screen.findByRole('heading', { level: 2, name: 'Test Artist' });
+		expect(screen.getByLabelText('Search artists or albums')).toHaveValue('');
+	});
+
 	it('replaces the old /music/<hash> album URL with /music/album/<hash>', async () => {
 		routerMock.query = { slug: ['h1'] };
 		render(<AlbumsPage />);
