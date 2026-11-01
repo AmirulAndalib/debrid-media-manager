@@ -69,17 +69,17 @@ function sign(body: string, secret: string): string {
  * trusted, and only ever on the server.
  */
 export function signSponsorToken(payload: SponsorTokenPayload): string {
+	return signPayload(payload);
+}
+
+/** Signs any payload with the sponsor secret. Each verifier checks its own payload shape. */
+export function signPayload(payload: object): string {
 	const body = base64url(JSON.stringify(payload));
 	return `${body}.${sign(body, getSecret())}`;
 }
 
-/**
- * Verifies a token and returns its payload, or null if it is missing, malformed,
- * forged or expired.
- *
- * Fails closed: an unset secret means nobody is a sponsor, never everybody.
- */
-export function verifySponsorToken(token: string | undefined | null): SponsorTokenPayload | null {
+/** The parsed payload of a token whose signature holds, or null. Shape and expiry are unchecked. */
+export function readSignedPayload(token: string | undefined | null): unknown {
 	if (!token || typeof token !== 'string') return null;
 
 	const separator = token.lastIndexOf('.');
@@ -99,12 +99,21 @@ export function verifySponsorToken(token: string | undefined | null): SponsorTok
 	const want = Buffer.from(expected);
 	if (given.length !== want.length || !timingSafeEqual(given, want)) return null;
 
-	let payload: SponsorTokenPayload;
 	try {
-		payload = JSON.parse(fromBase64url(body).toString('utf8'));
+		return JSON.parse(fromBase64url(body).toString('utf8'));
 	} catch {
 		return null;
 	}
+}
+
+/**
+ * Verifies a token and returns its payload, or null if it is missing, malformed,
+ * forged or expired.
+ *
+ * Fails closed: an unset secret means nobody is a sponsor, never everybody.
+ */
+export function verifySponsorToken(token: string | undefined | null): SponsorTokenPayload | null {
+	const payload = readSignedPayload(token) as SponsorTokenPayload | null;
 
 	if (
 		!payload ||
