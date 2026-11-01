@@ -58,6 +58,12 @@ describe('/api-docs OpenAPI document', () => {
 		expect(routeExists(path)).toBe(true);
 	});
 
+	it('lists the sponsor groups before the open one', () => {
+		const names = openApiDocument.tags.map((t) => t.name);
+		expect(names[0]).toBe('Sponsors');
+		expect(names.at(-1)).toBe('Open');
+	});
+
 	it('gates every sponsor operation on a key and leaves open ones open', () => {
 		for (const { path, op } of operations) {
 			const open = op.tags.includes('Open');

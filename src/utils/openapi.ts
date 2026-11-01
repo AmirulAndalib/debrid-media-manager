@@ -86,8 +86,8 @@ export const openApiDocument = {
 		].join('\n'),
 	},
 	servers: [{ url: 'https://debridmediamanager.com' }],
+	// Sponsor groups first: the reference opens on its first tag.
 	tags: [
-		{ name: 'Open', description: 'No sponsorship needed.' },
 		{
 			name: 'Sponsors',
 			description: `Need an active sponsorship's DMM API key from [gatekeeper](${GATEKEEPER_URL}).`,
@@ -101,6 +101,7 @@ export const openApiDocument = {
 			name: 'Indexers and plugins',
 			description: 'Sponsor endpoints that speak another program’s protocol.',
 		},
+		{ name: 'Open', description: 'No sponsorship needed.' },
 	],
 	paths: {
 		'/api/stremio/{userid}/manifest.json': {
