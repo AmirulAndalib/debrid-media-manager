@@ -2,7 +2,11 @@
  * Enrich every release group in the music catalog: its type, genres and first
  * release date, the tracklist of one of its releases (titles and lengths for
  * the player), every other title its releases give (disc 0, for files that
- * release leaves untitled), its artists, and its Cover Art Archive cover.
+ * release leaves untitled), its artists, and its cover: the Cover Art Archive's
+ * for the group, else Lidarr's for one of its releases, copied into the B2
+ * bucket behind posters0…9.debridmediamanager.com when B2_KEY_ID and
+ * B2_APP_KEY are set (one download at a time, 10 s each; a failed copy keeps
+ * the archive's URL). Albums already copied (`coverSource` b2) keep theirs.
  *
  * `MusicMetadata.mbid` is a release group. Lidarr's metadata server is asked
  * first: one request, at most two a second, gives every release with its
@@ -17,11 +21,14 @@
  * `--force` redoes groups already done; `--untitled` redoes only those the last
  * `scripts/music-title-census.ts` found not fully titled (music-title-census.json).
  *
- *   npx tsx scripts/music-backfill-musicbrainz.ts [--limit N] [--mbid X] [--force] [--untitled]
+ * `--covers` only copies the covers of albums already enriched, enriching nothing.
+ *
+ *   npx tsx scripts/music-backfill-musicbrainz.ts [--limit N] [--mbid X] [--force] [--untitled] [--covers]
  */
 import { PrismaClient } from '@prisma/client';
 import { config } from 'dotenv';
 import { readFileSync } from 'fs';
+import { canMirrorAlbumArt, mirrorAlbumArt } from '../src/services/albumArt';
 import {
 	caaCoverUrl,
 	enrichment,
@@ -55,9 +62,73 @@ const force = args.includes('--force') || untitled;
 const onlyMbid = option('--mbid');
 const limit = option('--limit') ? parseInt(option('--limit')!, 10) : Infinity;
 if (!(limit > 0)) throw new Error('--limit must be a positive number');
+const mirroring = canMirrorAlbumArt();
+
+const caaReleaseCover = (release: string) =>
+	`https://coverartarchive.org/release/${release}/front-500`;
+
+/**
+ * The cover to store for `mbid`: the group's Cover Art Archive art, else a
+ * release's (`releaseArt`), copied to B2 when it can be; else the archive's own
+ * URL, which replaces an iTunes guess; null to keep what is stored.
+ */
+async function albumCover(
+	mbid: string,
+	stored: string | null | undefined,
+	groupArt: string | null,
+	releaseArt: string | null
+): Promise<{ coverUrl: string; coverSource: string } | null> {
+	if (stored === 'b2') return null;
+	for (const source of mirroring ? [groupArt, releaseArt] : []) {
+		const mirrored = source && (await mirrorAlbumArt(mbid, source));
+		if (mirrored) return { coverUrl: mirrored, coverSource: 'b2' };
+	}
+	if (stored === 'caa') return null;
+	const archived = groupArt && (await hasCaaCover(mbid)) ? groupArt : releaseArt;
+	return archived ? { coverUrl: archived, coverSource: 'caa' } : null;
+}
+
+/** `--covers`: copies the covers of enriched albums not on B2 yet, nothing else. */
+async function mirrorCovers(prisma: PrismaClient) {
+	if (!mirroring) throw new Error('--covers needs B2_KEY_ID and B2_APP_KEY');
+	const rows = (
+		await prisma.musicMetadata.findMany({
+			where: {
+				enrichedAt: { not: null },
+				OR: [{ coverSource: null }, { coverSource: { not: 'b2' } }],
+				...(onlyMbid ? { mbid: onlyMbid } : {}),
+			},
+			select: { mbid: true, coverUrl: true },
+			orderBy: { mbid: 'asc' },
+		})
+	).slice(0, limit);
+	let copied = 0;
+	for (const [i, row] of rows.entries()) {
+		// A group found by name stored its release's art.
+		const releaseArt = row.coverUrl?.startsWith('https://coverartarchive.org/release/')
+			? row.coverUrl
+			: null;
+		const cover = await albumCover(row.mbid, 'caa', caaCoverUrl(row.mbid), releaseArt);
+		if (cover) {
+			await prisma.musicMetadata.update({ where: { mbid: row.mbid }, data: cover });
+			copied++;
+		}
+		console.log(
+			`[${i + 1}/${rows.length}] ${row.mbid}: ${cover?.coverUrl ?? 'no cover copied'}`
+		);
+	}
+	console.log(`Copied ${copied} of ${rows.length} covers to B2`);
+}
 
 async function main() {
 	const prisma = new PrismaClient();
+	if (args.includes('--covers')) {
+		try {
+			return await mirrorCovers(prisma);
+		} finally {
+			await prisma.$disconnect();
+		}
+	}
 	const counts = {
 		enriched: 0,
 		lidarr: 0,
@@ -65,7 +136,7 @@ async function main() {
 		foundByName: 0,
 		noSource: 0,
 		noRelease: 0,
-		caaCovers: 0,
+		covers: 0,
 		failed: 0,
 	};
 	try {
@@ -181,23 +252,20 @@ async function main() {
 					where: { mbid },
 					select: { coverSource: true },
 				});
-				// Replaces an iTunes guess; without CAA art the stored cover stays. A group
-				// found by name has its art under the other id: its release's, as Lidarr has it.
-				const coverRelease = foundByName && lidarrCoverRelease(foundByName);
-				const cover =
-					existing?.coverSource === 'caa'
-						? null
-						: coverRelease
-							? `https://coverartarchive.org/release/${coverRelease}/front-500`
-							: !foundByName && (await hasCaaCover(mbid))
-								? caaCoverUrl(mbid)
-								: null;
+				// A group found by name has its art under the other id: its release's.
+				const coverRelease = album && lidarrCoverRelease(album);
+				const cover = await albumCover(
+					mbid,
+					existing?.coverSource,
+					foundByName ? null : caaCoverUrl(mbid),
+					coverRelease ? caaReleaseCover(coverRelease) : null
+				);
 				const { artist, album: title, ...fields } = metadata;
 				const data = {
 					...fields,
 					// Lidarr may not list the album's artist; never forget the one stored.
 					artistMbid: fields.artistMbid ?? undefined,
-					...(cover ? { coverUrl: cover, coverSource: 'caa' } : {}),
+					...cover,
 					enrichedAt: new Date(),
 				};
 
@@ -227,14 +295,14 @@ async function main() {
 				else if (album) counts.lidarr++;
 				else counts.musicBrainz++;
 				if (!release) counts.noRelease++;
-				if (cover) counts.caaCovers++;
+				if (cover) counts.covers++;
 				console.log(
 					`${prefix}: ${artist} - ${title}, ${metadata.primaryType ?? 'no type'}, from ${source}, ` +
 						(release && picked
 							? `release ${release.id} by ${picked.rule} with ${tracks.length} tracks ` +
 								`for ${paths.length} files, ${pool.length} more titles`
 							: 'no release') +
-						(cover ? ', CAA cover' : '')
+						(cover ? `, cover ${cover.coverUrl}` : '')
 				);
 			} catch (error) {
 				counts.failed++;

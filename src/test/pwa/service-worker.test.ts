@@ -52,8 +52,12 @@ afterAll(() => {
 	globalThis.self = realSelf;
 });
 
+/** A runtime rule by its cache's name. */
+const rule = (cacheName: string) =>
+	serwist.options.runtimeCaching.find((r: any) => r.handler.options.cacheName === cacheName);
+
 const navigation = (href: string) => {
-	const rule = serwist.options.runtimeCaching[1];
+	const rule = serwist.options.runtimeCaching.find((r: any) => typeof r.matcher === 'function');
 	return rule.matcher({ request: { mode: 'navigate' }, url: new URL(href) });
 };
 
@@ -81,15 +85,13 @@ describe('service worker', () => {
 	});
 
 	it('bounds the document cache', () => {
-		const pages = serwist.options.runtimeCaching[1].handler.options;
+		const pages = rule('pages').handler.options;
 		expect(pages.cacheName).toBe('pages');
 		expect(pages.plugins.find((p: any) => p.config)?.config.maxEntries).toBeGreaterThan(0);
 	});
 
 	it('stores only successful HTML documents', async () => {
-		const guard = serwist.options.runtimeCaching[1].handler.options.plugins.find(
-			(p: any) => p.cacheWillUpdate
-		);
+		const guard = rule('pages').handler.options.plugins.find((p: any) => p.cacheWillUpdate);
 		const response = (status: number, type: string, url = 'https://debridmediamanager.com/x') =>
 			({ status, url, headers: new Headers({ 'content-type': type }) }) as Response;
 		expect(await guard.cacheWillUpdate({ response: response(200, 'text/html') })).toBeTruthy();
@@ -104,8 +106,27 @@ describe('service worker', () => {
 		).toBeNull();
 	});
 
+	it('keeps album covers on the posters hosts in a cache of 500 of their own, before posters', () => {
+		const albumArt = rule('album-art');
+		const cover =
+			'https://posters2.debridmediamanager.com/music-48e8b712-4f5d-34e0-9492-22f936854662.jpg';
+		expect(albumArt.matcher.test(cover)).toBe(true);
+		expect(albumArt.matcher.test('https://posters3.debridmediamanager.com/tt1-small.jpg')).toBe(
+			false
+		);
+		expect(albumArt.matcher.test('https://example.com/music-1.jpg')).toBe(false);
+		// Serwist takes the first rule that matches.
+		expect(serwist.options.runtimeCaching.find((r: any) => r.matcher.test?.(cover))).toBe(
+			albumArt
+		);
+		expect(albumArt.handler.options.plugins[0].config).toEqual({
+			maxEntries: 500,
+			maxAgeSeconds: 60 * 60 * 24 * 30,
+		});
+	});
+
 	it('keeps the poster cache to 200 images for 30 days', () => {
-		const posters = serwist.options.runtimeCaching[0];
+		const posters = rule('poster-images');
 		expect(posters.matcher.test('https://posters3.debridmediamanager.com/tt1-small.jpg')).toBe(
 			true
 		);

@@ -15,6 +15,7 @@ import group from '@/test/fixtures/musicbrainz/release-group-4853b957-05f2-457b-
 import monkeesGroup from '@/test/fixtures/musicbrainz/release-group-48e8b712-4f5d-34e0-9492-22f936854662.json';
 import darkSideGroup from '@/test/fixtures/musicbrainz/release-group-f5093c06-23e3-404f-aeaa-40f72885ee3a.json';
 import { discTrackCounts, getFilename, normalizeTitle } from '@/utils/musicTracks';
+import { albumArtUrl } from '@/utils/posterHost';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
 	enrichment,
@@ -32,6 +33,7 @@ import {
 	namesFiles,
 	pickRelease,
 	searchLidarrAlbums,
+	servedCoverUrl,
 	titlePool,
 } from './musicBrainz';
 
@@ -553,5 +555,19 @@ describe("Lidarr's albums", () => {
 		const songs = fromLidarr(bebeSearch.albums[0] as unknown as LidarrAlbum);
 		expect(namesFiles(songs.releases[0], pathsOf(bebe).map(getFilename))).toBe(true);
 		expect(namesFiles(songs.releases[0], [])).toBe(false);
+	});
+});
+
+describe('servedCoverUrl', () => {
+	it("hands out a cover copied to the posters hosts as it is, an archive group's through DMM's cache", () => {
+		const mirrored = albumArtUrl(MONKEES);
+		expect(servedCoverUrl(mirrored)).toBe(mirrored);
+		expect(
+			servedCoverUrl(`https://coverartarchive.org/release-group/${MONKEES}/front-500`)
+		).toBe(`/api/music/cover/${MONKEES}.jpg`);
+		const release =
+			'https://coverartarchive.org/release/9f4bad72-4b43-45c4-9de8-11066ecc7efd/front-500';
+		expect(servedCoverUrl(release)).toBe(release);
+		expect(servedCoverUrl(null)).toBeNull();
 	});
 });

@@ -1,20 +1,9 @@
+import { posterUrl } from '@/utils/posterHost';
 import Image from 'next/image';
 import { memo, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
 
-// Pre-compute subdomain based on IMDB ID (deterministic hash)
-const getPosterUrl = (imdbId: string | null | undefined): string => {
-	if (!imdbId) return '';
-
-	const numericId = imdbId.replace(/[^0-9]/g, '');
-	let hash = 0;
-	for (let i = 0; i < numericId.length; i++) {
-		hash = (hash << 5) - hash + parseInt(numericId[i]);
-		hash = hash & hash;
-	}
-
-	const subdomain = Math.abs(hash) % 10;
-	return `https://posters${subdomain}.debridmediamanager.com/${imdbId}-small.jpg`;
-};
+const getPosterUrl = (imdbId: string | null | undefined): string =>
+	imdbId ? posterUrl(imdbId) : '';
 
 // Stremio's poster CDN (same source Cinemeta serves). Good coverage for
 // the long tail that Fanart/TMDB sometimes miss, and deterministic by IMDb ID.

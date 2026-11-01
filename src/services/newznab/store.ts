@@ -53,32 +53,34 @@ interface AuthState {
 	accountId: string;
 	/** Present only when the application key is scoped to a single bucket. */
 	allowedBucketId: string | null;
+	allowedBucketName: string | null;
 	expiresAt: number;
 }
 
 // Read per call rather than at import time: Next.js loads this module once per
-// process, and the tests flip the env between cases.
-function getConfig(): StoreConfig | null {
+// process, and the tests flip the env between cases. `bucketName` names another
+// bucket the same key writes (album art goes to `posters`); `B2_BUCKET` is the NZB one.
+function getConfig(bucketName = process.env.B2_BUCKET): StoreConfig | null {
 	const keyId = process.env.B2_KEY_ID;
 	const appKey = process.env.B2_APP_KEY;
-	const bucketName = process.env.B2_BUCKET;
 	if (!keyId || !appKey || !bucketName) return null;
 	return { keyId, appKey, bucketName };
 }
 
-export function isStoreConfigured(): boolean {
-	return getConfig() !== null;
+export function isStoreConfigured(bucketName?: string): boolean {
+	return getConfig(bucketName) !== null;
 }
 
 // The in-flight promise is cached, not just its result: a cold instance serving
 // a burst would otherwise fire one b2_authorize_account per concurrent request.
 let authPromise: Promise<AuthState> | null = null;
-let cachedBucketId: string | null = null;
+// By bucket name: one key writes more than one bucket.
+const cachedBucketIds = new Map<string, string>();
 
 /** Test-only. Module state outlives a `vi.resetModules()`-free test file. */
 export function _resetStoreForTest(): void {
 	authPromise = null;
-	cachedBucketId = null;
+	cachedBucketIds.clear();
 }
 
 async function authorize(config: StoreConfig): Promise<AuthState> {
@@ -94,7 +96,7 @@ async function authorize(config: StoreConfig): Promise<AuthState> {
 		apiUrl?: string;
 		downloadUrl?: string;
 		accountId?: string;
-		allowed?: { bucketId?: string | null };
+		allowed?: { bucketId?: string | null; bucketName?: string | null };
 	};
 	if (!body.authorizationToken || !body.apiUrl || !body.downloadUrl) {
 		throw new Error('b2_authorize_account returned an incomplete response');
@@ -106,6 +108,7 @@ async function authorize(config: StoreConfig): Promise<AuthState> {
 		downloadUrl: body.downloadUrl.replace(/\/+$/, ''),
 		accountId: body.accountId ?? '',
 		allowedBucketId: body.allowed?.bucketId ?? null,
+		allowedBucketName: body.allowed?.bucketName ?? null,
 		expiresAt: Date.now() + AUTH_TTL_MS,
 	};
 }
@@ -114,8 +117,8 @@ async function getAuth(config: StoreConfig, force = false): Promise<AuthState> {
 	if (force) {
 		authPromise = null;
 		// A fresh authorization may land on a different key scope, so the bucket
-		// id resolved under the old one is no longer known to be right.
-		cachedBucketId = null;
+		// ids resolved under the old one are no longer known to be right.
+		cachedBucketIds.clear();
 	}
 	if (authPromise) {
 		const state = await authPromise;
@@ -215,8 +218,14 @@ async function resolveBucketId(
 	config: StoreConfig,
 	state: AuthState
 ): Promise<MaybeUnauthorized<string | null>> {
-	if (state.allowedBucketId) return state.allowedBucketId;
-	if (cachedBucketId) return cachedBucketId;
+	// A key scoped to one bucket writes that bucket only.
+	if (state.allowedBucketId) {
+		return !state.allowedBucketName || state.allowedBucketName === config.bucketName
+			? state.allowedBucketId
+			: null;
+	}
+	const cached = cachedBucketIds.get(config.bucketName);
+	if (cached) return cached;
 
 	const res = await fetch(`${state.apiUrl}/b2api/v2/b2_list_buckets`, {
 		method: 'POST',
@@ -231,8 +240,8 @@ async function resolveBucketId(
 	const match = body.buckets?.find((bucket) => bucket.bucketName === config.bucketName);
 	if (!match?.bucketId) return null;
 
-	cachedBucketId = match.bucketId;
-	return cachedBucketId;
+	cachedBucketIds.set(config.bucketName, match.bucketId);
+	return match.bucketId;
 }
 
 interface UploadTarget {
@@ -287,23 +296,26 @@ export async function getStoredNzb(prefix: string, nativeId: string): Promise<st
 }
 
 /**
- * Writes any object into the same bucket.
+ * Writes any object into the same bucket, or into `bucketName`.
  *
- * Used by the Jellyfin plugin publish script rather than by a request path, so
- * unlike the NZB write it reports the failure to its caller: publishing half a
- * catalog silently would leave sponsors installing a version that is not there.
+ * Used by the Jellyfin plugin publish script and the music backfill rather than
+ * by a request path, so unlike the NZB write it reports the failure to its
+ * caller: publishing half a catalog silently would leave sponsors installing a
+ * version that is not there.
  *
  * @param objectKey Full object key inside the bucket, unencoded.
  * @param body The bytes to store.
  * @param contentType The type to serve them back as.
+ * @param bucketName Another bucket than `B2_BUCKET` (the NZB one) to write to.
  * @returns Whether the object landed.
  */
 export async function putStoredObject(
 	objectKey: string,
 	body: Buffer,
-	contentType: string
+	contentType: string,
+	bucketName?: string
 ): Promise<boolean> {
-	const config = getConfig();
+	const config = getConfig(bucketName);
 	if (!config) return false;
 
 	const key = encodeObjectKey(objectKey);

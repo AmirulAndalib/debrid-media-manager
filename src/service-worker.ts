@@ -44,6 +44,21 @@ const serwist = new Serwist({
 	skipWaiting: true,
 	clientsClaim: true,
 	runtimeCaching: [
+		// Album covers the music backfill copies to the posters bucket: a cache of
+		// their own, before the posters rule, so a library page of covers does not
+		// push the movie posters out of theirs.
+		{
+			matcher: /^https:\/\/posters\d+\.debridmediamanager\.com\/music-.*\.jpg$/,
+			handler: new CacheFirst({
+				cacheName: 'album-art',
+				plugins: [
+					new ExpirationPlugin({
+						maxAgeSeconds: 60 * 60 * 24 * 30,
+						maxEntries: 500,
+					}),
+				],
+			}),
+		},
 		{
 			matcher: /^https:\/\/posters\d+\.debridmediamanager\.com\/.*$/,
 			handler: new CacheFirst({
