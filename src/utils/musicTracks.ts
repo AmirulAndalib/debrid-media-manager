@@ -138,6 +138,9 @@ export function formatTrackTitle(filename: string, artist?: string | null): stri
 
 export type TrackMetadata = { disc: number; position: number; title: string };
 
+/** More than a few audio files beyond the release's tracks: a pack, its numbers other albums'. */
+export const isReleasePack = (files: number, tracks: number) => files > tracks + 3;
+
 const TITLE_SIMILARITY = 0.8;
 export const normalizeTitle = (title: string) =>
 	title.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '');
@@ -189,26 +192,30 @@ export function similarTitle<T extends TrackMetadata>(
  * them album after album, and most of a disc's names do not fit other tracks
  * better: a release laid out otherwise), unless another track's title fits
  * the file's name better; then by title. A file still untitled may take a
- * disc-0 title, which is never a place on a disc. Names are read without a
- * leading "`artist` - " (the album's).
+ * disc-0 title, which is never a place on a disc. In a pack (`isReleasePack`)
+ * neither positions nor numbers count: a file takes a release or disc-0 title
+ * of its exact name, or none. Names are read without a leading "`artist` - "
+ * (the album's).
  */
 export function matchTrackMetadata<T extends TrackMetadata>(
 	files: { disc?: number | null; trackNumber: number | null; filename: string }[],
 	tracks: T[],
 	artist?: string | null
 ): (T | null)[] {
+	const release = tracks
+		.filter((track) => track.disc > 0)
+		.sort((a, b) => a.disc - b.disc || a.position - b.position);
+	const pack = isReleasePack(files.length, release.length);
 	// Disc 0 holds the titles of the group's other releases (and of the artist's
 	// other groups, for a pack), so a file takes one only when the names agree outright.
-	const pool = new Map<string, T>();
-	for (const track of tracks.filter((track) => track.disc === 0)) {
+	const byName = new Map<string, T>();
+	for (const track of [...(pack ? release : []), ...tracks.filter((t) => t.disc === 0)]) {
 		const key = normalizeTitle(track.title);
-		if (!pool.has(key)) pool.set(key, track);
+		if (!byName.has(key)) byName.set(key, track);
 	}
-	return matchRelease(
-		files,
-		tracks.filter((track) => track.disc > 0),
-		artist
-	).map((match, i) => match ?? pool.get(nameKey(files[i].filename, artist)) ?? null);
+	return (pack ? files.map(() => null) : matchRelease(files, release, artist)).map(
+		(match, i) => match ?? byName.get(nameKey(files[i].filename, artist)) ?? null
+	);
 }
 
 function matchRelease<T extends TrackMetadata>(

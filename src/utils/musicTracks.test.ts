@@ -132,8 +132,22 @@ describe('matchTrackMetadata', () => {
 			const pool = titlePool(monkees.mbid, lidarr.group, lidarr.releases, album);
 			const matches = matchTrackMetadata(files, [...album, ...pool]);
 
-			// Disc 1 is the album, by disc and position, as before.
-			expect(titles(matches.slice(0, 12))).toEqual(album.map((t) => t.title));
+			// 61 files for 12 tracks: a pack, so disc 1 is not the album by position
+			// but its stereo mixes, by name.
+			expect(titles(matches.slice(0, 12))).toEqual([
+				'(Theme From) The Monkees (stereo mix)',
+				'Saturday’s Child (stereo mix)',
+				'I Wanna Be Free (stereo mix)',
+				'Tomorrow’s Gonna Be Another Day (stereo mix)',
+				'Papa Gene’s Blues (stereo mix)',
+				'Take a Giant Step (stereo mix)',
+				'Last Train to Clarksville (stereo mix)',
+				'This Just Doesn’t Seem to Be My Day (stereo mix)',
+				'Let’s Dance On (stereo mix)',
+				'I’ll Be True to You (stereo mix)',
+				'Sweet Young Thing (stereo mix)',
+				'Gonna Buy Me a Dog (stereo mix)',
+			]);
 			expect(titles(matches.slice(12, 16))).toEqual([
 				'(Theme From) The Monkees (mono mix)',
 				'Saturday’s Child (mono mix)',

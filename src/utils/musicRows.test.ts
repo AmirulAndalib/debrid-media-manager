@@ -117,22 +117,25 @@ describe('resolveMusicRows', () => {
 	});
 
 	it("titles, numbers and times a track as its album's page does, never from its file", async () => {
-		// The Monkees' 4-disc deluxe set, enriched with the 12-track 1966 album.
+		// The Monkees' disc 1 and one file of disc 4, enriched with the 12-track
+		// 1966 album: 13 files for 12 tracks, so matched by disc and position.
 		const { tracks } = enrichment(
 			monkees.mbid,
 			monkeesGroup as unknown as MbReleaseGroup,
 			monkeesRelease as unknown as MbRelease
 		);
 		mocked.availableMusicFile.findMany.mockResolvedValue(
-			monkees.files.map((f) => ({
-				...f,
-				hash: monkees.hash,
-				link: '',
-				bytes: BigInt(f.bytes),
-			}))
+			monkees.files
+				.filter((f) => f.path.startsWith('/Disc 01/') || f.file_id === 61)
+				.map((f) => ({
+					...f,
+					hash: monkees.hash,
+					link: '',
+					bytes: BigInt(f.bytes),
+				}))
 		);
 		mocked.availableMusic.findMany.mockResolvedValue([
-			release(monkees.hash, monkees.mbid, 61),
+			release(monkees.hash, monkees.mbid, 13),
 		] as any);
 		mocked.musicMetadata.findMany.mockResolvedValue([meta(monkees.mbid, 'The Monkees')] as any);
 		mocked.musicTrackMetadata.findMany.mockResolvedValue(tracks as any);

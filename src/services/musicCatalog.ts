@@ -5,6 +5,7 @@ import {
 	getDirectory,
 	getFilename,
 	isAudioPath,
+	isReleasePack,
 	matchTrackMetadata,
 	trackPosition,
 } from '@/utils/musicTracks';
@@ -322,13 +323,15 @@ export function albumTracks(
 		};
 	});
 	const matches = matchTrackMetadata(tracks, tracklist, artist);
+	// A pack's files keep their numbers: a title its release shares is no place on it.
+	const pack = isReleasePack(tracks.length, tracklist.filter((row) => row.disc > 0).length);
 	tracks.forEach((track, i) => {
 		const match = matches[i];
 		track.title = match?.title ?? null;
 		track.durationMs = match?.lengthMs ?? null;
 		// Disc 0 is a pool of titles, not a place on a disc; a track on another
 		// disc than the file names (a release laid out otherwise) numbers that disc.
-		if (match && match.disc > 0 && (track.disc ?? match.disc) === match.disc) {
+		if (!pack && match && match.disc > 0 && (track.disc ?? match.disc) === match.disc) {
 			track.trackNumber = match.position;
 			track.disc = match.disc;
 		}

@@ -1,4 +1,4 @@
-import { getDirectory, normalizeTitle, similarTitle } from '@/utils/musicTracks';
+import { getDirectory, isReleasePack, normalizeTitle, similarTitle } from '@/utils/musicTracks';
 import * as v from '@badrap/valita';
 
 // MusicBrainz asks for one request a second and a User-Agent that names the
@@ -528,7 +528,8 @@ export const isArtistPack = (
 	files: number,
 	tracks: number,
 	artist: { mbid: string | null; name: string }
-) => files > tracks + 3 && !!artist.mbid && !/^various artists$/i.test(artist.name.trim());
+) =>
+	isReleasePack(files, tracks) && !!artist.mbid && !/^various artists$/i.test(artist.name.trim());
 
 /**
  * The ids of at most 40 of an artist's groups to title a pack of theirs from:

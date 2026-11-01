@@ -98,17 +98,28 @@ describe('albumTracks', () => {
 		expect(titleCensusReason(album, enriched)).toBe('titled');
 	});
 
-	it("titles an album filed under its single from the artist's other groups", () => {
+	it("titles a pack filed under a single by name only, then from the artist's other groups", () => {
 		// The Beatles' Please Please Me, 14 files, filed under the 2-track single
-		// Please Please Me / Ask Me Why (census 2026-11-01: 4 titled).
+		// Please Please Me / Ask Me Why. The census of 2026-11-01 counted 4 titled,
+		// 01 "I Saw Her Standing There" and 02 "Misery" as the single's 1 and 2.
 		const single = ppmSingle as unknown as LidarrAlbum;
-		const before = served(ppm, single).tracks.map((track) => track.title);
+		const before = served(ppm, single);
+		expect(before.tracks.map((track) => track.title)).toEqual([
+			...Array(5).fill(null),
+			'Ask Me Why',
+			'Please Please Me',
+			...Array(7).fill(null),
+		]);
+		// Named like the single's first track, it is still the album's seventh.
+		expect(before.tracks[6].trackNumber).toBe(7);
+		expect(titleCensusReason(before, enriched)).toBe('files > tracks');
+
 		const after = served(ppm, single, undefined, [ppmAlbum as unknown as LidarrAlbum]);
 		const titles = after.tracks.map((track) => track.title);
-
 		expect(after.mbTrackCount).toBe(2);
-		expect(before.filter(Boolean)).toHaveLength(4);
-		expect(titles.slice(2)).toEqual([
+		expect(titles).toEqual([
+			'I Saw Her Standing There',
+			'Misery',
 			'Anna (Go to Him)',
 			'Chains',
 			'Boys',
@@ -122,8 +133,7 @@ describe('albumTracks', () => {
 			'There’s a Place',
 			'Twist and Shout',
 		]);
-		// 01 and 02 keep the single's titles by position, as before.
-		expect(titles.slice(0, 2)).toEqual(before.slice(0, 2));
+		expect(titleCensusReason(after, enriched)).toBe('titled');
 		const rows = after.tracks.filter((track) => track.title === 'Chains');
 		expect(rows[0]).toMatchObject({ trackNumber: 4, durationMs: expect.any(Number) });
 	});

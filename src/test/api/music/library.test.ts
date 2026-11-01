@@ -450,8 +450,9 @@ describe('/api/music/library', () => {
 				expect(served).not.toMatch(/Monkees|Stereo Mix/);
 			});
 
-			it('titles a disc from MusicBrainz by disc and position once enriched', async () => {
-				// The release the backfill picks for it (see pickRelease): the 12-track 1966 album.
+			it('titles no file of a pack by position or number, only by its exact name', async () => {
+				// The 12-track 1966 album alone, as an older backfill stored it: 61 files
+				// for 12 tracks is a pack, whose numbers are not the album's.
 				const { tracks: tracklist } = enrichment(
 					monkees.mbid,
 					monkeesGroup as unknown as MbReleaseGroup,
@@ -461,17 +462,14 @@ describe('/api/music/library', () => {
 
 				const { tracks } = (await serveMonkees()).albums[0];
 
-				// Disc 1 is the album; MusicBrainz spells "Papa Jean's Blues", the file "Papa Gene's".
-				expect(tracks.slice(0, 12).map((t: any) => t.title)).toEqual(
-					tracklist.map((t) => t.title)
-				);
+				// "01_05 - Papa Gene's Blues (Stereo Mix)" is not "Papa Jean's Blues", track 5.
 				expect(tracks[4]).toMatchObject({
-					title: "Papa Jean's Blues",
+					title: null,
 					disc: 1,
 					trackNumber: 5,
-					durationMs: 115000,
+					durationMs: null,
 				});
-				expect(tracks.slice(12).map((t: any) => t.title)).toEqual(Array(49).fill(null));
+				expect(tracks.map((t: any) => t.title)).toEqual(Array(61).fill(null));
 				expect(tracks.map((t: any) => [t.disc, t.trackNumber])).toEqual(discs);
 			});
 
