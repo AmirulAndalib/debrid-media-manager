@@ -75,7 +75,6 @@ describe('NowPlayingPanel', () => {
 				navigate={navigate}
 				onClose={onClose}
 				onTrackMenu={vi.fn()}
-				onDownload={vi.fn()}
 				sheet={sheet}
 			/>
 		);

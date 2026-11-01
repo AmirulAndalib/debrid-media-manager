@@ -1,7 +1,7 @@
-import type { MusicTrack } from '@/pages/api/music/library';
 import {
 	ChevronDown,
 	Disc3,
+	Ellipsis,
 	GripVertical,
 	Heart,
 	Loader2,
@@ -18,7 +18,6 @@ import {
 import { MouseEvent, useRef, useState } from 'react';
 import { useMusicPlayer } from './player/MusicPlayerProvider';
 import { artistRoute, contextRoute, MusicRoute } from './routes';
-import TrackListItem from './TrackListItem';
 import { QueuedTrack } from './types';
 import { useMusicUser } from './user/MusicUserProvider';
 import { dragRow, formatDuration, trackRef, trackTitle } from './utils';
@@ -44,7 +43,6 @@ interface NowPlayingPanelProps {
 	navigate: (route: MusicRoute) => void;
 	onClose: () => void;
 	onTrackMenu: (e: MouseEvent, item: QueuedTrack) => void;
-	onDownload: (track: MusicTrack) => Promise<void>;
 	/** The phone's full-screen sheet: playback controls, and the queue on its own tab. */
 	sheet?: boolean;
 }
@@ -56,7 +54,6 @@ export default function NowPlayingPanel({
 	navigate,
 	onClose,
 	onTrackMenu,
-	onDownload,
 	sheet = false,
 }: NowPlayingPanelProps) {
 	const player = useMusicPlayer();
@@ -77,31 +74,68 @@ export default function NowPlayingPanel({
 		if (sheet) onClose();
 	};
 
-	const queueRow = (q: QueuedTrack, position: number) => (
-		<div
-			key={`${q.track.id}-${position}`}
-			className="flex items-center"
-			{...dragRow(position, dragged, player.moveInQueue)}
-		>
-			<span className="hidden cursor-grab text-gray-600 sm:block" aria-hidden>
-				<GripVertical className="h-4 w-4" />
-			</span>
-			<div className="min-w-0 flex-1">
-				<TrackListItem
-					track={q.track}
-					index={position}
-					album={q.album}
-					isCurrentTrack={false}
-					isPlaying={false}
-					onPlay={() => player.playAt(position)}
-					onDownload={onDownload}
-					onRemove={() => player.removeAt(position)}
-					showRemove
-					onMenu={(e) => onTrackMenu(e, q)}
-				/>
+	// Cover, title and artist: the pane is too narrow for the album table's columns.
+	const queueRow = (q: QueuedTrack, position: number) => {
+		const title = trackTitle(q.track);
+		return (
+			<div
+				key={`${q.track.id}-${position}`}
+				className="flex items-center gap-1 rounded-md hover:bg-white/5"
+				{...dragRow(position, dragged, player.moveInQueue)}
+			>
+				<span className="hidden cursor-grab pl-1 text-gray-600 sm:block" aria-hidden>
+					<GripVertical className="h-4 w-4" />
+				</span>
+				<button
+					type="button"
+					onClick={() => player.playAt(position)}
+					onContextMenu={(e) => onTrackMenu(e, q)}
+					aria-label={`Play ${title} by ${q.album.artist}`}
+					className="flex min-w-0 flex-1 items-center gap-3 p-2 text-left"
+				>
+					<span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded bg-gray-800">
+						<Disc3 className="h-5 w-5 text-gray-500" />
+						{q.album.coverUrl && (
+							// oxlint-disable-next-line nextjs/no-img-element
+							<img
+								src={q.album.coverUrl}
+								alt=""
+								loading="lazy"
+								className="absolute inset-0 h-full w-full object-cover"
+								onError={(e) => {
+									(e.target as HTMLImageElement).style.display = 'none';
+								}}
+							/>
+						)}
+					</span>
+					<span className="min-w-0">
+						<span className="block truncate text-sm text-white">{title}</span>
+						<span className="block truncate text-xs text-gray-400">
+							{q.album.artist}
+						</span>
+					</span>
+				</button>
+				<button
+					type="button"
+					onClick={() => player.removeAt(position)}
+					className={iconButton}
+					aria-label={`Remove ${title} from the queue`}
+					title="Remove from queue"
+				>
+					<X className="h-4 w-4" />
+				</button>
+				<button
+					type="button"
+					onClick={(e) => onTrackMenu(e, q)}
+					className={iconButton}
+					aria-label={`More options for ${title}`}
+					title="More options"
+				>
+					<Ellipsis className="h-4 w-4" />
+				</button>
 			</div>
-		</div>
-	);
+		);
+	};
 
 	const playing = (
 		<div className="flex flex-col gap-4">

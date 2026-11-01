@@ -611,7 +611,6 @@ function MusicLibrary({
 			navigate={navigate}
 			onClose={toggleNowPlaying}
 			onTrackMenu={openTrackMenu}
-			onDownload={downloadTrack}
 		/>
 	);
 
@@ -869,7 +868,6 @@ function MusicLibrary({
 						navigate={navigate}
 						onClose={() => setOverlayOpen(false)}
 						onTrackMenu={openTrackMenu}
-						onDownload={downloadTrack}
 					/>
 				</div>
 			)}
