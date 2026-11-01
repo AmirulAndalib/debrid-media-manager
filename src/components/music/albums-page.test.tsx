@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import React from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -339,6 +339,40 @@ describe('music page', () => {
 		);
 		// The catalog grid loads only when Browse or Search shows it.
 		expect(fetchMock).not.toHaveBeenCalledWith(expect.stringContaining('sortBy=name'));
+	});
+
+	it("lists a followed artist's albums under the artist placeholder", async () => {
+		me.library = {
+			albums: [],
+			artists: [{ artistMbid: 'ar1', name: 'Test Artist', followedAt: '' }],
+			playlists: [],
+		};
+		routerMock.query = { slug: ['artist', 'ar1'] };
+		render(<AlbumsPage />);
+		expect(await screen.findByText('Artist pages are coming')).toBeInTheDocument();
+		expect(
+			await screen.findByRole('heading', { level: 2, name: 'Test Artist' })
+		).toBeInTheDocument();
+		expect(fetchMock).toHaveBeenCalledWith(expect.stringContaining('search=Test+Artist'));
+	});
+
+	it('shows only the placeholder for an artist it has no name for', async () => {
+		routerMock.query = { slug: ['artist', 'ar2'] };
+		render(<AlbumsPage />);
+		expect(await screen.findByText('Artist pages are coming')).toBeInTheDocument();
+		expect(
+			within(screen.getByRole('main')).getByRole('button', { name: 'Browse the catalog' })
+		).toBeInTheDocument();
+		expect(fetchMock).not.toHaveBeenCalledWith(expect.stringContaining('sortBy=name'));
+	});
+
+	it('shows Your Library as a page of its own', async () => {
+		routerMock.query = { slug: ['library'] };
+		render(<AlbumsPage />);
+		// The pane beside the page, and the page.
+		await waitFor(() =>
+			expect(screen.getAllByRole('region', { name: 'Your Library' })).toHaveLength(2)
+		);
 	});
 
 	it('plays an album from its card in the grid', async () => {

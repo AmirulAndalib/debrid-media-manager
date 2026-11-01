@@ -219,8 +219,15 @@ function MusicLibrary({
 
 	const route = parseMusicRoute(router.query.slug, router.query.q);
 	const albumHash = route.name === 'album' ? route.hash : undefined;
-	const catalogSearch = route.name === 'search' ? route.q : '';
-	const showsGrid = route.name !== 'album' && route.name !== 'home';
+	// Followed artists carry a name; the artist placeholder lists the catalog's albums by it.
+	const artistName =
+		route.name === 'artist'
+			? (user.library.artists.find((a) => a.artistMbid === route.mbid)?.name ?? null)
+			: null;
+	const catalogSearch = route.name === 'search' ? route.q : (artistName ?? '');
+	const showsGrid =
+		!['album', 'home', 'library'].includes(route.name) &&
+		(route.name !== 'artist' || artistName !== null);
 	const selectedAlbumSummary = library?.albums.find((a) => a.hash === albumHash) ?? null;
 	const [selectedAlbumDetail, setSelectedAlbumDetail] = useState<MusicAlbum | null>(null);
 	const [selectedAlbumLoading, setSelectedAlbumLoading] = useState(false);
@@ -563,6 +570,13 @@ function MusicLibrary({
 	) : (
 		<>
 			<AlbumGrid
+				heading={
+					route.name === 'search'
+						? route.q
+							? `Results for \u201c${route.q}\u201d`
+							: 'Search'
+						: (artistName ?? 'Browse')
+				}
 				albums={visibleAlbums}
 				searchQuery={catalogSearch}
 				matchCount={catalogSearch.trim() ? library?.totalAlbums : undefined}
@@ -648,15 +662,27 @@ function MusicLibrary({
 			break;
 		case 'artist':
 			content = (
-				<div className="flex h-full flex-col items-center justify-center gap-2 p-6 text-center text-gray-400">
-					<p className="text-lg font-bold text-white">Artist pages are coming</p>
-					<button
-						type="button"
-						onClick={() => navigate({ name: 'browse' })}
-						className="text-sm text-green-500 hover:underline"
-					>
-						Browse the catalog
-					</button>
+				<>
+					<div className="flex flex-col items-start gap-2 px-3 pt-6 md:px-6">
+						<p className="text-lg font-bold text-white">Artist pages are coming</p>
+						{!artistName && (
+							<button
+								type="button"
+								onClick={() => navigate({ name: 'browse' })}
+								className="text-sm text-green-500 hover:underline"
+							>
+								Browse the catalog
+							</button>
+						)}
+					</div>
+					{artistName && grid}
+				</>
+			);
+			break;
+		case 'library':
+			content = (
+				<div className="h-full p-2">
+					<LibraryPane route={route} navigate={navigate} />
 				</div>
 			);
 			break;
