@@ -67,6 +67,10 @@ const fetchMock = vi.fn(async (url: string, init?: RequestInit) => {
 	if (url === '/api/music/unrestrict') {
 		return json({ streamUrl: `https://cdn.example/${JSON.parse(String(init?.body)).fileId}` });
 	}
+	if (url.startsWith('/api/music/artist?')) {
+		return json({ artist: { mbid: 'ar1', name: 'Test Artist' }, albums: [summary] });
+	}
+	if (url.startsWith('/api/music/popular?')) return json({ items: [] });
 	if (url.includes('hash=')) return json({ albums: [fullAlbum], totalAlbums: 1, totalTracks: 2 });
 	if (url.includes('search=')) {
 		return json({ albums: [summary], totalAlbums: 11, totalTracks: 260, hasMore: false });
@@ -346,7 +350,7 @@ describe('music page', () => {
 		};
 		routerMock.query = { slug: ['artist', 'ar1'] };
 		render(<AlbumsPage />);
-		await screen.findByRole('heading', { level: 2, name: 'Test Artist' });
+		await screen.findByRole('heading', { level: 1, name: 'Test Artist' });
 		expect(screen.getByLabelText('Search artists or albums')).toHaveValue('');
 	});
 
@@ -373,28 +377,14 @@ describe('music page', () => {
 		expect(fetchMock).not.toHaveBeenCalledWith(expect.stringContaining('sortBy=name'));
 	});
 
-	it("lists a followed artist's albums under the artist placeholder", async () => {
-		me.library = {
-			albums: [],
-			artists: [{ artistMbid: 'ar1', name: 'Test Artist', followedAt: '' }],
-			playlists: [],
-		};
+	it('opens an artist page from its URL', async () => {
 		routerMock.query = { slug: ['artist', 'ar1'] };
 		render(<AlbumsPage />);
-		expect(await screen.findByText('Artist pages are coming')).toBeInTheDocument();
 		expect(
-			await screen.findByRole('heading', { level: 2, name: 'Test Artist' })
+			await screen.findByRole('heading', { level: 1, name: 'Test Artist' })
 		).toBeInTheDocument();
-		expect(fetchMock).toHaveBeenCalledWith(expect.stringContaining('search=Test+Artist'));
-	});
-
-	it('shows only the placeholder for an artist it has no name for', async () => {
-		routerMock.query = { slug: ['artist', 'ar2'] };
-		render(<AlbumsPage />);
-		expect(await screen.findByText('Artist pages are coming')).toBeInTheDocument();
-		expect(
-			within(screen.getByRole('main')).getByRole('button', { name: 'Browse the catalog' })
-		).toBeInTheDocument();
+		expect(screen.getByText('1 album in the catalog')).toBeInTheDocument();
+		expect(fetchMock).toHaveBeenCalledWith('/api/music/artist?mbid=ar1');
 		expect(fetchMock).not.toHaveBeenCalledWith(expect.stringContaining('sortBy=name'));
 	});
 

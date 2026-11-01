@@ -1,5 +1,6 @@
 import AlbumDetailView from '@/components/music/AlbumDetailView';
 import AlbumGrid, { AlbumTypeFilter } from '@/components/music/AlbumGrid';
+import ArtistView from '@/components/music/ArtistView';
 import ContextMenu, {
 	albumMenuItems,
 	MenuActions,
@@ -225,13 +226,8 @@ function MusicLibrary({
 
 	const route = parseMusicRoute(router.query.slug, router.query.q);
 	const albumHash = route.name === 'album' ? route.hash : undefined;
-	// Followed artists carry a name; the artist placeholder lists the catalog's albums by it.
-	const artistName =
-		route.name === 'artist'
-			? (user.library.artists.find((a) => a.artistMbid === route.mbid)?.name ?? null)
-			: null;
-	const catalogSearch = route.name === 'search' ? route.q : (artistName ?? '');
-	const showsGrid = route.name === 'browse' || route.name === 'search' || artistName !== null;
+	const catalogSearch = route.name === 'search' ? route.q : '';
+	const showsGrid = route.name === 'browse' || route.name === 'search';
 	const selectedAlbumSummary = library?.albums.find((a) => a.hash === albumHash) ?? null;
 	const [selectedAlbumDetail, setSelectedAlbumDetail] = useState<MusicAlbum | null>(null);
 	const [selectedAlbumLoading, setSelectedAlbumLoading] = useState(false);
@@ -582,7 +578,7 @@ function MusicLibrary({
 						? route.q
 							? `Results for \u201c${route.q}\u201d`
 							: 'Search'
-						: (artistName ?? 'Browse')
+						: 'Browse'
 				}
 				albums={visibleAlbums}
 				searchQuery={catalogSearch}
@@ -657,21 +653,15 @@ function MusicLibrary({
 			break;
 		case 'artist':
 			content = (
-				<>
-					<div className="flex flex-col items-start gap-2 px-3 pt-6 md:px-6">
-						<p className="text-lg font-bold text-white">Artist pages are coming</p>
-						{!artistName && (
-							<button
-								type="button"
-								onClick={() => navigate({ name: 'browse' })}
-								className="text-sm text-green-500 hover:underline"
-							>
-								Browse the catalog
-							</button>
-						)}
-					</div>
-					{artistName && grid}
-				</>
+				<ArtistView
+					key={route.mbid}
+					mbid={route.mbid}
+					navigate={navigate}
+					onPlayAlbum={playAlbum}
+					onAlbumMenu={openAlbumMenu}
+					onTrackMenu={openTrackMenu}
+					onCoverLoaded={handleCoverLoaded}
+				/>
 			);
 			break;
 		case 'liked':
