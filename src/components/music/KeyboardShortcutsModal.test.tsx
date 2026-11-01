@@ -24,7 +24,7 @@ describe('KeyboardShortcutsModal', () => {
 		expect(screen.getByText('Mute / Unmute')).toBeInTheDocument();
 		expect(screen.getByText('Toggle shuffle')).toBeInTheDocument();
 		expect(screen.getByText('Toggle repeat')).toBeInTheDocument();
-		expect(screen.getByText('Toggle queue')).toBeInTheDocument();
+		expect(screen.getByText('Show or hide Now Playing')).toBeInTheDocument();
 		expect(screen.getByText('Back 10 seconds')).toBeInTheDocument();
 		expect(screen.getByText('Forward 10 seconds')).toBeInTheDocument();
 		expect(screen.getByText('Search')).toBeInTheDocument();

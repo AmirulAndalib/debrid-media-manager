@@ -63,3 +63,10 @@ export function contextRoute(contextId: string | null): MusicRoute | null {
 	if (kind === 'playlist' && id) return { name: 'playlist', id };
 	return null;
 }
+
+// ponytail: the catalog sends no artist MBID yet, so an artist link searches by name;
+// return { name: 'artist', mbid } once albums carry one.
+export const artistRoute = (album: { artist: string }): MusicRoute => ({
+	name: 'search',
+	q: album.artist,
+});

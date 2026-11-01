@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import { KeyboardEvent, MouseEvent, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { MusicPlayer } from './player/MusicPlayerProvider';
-import type { MusicRoute } from './routes';
+import { artistRoute, type MusicRoute } from './routes';
 import type { QueuedTrack } from './types';
 import type { MusicUser } from './user/MusicUserProvider';
 import { albumItems, trackRef } from './utils';
@@ -237,12 +237,10 @@ const addToPlaylistItem = (a: MenuActions, refs: () => Promise<MusicTrackRef[]>)
 	};
 };
 
-// ponytail: the catalog sends no artist MBID yet, so this searches by name; route to
-// { name: 'artist', mbid } once albums carry one.
 const goToArtist = (a: MenuActions, album: MusicAlbum): MenuItem => ({
 	label: 'Go to artist',
 	icon: UserRound,
-	onSelect: () => a.navigate({ name: 'search', q: album.artist }),
+	onSelect: () => a.navigate(artistRoute(album)),
 });
 
 export function trackMenuItems({ track, album }: QueuedTrack, a: MenuActions): MenuItem[] {

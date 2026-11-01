@@ -132,10 +132,42 @@ describe('music page', () => {
 		expect(
 			(await screen.findAllByRole('button', { name: 'Next track' })).length
 		).toBeGreaterThan(0);
-		// The Queue button rather than Q: its handler is bound at render, the window's after.
-		fireEvent.click(screen.getAllByRole('button', { name: 'Queue' })[0]);
-		fireEvent.click(await screen.findByTitle('Clear queue'));
+		fireEvent.click(screen.getByRole('button', { name: 'Clear queue' }));
 		expect(screen.queryByRole('button', { name: 'Next track' })).toBeNull();
+	});
+
+	it('shows Now Playing beside the page on a desktop and remembers closing it', async () => {
+		savedQueue();
+		render(<AlbumsPage />);
+		expect(
+			await screen.findByRole('button', { name: 'Close Now Playing' })
+		).toBeInTheDocument();
+		const [queueButton] = screen.getAllByRole('button', { name: 'Queue' });
+		expect(queueButton).toHaveAttribute('aria-pressed', 'true');
+		fireEvent.click(queueButton);
+		expect(screen.queryByRole('button', { name: 'Close Now Playing' })).toBeNull();
+		expect(localStorage.getItem('music:nowPlayingOpen')).toBe('false');
+	});
+
+	it('opens Now Playing as an overlay on a tablet', async () => {
+		viewport(768);
+		savedQueue();
+		render(<AlbumsPage />);
+		const [queueButton] = await screen.findAllByRole('button', { name: 'Queue' });
+		expect(screen.queryByRole('button', { name: 'Close Now Playing' })).toBeNull();
+		fireEvent.click(queueButton);
+		fireEvent.click(await screen.findByRole('button', { name: 'Close Now Playing' }));
+		expect(screen.queryByRole('button', { name: 'Close Now Playing' })).toBeNull();
+	});
+
+	it('gives the library pane up to Now Playing below 1280 px', async () => {
+		viewport(1024);
+		savedQueue();
+		render(<AlbumsPage />);
+		await screen.findByRole('button', { name: 'Close Now Playing' });
+		expect(screen.queryByLabelText('Search in Your Library')).toBeNull();
+		fireEvent.click(screen.getByRole('button', { name: 'Close Now Playing' }));
+		expect(await screen.findByLabelText('Search in Your Library')).toBeInTheDocument();
 	});
 
 	it('likes the playing track from the heart in the player bar', async () => {
@@ -152,7 +184,8 @@ describe('music page', () => {
 				})
 			)
 		);
-		expect(screen.getAllByRole('button', { name: 'Remove from Liked Songs' }).length).toBe(2);
+		// The player bar's phone and desktop rows, and Now Playing.
+		expect(screen.getAllByRole('button', { name: 'Remove from Liked Songs' })).toHaveLength(3);
 	});
 
 	it('shows the library pane with Home, Search and Browse on a desktop, and collapses it', async () => {

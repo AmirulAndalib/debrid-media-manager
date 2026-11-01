@@ -11,7 +11,7 @@ const SHORTCUTS = [
 	{ key: 'M', description: 'Mute / Unmute' },
 	{ key: 'S', description: 'Toggle shuffle' },
 	{ key: 'R', description: 'Toggle repeat' },
-	{ key: 'Q', description: 'Toggle queue' },
+	{ key: 'Q', description: 'Show or hide Now Playing' },
 	{ key: 'Ctrl/\u2318 K', description: 'Search' },
 	{ key: '?', description: 'Show shortcuts' },
 	{ key: 'F1', description: 'Show shortcuts' },

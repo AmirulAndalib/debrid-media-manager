@@ -11,15 +11,16 @@ import DownloadAlbumModal from '@/components/music/DownloadAlbumModal';
 import KeyboardShortcutsModal from '@/components/music/KeyboardShortcutsModal';
 import LibraryPane from '@/components/music/LibraryPane';
 import MusicPlayerBar from '@/components/music/MusicPlayerBar';
+import NowPlayingPanel from '@/components/music/NowPlayingPanel';
 import { MusicPlayerProvider, useMusicPlayer } from '@/components/music/player/MusicPlayerProvider';
 import { accountPersistence } from '@/components/music/player/persistence';
-import QueuePanel from '@/components/music/QueuePanel';
 import { musicHref, MusicRoute, parseMusicRoute } from '@/components/music/routes';
 import TopBar from '@/components/music/TopBar';
 import { QueuedTrack } from '@/components/music/types';
 import { MusicUserProvider, useMusicUser } from '@/components/music/user/MusicUserProvider';
 import { albumItems, trackRef, trackTitle } from '@/components/music/utils';
 import { useRealDebridAccessToken } from '@/hooks/auth';
+import useLocalStorage from '@/hooks/localStorage';
 import { MusicAlbum, MusicLibraryResponse, MusicTrack } from '@/pages/api/music/library';
 import type { MusicPlayerStateResponse } from '@/pages/api/music/me/state';
 import { UnrestrictTrackResponse } from '@/pages/api/music/unrestrict';
@@ -196,11 +197,22 @@ function MusicLibrary({
 	// Layout: phones below 768 px, tablets to 1023 px, desktops from 1024 px
 	const phone = !useMediaQuery('(min-width: 768px)');
 	const desktop = useMediaQuery('(min-width: 1024px)');
+	const wide = useMediaQuery('(min-width: 1280px)');
 	const [collapsedByUser, setCollapsedByUser] = useState(false);
-	const libraryCollapsed = !desktop || collapsedByUser;
+
+	// Now Playing: a pane desktops remember, an overlay elsewhere.
+	const [paneOpen, setPaneOpen] = useLocalStorage<boolean>('music:nowPlayingOpen', true);
+	const [overlayOpen, setOverlayOpen] = useState(false);
+	const nowPlayingOpen = desktop ? paneOpen !== false : overlayOpen;
+	const toggleNowPlaying = () =>
+		desktop ? setPaneOpen(!nowPlayingOpen) : setOverlayOpen(!nowPlayingOpen);
+	// Below 1280 px two open panes leave the page too little room: the library gives way.
+	const libraryForced = !desktop || (!wide && nowPlayingOpen && !!currentTrack);
+	const libraryCollapsed = libraryForced || collapsedByUser;
+	const toggleNowPlayingRef = useRef(toggleNowPlaying);
+	toggleNowPlayingRef.current = toggleNowPlaying;
 
 	// View state
-	const [isQueueOpen, setIsQueueOpen] = useState(false);
 	const [showShortcuts, setShowShortcuts] = useState(false);
 	const [sortBy, setSortBy] = useState<'recent' | 'name' | 'artist' | 'year'>('name');
 
@@ -462,7 +474,7 @@ function MusicLibrary({
 			switch (e.key) {
 				case 'q':
 				case 'Q':
-					setIsQueueOpen((prev) => !prev);
+					toggleNowPlayingRef.current();
 					break;
 				case '?':
 					setShowShortcuts((prev) => !prev);
@@ -577,6 +589,15 @@ function MusicLibrary({
 		</>
 	);
 
+	const nowPlaying = (
+		<NowPlayingPanel
+			navigate={navigate}
+			onClose={toggleNowPlaying}
+			onTrackMenu={openTrackMenu}
+			onDownload={downloadTrack}
+		/>
+	);
+
 	let content: ReactNode;
 	switch (route.name) {
 		case 'album':
@@ -656,7 +677,9 @@ function MusicLibrary({
 								navigate={navigate}
 								collapsed={libraryCollapsed}
 								onToggleCollapsed={
-									desktop ? () => setCollapsedByUser((prev) => !prev) : undefined
+									libraryForced
+										? undefined
+										: () => setCollapsedByUser((prev) => !prev)
 								}
 								onFocusSearch={() => searchInput.current?.focus()}
 							/>
@@ -681,24 +704,24 @@ function MusicLibrary({
 							{content}
 						</main>
 					</div>
-				</div>
 
-				{/* Queue Panel */}
-				{currentTrack && isQueueOpen && (
-					<QueuePanel
-						nowPlaying={currentTrack}
-						upNext={player.upNext}
-						isPlaying={player.isPlaying}
-						onPlayTrack={player.playAt}
-						onClose={() => setIsQueueOpen(false)}
-						onDownload={downloadTrack}
-						onRemoveTrack={player.removeAt}
-						onClearQueue={() => {
-							player.clearQueue();
-							setIsQueueOpen(false);
-						}}
-					/>
-				)}
+					{currentTrack && nowPlayingOpen && desktop && (
+						<aside className="w-80 shrink-0 overflow-hidden rounded-lg bg-black/25">
+							{nowPlaying}
+						</aside>
+					)}
+					{currentTrack && nowPlayingOpen && !desktop && !phone && (
+						<>
+							<div
+								className="absolute inset-0 z-30 bg-black/40"
+								onClick={() => setOverlayOpen(false)}
+							/>
+							<aside className="absolute inset-y-2 right-2 z-30 w-96 max-w-[calc(100%-1rem)] overflow-hidden rounded-lg bg-gray-900 shadow-music-2xl">
+								{nowPlaying}
+							</aside>
+						</>
+					)}
+				</div>
 
 				{currentTrack && (
 					<MusicPlayerBar
@@ -712,8 +735,8 @@ function MusicLibrary({
 						onSeek={player.seek}
 						onVolumeChange={player.setVolume}
 						onToggleMute={player.toggleMute}
-						onToggleQueue={() => setIsQueueOpen((prev) => !prev)}
-						isQueueOpen={isQueueOpen}
+						onToggleQueue={toggleNowPlaying}
+						isQueueOpen={nowPlayingOpen}
 						isLiked={user.isLiked(currentTrack.track.id)}
 						onToggleLike={() => {
 							const ref = trackRef(currentTrack.track, currentTrack.album);

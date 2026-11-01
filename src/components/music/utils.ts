@@ -1,5 +1,6 @@
 import type { MusicAlbum } from '@/pages/api/music/library';
 import { formatTrackTitle, removeExtension } from '@/utils/musicTracks';
+import type { DragEvent } from 'react';
 import { PlayableTrack, QueuedTrack } from './types';
 
 export function formatDuration(seconds: number): string {
@@ -38,3 +39,24 @@ export const trackRef = (track: PlayableTrack, album: { mbid: string }) => ({
 
 export const albumItems = (album: MusicAlbum): QueuedTrack[] =>
 	album.tracks.map((track) => ({ track, album }));
+
+/** Native drag-and-drop props for row `index` of a list that `onMove` reorders. */
+export const dragRow = (
+	index: number,
+	dragged: { current: number | null },
+	onMove: (from: number, to: number) => void
+) => ({
+	draggable: true,
+	onDragStart: (e: DragEvent) => {
+		dragged.current = index;
+		e.dataTransfer.effectAllowed = 'move';
+		e.dataTransfer.setData('text/plain', String(index)); // Firefox starts no drag without data
+	},
+	onDragOver: (e: DragEvent) => e.preventDefault(),
+	onDrop: (e: DragEvent) => {
+		e.preventDefault();
+		const from = dragged.current;
+		dragged.current = null;
+		if (from !== null && from !== index) onMove(from, index);
+	},
+});
