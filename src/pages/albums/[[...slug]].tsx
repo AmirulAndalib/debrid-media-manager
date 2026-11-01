@@ -19,6 +19,7 @@ import { MusicPlayerProvider, useMusicPlayer } from '@/components/music/player/M
 import { accountPersistence } from '@/components/music/player/persistence';
 import PlaylistView from '@/components/music/PlaylistView';
 import { musicHref, MusicRoute, parseMusicRoute } from '@/components/music/routes';
+import SearchView from '@/components/music/SearchView';
 import TopBar, { SearchBox } from '@/components/music/TopBar';
 import { QueuedTrack } from '@/components/music/types';
 import { MusicUserProvider, useMusicUser } from '@/components/music/user/MusicUserProvider';
@@ -226,8 +227,8 @@ function MusicLibrary({
 
 	const route = parseMusicRoute(router.query.slug, router.query.q);
 	const albumHash = route.name === 'album' ? route.hash : undefined;
-	const catalogSearch = route.name === 'search' ? route.q : '';
-	const showsGrid = route.name === 'browse' || route.name === 'search';
+	const routeQ = route.name === 'search' ? route.q : null;
+	const showsGrid = route.name === 'browse';
 	const selectedAlbumSummary = library?.albums.find((a) => a.hash === albumHash) ?? null;
 	const [selectedAlbumDetail, setSelectedAlbumDetail] = useState<MusicAlbum | null>(null);
 	const [selectedAlbumLoading, setSelectedAlbumLoading] = useState(false);
@@ -279,7 +280,7 @@ function MusicLibrary({
 		if (route.name === 'search' && document.activeElement !== searchInput.current) {
 			setSearchText(route.q);
 		}
-	}, [route.name, catalogSearch]); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [routeQ]); // eslint-disable-line react-hooks/exhaustive-deps
 	const search = (q: string) => {
 		setSearchText(q);
 		clearTimeout(searchTimeout.current);
@@ -334,8 +335,6 @@ function MusicLibrary({
 					limit: String(MUSIC_PAGE_SIZE),
 					sortBy,
 				});
-				const trimmedSearch = catalogSearch.trim();
-				if (trimmedSearch) params.set('search', trimmedSearch);
 				if (albumType !== 'all') params.set('type', albumType);
 
 				const response = await fetch(`/api/music/library?${params.toString()}`);
@@ -365,7 +364,7 @@ function MusicLibrary({
 				}
 			}
 		},
-		[albumType, catalogSearch, sortBy]
+		[albumType, sortBy]
 	);
 
 	const fetchRecentAlbums = useCallback(async () => {
@@ -391,11 +390,11 @@ function MusicLibrary({
 
 	// Kept while another page shows, so coming back keeps the loaded pages and the scroll.
 	useEffect(() => {
-		const key = `${catalogSearch.trim()}\n${sortBy}\n${albumType}`;
+		const key = `${sortBy}\n${albumType}`;
 		if (!showsGrid || key === loadedCatalogKey.current) return;
 		loadedCatalogKey.current = key;
 		fetchLibraryPage(1, false);
-	}, [albumType, catalogSearch, fetchLibraryPage, showsGrid, sortBy]);
+	}, [albumType, fetchLibraryPage, showsGrid, sortBy]);
 
 	useEffect(() => {
 		fetchRecentAlbums();
@@ -573,22 +572,13 @@ function MusicLibrary({
 	) : (
 		<>
 			<AlbumGrid
-				heading={
-					route.name === 'search'
-						? route.q
-							? `Results for \u201c${route.q}\u201d`
-							: 'Search'
-						: 'Browse'
-				}
 				albums={visibleAlbums}
-				searchQuery={catalogSearch}
-				matchCount={catalogSearch.trim() ? library?.totalAlbums : undefined}
 				onSelect={selectAlbum}
 				onPlay={playAlbum}
 				sortBy={sortBy}
 				onSortChange={setSortBy}
 				type={albumType}
-				onTypeChange={route.name === 'browse' ? setAlbumType : undefined}
+				onTypeChange={setAlbumType}
 				nowPlayingAlbumHash={currentTrack?.album.hash ?? null}
 				isPlaying={player.isPlaying}
 				onCoverLoaded={handleCoverLoaded}
@@ -650,6 +640,23 @@ function MusicLibrary({
 						This album is not in the catalog.
 					</div>
 				);
+			break;
+		case 'search':
+			content = (
+				<SearchView
+					q={searchText}
+					navigate={navigate}
+					onPlayAlbum={playAlbum}
+					onAlbumMenu={openAlbumMenu}
+					onTrackMenu={openTrackMenu}
+					onCoverLoaded={handleCoverLoaded}
+					recentAlbums={recentAlbums}
+					onBrowseType={(type) => {
+						setAlbumType(type);
+						navigate({ name: 'browse' });
+					}}
+				/>
+			);
 			break;
 		case 'artist':
 			content = (

@@ -71,6 +71,9 @@ const fetchMock = vi.fn(async (url: string, init?: RequestInit) => {
 		return json({ artist: { mbid: 'ar1', name: 'Test Artist' }, albums: [summary] });
 	}
 	if (url.startsWith('/api/music/popular?')) return json({ items: [] });
+	if (url.startsWith('/api/music/search?')) {
+		return json({ artists: [], albums: [summary], tracks: [] });
+	}
 	if (url.includes('hash=')) return json({ albums: [fullAlbum], totalAlbums: 1, totalTracks: 2 });
 	if (url.includes('search=')) {
 		return json({ albums: [summary], totalAlbums: 11, totalTracks: 260, hasMore: false });
@@ -297,13 +300,14 @@ describe('music page', () => {
 		);
 	});
 
-	it('keeps the catalog totals in the header while a search narrows the grid', async () => {
+	it('searches the catalog by section and keeps its totals in the header', async () => {
 		routerMock.query = { slug: ['search'], q: 'first' };
 		render(<AlbumsPage />);
-		expect(await screen.findByText('11 albums match')).toBeInTheDocument();
+		const albums = await screen.findByRole('region', { name: 'Albums' });
+		expect(albums).toHaveTextContent('First Album');
+		expect(fetchMock).toHaveBeenCalledWith('/api/music/search?q=first');
 		expect(screen.getByText('120 albums · 1500 tracks')).toBeInTheDocument();
-		expect(screen.queryByText('11 albums · 260 tracks')).toBeNull();
-		expect(fetchMock).toHaveBeenCalledWith(expect.stringContaining('search=first'));
+		expect(fetchMock).not.toHaveBeenCalledWith(expect.stringContaining('search=first'));
 	});
 
 	it('navigates to the search page as you type, after a pause', async () => {
@@ -556,7 +560,9 @@ describe('music page', () => {
 			routerMock.query = { slug: ['search'], q: 'first' };
 			render(<AlbumsPage />);
 			expect(await screen.findByLabelText('Search artists or albums')).toHaveValue('first');
-			expect(await screen.findByText('11 albums match')).toBeInTheDocument();
+			expect(await screen.findByRole('region', { name: 'Top result' })).toHaveTextContent(
+				'First Album'
+			);
 		});
 
 		it('shows Your Library full width on its tab', async () => {

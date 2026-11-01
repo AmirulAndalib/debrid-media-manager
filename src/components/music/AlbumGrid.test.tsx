@@ -22,7 +22,6 @@ describe('AlbumGrid', () => {
 		render(
 			<AlbumGrid
 				albums={[makeAlbum(), makeAlbum({ hash: 'def456', album: 'Another Album' })]}
-				searchQuery=""
 				onSelect={vi.fn()}
 				onPlay={vi.fn()}
 				sortBy="recent"
@@ -39,7 +38,6 @@ describe('AlbumGrid', () => {
 		render(
 			<AlbumGrid
 				albums={[]}
-				searchQuery=""
 				onSelect={vi.fn()}
 				onPlay={vi.fn()}
 				sortBy="recent"
@@ -48,46 +46,13 @@ describe('AlbumGrid', () => {
 				isPlaying={false}
 			/>
 		);
-		expect(screen.getByText('No music in your library')).toBeInTheDocument();
-	});
-
-	it('shows search empty state when searching with no results', () => {
-		render(
-			<AlbumGrid
-				albums={[]}
-				searchQuery="nonexistent"
-				onSelect={vi.fn()}
-				onPlay={vi.fn()}
-				sortBy="recent"
-				onSortChange={vi.fn()}
-				nowPlayingAlbumHash={null}
-				isPlaying={false}
-			/>
-		);
-		expect(screen.getByText('No albums match your search')).toBeInTheDocument();
-	});
-
-	it('says how many albums match while searching', () => {
-		const props = {
-			albums: [makeAlbum()],
-			onSelect: vi.fn(),
-			onPlay: vi.fn(),
-			sortBy: 'name' as const,
-			onSortChange: vi.fn(),
-			nowPlayingAlbumHash: null,
-			isPlaying: false,
-		};
-		const { rerender } = render(<AlbumGrid {...props} searchQuery="" matchCount={undefined} />);
-		expect(screen.queryByText(/match/)).toBeNull();
-		rerender(<AlbumGrid {...props} searchQuery="test" matchCount={1} />);
-		expect(screen.getByText('1 album matches')).toBeInTheDocument();
+		expect(screen.getByText('No music in the catalog yet')).toBeInTheDocument();
 	});
 
 	it('renders sort buttons', () => {
 		render(
 			<AlbumGrid
 				albums={[]}
-				searchQuery=""
 				onSelect={vi.fn()}
 				onPlay={vi.fn()}
 				sortBy="recent"
@@ -107,7 +72,6 @@ describe('AlbumGrid', () => {
 		render(
 			<AlbumGrid
 				albums={[]}
-				searchQuery=""
 				onSelect={vi.fn()}
 				onPlay={vi.fn()}
 				sortBy="recent"
@@ -125,7 +89,6 @@ describe('AlbumGrid', () => {
 		render(
 			<AlbumGrid
 				albums={[]}
-				searchQuery=""
 				onSelect={vi.fn()}
 				onPlay={vi.fn()}
 				sortBy="artist"
@@ -142,7 +105,6 @@ describe('AlbumGrid', () => {
 	it('shows release-type chips once an album has a type, and filters by them', () => {
 		const onTypeChange = vi.fn();
 		const props = {
-			searchQuery: '',
 			onSelect: vi.fn(),
 			onPlay: vi.fn(),
 			sortBy: 'name' as const,

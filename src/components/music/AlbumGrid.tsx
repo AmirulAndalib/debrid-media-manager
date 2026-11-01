@@ -17,14 +17,10 @@ interface AlbumCardGridProps {
 }
 
 interface AlbumGridProps extends AlbumCardGridProps {
-	searchQuery: string;
-	/** Albums matching the search, shown while one is active. */
-	matchCount?: number;
 	sortBy: SortOption;
 	onSortChange: (sort: SortOption) => void;
 	type?: AlbumTypeFilter;
 	onTypeChange?: (type: AlbumTypeFilter) => void;
-	heading?: string;
 }
 
 const sortOptions: { value: SortOption; label: string; icon: typeof Clock }[] = [
@@ -110,13 +106,10 @@ export function AlbumCardGrid({
 
 export default function AlbumGrid({
 	albums,
-	searchQuery,
-	matchCount,
 	sortBy,
 	onSortChange,
 	type = 'all',
 	onTypeChange,
-	heading = 'Browse',
 	...cards
 }: AlbumGridProps) {
 	return (
@@ -124,12 +117,7 @@ export default function AlbumGrid({
 			<div className="mb-3 flex flex-wrap items-center justify-end gap-2 md:mb-6 md:items-end md:justify-between">
 				<div className="hidden md:block">
 					<p className="text-xs font-bold text-gray-400 uppercase">Catalog</p>
-					<h2 className="mt-1 text-2xl font-black text-white md:text-4xl">{heading}</h2>
-					{matchCount !== undefined && (
-						<p className="mt-1 text-sm text-gray-400">
-							{matchCount} {matchCount === 1 ? 'album matches' : 'albums match'}
-						</p>
-					)}
+					<h2 className="mt-1 text-2xl font-black text-white md:text-4xl">Browse</h2>
 				</div>
 				<div className="flex flex-wrap items-center justify-end gap-x-3 gap-y-2">
 					{onTypeChange && (
@@ -161,10 +149,12 @@ export default function AlbumGrid({
 				<div className="flex flex-col items-center justify-center py-20 text-gray-400">
 					<Music2 className="mb-4 h-16 w-16" />
 					<p className="text-lg">
-						{searchQuery ? 'No albums match your search' : 'No music in your library'}
+						{type === 'all'
+							? 'No music in the catalog yet'
+							: 'No albums of this type yet'}
 					</p>
 					<p className="mt-2 text-sm text-gray-500">
-						Add music torrents from your debrid service to see them here
+						The catalog holds albums cached on Real-Debrid
 					</p>
 				</div>
 			) : (
