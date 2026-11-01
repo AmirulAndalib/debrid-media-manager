@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { contextRoute, musicHref, MusicRoute, parseMusicRoute } from './routes';
+import { artistRoute, contextRoute, musicHref, MusicRoute, parseMusicRoute } from './routes';
 
 describe('music routes', () => {
 	it.each<[string[] | undefined, string | undefined, MusicRoute]>([
@@ -47,5 +47,16 @@ describe('music routes', () => {
 		expect(contextRoute('liked')).toEqual({ name: 'liked' });
 		expect(contextRoute(null)).toBeNull();
 		expect(contextRoute('album:')).toBeNull();
+	});
+
+	it("opens an album's artist page, or searches by name when it has no artist id", () => {
+		expect(artistRoute({ artist: 'Green Day', artistMbid: 'ar-1' })).toEqual({
+			name: 'artist',
+			mbid: 'ar-1',
+		});
+		expect(artistRoute({ artist: 'Green Day', artistMbid: null })).toEqual({
+			name: 'search',
+			q: 'Green Day',
+		});
 	});
 });

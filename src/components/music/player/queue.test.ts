@@ -20,6 +20,7 @@ import {
 const album = {
 	hash: 'h',
 	mbid: 'm',
+	artistMbid: null,
 	artist: 'Artist',
 	album: 'Album',
 	year: null,

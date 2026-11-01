@@ -240,6 +240,7 @@ export function MusicUserProvider({
 				? {
 						hash: album.hash,
 						mbid,
+						artistMbid: album.artistMbid,
 						artist: album.artist,
 						album: album.album,
 						year: album.year,

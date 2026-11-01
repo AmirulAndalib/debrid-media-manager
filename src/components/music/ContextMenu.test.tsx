@@ -6,6 +6,7 @@ import type { MusicUser } from './user/MusicUserProvider';
 const album = {
 	hash: 'h1',
 	mbid: 'mb1',
+	artistMbid: null,
 	artist: 'Test Artist',
 	album: 'First Album',
 	year: 2020,

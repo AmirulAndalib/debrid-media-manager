@@ -13,6 +13,7 @@ vi.mock('./user/MusicUserProvider', () => ({ useMusicUser: () => user }));
 const album = (hash: string, name: string) => ({
 	hash,
 	mbid: `mb-${hash}`,
+	artistMbid: null,
 	artist: 'Test Artist',
 	album: name,
 	year: 2020,

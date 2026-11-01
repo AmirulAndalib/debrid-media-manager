@@ -7,6 +7,7 @@ export interface MusicAlbumSummary {
 	/** null when no release of the album is left in the catalog. */
 	hash: string | null;
 	mbid: string;
+	artistMbid: string | null;
 	artist: string;
 	album: string;
 	year: number | null;
@@ -32,6 +33,7 @@ export interface MusicPlaylistSummary {
 type Release = { hash: string; mbid: string; filename: string; _count: { files: number } };
 type Meta = {
 	mbid: string;
+	artistMbid: string | null;
 	artist: string;
 	album: string;
 	year: number | null;
@@ -44,7 +46,14 @@ const releaseSelect = {
 	filename: true,
 	_count: { select: { files: true } },
 };
-const metaSelect = { mbid: true, artist: true, album: true, year: true, coverUrl: true };
+const metaSelect = {
+	mbid: true,
+	artistMbid: true,
+	artist: true,
+	album: true,
+	year: true,
+	coverUrl: true,
+};
 const fileKey = (hash: string, fileId: number) => `${hash.toLowerCase()}-${fileId}`;
 
 // Same patterns as library.ts's extractTrackNumber, which it does not export.
@@ -66,6 +75,7 @@ function summarize(
 	return {
 		hash: release?.hash ?? null,
 		mbid,
+		artistMbid: meta?.artistMbid ?? null,
 		artist: meta?.artist ?? 'Unknown Artist',
 		album: meta?.album ?? release?.filename ?? '',
 		year: meta?.year ?? null,

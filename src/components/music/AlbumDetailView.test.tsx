@@ -17,6 +17,7 @@ const makeTrack = (id: string, filename: string, trackNumber: number) => ({
 const makeAlbum = (overrides = {}) => ({
 	hash: 'abc123',
 	mbid: 'mbid-1',
+	artistMbid: null,
 	artist: 'Test Artist',
 	album: 'Test Album',
 	year: 2023,

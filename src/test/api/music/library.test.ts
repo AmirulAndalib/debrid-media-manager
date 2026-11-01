@@ -32,6 +32,7 @@ function row(overrides: Record<string, unknown> = {}) {
 		filename: 'Test Album',
 		bytes: BigInt(50000000),
 		fileCount: BigInt(12),
+		artistMbid: null,
 		artist: 'Test Artist',
 		album: 'Test Album',
 		year: BigInt(2024),
@@ -187,6 +188,7 @@ describe('/api/music/library', () => {
 			serve(
 				[
 					row({
+						artistMbid: '084308bd-1654-436f-ba03-df6697104e19',
 						primaryType: 'Album',
 						genres: ['pop punk', 'rock'],
 						mbTrackCount: 12,
@@ -216,6 +218,7 @@ describe('/api/music/library', () => {
 			expect(data.albums[0]).toEqual({
 				hash: 'hash1',
 				mbid: 'mbid-1',
+				artistMbid: '084308bd-1654-436f-ba03-df6697104e19',
 				artist: 'Test Artist',
 				album: 'Test Album',
 				year: 2012,
@@ -228,7 +231,9 @@ describe('/api/music/library', () => {
 				mbTrackCount: 12,
 				pack: false,
 			});
+			expect(pageQuery().sql).toContain('md.artistMbid');
 			expect(data.albums[1]).toMatchObject({
+				artistMbid: null,
 				artist: 'Unknown Artist',
 				album: 'Raw',
 				genres: [],

@@ -36,8 +36,10 @@ const release = (hash: string, mbid: string, files: number) => ({
 	filename: `Release ${hash.slice(0, 1)}`,
 	_count: { files },
 });
+const ARTIST = '084308bd-1654-436f-ba03-df6697104e19';
 const meta = (mbid: string, album: string) => ({
 	mbid,
+	artistMbid: ARTIST,
 	artist: 'Artist',
 	album,
 	year: 2001,
@@ -93,6 +95,7 @@ describe('resolveMusicRows', () => {
 			album: {
 				hash: H1,
 				mbid: M1,
+				artistMbid: ARTIST,
 				artist: 'Artist',
 				album: 'First',
 				year: 2001,
@@ -122,6 +125,7 @@ describe('resolveMusicRows', () => {
 			album: {
 				hash: null,
 				mbid: M3,
+				artistMbid: ARTIST,
 				artist: 'Artist',
 				album: 'Third',
 				year: 2001,
@@ -186,7 +190,12 @@ describe('resolveAlbumSummaries', () => {
 
 		const summaries = await resolveAlbumSummaries([M1, M2, M3]);
 
-		expect(summaries.get(M1)).toMatchObject({ hash: H1, trackCount: 10, album: 'First' });
+		expect(summaries.get(M1)).toMatchObject({
+			hash: H1,
+			trackCount: 10,
+			album: 'First',
+			artistMbid: ARTIST,
+		});
 		expect(summaries.has(M2)).toBe(false);
 		expect(summaries.get(M3)).toMatchObject({ hash: null, trackCount: 0, album: 'Third' });
 		expect(mocked.availableMusic.findMany).toHaveBeenCalledTimes(1);

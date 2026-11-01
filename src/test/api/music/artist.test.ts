@@ -23,6 +23,7 @@ const row = (mbid: string, album: string, year: number, primaryType: string) => 
 	filename: album,
 	bytes: BigInt(1),
 	fileCount: BigInt(12),
+	artistMbid: GREEN_DAY,
 	artist: 'Green Day',
 	album,
 	year: BigInt(year),
@@ -72,10 +73,12 @@ describe('/api/music/artist', () => {
 
 		expect(res._getStatusCode()).toBe(200);
 		expect(data.artist).toEqual({ mbid: GREEN_DAY, name: 'Green Day', sortName: 'Green Day' });
-		expect(data.albums.map((a: any) => [a.album, a.year, a.primaryType])).toEqual([
-			['¡Tré!', 2012, 'Album'],
-			['Dookie', 1994, 'Album'],
-		]);
+		expect(data.albums.map((a: any) => [a.album, a.year, a.primaryType, a.artistMbid])).toEqual(
+			[
+				['¡Tré!', 2012, 'Album', GREEN_DAY],
+				['Dookie', 1994, 'Album', GREEN_DAY],
+			]
+		);
 		const query = mockedPrisma.$queryRaw.mock.calls[0][0] as unknown as Prisma.Sql;
 		expect(query.sql).toContain('md.artistMbid = ?');
 		expect(query.values).toContain(GREEN_DAY);

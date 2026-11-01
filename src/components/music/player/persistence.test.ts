@@ -6,6 +6,7 @@ import { emptyQueue, nowPlayingOf } from './queue';
 const album = {
 	hash: 'h',
 	mbid: 'm',
+	artistMbid: null,
 	artist: 'Artist',
 	album: 'Album',
 	year: 2020,

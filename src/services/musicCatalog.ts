@@ -30,6 +30,8 @@ export interface MusicTrack {
 export interface MusicAlbum {
 	hash: string;
 	mbid: string;
+	/** The artist's MusicBrainz id, which their page is found by; null when MusicBrainz has none. */
+	artistMbid: string | null;
 	artist: string;
 	album: string;
 	/** The year of MusicBrainz's first release date when known, else the stored year. */
@@ -132,6 +134,7 @@ type AlbumRow = {
 	filename: string;
 	bytes: bigint;
 	fileCount: bigint;
+	artistMbid: string | null;
 	artist: string | null;
 	album: string | null;
 	year: bigint | number | null;
@@ -165,7 +168,7 @@ export async function queryAlbums({
 	hash?: string;
 }): Promise<{ albums: MusicAlbum[]; totalAlbums: number; totalTracks: number }> {
 	const rows = await prisma.$queryRaw<AlbumRow[]>(Prisma.sql`${await bestCte(hash)}
-		SELECT b.hash, b.mbid, b.filename, b.bytes, b.fileCount, md.artist, md.album,
+		SELECT b.hash, b.mbid, b.filename, b.bytes, b.fileCount, md.artistMbid, md.artist, md.album,
 			${YEAR} AS year, md.coverUrl, md.primaryType, md.genres, md.mbTrackCount,
 			COUNT(*) OVER () AS totalAlbums, SUM(b.fileCount) OVER () AS totalTracks
 		FROM best b
@@ -176,6 +179,7 @@ export async function queryAlbums({
 	const albums = rows.map((row) => ({
 		hash: row.hash,
 		mbid: row.mbid,
+		artistMbid: row.artistMbid ?? null,
 		artist: row.artist ?? 'Unknown Artist',
 		album: row.album ?? row.filename,
 		year: row.year === null ? null : Number(row.year),

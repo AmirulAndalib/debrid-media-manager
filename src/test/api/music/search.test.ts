@@ -35,6 +35,7 @@ const treRow = {
 	filename: 'Green Day - ¡Tré!',
 	bytes: BigInt(300000000),
 	fileCount: BigInt(12),
+	artistMbid: GREEN_DAY,
 	artist: 'Green Day',
 	album: '¡Tré!',
 	year: BigInt(2012),
@@ -108,7 +109,12 @@ describe('/api/music/search', () => {
 			{ mbid: GREEN_DAY, name: 'Green Day', albumCount: 3, coverUrl: 'x.jpg' },
 		]);
 		expect(data.albums).toHaveLength(1);
-		expect(data.albums[0]).toMatchObject({ album: '¡Tré!', primaryType: 'Album', tracks: [] });
+		expect(data.albums[0]).toMatchObject({
+			album: '¡Tré!',
+			artistMbid: GREEN_DAY,
+			primaryType: 'Album',
+			tracks: [],
+		});
 		expect(data.tracks).toHaveLength(1);
 		expect(data.tracks[0].track).toMatchObject({
 			title: 'Brutal Love',
@@ -116,7 +122,11 @@ describe('/api/music/search', () => {
 			path: '/01.Brutal Love.flac',
 			hash: TRE_HASH,
 		});
-		expect(data.tracks[0].album).toMatchObject({ mbid: TRE_MBID, tracks: [] });
+		expect(data.tracks[0].album).toMatchObject({
+			mbid: TRE_MBID,
+			artistMbid: GREEN_DAY,
+			tracks: [],
+		});
 
 		const sql = queries().map((query) => query.sql);
 		expect(

@@ -12,6 +12,7 @@ const ref = { hash: 'a'.repeat(40), fileId: 3, mbid: '11111111-1111-1111-1111-11
 const summary = {
 	hash: 'h1',
 	mbid: 'mb-album',
+	artistMbid: null,
 	artist: 'Artist',
 	album: 'Album',
 	year: 2020,
