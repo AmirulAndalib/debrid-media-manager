@@ -171,6 +171,35 @@ describe('music page', () => {
 		);
 	});
 
+	it("saves an album to the library from its card's menu", async () => {
+		render(<AlbumsPage />);
+		fireEvent.click(
+			await screen.findByRole('button', { name: 'More options for First Album' })
+		);
+		fireEvent.click(await screen.findByRole('menuitem', { name: 'Save to Your Library' }));
+		await waitFor(() =>
+			expect(fetchMock).toHaveBeenCalledWith(
+				'/api/music/me/albums/mb1',
+				expect.objectContaining({ method: 'PUT' })
+			)
+		);
+		expect(screen.queryByRole('menu')).toBeNull();
+	});
+
+	it('saves the open album with the heart in its header', async () => {
+		routerMock.query = { slug: ['album', 'h1'] };
+		render(<AlbumsPage />);
+		const heart = await screen.findByRole('button', { name: 'Save to Your Library' });
+		fireEvent.click(heart);
+		expect(heart).toHaveAttribute('aria-pressed', 'true');
+		await waitFor(() =>
+			expect(fetchMock).toHaveBeenCalledWith(
+				'/api/music/me/albums/mb1',
+				expect.objectContaining({ method: 'PUT' })
+			)
+		);
+	});
+
 	it('keeps the catalog totals in the header while a search narrows the grid', async () => {
 		routerMock.query = { slug: ['search'], q: 'first' };
 		render(<AlbumsPage />);

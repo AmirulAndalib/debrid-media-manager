@@ -1,6 +1,6 @@
 import { MusicAlbum, MusicTrack } from '@/pages/api/music/library';
-import { Download, ListEnd, Loader2, Play, X } from 'lucide-react';
-import { useState } from 'react';
+import { Download, Ellipsis, Heart, ListEnd, Loader2, Play, X } from 'lucide-react';
+import { MouseEvent, useState } from 'react';
 import { PlayableTrack } from './types';
 import { formatDuration, formatSize, trackTitle } from './utils';
 
@@ -15,6 +15,10 @@ interface TrackListItemProps {
 	onRemove?: () => void;
 	showRemove?: boolean;
 	onPlayNext?: (track: MusicTrack, album: MusicAlbum) => void;
+	/** Opens the track's context menu, from a right-click or the "..." button. */
+	onMenu?: (e: MouseEvent) => void;
+	isLiked?: boolean;
+	onToggleLike?: () => void;
 }
 
 export default function TrackListItem({
@@ -28,8 +32,14 @@ export default function TrackListItem({
 	onRemove,
 	showRemove = false,
 	onPlayNext,
+	onMenu,
+	isLiked = false,
+	onToggleLike,
 }: TrackListItemProps) {
 	const [isDownloading, setIsDownloading] = useState(false);
+
+	// Phones show the menu, which holds these, rather than a row of small buttons.
+	const wideOnly = onMenu ? 'hidden sm:flex' : 'flex';
 
 	const handleDownload = async (e: React.MouseEvent) => {
 		e.stopPropagation();
@@ -46,6 +56,7 @@ export default function TrackListItem({
 		<button
 			type="button"
 			onClick={onPlay}
+			onContextMenu={onMenu}
 			aria-label={`Play ${trackTitle(track)} by ${album.artist}`}
 			className={`group grid w-full grid-cols-[32px_1fr_auto_auto] items-center gap-2 rounded-lg px-3 py-2.5 text-left transition-all duration-200 sm:grid-cols-[40px_1fr_auto_auto] sm:gap-4 sm:px-4 sm:py-3 ${
 				isCurrentTrack
@@ -102,15 +113,30 @@ export default function TrackListItem({
 							e.stopPropagation();
 							onPlayNext(track, album);
 						}}
-						className="flex items-center justify-center rounded-full p-1.5 text-gray-500 opacity-0 transition-all duration-200 group-hover:opacity-100 hover:bg-white/10 hover:text-white"
+						className={`${wideOnly} items-center justify-center rounded-full p-1.5 text-gray-500 opacity-0 transition-all duration-200 group-hover:opacity-100 hover:bg-white/10 hover:text-white`}
 						title="Play next"
 					>
 						<ListEnd className="h-4 w-4" />
 					</span>
 				)}
+				{onToggleLike && (
+					<span
+						onClick={(e) => {
+							e.stopPropagation();
+							onToggleLike();
+						}}
+						className={`flex items-center justify-center rounded-full p-1.5 transition-all duration-200 hover:bg-white/10 ${
+							isLiked ? 'text-green-500' : 'text-gray-500 hover:text-white'
+						}`}
+						title={isLiked ? 'Remove from Liked Songs' : 'Save to Liked Songs'}
+						aria-label={isLiked ? 'Remove from Liked Songs' : 'Save to Liked Songs'}
+					>
+						<Heart className="h-4 w-4" fill={isLiked ? 'currentColor' : 'none'} />
+					</span>
+				)}
 				<span
 					onClick={handleDownload}
-					className={`flex items-center justify-center rounded-full p-1.5 transition-all duration-200 ${
+					className={`${wideOnly} items-center justify-center rounded-full p-1.5 transition-all duration-200 ${
 						isDownloading
 							? 'text-green-500'
 							: 'text-gray-500 hover:bg-white/10 hover:text-white'
@@ -133,6 +159,16 @@ export default function TrackListItem({
 						title="Remove from queue"
 					>
 						<X className="h-4 w-4" />
+					</span>
+				)}
+				{onMenu && (
+					<span
+						onClick={onMenu}
+						className="flex items-center justify-center rounded-full p-1.5 text-gray-500 transition-all duration-200 hover:bg-white/10 hover:text-white"
+						title="More options"
+						aria-label={`More options for ${trackTitle(track)}`}
+					>
+						<Ellipsis className="h-4 w-4" />
 					</span>
 				)}
 			</div>

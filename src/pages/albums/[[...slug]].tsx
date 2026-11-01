@@ -1,5 +1,13 @@
 import AlbumDetailView from '@/components/music/AlbumDetailView';
 import AlbumGrid from '@/components/music/AlbumGrid';
+import ContextMenu, {
+	albumMenuItems,
+	MenuActions,
+	menuAt,
+	OpenMenu,
+	trackMenuItems,
+} from '@/components/music/ContextMenu';
+import DownloadAlbumModal from '@/components/music/DownloadAlbumModal';
 import KeyboardShortcutsModal from '@/components/music/KeyboardShortcutsModal';
 import MusicPlayerBar from '@/components/music/MusicPlayerBar';
 import { MusicPlayerProvider, useMusicPlayer } from '@/components/music/player/MusicPlayerProvider';
@@ -17,7 +25,7 @@ import { toasterPosition } from '@/utils/toastOptions';
 import { Keyboard, Library, Loader2, Music2, X } from 'lucide-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { MouseEvent, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 
 const MUSIC_PAGE_SIZE = 48;
@@ -237,7 +245,10 @@ function MusicLibrary({
 }) {
 	const router = useRouter();
 	const player = useMusicPlayer();
+	const user = useMusicUser();
 	const currentTrack = player.nowPlaying?.item ?? null;
+	const [menu, setMenu] = useState<OpenMenu | null>(null);
+	const [albumToDownload, setAlbumToDownload] = useState<MusicAlbum | null>(null);
 
 	// Library state
 	const [library, setLibrary] = useState<MusicLibraryResponse | null>(null);
@@ -533,13 +544,18 @@ function MusicLibrary({
 		return () => window.removeEventListener('keydown', handleKeyDown);
 	}, []);
 
-	const playAlbum = async (album: MusicAlbum, startIndex: number = 0) => {
+	const withTracks = useCallback(async (album: MusicAlbum) => {
 		try {
-			const full = album.tracks.length ? album : await fetchAlbum(album.hash);
-			if (full) player.playContext(albumItems(full), startIndex, `album:${full.hash}`);
+			return album.tracks.length ? album : await fetchAlbum(album.hash);
 		} catch (err) {
-			console.error('Failed to play album:', err);
+			console.error('Failed to load the album tracks:', err);
+			return null;
 		}
+	}, []);
+
+	const playAlbum = async (album: MusicAlbum, startIndex: number = 0) => {
+		const full = await withTracks(album);
+		if (full) player.playContext(albumItems(full), startIndex, `album:${full.hash}`);
 	};
 
 	// Download a track
@@ -569,6 +585,19 @@ function MusicLibrary({
 		}
 	};
 
+	const menuActions: MenuActions = {
+		player,
+		user,
+		navigate,
+		withTracks,
+		download: (track) => void downloadTrack(track),
+		downloadAlbum: setAlbumToDownload,
+	};
+	const openTrackMenu = (e: MouseEvent, item: QueuedTrack) =>
+		setMenu(menuAt(e, trackMenuItems(item, menuActions)));
+	const openAlbumMenu = (e: MouseEvent, album: MusicAlbum) =>
+		setMenu(menuAt(e, albumMenuItems(album, menuActions)));
+
 	const visibleAlbums = library?.albums ?? [];
 	const sidebarAlbums = useMemo(() => recentAlbums.slice(0, RECENT_ALBUM_LIMIT), [recentAlbums]);
 
@@ -595,6 +624,7 @@ function MusicLibrary({
 				nowPlayingAlbumHash={currentTrack?.album.hash ?? null}
 				isPlaying={player.isPlaying}
 				onCoverLoaded={handleCoverLoaded}
+				onAlbumMenu={openAlbumMenu}
 			/>
 			<div
 				ref={loadMoreRef}
@@ -628,6 +658,16 @@ function MusicLibrary({
 						onDownload={downloadTrack}
 						onDownloadAlbum={downloadAlbum}
 						onCoverLoaded={handleCoverLoaded}
+						isSaved={user.isSaved(selectedAlbum.mbid)}
+						onToggleSave={() =>
+							user.isSaved(selectedAlbum.mbid)
+								? user.unsaveAlbum(selectedAlbum.mbid)
+								: user.saveAlbum(selectedAlbum.mbid, selectedAlbum)
+						}
+						onMenu={(e) => openAlbumMenu(e, selectedAlbum)}
+						onTrackMenu={(e, track) =>
+							openTrackMenu(e, { track, album: selectedAlbum })
+						}
 					/>
 				) : selectedAlbumLoading ? (
 					spinner
@@ -828,6 +868,23 @@ function MusicLibrary({
 			</div>
 
 			{showShortcuts && <KeyboardShortcutsModal onClose={() => setShowShortcuts(false)} />}
+			{menu && (
+				<ContextMenu
+					key={`${menu.x}:${menu.y}`}
+					menu={menu}
+					onClose={() => setMenu(null)}
+				/>
+			)}
+			{albumToDownload && (
+				<DownloadAlbumModal
+					album={albumToDownload}
+					onConfirm={() => {
+						setAlbumToDownload(null);
+						void downloadAlbum(albumToDownload);
+					}}
+					onClose={() => setAlbumToDownload(null)}
+				/>
+			)}
 		</>
 	);
 }

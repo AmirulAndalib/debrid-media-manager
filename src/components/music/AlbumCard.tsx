@@ -1,6 +1,6 @@
 import { MusicAlbum } from '@/pages/api/music/library';
-import { Disc3, Pause, Play } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { Disc3, Ellipsis, Pause, Play } from 'lucide-react';
+import { MouseEvent, useEffect, useRef, useState } from 'react';
 
 interface AlbumCardProps {
 	album: MusicAlbum;
@@ -9,6 +9,8 @@ interface AlbumCardProps {
 	isNowPlaying?: boolean;
 	isPlaying?: boolean;
 	onCoverLoaded?: (album: MusicAlbum, coverUrl: string) => void;
+	/** Opens the album's context menu, from a right-click or the "..." button. */
+	onMenu?: (e: MouseEvent, album: MusicAlbum) => void;
 }
 
 export default function AlbumCard({
@@ -18,6 +20,7 @@ export default function AlbumCard({
 	isNowPlaying = false,
 	isPlaying = false,
 	onCoverLoaded,
+	onMenu,
 }: AlbumCardProps) {
 	const cardRef = useRef<HTMLDivElement>(null);
 	const [coverUrl, setCoverUrl] = useState(album.coverUrl);
@@ -89,6 +92,7 @@ export default function AlbumCard({
 			tabIndex={0}
 			aria-label={`Open ${album.album} by ${album.artist}`}
 			onClick={() => onSelect(album)}
+			onContextMenu={onMenu && ((e) => onMenu(e, album))}
 			onKeyDown={(e) => {
 				if (e.key === 'Enter' || e.key === ' ') {
 					e.preventDefault();
@@ -169,11 +173,27 @@ export default function AlbumCard({
 				</div>
 			</div>
 
-			<h3 className="truncate font-semibold text-white">{album.album}</h3>
-			<p className="truncate text-sm text-gray-400">
-				{album.artist}
-				{album.year && ` \u00b7 ${album.year}`}
-			</p>
+			<div className="flex items-start gap-1">
+				<div className="min-w-0 flex-1">
+					<h3 className="truncate font-semibold text-white">{album.album}</h3>
+					<p className="truncate text-sm text-gray-400">
+						{album.artist}
+						{album.year && ` \u00b7 ${album.year}`}
+					</p>
+				</div>
+				{onMenu && (
+					<button
+						type="button"
+						onClick={(e) => onMenu(e, album)}
+						onKeyDown={(e) => e.stopPropagation()}
+						aria-label={`More options for ${album.album}`}
+						title="More options"
+						className="-mr-1 shrink-0 rounded-full p-1 text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
+					>
+						<Ellipsis className="h-5 w-5" />
+					</button>
+				)}
+			</div>
 		</div>
 	);
 }

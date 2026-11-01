@@ -1,6 +1,15 @@
 import { MusicAlbum, MusicTrack } from '@/pages/api/music/library';
-import { ChevronLeft, Disc3, Download, ListEnd, Loader2, Play } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import {
+	ChevronLeft,
+	Disc3,
+	Download,
+	Ellipsis,
+	Heart,
+	ListEnd,
+	Loader2,
+	Play,
+} from 'lucide-react';
+import { MouseEvent, useEffect, useState } from 'react';
 import DownloadAlbumModal from './DownloadAlbumModal';
 import TrackListItem from './TrackListItem';
 import { PlayableTrack, PlayerState, QueuedTrack } from './types';
@@ -18,6 +27,11 @@ interface AlbumDetailViewProps {
 	onDownload: (track: MusicTrack) => Promise<void>;
 	onDownloadAlbum: (album: MusicAlbum) => Promise<void>;
 	onCoverLoaded?: (album: MusicAlbum, coverUrl: string) => void;
+	/** Saved to Your Library. */
+	isSaved?: boolean;
+	onToggleSave?: () => void;
+	onMenu?: (e: MouseEvent) => void;
+	onTrackMenu?: (e: MouseEvent, track: MusicTrack) => void;
 }
 
 export default function AlbumDetailView({
@@ -32,6 +46,10 @@ export default function AlbumDetailView({
 	onDownload,
 	onDownloadAlbum,
 	onCoverLoaded,
+	isSaved = false,
+	onToggleSave,
+	onMenu,
+	onTrackMenu,
 }: AlbumDetailViewProps) {
 	const [coverUrl, setCoverUrl] = useState(album.coverUrl);
 	const [isDownloadingAlbum, setIsDownloadingAlbum] = useState(false);
@@ -104,7 +122,10 @@ export default function AlbumDetailView({
 				</button>
 
 				{/* Album header */}
-				<div className="flex flex-col gap-8 md:flex-row md:items-end">
+				<div
+					className="flex flex-col gap-8 md:flex-row md:items-end"
+					onContextMenu={onMenu}
+				>
 					<div className="relative mx-auto h-48 w-48 shrink-0 overflow-hidden rounded-xl bg-gray-800 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-transform duration-300 hover:scale-[1.02] md:mx-0 md:h-64 md:w-64">
 						{/* Fallback icon */}
 						<div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-gray-700 to-gray-800">
@@ -185,6 +206,42 @@ export default function AlbumDetailView({
 								<ListEnd className="h-5 w-5" />
 								Play Next
 							</button>
+							{onToggleSave && (
+								<button
+									type="button"
+									onClick={onToggleSave}
+									aria-pressed={isSaved}
+									aria-label={
+										isSaved
+											? 'Remove from Your Library'
+											: 'Save to Your Library'
+									}
+									title={
+										isSaved
+											? 'Remove from Your Library'
+											: 'Save to Your Library'
+									}
+									className={`flex items-center rounded-full border border-gray-600 bg-white/5 p-3.5 backdrop-blur-sm transition-all duration-200 hover:border-white/30 hover:bg-white/10 active:scale-95 ${
+										isSaved ? 'text-green-500' : 'text-white'
+									}`}
+								>
+									<Heart
+										className="h-5 w-5"
+										fill={isSaved ? 'currentColor' : 'none'}
+									/>
+								</button>
+							)}
+							{onMenu && (
+								<button
+									type="button"
+									onClick={onMenu}
+									aria-label={`More options for ${album.album}`}
+									title="More options"
+									className="flex items-center rounded-full border border-gray-600 bg-white/5 p-3.5 text-white backdrop-blur-sm transition-all duration-200 hover:border-white/30 hover:bg-white/10 active:scale-95"
+								>
+									<Ellipsis className="h-5 w-5" />
+								</button>
+							)}
 						</div>
 					</div>
 				</div>
@@ -214,6 +271,7 @@ export default function AlbumDetailView({
 								onPlay={() => onPlay(album, index)}
 								onDownload={onDownload}
 								onPlayNext={onPlayTrackNext}
+								onMenu={onTrackMenu && ((e) => onTrackMenu(e, track))}
 							/>
 						))}
 					</div>

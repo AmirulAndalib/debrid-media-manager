@@ -1,5 +1,6 @@
 import { MusicAlbum } from '@/pages/api/music/library';
 import { ArrowDownAZ, Calendar, Clock, Music2, User } from 'lucide-react';
+import { MouseEvent } from 'react';
 import AlbumCard from './AlbumCard';
 
 type SortOption = 'recent' | 'name' | 'artist' | 'year';
@@ -16,6 +17,7 @@ interface AlbumGridProps {
 	nowPlayingAlbumHash: string | null;
 	isPlaying: boolean;
 	onCoverLoaded?: (album: MusicAlbum, coverUrl: string) => void;
+	onAlbumMenu?: (e: MouseEvent, album: MusicAlbum) => void;
 }
 
 const sortOptions: { value: SortOption; label: string; icon: typeof Clock }[] = [
@@ -36,6 +38,7 @@ export default function AlbumGrid({
 	nowPlayingAlbumHash,
 	isPlaying,
 	onCoverLoaded,
+	onAlbumMenu,
 }: AlbumGridProps) {
 	return (
 		<div className="p-3 md:p-6">
@@ -93,6 +96,7 @@ export default function AlbumGrid({
 							isNowPlaying={album.hash === nowPlayingAlbumHash}
 							isPlaying={isPlaying}
 							onCoverLoaded={onCoverLoaded}
+							onMenu={onAlbumMenu}
 						/>
 					))}
 				</div>
