@@ -1,5 +1,5 @@
 import AlbumDetailView from '@/components/music/AlbumDetailView';
-import AlbumGrid from '@/components/music/AlbumGrid';
+import AlbumGrid, { AlbumTypeFilter } from '@/components/music/AlbumGrid';
 import ContextMenu, {
 	albumMenuItems,
 	MenuActions,
@@ -221,6 +221,7 @@ function MusicLibrary({
 	// View state
 	const [showShortcuts, setShowShortcuts] = useState(false);
 	const [sortBy, setSortBy] = useState<'recent' | 'name' | 'artist' | 'year'>('name');
+	const [albumType, setAlbumType] = useState<AlbumTypeFilter>('all');
 
 	const route = parseMusicRoute(router.query.slug, router.query.q);
 	const albumHash = route.name === 'album' ? route.hash : undefined;
@@ -339,6 +340,7 @@ function MusicLibrary({
 				});
 				const trimmedSearch = catalogSearch.trim();
 				if (trimmedSearch) params.set('search', trimmedSearch);
+				if (albumType !== 'all') params.set('type', albumType);
 
 				const response = await fetch(`/api/music/library?${params.toString()}`);
 				if (!response.ok) throw new Error('Failed to fetch library');
@@ -367,7 +369,7 @@ function MusicLibrary({
 				}
 			}
 		},
-		[catalogSearch, sortBy]
+		[albumType, catalogSearch, sortBy]
 	);
 
 	const fetchRecentAlbums = useCallback(async () => {
@@ -393,11 +395,11 @@ function MusicLibrary({
 
 	// Kept while another page shows, so coming back keeps the loaded pages and the scroll.
 	useEffect(() => {
-		const key = `${catalogSearch.trim()}\n${sortBy}`;
+		const key = `${catalogSearch.trim()}\n${sortBy}\n${albumType}`;
 		if (!showsGrid || key === loadedCatalogKey.current) return;
 		loadedCatalogKey.current = key;
 		fetchLibraryPage(1, false);
-	}, [catalogSearch, fetchLibraryPage, showsGrid, sortBy]);
+	}, [albumType, catalogSearch, fetchLibraryPage, showsGrid, sortBy]);
 
 	useEffect(() => {
 		fetchRecentAlbums();
@@ -589,6 +591,8 @@ function MusicLibrary({
 				onPlay={playAlbum}
 				sortBy={sortBy}
 				onSortChange={setSortBy}
+				type={albumType}
+				onTypeChange={route.name === 'browse' ? setAlbumType : undefined}
 				nowPlayingAlbumHash={currentTrack?.album.hash ?? null}
 				isPlaying={player.isPlaying}
 				onCoverLoaded={handleCoverLoaded}

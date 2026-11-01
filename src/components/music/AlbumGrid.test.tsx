@@ -137,4 +137,35 @@ describe('AlbumGrid', () => {
 		const artistBtn = screen.getByTitle('Sort by Artist');
 		expect(artistBtn.className).toContain('text-green-500');
 	});
+
+	// Before the MusicBrainz backfill no album has a type: a chip would filter to nothing.
+	it('shows release-type chips once an album has a type, and filters by them', () => {
+		const onTypeChange = vi.fn();
+		const props = {
+			searchQuery: '',
+			onSelect: vi.fn(),
+			onPlay: vi.fn(),
+			sortBy: 'name' as const,
+			onSortChange: vi.fn(),
+			nowPlayingAlbumHash: null,
+			isPlaying: false,
+			onTypeChange,
+		};
+		const { rerender } = render(<AlbumGrid {...props} albums={[makeAlbum()]} />);
+		expect(screen.queryByRole('group', { name: 'Release type' })).toBeNull();
+
+		rerender(<AlbumGrid {...props} albums={[makeAlbum({ primaryType: 'Album' })]} />);
+		const chips = screen.getByRole('group', { name: 'Release type' });
+		expect(screen.getAllByRole('button', { pressed: false }).map((b) => b.textContent)).toEqual(
+			expect.arrayContaining(['Albums', 'EPs', 'Singles', 'Compilations'])
+		);
+		expect(chips).toHaveTextContent('AlbumsEPsSinglesCompilationsAll');
+		screen.getByRole('button', { name: 'EPs' }).click();
+		expect(onTypeChange).toHaveBeenCalledWith('ep');
+
+		// A chosen type stays changeable when it matches nothing.
+		rerender(<AlbumGrid {...props} albums={[]} type="ep" />);
+		expect(screen.getByRole('button', { name: 'EPs' })).toHaveAttribute('aria-pressed', 'true');
+		expect(screen.getByRole('button', { name: 'All' })).toBeInTheDocument();
+	});
 });

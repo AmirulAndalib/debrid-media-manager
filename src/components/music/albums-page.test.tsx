@@ -493,6 +493,27 @@ describe('music page', () => {
 		expect(screen.getByRole('button', { name: 'Play Road trip' })).toBeEnabled();
 	});
 
+	it('filters Browse by release type', async () => {
+		routerMock.query = { slug: ['browse'] };
+		const served = fetchMock.getMockImplementation()!;
+		fetchMock.mockImplementation(async (url, init) =>
+			url.includes('sortBy=name')
+				? json({ albums: [{ ...summary, primaryType: 'Album' }], totalAlbums: 1 })
+				: served(url, init)
+		);
+		try {
+			render(<AlbumsPage />);
+			fireEvent.click(await screen.findByRole('button', { name: 'EPs' }));
+			await waitFor(() =>
+				expect(fetchMock).toHaveBeenCalledWith(
+					'/api/music/library?summary=1&page=1&limit=48&sortBy=name&type=ep'
+				)
+			);
+		} finally {
+			fetchMock.mockImplementation(served);
+		}
+	});
+
 	it('plays an album from its card in the grid', async () => {
 		routerMock.query = { slug: ['browse'] };
 		const { container } = render(<AlbumsPage />);
