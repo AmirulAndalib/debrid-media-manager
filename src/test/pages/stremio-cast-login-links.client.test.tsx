@@ -97,8 +97,9 @@ describe('DMM Cast pages: the "<provider> Required" card', () => {
 
 	it('knows about every login route', () => {
 		// Guards the guard: if login pages ever move, the glob above must not
-		// quietly go empty and pass everything.
-		expect(LOGIN_ROUTES.size).toBe(6);
+		// quietly go empty and pass everything. Six providers plus /sponsor/login,
+		// the DMM-key login, which no cast page links to.
+		expect(LOGIN_ROUTES.size).toBe(7);
 	});
 
 	it.each(CAST_PAGES)(

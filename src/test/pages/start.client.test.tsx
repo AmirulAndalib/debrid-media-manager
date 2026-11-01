@@ -93,6 +93,10 @@ describe('StartPage', () => {
 	it('should render all login buttons', () => {
 		render(<StartPage />);
 
+		expect(screen.getByRole('link', { name: 'Login with DMM key' })).toHaveAttribute(
+			'href',
+			'/sponsor/login'
+		);
 		expect(screen.getByText('Login with Real Debrid')).toBeInTheDocument();
 		expect(screen.getByText('Login with AllDebrid')).toBeInTheDocument();
 		expect(screen.getByText('Login with Torbox')).toBeInTheDocument();
@@ -104,6 +108,10 @@ describe('StartPage', () => {
 	it('should render account creation links', () => {
 		render(<StartPage />);
 
+		// For DMM itself, "Create account" means sponsoring, on gatekeeper.
+		expect(
+			screen.getByRole('link', { name: 'Become a sponsor on gatekeeper' })
+		).toHaveAttribute('href', 'https://gatekeeper.debridmediamanager.com');
 		expect(
 			screen.getByRole('link', { name: 'Create an account with RealDebrid' })
 		).toBeInTheDocument();

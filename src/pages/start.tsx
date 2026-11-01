@@ -10,6 +10,7 @@ import {
 	useRealDebridAccessToken,
 	useTorBoxAccessToken,
 } from '@/hooks/auth';
+import { GATEKEEPER_URL } from '@/utils/gatekeeper';
 import { enableGuestMode } from '@/utils/guestMode';
 import {
 	ALLDEBRID_REFERRAL_URL,
@@ -99,6 +100,27 @@ export default function StartPage() {
 				<p className="mb-1 text-sm">
 					Please login with one of the supported services below
 				</p>
+				{/* A sponsorship is a login of its own: everything it opens works from the
+				    DMM API key alone, so a sponsor with no debrid account (NZB-only zurg)
+				    gets in here. "Create account" means sponsoring, on gatekeeper. */}
+				<div className="my-1 grid w-full max-w-sm grid-cols-2 gap-2">
+					<Link
+						href="/sponsor/login"
+						className="flex items-center justify-center rounded bg-blue-600 px-2 py-2 text-center text-sm text-white hover:bg-blue-700 sm:px-3 sm:text-base"
+					>
+						Login with DMM key
+					</Link>
+					<a
+						className="flex items-center justify-center rounded bg-green-700 px-2 py-2 text-center text-sm text-white hover:bg-green-800 sm:px-3 sm:text-base"
+						href={GATEKEEPER_URL}
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="Become a sponsor on gatekeeper"
+						title="Become a sponsor on gatekeeper"
+					>
+						Create account
+					</a>
+				</div>
 				<div className="my-1 grid w-full max-w-sm grid-cols-2 gap-2">
 					<button
 						className="rounded bg-blue-600 px-2 py-2 text-sm text-white hover:bg-blue-700 sm:px-3 sm:text-base"
@@ -220,8 +242,9 @@ export default function StartPage() {
 				    else. This is the way past it. */}
 				<div className="mt-6 flex max-w-lg flex-col items-center border-t border-slate-700 pt-6">
 					<p className="text-center text-sm">
-						No debrid account? DMM also answers as a Torznab and Newznab indexer for
-						Prowlarr, Sonarr and Radarr, and that only needs a DMM API key.
+						No debrid account and no DMM key? You can still look around. DMM also
+						answers as a Torznab and Newznab indexer for Prowlarr, Sonarr and Radarr,
+						and that only needs a DMM API key.
 					</p>
 					<button
 						className="m-2 rounded bg-slate-600 px-4 py-2 text-white hover:bg-slate-500"
