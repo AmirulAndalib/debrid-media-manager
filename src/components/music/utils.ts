@@ -1,5 +1,6 @@
+import type { MusicAlbum } from '@/pages/api/music/library';
 import { formatTrackTitle, removeExtension } from '@/utils/musicTracks';
-import { PlayableTrack } from './types';
+import { PlayableTrack, QueuedTrack } from './types';
 
 export function formatDuration(seconds: number): string {
 	if (!seconds || !isFinite(seconds)) return '0:00';
@@ -27,3 +28,13 @@ export function shuffleArray<T>(array: T[]): T[] {
 	}
 	return shuffled;
 }
+
+/** What the per-user API stores for a track: its file and its album. */
+export const trackRef = (track: PlayableTrack, album: { mbid: string }) => ({
+	hash: track.hash,
+	fileId: track.fileId,
+	mbid: album.mbid,
+});
+
+export const albumItems = (album: MusicAlbum): QueuedTrack[] =>
+	album.tracks.map((track) => ({ track, album }));

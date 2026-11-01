@@ -3,18 +3,22 @@ import AlbumGrid from '@/components/music/AlbumGrid';
 import KeyboardShortcutsModal from '@/components/music/KeyboardShortcutsModal';
 import MusicPlayerBar from '@/components/music/MusicPlayerBar';
 import { MusicPlayerProvider, useMusicPlayer } from '@/components/music/player/MusicPlayerProvider';
-import { localStoragePersistence } from '@/components/music/player/persistence';
+import { accountPersistence } from '@/components/music/player/persistence';
 import QueuePanel from '@/components/music/QueuePanel';
 import { musicHref, MusicRoute, parseMusicRoute } from '@/components/music/routes';
 import { QueuedTrack } from '@/components/music/types';
-import { trackTitle } from '@/components/music/utils';
+import { MusicUserProvider, useMusicUser } from '@/components/music/user/MusicUserProvider';
+import { albumItems, trackRef, trackTitle } from '@/components/music/utils';
 import { useRealDebridAccessToken } from '@/hooks/auth';
 import { MusicAlbum, MusicLibraryResponse, MusicTrack } from '@/pages/api/music/library';
+import type { MusicPlayerStateResponse } from '@/pages/api/music/me/state';
 import { UnrestrictTrackResponse } from '@/pages/api/music/unrestrict';
+import { toasterPosition } from '@/utils/toastOptions';
 import { Keyboard, Library, Loader2, Music2, X } from 'lucide-react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 const MUSIC_PAGE_SIZE = 48;
 const RECENT_ALBUM_LIMIT = 24;
@@ -65,9 +69,6 @@ async function fetchAlbum(hash: string): Promise<MusicAlbum | null> {
 	const data: MusicLibraryResponse = await response.json();
 	return data.albums[0] ?? null;
 }
-
-const albumItems = (album: MusicAlbum): QueuedTrack[] =>
-	album.tracks.map((track) => ({ track, album }));
 
 interface SidebarAlbumButtonProps {
 	album: MusicAlbum;
@@ -156,24 +157,71 @@ function SidebarAlbumButton({
 	);
 }
 
+const fullScreenSpinner = (
+	<div className="flex h-dvh items-center justify-center bg-gray-900">
+		<Loader2 className="h-8 w-8 animate-spin text-green-500" />
+	</div>
+);
+
 export default function AlbumsPage() {
 	const router = useRouter();
 	const [accessToken, isLoading] = useRealDebridAccessToken();
+
+	if (!accessToken) {
+		// Redirect if not authenticated
+		if (!isLoading) router.push('/realdebrid/login?redirect=/music');
+		return isLoading ? fullScreenSpinner : null;
+	}
+
+	return (
+		<MusicUserProvider accessToken={accessToken}>
+			<MusicPlayerRoot accessToken={accessToken} />
+			<Toaster position={toasterPosition()} />
+		</MusicUserProvider>
+	);
+}
+
+function MusicPlayerRoot({ accessToken }: { accessToken: string }) {
+	const { musicFetch } = useMusicUser();
 	const resolveStreamUrl = useCallback(
 		(track: MusicTrack) => unrestrictTrack(track, accessToken),
 		[accessToken]
 	);
+	const [persistence] = useState(() =>
+		accountPersistence({
+			get: async () => {
+				const res = await musicFetch('/api/music/me/state');
+				return res.ok ? ((await res.json()) as MusicPlayerStateResponse).state : null;
+			},
+			put: async (state) => {
+				const res = await musicFetch('/api/music/me/state', {
+					method: 'PUT',
+					body: JSON.stringify({ state }),
+				});
+				if (!res.ok) throw new Error(`Saving the player failed: ${res.status}`);
+			},
+		})
+	);
+	const [hydrated, setHydrated] = useState(false);
+	useEffect(() => {
+		void persistence.hydrate().finally(() => setHydrated(true));
+	}, [persistence]);
+	const onTrackPlayed = useCallback(
+		(item: QueuedTrack) => {
+			musicFetch('/api/music/me/history', {
+				method: 'POST',
+				body: JSON.stringify(trackRef(item.track, item.album)),
+			}).catch(() => {});
+		},
+		[musicFetch]
+	);
 
-	// Redirect if not authenticated
-	if (!isLoading && !accessToken) {
-		router.push('/realdebrid/login?redirect=/music');
-		return null;
-	}
-
+	if (!hydrated) return fullScreenSpinner;
 	return (
 		<MusicPlayerProvider
 			resolveStreamUrl={resolveStreamUrl}
-			persistence={localStoragePersistence}
+			persistence={persistence}
+			onTrackPlayed={onTrackPlayed}
 		>
 			<MusicLibrary resolveStreamUrl={resolveStreamUrl} />
 		</MusicPlayerProvider>

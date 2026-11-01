@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { QueuedTrack } from '../types';
-import { localStoragePersistence } from './persistence';
+import { accountPersistence, localStoragePersistence, PersistedPlayerState } from './persistence';
 import { emptyQueue, nowPlayingOf } from './queue';
 
 const album = {
@@ -142,5 +142,93 @@ describe('localStoragePersistence', () => {
 			})
 		).not.toThrow();
 		expect(localStorage.getItem('music:player')).toBeNull();
+	});
+});
+
+describe('accountPersistence', () => {
+	const playing = (id: string): PersistedPlayerState => ({
+		queue: {
+			...emptyQueue,
+			contextId: `album:${id}`,
+			context: [{ ...item(id), streamUrl: `https://cdn/${id}` }],
+			contextIndex: 0,
+		},
+		repeatMode: 'off',
+		isShuffled: false,
+		volume: 0.5,
+	});
+	const remote = (saved: unknown) => ({
+		get: vi.fn(async () => saved),
+		put: vi.fn(async (_state: PersistedPlayerState) => undefined),
+	});
+
+	beforeEach(() => localStorage.clear());
+	afterEach(() => {
+		vi.useRealTimers();
+		localStorage.clear();
+	});
+
+	it("loads this device's queue without asking the server", async () => {
+		localStoragePersistence.save(playing('local'));
+		const server = remote(playing('server'));
+		const persistence = accountPersistence(server);
+		await persistence.hydrate();
+		expect(server.get).not.toHaveBeenCalled();
+		expect(persistence.load()!.queue.contextId).toBe('album:local');
+	});
+
+	it("loads the account's queue when this device has none", async () => {
+		const server = remote(playing('server'));
+		const persistence = accountPersistence(server);
+		await persistence.hydrate();
+		expect(server.get).toHaveBeenCalledOnce();
+		expect(persistence.load()!.queue.contextId).toBe('album:server');
+	});
+
+	it('falls back to this device when the server fails or sends junk', async () => {
+		const failing = accountPersistence({
+			get: vi.fn(async () => Promise.reject(new Error('signed out'))),
+			put: vi.fn(),
+		});
+		await failing.hydrate();
+		expect(failing.load()!.queue.context).toEqual([]);
+
+		const junk = accountPersistence(remote({ queue: 'x' }));
+		await junk.hydrate();
+		expect(junk.load()!.queue.context).toEqual([]);
+	});
+
+	it('saves locally at once and to the server 5 s after the last change', async () => {
+		vi.useFakeTimers();
+		const server = remote(null);
+		const persistence = accountPersistence(server);
+		persistence.save(playing('a'));
+		expect(localStoragePersistence.load()!.queue.contextId).toBe('album:a');
+		await vi.advanceTimersByTimeAsync(4000);
+		persistence.save(playing('b'));
+		await vi.advanceTimersByTimeAsync(4999);
+		expect(server.put).not.toHaveBeenCalled();
+		await vi.advanceTimersByTimeAsync(1);
+		expect(server.put).toHaveBeenCalledOnce();
+		const sent = server.put.mock.calls[0][0];
+		expect(sent.queue.contextId).toBe('album:b');
+		expect(JSON.stringify(sent)).not.toContain('https://cdn/');
+
+		// The same state again is not sent again.
+		persistence.save(playing('b'));
+		await vi.advanceTimersByTimeAsync(5000);
+		expect(server.put).toHaveBeenCalledOnce();
+	});
+
+	it('sends a state again after the server refused it', async () => {
+		vi.useFakeTimers();
+		const server = remote(null);
+		server.put.mockRejectedValueOnce(new Error('413'));
+		const persistence = accountPersistence(server);
+		persistence.save(playing('a'));
+		await vi.advanceTimersByTimeAsync(5000);
+		persistence.save(playing('a'));
+		await vi.advanceTimersByTimeAsync(5000);
+		expect(server.put).toHaveBeenCalledTimes(2);
 	});
 });

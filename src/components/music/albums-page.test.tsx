@@ -48,8 +48,21 @@ const fullAlbum = {
 	tracks: [track(1, '01 - Opening.flac'), track(2, '02 - Closing.flac')],
 };
 
-const json = (body: unknown) => ({ ok: true, json: async () => body }) as Response;
+const json = (body: unknown, status = 200) =>
+	({ ok: status < 300, status, json: async () => body }) as Response;
+const me: Record<string, unknown> = {};
 const fetchMock = vi.fn(async (url: string, init?: RequestInit) => {
+	if (url === '/api/music/session') {
+		return json({ token: 'music-token', userId: 'user-1', exp: Date.now() + 864e5 });
+	}
+	if (url.startsWith('/api/music/me/')) {
+		const path = url.slice('/api/music/me/'.length);
+		if (path in me) return json(me[path]);
+		if (path === 'library') return json({ albums: [], artists: [], playlists: [] });
+		if (path === 'likes?ids=1') return json({ ids: [] });
+		if (path === 'state') return json({ state: null, updatedAt: null });
+		return json(null, 204);
+	}
 	if (url === '/api/music/unrestrict') {
 		return json({ streamUrl: `https://cdn.example/${JSON.parse(String(init?.body)).fileId}` });
 	}
@@ -65,6 +78,7 @@ describe('music page', () => {
 	beforeEach(() => {
 		localStorage.clear();
 		routerMock.query = {};
+		for (const key of Object.keys(me)) delete me[key];
 		routerMock.push.mockClear();
 		routerMock.replace.mockClear();
 		vi.stubGlobal('fetch', fetchMock);
@@ -111,6 +125,52 @@ describe('music page', () => {
 		expect(sidebarList).not.toHaveClass('pb-32');
 	});
 
+	it("resumes the account's queue on a device that has none", async () => {
+		me.state = {
+			state: {
+				queue: {
+					contextId: 'album:h1',
+					context: [{ track: fullAlbum.tracks[1], album: summary }],
+					contextIndex: 0,
+					originalOrder: [],
+					priority: [],
+					priorityItem: null,
+				},
+				repeatMode: 'off',
+				isShuffled: false,
+				volume: 1,
+			},
+			updatedAt: '2026-11-01T00:00:00.000Z',
+		};
+		render(<AlbumsPage />);
+		expect((await screen.findAllByText('Closing')).length).toBeGreaterThan(0);
+		const stateCall = fetchMock.mock.calls.find(([url]) => url === '/api/music/me/state')!;
+		expect((stateCall[1]!.headers as Record<string, string>)['x-dmm-music-token']).toBe(
+			'music-token'
+		);
+	});
+
+	it('records a play in the history after 30 seconds heard', async () => {
+		routerMock.query = { slug: ['album', 'h1'] };
+		const { container } = render(<AlbumsPage />);
+		fireEvent.click(await screen.findByRole('button', { name: 'Play' }));
+		const audio = container.querySelector('audio')!;
+		await waitFor(() => expect(audio).toHaveAttribute('src', 'https://cdn.example/1'));
+		for (let t = 1; t <= 30; t++) {
+			Object.defineProperty(audio, 'currentTime', { value: t, configurable: true });
+			fireEvent.timeUpdate(audio);
+		}
+		await waitFor(() =>
+			expect(fetchMock).toHaveBeenCalledWith(
+				'/api/music/me/history',
+				expect.objectContaining({
+					method: 'POST',
+					body: JSON.stringify({ hash: 'h1', fileId: 1, mbid: 'mb1' }),
+				})
+			)
+		);
+	});
+
 	it('keeps the catalog totals in the header while a search narrows the grid', async () => {
 		routerMock.query = { slug: ['search'], q: 'first' };
 		render(<AlbumsPage />);
@@ -124,7 +184,7 @@ describe('music page', () => {
 		vi.useFakeTimers({ shouldAdvanceTime: true });
 		try {
 			render(<AlbumsPage />);
-			fireEvent.change(screen.getByLabelText('Search artists or albums'), {
+			fireEvent.change(await screen.findByLabelText('Search artists or albums'), {
 				target: { value: 'daft punk' },
 			});
 			expect(routerMock.push).not.toHaveBeenCalled();
