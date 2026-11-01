@@ -1,7 +1,10 @@
+import monkees from '@/test/fixtures/music/library-dc925f67cd67936b4a8fbeb17d6decb648fd3479.json';
 import release from '@/test/fixtures/musicbrainz/release-08205eae-c9e3-4174-8d69-2a67d742a19c.json';
 import dogsRelease from '@/test/fixtures/musicbrainz/release-99a48afd-1292-4076-a9b6-12818729eae8.json';
 import dogsGroup from '@/test/fixtures/musicbrainz/release-group-0dc4835d-b21a-3612-bac6-ab1e782a1396.json';
 import group from '@/test/fixtures/musicbrainz/release-group-4853b957-05f2-457b-ba47-18b2565abc69.json';
+import monkeesGroup from '@/test/fixtures/musicbrainz/release-group-48e8b712-4f5d-34e0-9492-22f936854662.json';
+import { discTrackCounts } from '@/utils/musicTracks';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
 	enrichment,
@@ -114,12 +117,39 @@ describe('pickRelease', () => {
 	const rg = group as unknown as MbReleaseGroup;
 
 	it('takes the earliest official release with as many tracks as the catalog has files', () => {
-		expect(pickRelease(rg, 12)?.id).toBe('08205eae-c9e3-4174-8d69-2a67d742a19c');
-		expect(pickRelease(rg, 13)?.id).toBe('5f0eb95b-46e2-4e67-865c-a7a35f8cbde0');
+		expect(pickRelease(rg, [12])?.id).toBe('08205eae-c9e3-4174-8d69-2a67d742a19c');
+		expect(pickRelease(rg, [13])?.id).toBe('5f0eb95b-46e2-4e67-865c-a7a35f8cbde0');
 	});
 
 	it('takes the earliest official release when none has that many tracks', () => {
-		expect(pickRelease(rg, 147)?.id).toBe('08205eae-c9e3-4174-8d69-2a67d742a19c');
+		expect(pickRelease(rg, [147])?.id).toBe('08205eae-c9e3-4174-8d69-2a67d742a19c');
+	});
+
+	it('prefers a release with as many tracks on each disc as the files', () => {
+		// Diamond Dogs: eleven-track releases from 1974, the 2004 2CD edition with 11 and 8.
+		const dogs = dogsGroup as unknown as MbReleaseGroup;
+		expect(pickRelease(dogs, [11, 8])?.id).toBe('0600b408-8033-4baf-955f-da4253fb7418');
+		// Over an earlier release with as many tracks in all, laid out otherwise.
+		const reshaped = {
+			...dogs,
+			releases: dogs.releases.map((r) =>
+				r.id === '54a293fc-d5bd-4925-94b3-62fd833d6c7b'
+					? { ...r, media: [{ 'track-count': 13 }, { 'track-count': 6 }] }
+					: r
+			),
+		};
+		expect(pickRelease(reshaped, [19])?.id).toBe('54a293fc-d5bd-4925-94b3-62fd833d6c7b');
+		expect(pickRelease(reshaped, [11, 8])?.id).toBe('0600b408-8033-4baf-955f-da4253fb7418');
+	});
+
+	it('keeps the earliest album for a deluxe set no release lays out the same way', () => {
+		// The Monkees' 4-disc set: 12, 16, 18 and 15 files. MusicBrainz lists 25
+		// of the group's 60 releases, every one a 12-track 1966 or 1967 album.
+		const perDisc = discTrackCounts(monkees.files.map((file) => file.path));
+		expect(perDisc).toEqual([12, 16, 18, 15]);
+		expect(pickRelease(monkeesGroup as unknown as MbReleaseGroup, perDisc)?.id).toBe(
+			'0c6324c1-5968-4675-84bc-8f20b44cabc4'
+		);
 	});
 
 	it('takes an unofficial release only when there is no official one', () => {
@@ -127,8 +157,8 @@ describe('pickRelease', () => {
 			...rg,
 			releases: rg.releases.map((r) => ({ ...r, status: 'Bootleg' })).reverse(),
 		};
-		expect(pickRelease(bootlegs, 147)?.id).toBe('08205eae-c9e3-4174-8d69-2a67d742a19c');
-		expect(pickRelease({ ...rg, releases: [] }, 12)).toBeNull();
+		expect(pickRelease(bootlegs, [147])?.id).toBe('08205eae-c9e3-4174-8d69-2a67d742a19c');
+		expect(pickRelease({ ...rg, releases: [] }, [12])).toBeNull();
 	});
 });
 
@@ -190,7 +220,7 @@ describe('enrichment', () => {
 		// David Bowie, Diamond Dogs: the group credits "David Bowie", the release
 		// with the catalog's 11 tracks credits "Bowie" on every track.
 		const DOGS = '0dc4835d-b21a-3612-bac6-ab1e782a1396';
-		const picked = pickRelease(dogsGroup as unknown as MbReleaseGroup, 11);
+		const picked = pickRelease(dogsGroup as unknown as MbReleaseGroup, [11]);
 		expect(picked?.id).toBe('99a48afd-1292-4076-a9b6-12818729eae8');
 
 		const { metadata, tracks } = enrichment(

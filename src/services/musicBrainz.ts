@@ -118,23 +118,30 @@ export async function fetchRelease(id: string): Promise<MbRelease | null> {
 	return json === null ? null : Release.parse(json, { mode: 'strip' });
 }
 
-const trackCount = (release: MbReleaseGroup['releases'][number]) =>
-	(release.media ?? []).reduce((sum, medium) => sum + medium['track-count'], 0);
+const discCounts = (release: MbReleaseGroup['releases'][number]) =>
+	(release.media ?? []).map((medium) => medium['track-count']);
+const sum = (counts: number[]) => counts.reduce((total, count) => total + count, 0);
 
 /**
- * The release whose tracklist stands for the group: an official one if any,
- * the one with as many tracks as the catalog has audio files if any, else the
- * earliest dated (undated last).
+ * The release whose tracklist stands for the group: an official one if any;
+ * of those the one with as many tracks per disc as the catalog has audio files
+ * per disc (`perDisc`, see `discTrackCounts`), else as many tracks in all, else
+ * the earliest dated (undated last).
  */
 export function pickRelease(
 	group: MbReleaseGroup,
-	audioFileCount: number
+	perDisc: number[]
 ): MbReleaseGroup['releases'][number] | null {
 	const official = group.releases.filter((release) => release.status === 'Official');
 	const byDate = [...(official.length ? official : group.releases)].sort((a, b) =>
 		(a.date || '9999').localeCompare(b.date || '9999')
 	);
-	return byDate.find((release) => trackCount(release) === audioFileCount) ?? byDate[0] ?? null;
+	return (
+		byDate.find((release) => discCounts(release).join() === perDisc.join()) ??
+		byDate.find((release) => sum(discCounts(release)) === sum(perDisc)) ??
+		byDate[0] ??
+		null
+	);
 }
 
 type Credit = v.Infer<typeof ArtistCredit>;

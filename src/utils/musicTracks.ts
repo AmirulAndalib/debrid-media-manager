@@ -81,6 +81,16 @@ export function trackPosition(
 		: { disc, track };
 }
 
+/** Audio files per disc, in disc order: what a release's media should hold. */
+export function discTrackCounts(paths: string[]): number[] {
+	const counts = new Map<number, number>();
+	for (const path of paths.filter(isAudioPath)) {
+		const disc = trackPosition(path, null).disc ?? 1;
+		counts.set(disc, (counts.get(disc) ?? 0) + 1);
+	}
+	return [...counts].sort(([a], [b]) => a - b).map(([, count]) => count);
+}
+
 export function removeExtension(filename: string): string {
 	return filename.replace(/\.[^/.]+$/, '');
 }

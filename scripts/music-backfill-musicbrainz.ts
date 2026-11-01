@@ -4,9 +4,10 @@
  * and lengths for the player), its artists, and its Cover Art Archive cover.
  *
  * `MusicMetadata.mbid` is a release group. Of its releases the official one
- * with as many tracks as the catalog has audio files is taken, else the
- * earliest official one. Two MusicBrainz requests per group, one a second
- * (their limit), so the whole catalog takes a few hours.
+ * with as many tracks per disc as the catalog has audio files per disc is
+ * taken, else one with as many tracks in all, else the earliest official one.
+ * Two MusicBrainz requests per group, one a second (their limit), so the whole
+ * catalog takes a few hours.
  *
  * Resumable and idempotent: a group is done once `enrichedAt` is set, in the
  * same transaction that writes it, so a rerun picks up where one stopped.
@@ -24,7 +25,7 @@ import {
 	hasCaaCover,
 	pickRelease,
 } from '../src/services/musicBrainz';
-import { isAudioPath } from '../src/utils/musicTracks';
+import { discTrackCounts, isAudioPath } from '../src/utils/musicTracks';
 // Next loads `.env.local` over `.env` on its own; a plain tsx run does not, and
 // `.env` carries placeholder database credentials.
 config({ path: '.env.local', override: true });
@@ -85,15 +86,18 @@ async function main() {
 					where: { availableMusic: { mbid } },
 					select: { hash: true, path: true },
 				});
-				const audioPerHash = new Map<string, number>();
-				for (const file of files) {
-					if (isAudioPath(file.path)) {
-						audioPerHash.set(file.hash, (audioPerHash.get(file.hash) ?? 0) + 1);
-					}
+				const audioPerHash = new Map<string, string[]>();
+				for (const file of files.filter((file) => isAudioPath(file.path))) {
+					audioPerHash.set(file.hash, [
+						...(audioPerHash.get(file.hash) ?? []),
+						file.path,
+					]);
 				}
-				const audioFiles = Math.max(0, ...audioPerHash.values());
+				const paths =
+					[...audioPerHash.values()].sort((a, b) => b.length - a.length)[0] ?? [];
+				const audioFiles = paths.length;
 
-				const picked = pickRelease(group, audioFiles);
+				const picked = pickRelease(group, discTrackCounts(paths));
 				const release = picked ? await fetchRelease(picked.id) : null;
 				const { metadata, tracks, artists } = enrichment(mbid, group, release);
 				const existing = await prisma.musicMetadata.findUnique({
