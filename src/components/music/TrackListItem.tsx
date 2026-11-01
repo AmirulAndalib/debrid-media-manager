@@ -14,6 +14,7 @@ interface TrackListItemProps {
 	onDownload: (track: MusicTrack) => Promise<void>;
 	onRemove?: () => void;
 	showRemove?: boolean;
+	removeLabel?: string;
 	onPlayNext?: (track: MusicTrack, album: MusicAlbum) => void;
 	/** Opens the track's context menu, from a right-click or the "..." button. */
 	onMenu?: (e: MouseEvent) => void;
@@ -31,6 +32,7 @@ export default function TrackListItem({
 	onDownload,
 	onRemove,
 	showRemove = false,
+	removeLabel = 'Remove from queue',
 	onPlayNext,
 	onMenu,
 	isLiked = false,
@@ -156,7 +158,7 @@ export default function TrackListItem({
 							onRemove();
 						}}
 						className="flex items-center justify-center rounded-full p-1.5 text-gray-500 transition-all duration-200 hover:bg-red-500/10 hover:text-red-400"
-						title="Remove from queue"
+						title={removeLabel}
 					>
 						<X className="h-4 w-4" />
 					</span>

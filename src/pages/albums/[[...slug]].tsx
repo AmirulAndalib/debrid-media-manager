@@ -16,6 +16,7 @@ import MusicPlayerBar from '@/components/music/MusicPlayerBar';
 import NowPlayingPanel from '@/components/music/NowPlayingPanel';
 import { MusicPlayerProvider, useMusicPlayer } from '@/components/music/player/MusicPlayerProvider';
 import { accountPersistence } from '@/components/music/player/persistence';
+import PlaylistView from '@/components/music/PlaylistView';
 import { musicHref, MusicRoute, parseMusicRoute } from '@/components/music/routes';
 import TopBar from '@/components/music/TopBar';
 import { QueuedTrack } from '@/components/music/types';
@@ -226,9 +227,7 @@ function MusicLibrary({
 			? (user.library.artists.find((a) => a.artistMbid === route.mbid)?.name ?? null)
 			: null;
 	const catalogSearch = route.name === 'search' ? route.q : (artistName ?? '');
-	const showsGrid =
-		!['album', 'home', 'library', 'liked'].includes(route.name) &&
-		(route.name !== 'artist' || artistName !== null);
+	const showsGrid = route.name === 'browse' || route.name === 'search' || artistName !== null;
 	const selectedAlbumSummary = library?.albums.find((a) => a.hash === albumHash) ?? null;
 	const [selectedAlbumDetail, setSelectedAlbumDetail] = useState<MusicAlbum | null>(null);
 	const [selectedAlbumLoading, setSelectedAlbumLoading] = useState(false);
@@ -682,6 +681,18 @@ function MusicLibrary({
 			break;
 		case 'liked':
 			content = <LikedView onTrackMenu={openTrackMenu} onDownload={downloadTrack} />;
+			break;
+		case 'playlist':
+			content = (
+				<PlaylistView
+					key={route.id}
+					id={route.id}
+					navigate={navigate}
+					onMenu={(e, items) => setMenu(menuAt(e, items))}
+					onTrackMenu={openTrackMenu}
+					onDownload={downloadTrack}
+				/>
+			);
 			break;
 		case 'library':
 			content = (

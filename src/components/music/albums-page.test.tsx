@@ -400,6 +400,67 @@ describe('music page', () => {
 		expect(JSON.parse(localStorage.getItem('music:player')!).queue.contextId).toBe('liked');
 	});
 
+	it('opens a playlist and adds the open album to it from a track menu', async () => {
+		me.library = {
+			albums: [],
+			artists: [],
+			playlists: [
+				{
+					id: 'p1',
+					name: 'Road trip',
+					description: null,
+					trackCount: 0,
+					coverUrl: null,
+					updatedAt: '',
+				},
+			],
+		};
+		me['playlists/p1/tracks'] = { trackCount: 1 };
+		routerMock.query = { slug: ['album', 'h1'] };
+		render(<AlbumsPage />);
+		fireEvent.click(await screen.findByLabelText('More options for Closing'));
+		fireEvent.click(screen.getByRole('menuitem', { name: 'Add to playlist' }));
+		fireEvent.click(screen.getByRole('menuitem', { name: 'Road trip' }));
+		await waitFor(() =>
+			expect(fetchMock).toHaveBeenCalledWith(
+				'/api/music/me/playlists/p1/tracks',
+				expect.objectContaining({
+					method: 'POST',
+					body: JSON.stringify({ tracks: [{ hash: 'h1', fileId: 2, mbid: 'mb1' }] }),
+				})
+			)
+		);
+	});
+
+	it('shows a playlist page from its URL', async () => {
+		me['playlists/p1'] = {
+			id: 'p1',
+			name: 'Road trip',
+			description: null,
+			trackCount: 1,
+			coverUrl: null,
+			updatedAt: '',
+			tracks: [
+				{
+					id: 'e1',
+					position: 0,
+					addedAt: '',
+					hash: 'h1',
+					fileId: 1,
+					mbid: 'mb1',
+					track: fullAlbum.tracks[0],
+					album: summary,
+				},
+			],
+		};
+		routerMock.query = { slug: ['playlist', 'p1'] };
+		render(<AlbumsPage />);
+		expect(
+			await screen.findByRole('button', { name: 'Play Opening by Test Artist' })
+		).toBeInTheDocument();
+		expect(screen.getByRole('button', { name: 'Play Road trip' })).toBeEnabled();
+	});
+
 	it('plays an album from its card in the grid', async () => {
 		routerMock.query = { slug: ['browse'] };
 		const { container } = render(<AlbumsPage />);
