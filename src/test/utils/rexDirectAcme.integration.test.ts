@@ -56,8 +56,13 @@ vi.mock('@/utils/rexDirectDns', () => ({
 		return record;
 	},
 	deleteRexDirectRecord: async (record: string) => {
-		await dnsControl('clear-txt', { host: record });
 		fixture.removed.push(record);
+		// challtestsrv clears every TXT at a name at once, and the name and its wildcard
+		// put two there: clear when the last is removed, as Cloudflare deletes by id.
+		const count = (list: string[]) => list.filter((entry) => entry === record).length;
+		if (count(fixture.removed) === count(fixture.created)) {
+			await dnsControl('clear-txt', { host: record });
+		}
 	},
 }));
 
@@ -147,7 +152,7 @@ describe.skipIf(!runtimeAvailable)('RexDirect real Pebble DNS-01 issuance (Integ
 		}
 	}, 60_000);
 
-	it('requires EAB, validates real DNS, and returns a usable SAN-only EC key/fullchain', async () => {
+	it('requires EAB, validates real DNS, and returns a usable SAN-only EC key/fullchain with the wildcard', async () => {
 		for (const port of [ACME_PORT, ADMIN_PORT, fixture.dnsPort, 19452])
 			await requireFreeTcpPort(port);
 		scratch = await mkdtemp(path.join(tmpdir(), 'dmm-acme-'));
@@ -334,8 +339,13 @@ describe.skipIf(!runtimeAvailable)('RexDirect real Pebble DNS-01 issuance (Integ
 		expect(chain.length).toBeGreaterThanOrEqual(2);
 		const leaf = chain[0];
 		expect(leaf.subject ?? '').not.toMatch(/CN=/);
-		expect(leaf.subjectAltName).toBe(`DNS:${HOSTNAME}`);
+		expect(leaf.subjectAltName?.split(', ').sort()).toEqual([
+			`DNS:*.${HOSTNAME}`,
+			`DNS:${HOSTNAME}`,
+		]);
 		expect(leaf.checkHost(HOSTNAME)).toBe(HOSTNAME);
+		// checkHost answers the SAN that matched: the LAN name is covered by the wildcard.
+		expect(leaf.checkHost(`lan.${HOSTNAME}`)).toBe(`*.${HOSTNAME}`);
 		expect(leaf.checkPrivateKey(key)).toBe(true);
 		expect(leaf.publicKey.export({ type: 'spki', format: 'pem' })).toBe(
 			createPublicKey(key).export({ type: 'spki', format: 'pem' })
@@ -352,7 +362,7 @@ describe.skipIf(!runtimeAvailable)('RexDirect real Pebble DNS-01 issuance (Integ
 		expect(chain.at(-1)!.verify(root.publicKey)).toBe(true);
 		await writeFile(file('issued.csr'), csr!);
 		const csrText = openssl(['req', '-in', file('issued.csr'), '-noout', '-verify', '-text']);
-		expect(csrText).toContain(`DNS:${HOSTNAME}`);
+		expect(csrText).toContain(`DNS:${HOSTNAME}, DNS:*.${HOSTNAME}`);
 		expect(csrText).not.toMatch(/Subject:.*CN\s*=/);
 		await writeFile(file('leaf.pem'), leaf.toString());
 		await writeFile(
@@ -385,13 +395,28 @@ describe.skipIf(!runtimeAvailable)('RexDirect real Pebble DNS-01 issuance (Integ
 		const initialOrder = await createOrder.mock.results[0].value;
 		const finalOrder = await issuingClient!.getOrder(initialOrder);
 		expect(finalOrder.status).toBe('valid');
-		expect(finalOrder.identifiers).toEqual([{ type: 'dns', value: HOSTNAME }]);
-		const authorizations = await issuingClient!.getAuthorizations(finalOrder);
-		expect(authorizations).toHaveLength(1);
-		expect(authorizations[0].status).toBe('valid');
-		expect(authorizations[0].challenges).toEqual(
-			expect.arrayContaining([expect.objectContaining({ type: 'dns-01', status: 'valid' })])
+		expect(finalOrder.identifiers).toHaveLength(2);
+		expect(finalOrder.identifiers).toEqual(
+			expect.arrayContaining([
+				{ type: 'dns', value: HOSTNAME },
+				{ type: 'dns', value: `*.${HOSTNAME}` },
+			])
 		);
+		const authorizations = await issuingClient!.getAuthorizations(finalOrder);
+		expect(authorizations).toHaveLength(2);
+		for (const authorization of authorizations) {
+			expect(authorization.status).toBe('valid');
+			expect(authorization.identifier.value).toBe(HOSTNAME);
+			expect(authorization.challenges).toEqual(
+				expect.arrayContaining([
+					expect.objectContaining({ type: 'dns-01', status: 'valid' }),
+				])
+			);
+		}
+		expect(authorizations.map((authorization) => !!authorization.wildcard).sort()).toEqual([
+			false,
+			true,
+		]);
 		for (const event of [
 			'account:register',
 			'order:create',
@@ -404,7 +429,10 @@ describe.skipIf(!runtimeAvailable)('RexDirect real Pebble DNS-01 issuance (Integ
 		]) {
 			expect(events).toContain(event);
 		}
-		expect(fixture.created).toEqual([`_acme-challenge.${HOSTNAME}.`]);
+		expect(fixture.created).toEqual([
+			`_acme-challenge.${HOSTNAME}.`,
+			`_acme-challenge.${HOSTNAME}.`,
+		]);
 		expect(fixture.removed).toEqual(fixture.created);
 		const dnsHistory = await (
 			await dnsControl('dns-request-history', { host: `_acme-challenge.${HOSTNAME}` })

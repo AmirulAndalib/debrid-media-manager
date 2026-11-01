@@ -83,7 +83,8 @@ describe('issueRexDirectCert', () => {
 
 	// 2026-10-19: a real 32-hex name is 66 characters, over a CommonName's 64, and
 	// ZeroSSL refused the order at finalize ("The CSR and order identifiers differ").
-	it('puts a name longer than 64 characters in the SAN only', async () => {
+	// The wildcard covers the server's LAN name, `lan.<hash>.rex-direct…`.
+	it('orders the name and its wildcard, in the SAN only when longer than 64 characters', async () => {
 		answers = [[['KA']]];
 		// Load after this test's environment and hoisted factory state are initialized.
 		const acme = await import('@geektr/acme-dns01');
@@ -91,8 +92,37 @@ describe('issueRexDirectCert', () => {
 		const long = `${'a'.repeat(32)}.rex-direct.debridmediamanager.com`;
 		await issueRexDirectCert(long);
 		expect(vi.mocked(acme.crypto.createCsr).mock.calls.at(-1)?.[0]).toEqual({
-			altNames: [long],
+			altNames: [long, `*.${long}`],
 		});
+	});
+
+	// A name and its wildcard are two authorizations for the same identifier, so
+	// both challenge TXT records sit at one `_acme-challenge` name, validated at once.
+	it('removes each challenge record by its own id when the wildcard shares the name', async () => {
+		const dnsRecords = await import('@/utils/rexDirectDns');
+		vi.mocked(dnsRecords.createRexDirectTxt)
+			.mockResolvedValueOnce('recName')
+			.mockResolvedValueOnce('recWildcard');
+		vi.mocked(dnsRecords.deleteRexDirectRecord).mockClear();
+		answers = [
+			[['KA1'], ['KA2']],
+			[['KA1'], ['KA2']],
+		];
+		auto.mockImplementation(async (options: any) => {
+			const name = { identifier: { value: 'h1.rex-direct.debridmediamanager.com' } };
+			const wildcard = { ...name, wildcard: true };
+			await options.challengeCreateFn(name, {}, 'KA1');
+			await options.challengeCreateFn(wildcard, {}, 'KA2');
+			await options.challengeRemoveFn(name, {}, 'KA1');
+			await options.challengeRemoveFn(wildcard, {}, 'KA2');
+			return 'CHAIN';
+		});
+		const { issueRexDirectCert } = await import('@/utils/rexDirectAcme');
+		await issueRexDirectCert('h1.rex-direct.debridmediamanager.com');
+		expect(vi.mocked(dnsRecords.deleteRexDirectRecord).mock.calls).toEqual([
+			['recName'],
+			['recWildcard'],
+		]);
 	});
 
 	it('preserves a traditional PEM account key identity in the Web Crypto client', async () => {

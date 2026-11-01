@@ -8,8 +8,11 @@ import { createRexDirectTxt, deleteRexDirectRecord } from './rexDirectDns';
 acme.settings.timeout = 120_000;
 
 /**
- * A certificate for one rex server's own `<hash>.rex-direct…` name, from ZeroSSL
- * over ACME DNS-01 (`src/pages/api/rex-direct/register`). Each server gets its own
+ * A certificate for one rex server's own `<hash>.rex-direct…` name and its
+ * `*.<hash>.rex-direct…` wildcard, from ZeroSSL over ACME DNS-01
+ * (`src/pages/api/rex-direct/register`). The wildcard covers the server's LAN name,
+ * `lan.<hash>…`, whose A record is a private address: DNS-01 proves control of the
+ * name, so the CA never looks at where it resolves. Each server gets its own
  * key, so no server holds one that works for another's name: a shared wildcard key
  * handed to every claimed server would be public in all but name. ZeroSSL rather
  * than Let's Encrypt because LE allows about 50 new certificates a week per
@@ -72,15 +75,16 @@ export async function issueRexDirectCert(hostname: string): Promise<IssuedCert> 
 	const { accountKey, externalAccountBinding, email, directoryUrl } = config();
 	const client = new acme.Client({ directoryUrl, accountKey, externalAccountBinding });
 	const privateKey = await acme.crypto.createPrivateEcdsaKey();
-	// The name goes in the SAN only: a CommonName holds at most 64 characters, and a
+	// The names go in the SAN only: a CommonName holds at most 64 characters, and a
 	// 32-hex `<hash>.rex-direct.debridmediamanager.com` is 66, which ZeroSSL refused at
 	// finalize as "The CSR and order identifiers differ" (2026-10-19).
+	const altNames = [hostname, `*.${hostname}`];
 	const [, csr] = await acme.crypto.createCsr(
-		hostname.length <= 64
-			? { commonName: hostname, altNames: [hostname] }
-			: { altNames: [hostname] },
+		hostname.length <= 64 ? { commonName: hostname, altNames } : { altNames },
 		privateKey
 	);
+	// Keyed by key authorization, not name: the name and its wildcard are validated at
+	// once with two TXT records at the same `_acme-challenge` name.
 	const records = new Map<string, string>();
 	const certificate = await client.auto({
 		csr: Buffer.from(csr),
@@ -89,11 +93,11 @@ export async function issueRexDirectCert(hostname: string): Promise<IssuedCert> 
 		skipChallengeVerification: true,
 		challengeCreateFn: async (authz, _challenge, keyAuthorization) => {
 			const name = authz.identifier.value;
-			records.set(name, await createRexDirectTxt(name, keyAuthorization));
+			records.set(keyAuthorization, await createRexDirectTxt(name, keyAuthorization));
 			await waitForTxt(`_acme-challenge.${name}`, keyAuthorization);
 		},
-		challengeRemoveFn: async (authz) => {
-			const id = records.get(authz.identifier.value);
+		challengeRemoveFn: async (_authz, _challenge, keyAuthorization) => {
+			const id = records.get(keyAuthorization);
 			if (id) await deleteRexDirectRecord(id).catch(() => undefined);
 		},
 	});
